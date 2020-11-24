@@ -27,6 +27,11 @@ private long id;
     public Grupo(long id) {
         this.id = id;
     }
+    
+    public Grupo(Grupo g){
+    this.id= g.id;    
+        
+    }
 
 
 
