@@ -27,11 +27,11 @@ public class Baja{
         this.motivo = motivo;
     }
     
-    public Baja(Baja c){
-        this.id= c.id;
-        this.fechainicio = c.fechainicio;
-        this.fechafin = c.fechafin;
-        this.motivo = c.motivo;
+    public Baja(Baja b){
+        this.id= b.id;
+        this.fechainicio = b.fechainicio;
+        this.fechafin = b.fechafin;
+        this.motivo = b.motivo;
     }
 
     public long getId() {

@@ -29,13 +29,13 @@ public class Empleado {
         this.dirección = dirección;
     }
     
-    public Empleado (Empleado c) {
-        this.id = c.id;
-        this.nombre = c.nombre;
-        this.teléfono = c.teléfono;
-        this.nif = c.nif;
-        this.apellidos = c.apellidos;
-        this.dirección = c.dirección;
+    public Empleado (Empleado e) {
+        this.id = e.id;
+        this.nombre = e.nombre;
+        this.teléfono = e.teléfono;
+        this.nif = e.nif;
+        this.apellidos = e.apellidos;
+        this.dirección = e.dirección;
     }
     
     public long getId() {

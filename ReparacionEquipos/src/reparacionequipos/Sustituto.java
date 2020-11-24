@@ -22,9 +22,9 @@ public class Sustituto extends Empleado{
         this.exclusiónsocial = exclusiónsocial;
     }
     
-    public Sustituto(Sustituto c) {
-        this.edad = c.edad;
-        this.exclusiónsocial = c.exclusiónsocial;
+    public Sustituto(Sustituto s) {
+        this.edad = s.edad;
+        this.exclusiónsocial = s.exclusiónsocial;
     }
 
     public String getEdad() {

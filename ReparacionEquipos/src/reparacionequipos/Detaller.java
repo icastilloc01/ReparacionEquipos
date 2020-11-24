@@ -20,8 +20,8 @@ public class Detaller extends Empleado {
         this.senior = senior;
     }
     
-    public Detaller (Detaller c) {
-        this.senior = c.senior;
+    public Detaller (Detaller d) {
+        this.senior = d.senior;
     }
     /**
      *
