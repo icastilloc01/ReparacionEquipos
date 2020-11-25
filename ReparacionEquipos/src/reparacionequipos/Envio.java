@@ -5,6 +5,7 @@
  */
 package reparacionequipos;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -12,12 +13,15 @@ import java.util.Date;
  * @author PC_Alba
  */
 public class Envio {
-    private  long id;
+
+    private long id;
     private Date fechaSalida;
     private int precioDeReparto;
     private double ptrcioTotal;
     private double coste;
     private String lugar;
+    private ArrayList<Servicio> servicios = new ArrayList<Servicio>();
+    private ArrayList<Repartidor> repartidores = new ArrayList<Repartidor>();
 
     public long getId() {
         return id;
@@ -67,9 +71,23 @@ public class Envio {
         this.lugar = lugar;
     }
 
+    public ArrayList<Servicio> getServicios() {
+        return servicios;
+    }
+
+    public ArrayList<Repartidor> getRepartidores() {
+        return repartidores;
+    }
+
+    public void setRepartidores(ArrayList<Repartidor> repartidores) {
+        this.repartidores = repartidores;
+    }
+
+    public void setServicios(ArrayList<Servicio> servicios) {
+        this.servicios = servicios;
+    }
+
     public Envio() {
     }
-    
-    
-    
+
 }
