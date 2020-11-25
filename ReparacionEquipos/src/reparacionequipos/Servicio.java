@@ -5,6 +5,7 @@
  */
 package reparacionequipos;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -12,9 +13,11 @@ import java.util.Date;
  * @author Rxndy
  */
 public class Servicio {
+
     protected long id;
     protected Date fechaServicio;
     protected String nota;
+    protected ArrayList<Cliente> clientes = new ArrayList<>();
 
     public Servicio(long id, Date fechaServicio, String nota) {
         this.id = id;
@@ -45,12 +48,21 @@ public class Servicio {
     public void setNota(String nota) {
         this.nota = nota;
     }
-    
-    public Servicio (Servicio s){
-        this.fechaServicio = s.getFechaServicio();
-        this.id = s.getId();
-        this.nota = s.getNota();
+
+    public ArrayList<Cliente> getClientes() {
+        return clientes;
     }
-    
-    public Servicio(){}
+
+    public void setClientes(ArrayList<Cliente> clientes) {
+        this.clientes = clientes;
+    }
+
+    public Servicio(Servicio se) {
+        this.fechaServicio = se.getFechaServicio();
+        this.id = se.getId();
+        this.nota = se.getNota();
+    }
+
+    public Servicio() {
+    }
 }

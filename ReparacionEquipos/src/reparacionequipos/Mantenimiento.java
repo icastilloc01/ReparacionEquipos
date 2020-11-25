@@ -5,13 +5,31 @@
  */
 package reparacionequipos;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  *
  * @author aitor
  */
-public class Mantenimiento {
-    
+public class Mantenimiento extends Servicio {
+
     private int horastrabajadas;
+    private ArrayList<Reparacion> reparaciones = new ArrayList<>();
+
+    public Mantenimiento() {
+        super();
+    }
+
+    public Mantenimiento(int horastrabajadas, long id, Date fechaServicio, String nota) {
+        super(id, fechaServicio, nota);
+        this.horastrabajadas = horastrabajadas;
+    }
+
+    public Mantenimiento(Mantenimiento m) {
+        super(m);
+        this.horastrabajadas = m.horastrabajadas;
+    }
 
     public int getHorastrabajadas() {
         return horastrabajadas;
@@ -21,16 +39,21 @@ public class Mantenimiento {
         this.horastrabajadas = horastrabajadas;
     }
 
-    public Mantenimiento() {
+    public ArrayList<Cliente> getClientes() {
+        return clientes;
     }
 
-    public Mantenimiento(int horastrabajadas) {
-        this.horastrabajadas = horastrabajadas;
+    public void setClientes(ArrayList<Cliente> clientes) {
+        this.clientes = clientes;
     }
-    
-    
-    
-    
-    
+
+    public ArrayList<Reparacion> getReparaciones() {
+        return reparaciones;
+    }
+
+    public void setReparaciones(ArrayList<Reparacion> reparaciones) {
+        this.reparaciones = reparaciones;
+    }
+
     
 }

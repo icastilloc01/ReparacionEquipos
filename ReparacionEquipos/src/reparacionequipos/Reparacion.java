@@ -10,9 +10,21 @@ package reparacionequipos;
  * @author aitor
  */
 public class Reparacion {
-    
+
     private long id;
     private int duraciontotal;
+
+    public void setDuraciontotal(int duraciontotal) {
+        this.duraciontotal = duraciontotal;
+    }
+
+    public Reparacion() {
+    }
+
+    public Reparacion(long id, int duraciontotal) {
+        this.id = id;
+        this.duraciontotal = duraciontotal;
+    }
 
     public long getId() {
         return id;
@@ -26,20 +38,4 @@ public class Reparacion {
         return duraciontotal;
     }
 
-    public void setDuraciontotal(int duraciontotal) {
-        this.duraciontotal = duraciontotal;
-    }
-
-    public Reparacion() {
-    }
-
-    public Reparacion(long id, int duraciontotal) {
-        this.id = id;
-        this.duraciontotal = duraciontotal;
-    }
-    
-    
-    
-    
-    
 }

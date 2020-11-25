@@ -5,6 +5,7 @@
  */
 package reparacionequipos;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -14,10 +15,31 @@ import java.util.Date;
 public class Envio {
     private  long id;
     private Date fechaSalida;
-    private int precioDeReparto;
-    private double ptrcioTotal;
+    private int preciodereparto;
+    private double preciototal;
     private double coste;
     private String lugar;
+    private ArrayList<Repartidor> repartidores = new ArrayList<>();
+    
+    public Envio() {
+    }
+
+    public Envio(long id, Date fechaSalida, int preciodereparto, double preciototal, double coste, String lugar) {
+        this.id = id;
+        this.fechaSalida = fechaSalida;
+        this.preciodereparto = preciodereparto;
+        this.preciototal = preciototal;
+        this.coste = coste;
+        this.lugar = lugar;
+    }
+    
+    public Envio(Envio en){
+        this.id = en.id;
+        this.fechaSalida = en.fechaSalida;
+        this.preciototal = en.preciototal;
+        this.coste = en.coste;
+        this.lugar = en.lugar;
+    }
 
     public long getId() {
         return id;
@@ -35,20 +57,20 @@ public class Envio {
         this.fechaSalida = fechaSalida;
     }
 
-    public int getPrecioDeReparto() {
-        return precioDeReparto;
+    public int getPreciodereparto() {
+        return preciodereparto;
     }
 
-    public void setPrecioDeReparto(int precioDeReparto) {
-        this.precioDeReparto = precioDeReparto;
+    public void setPreciodereparto(int preciodereparto) {
+        this.preciodereparto = preciodereparto;
     }
 
-    public double getPtrcioTotal() {
-        return ptrcioTotal;
+    public double getPrecioTotal() {
+        return preciototal;
     }
 
-    public void setPtrcioTotal(double ptrcioTotal) {
-        this.ptrcioTotal = ptrcioTotal;
+    public void setPrecioTotal(double precioTotal) {
+        this.preciototal = precioTotal;
     }
 
     public double getCoste() {
@@ -65,11 +87,14 @@ public class Envio {
 
     public void setLugar(String lugar) {
         this.lugar = lugar;
+    }   
+    
+    public ArrayList<Repartidor> getRepartidores() {
+        return repartidores;
     }
 
-    public Envio() {
+    public void setRepartidores(ArrayList<Repartidor> repartidores) {
+        this.repartidores = repartidores;
     }
-    
-    
     
 }

@@ -5,6 +5,8 @@
  */
 package reparacionequipos;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Rxndy
@@ -50,8 +52,5 @@ public class Equipo {
     public void setModeloEquipo(String modeloEquipo) {
         this.modeloEquipo = modeloEquipo;
     }
-    
-    
-    
-    
+ 
 }

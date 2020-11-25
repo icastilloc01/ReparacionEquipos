@@ -5,6 +5,8 @@
  */
 package reparacionequipos;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Rxndy
@@ -17,8 +19,8 @@ public class Cliente {
     private String telefono;
     private String tarjetaCredito;
     private String cuentaCorriente;
+    private ArrayList<Servicio> servicios = new ArrayList<>();
 
-    
     //constructor por defecto
     public Cliente() {
     }
@@ -106,5 +108,14 @@ public class Cliente {
         this.cuentaCorriente = cuentaCorriente;
     }
 
+    public ArrayList<Servicio> getServicios() {
+        return servicios;
+    }
+
+    public void setServicios(ArrayList<Servicio> servicios) {
+        this.servicios = servicios;
+    }
+    
+    
     
 }

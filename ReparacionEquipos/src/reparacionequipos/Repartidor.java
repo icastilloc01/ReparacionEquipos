@@ -5,12 +5,20 @@
  */
 package reparacionequipos;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author icasc
  */
 public class Repartidor extends Empleado {
+
     public Repartidor() {
-        super ();
+        super();
     }
+
+    public Repartidor(long id, String nombre, String teléfono, String nif, String apellidos, String dirección) {
+        super(id, nombre, teléfono, nif, apellidos, dirección);
+    }
+
 }

@@ -5,28 +5,37 @@
  */
 package reparacionequipos;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Rxndy
  */
-public class Compra {
+public class Compra extends Servicio {
+
     private long idCompra;
     private double precioTotal;
     private char metodoPago;
+    private ArrayList<Equipo> equipos = new ArrayList<>();
+    private ArrayList<Lote> lotes = new ArrayList<>();
 
     public Compra(long idCompra, double precioTotal, char metodoPago) {
+        super();
         this.idCompra = idCompra;
         this.precioTotal = precioTotal;
         this.metodoPago = metodoPago;
     }
 
-    public Compra(Compra c){
+    public Compra(Compra c) {
+        super();
         this.idCompra = c.getIdCompra();
         this.metodoPago = c.getMetodoPago();
         this.precioTotal = c.getPrecioTotal();
     }
-    
-    public Compra(){}
+
+    public Compra() {
+        super();
+    }
 
     public long getIdCompra() {
         return idCompra;
@@ -51,7 +60,21 @@ public class Compra {
     public void setMetodoPago(char metodoPago) {
         this.metodoPago = metodoPago;
     }
-    
-    
-    
+
+    public ArrayList<Equipo> getEquipos() {
+        return equipos;
+    }
+
+    public void setEquipos(ArrayList<Equipo> equipos) {
+        this.equipos = equipos;
+    }
+
+    public ArrayList<Lote> getLotes() {
+        return lotes;
+    }
+
+    public void setLotes(ArrayList<Lote> lotes) {
+        this.lotes = lotes;
+    }
+
 }

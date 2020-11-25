@@ -5,6 +5,8 @@
  */
 package reparacionequipos;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Rxndy
@@ -12,6 +14,7 @@ package reparacionequipos;
 public class Lote {
     private long idLote;
     private int descuento;
+    private ArrayList<Equipo> equipos = new ArrayList<>();
 
     public Lote(long idLote, int descuento) {
         this.idLote = idLote;
@@ -39,6 +42,14 @@ public class Lote {
 
     public void setDescuento(int descuento) {
         this.descuento = descuento;
+    }
+
+    public ArrayList<Equipo> getEquipos() {
+        return equipos;
+    }
+
+    public void setEquipos(ArrayList<Equipo> equipos) {
+        this.equipos = equipos;
     }
     
     
