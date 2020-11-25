@@ -10,18 +10,20 @@ import java.util.Date;
 
 /**
  *
- * @author PC_Alba
+ * @author icasc
  */
 public class Envio {
-    private  long id;
+    private long id;
     private Date fechaSalida;
     private int preciodereparto;
     private double preciototal;
     private double coste;
     private String lugar;
+    private ArrayList<Servicio> servicios = new ArrayList<>();
     private ArrayList<Repartidor> repartidores = new ArrayList<>();
     
     public Envio() {
+        
     }
 
     public Envio(long id, Date fechaSalida, int preciodereparto, double preciototal, double coste, String lugar) {
@@ -40,7 +42,7 @@ public class Envio {
         this.coste = en.coste;
         this.lugar = en.lugar;
     }
-
+    
     public long getId() {
         return id;
     }
@@ -88,7 +90,23 @@ public class Envio {
     public void setLugar(String lugar) {
         this.lugar = lugar;
     }   
-    
+
+    public double getPreciototal() {
+        return preciototal;
+    }
+
+    public void setPreciototal(double preciototal) {
+        this.preciototal = preciototal;
+    }
+
+    public ArrayList<Servicio> getServicios() {
+        return servicios;
+    }
+
+    public void setServicios(ArrayList<Servicio> servicios) {
+        this.servicios = servicios;
+    }
+
     public ArrayList<Repartidor> getRepartidores() {
         return repartidores;
     }
