@@ -17,12 +17,34 @@ public class Envio {
     private long id;
     private Date fechaSalida;
     private int precioDeReparto;
-    private double ptrcioTotal;
+    private double precioTotal;
     private double coste;
     private String lugar;
-    private ArrayList<Servicio> servicios = new ArrayList<Servicio>();
-    private ArrayList<Repartidor> repartidores = new ArrayList<Repartidor>();
+    private ArrayList<Servicio> servicios = new ArrayList<>();
+    private ArrayList<Repartidor> repartidores = new ArrayList<>();
 
+    
+    public Envio() {
+    }
+
+    public Envio(long id, Date fechaSalida, int precioDeReparto, double precioTotal, double coste, String lugar) {
+        this.id = id;
+        this.fechaSalida = fechaSalida;
+        this.precioDeReparto = precioDeReparto;
+        this.precioTotal = precioTotal;
+        this.coste = coste;
+        this.lugar = lugar;
+    }
+    
+    public Envio(Envio en) {
+        this.id = en.id;
+        this.fechaSalida = en.fechaSalida;
+        this.precioDeReparto = en.precioDeReparto;
+        this.precioTotal = en.precioTotal;
+        this.coste = en.coste;
+        this.lugar = en.lugar;       
+    }
+    
     public long getId() {
         return id;
     }
@@ -48,11 +70,11 @@ public class Envio {
     }
 
     public double getPtrcioTotal() {
-        return ptrcioTotal;
+        return precioTotal;
     }
 
     public void setPtrcioTotal(double ptrcioTotal) {
-        this.ptrcioTotal = ptrcioTotal;
+        this.precioTotal = ptrcioTotal;
     }
 
     public double getCoste() {
@@ -85,9 +107,6 @@ public class Envio {
 
     public void setServicios(ArrayList<Servicio> servicios) {
         this.servicios = servicios;
-    }
-
-    public Envio() {
     }
 
 }
