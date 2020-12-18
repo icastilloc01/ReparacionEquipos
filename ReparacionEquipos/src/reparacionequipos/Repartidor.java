@@ -5,8 +5,6 @@
  */
 package reparacionequipos;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author icasc
