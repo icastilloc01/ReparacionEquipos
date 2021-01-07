@@ -5,8 +5,10 @@
  */
 package reparacionequipos;
 
+import static java.lang.System.in;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 /**
  *
@@ -14,9 +16,9 @@ import java.util.Date;
  */
 public class Servicio {
 
-    protected long id;
-    protected Date fechaServicio;
-    protected String nota;
+    protected long id;//valores validos: números positivos mayores que 0 - valor invalido: números menores o iguales que 0
+    protected Date fechaServicio;//valores validos: fechas con numeros de dia >0 y <31, meses >0 y <13 y año >1900 y <2021
+    protected String nota;// valores validos: cadena de caracteres con minimo de 4 letras - valor invalido: longitud de cadena menor de 4 letras
     protected ArrayList<Cliente> clientes = new ArrayList<>();
 
     public Servicio(long id, Date fechaServicio, String nota) {
@@ -65,4 +67,44 @@ public class Servicio {
 
     public Servicio() {
     }
+    
+     public static Servicio nuevoServicio() {
+        Servicio s = new Servicio();
+        Scanner sc = new Scanner(System.in);
+        boolean salir;
+        char d;
+        do {
+            System.out.println("Introduzca id del servicio:");
+            Long id = sc.nextLong();
+            s.setId(id);
+            System.out.println("Introduzca nota de servicio:");
+            String nota = sc.nextLine();
+            s.setNota(nota);
+            System.out.println("Introduzca fecha del servicio:");
+            Date fecha = Utilidades.introducirFecha();
+            System.out.println("Quiere Introducir un nuevo Cliente? s/n ");
+            d = sc.next().charAt(0);
+
+            while (d == 's') {
+                s.clientes.add(Cliente.nuevoCliente());
+
+                System.out.println("Quiere Introducir otro Cliente? s/n ");
+                d = sc.next().charAt(0);
+            }
+     
+            System.out.println("Son correctos los siguiente datos?(s/n)");
+            System.out.println("id:" +id);
+            System.out.println("fecha:" +fecha);
+            System.out.println("nota"+nota);
+            salir = Utilidades.leerBoolean();
+        } while (salir);
+        return s;
+    }
+
+    @Override
+    public String toString() {
+        return "Servicio{" + "id=" + id + ", fechaServicio=" + fechaServicio + ", nota=" + nota + ", clientes=" + clientes + '}';
+    }
+     
+     
 }

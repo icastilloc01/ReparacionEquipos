@@ -5,16 +5,16 @@
  */
 package reparacionequipos;
 
-import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
  * @author Rxndy
  */
 public class Equipo {
-    private long idEquipo;
-    private double precioEquipo;
-    private String modeloEquipo;
+    private long idEquipo;////valores validos: números positivos mayores que 0 - valor invalido: números menores o iguales que 0
+    private double precioEquipo;//valores validos: números positivos mayores que 0 - valor invalido: números menores que 0
+    private String modeloEquipo;// valores validos: cadena de caracteres con minimo de 4 letras - valor invalido: longitud de cadena menor de 4 letras
 
     public Equipo(long idEquipo, double precioEquipo, String modeloEquipo) {
         this.idEquipo = idEquipo;
@@ -53,4 +53,37 @@ public class Equipo {
         this.modeloEquipo = modeloEquipo;
     }
  
+    
+    public static Equipo nuevoEquipo() {
+        Equipo e = new Equipo();
+        Scanner sc = new Scanner(System.in);
+        boolean salir;
+        char d;
+        do {
+            System.out.println("Introduzca id del equipo:");
+            Long id = sc.nextLong();
+            e.setIdEquipo(id);
+            System.out.println("Introduzca precio del equipo:");
+            double precio = sc.nextDouble();
+            e.setPrecioEquipo(precio);
+            System.out.println("Introduzca modelo del equipo:");
+            String modelo = sc.nextLine();
+            e.setModeloEquipo(modelo);
+          
+                
+            System.out.println("Son correctos los siguiente datos?(s/n)");
+            System.out.println("id:" +id);
+            System.out.println("precio equipo" +precio);
+            System.out.println("modelo:" +modelo);
+            salir = Utilidades.leerBoolean();
+        } while (salir);
+        return e;
+    }
+
+    @Override
+    public String toString() {
+        return "Equipo{" + "idEquipo=" + idEquipo + ", precioEquipo=" + precioEquipo + ", modeloEquipo=" + modeloEquipo + '}';
+    }
+    
+    
 }
