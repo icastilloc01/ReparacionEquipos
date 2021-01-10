@@ -23,10 +23,11 @@ public class Envio {
     private ArrayList<Servicio> servicios = new ArrayList<>();
     private ArrayList<Repartidor> repartidores = new ArrayList<>();
 
-    
+    //constructor por defecto
     public Envio() {
     }
 
+    //constructor por atributos
     public Envio(long id, Date fechaSalida, int precioDeReparto, double precioTotal, double coste, String lugar) {
         this.id = id;
         this.fechaSalida = fechaSalida;
@@ -35,16 +36,18 @@ public class Envio {
         this.coste = coste;
         this.lugar = lugar;
     }
-    
+
+    //constructor de copia
     public Envio(Envio en) {
         this.id = en.id;
         this.fechaSalida = en.fechaSalida;
         this.precioDeReparto = en.precioDeReparto;
         this.precioTotal = en.precioTotal;
         this.coste = en.coste;
-        this.lugar = en.lugar;       
+        this.lugar = en.lugar;
     }
-    
+
+    //geters y seters
     public long getId() {
         return id;
     }
@@ -107,6 +110,12 @@ public class Envio {
 
     public void setServicios(ArrayList<Servicio> servicios) {
         this.servicios = servicios;
+    }
+
+    //metodo to string
+    @Override
+    public String toString() {
+        return "Envio{" + "id=" + id + ", fechaSalida=" + fechaSalida + ", precioDeReparto=" + precioDeReparto + ", precioTotal=" + precioTotal + ", coste=" + coste + ", lugar=" + lugar + ", servicios=" + servicios + ", repartidores=" + repartidores + '}';
     }
 
 }
