@@ -54,6 +54,5 @@ public class Mantenimiento extends Servicio {
     public void setReparaciones(ArrayList<Reparacion> reparaciones) {
         this.reparaciones = reparaciones;
     }
-
     
 }

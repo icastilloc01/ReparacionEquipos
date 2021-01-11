@@ -5,13 +5,15 @@
  */
 package reparacionequipos;
 
-import java.sql.Date;
+import java.util.Date;
+import java.util.Scanner;
 
 /**
  *
  * @author icasc
  */
-public class Baja{
+public class Baja {
+
     private long id;
     private Date fechainicio;
     private Date fechafin;
@@ -19,16 +21,16 @@ public class Baja{
 
     public Baja() {
     }
-    
+
     public Baja(long id, Date fechainicio, Date fechafin, String motivo) {
         this.id = id;
         this.fechainicio = fechainicio;
         this.fechafin = fechafin;
         this.motivo = motivo;
     }
-    
-    public Baja(Baja b){
-        this.id= b.id;
+
+    public Baja(Baja b) {
+        this.id = b.id;
         this.fechainicio = b.fechainicio;
         this.fechafin = b.fechafin;
         this.motivo = b.motivo;
@@ -65,7 +67,25 @@ public class Baja{
     public void setMotivo(String motivo) {
         this.motivo = motivo;
     }
-    
-    
-}
 
+    public static Baja nuevaBaja() {
+        Baja nuevaBaja = new Baja();
+        Scanner in = new Scanner(System.in);
+        System.out.print("Introduzca el id de la baja: ");
+        nuevaBaja.id = in.nextLong();
+        nuevaBaja.motivo = in.nextLine(); //esta linea es para que no se salte el proximo nextLine
+        System.out.print("Introduzca la fecha de inicio de la baja: ");
+        nuevaBaja.fechainicio = Utilidades.introducirFecha();
+        System.out.print("Introduzca la fecha de fin de la baja: ");
+        nuevaBaja.fechafin = Utilidades.introducirFecha();
+        System.out.println("Introduzca el motivo de la baja: ");
+        nuevaBaja.motivo = in.nextLine();
+        return nuevaBaja;
+    }
+
+    @Override
+    public String toString() {
+        return "Baja{" + "id=" + id + ", fechainicio=" + fechainicio + ", fechafin=" + fechafin + ", motivo=" + motivo + '}';
+    }
+
+}

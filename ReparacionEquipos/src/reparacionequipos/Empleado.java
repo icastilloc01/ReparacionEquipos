@@ -93,19 +93,10 @@ public class Empleado {
     public static Empleado nuevoEmpleado() {
         Empleado nuevoEmpleado = new Empleado();
         Scanner in = new Scanner(System.in);
-        do {
-            System.out.print("Introduzca el id del nuevo empleado: ");
-            try {
-                nuevoEmpleado.id = in.nextInt();
-                if (nuevoEmpleado.id <= 0) {
-                    System.out.println("El valor introducido es menor a uno, porfavor introduzca un número mayor que cero.");
-                }
-            } catch (InputMismatchException ex) {
-                System.out.println("El caracter que ha introducido no no es un Número");
-
-            }
-        } while (nuevoEmpleado.id <= 0);
-
+        System.out.print("Introduzca el id del nuevo empleado: ");
+        nuevoEmpleado.id = in.nextInt();
+        System.out.println("El caracter que ha introducido no no es un Número");
+        nuevoEmpleado.nombre = in.nextLine();
         nuevoEmpleado.nombre = in.nextLine();
         System.out.print("Introduzca el nombre del nuevo empleado: ");
         nuevoEmpleado.nombre = in.nextLine();

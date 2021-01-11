@@ -6,6 +6,7 @@
 package reparacionequipos;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -55,4 +56,19 @@ public class Sustituto extends Empleado {
         this.bajas = bajas;
     }
 
+    public static Sustituto nuevoSustituto(){
+        Sustituto nuevoSustituto = new Sustituto();
+        Scanner in = new Scanner(System.in);
+        System.out.print("Introduzca la edad del nuevo sustituto: ");
+        nuevoSustituto.edad = in.nextLine();
+        System.out.print("¿Tiene exclusión social? ");
+        nuevoSustituto.exclusiónsocial = in.nextBoolean();
+        return nuevoSustituto;
+    }
+
+    @Override
+    public String toString() {
+        return "Sustituto{" + "edad=" + edad + ", exclusi\u00f3nsocial=" + exclusiónsocial + '}';
+    }
+    
 }
