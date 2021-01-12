@@ -7,6 +7,7 @@ package reparacionequipos;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 /**
  *
@@ -110,6 +111,25 @@ public class Envio {
 
     public void setServicios(ArrayList<Servicio> servicios) {
         this.servicios = servicios;
+    }
+
+    public static Envio nuevoEnvio() {
+        Envio nuevoEnvio = new Envio();
+        Scanner in = new Scanner(System.in);
+        System.out.println("Introduzca el id del envio");
+        nuevoEnvio.id = in.nextLong();
+        nuevoEnvio.lugar = in.nextLine();//esta linea es para que no se salte el proximo nextLine
+        System.out.println("Introduzca la fecha de salidad del envio");
+        nuevoEnvio.fechaSalida = Utilidades.introducirFecha();
+        System.out.println("introduzca el precio del reparto");
+        nuevoEnvio.precioDeReparto = in.nextInt();
+        System.out.println("introduzca el precio total");
+        nuevoEnvio.precioTotal = in.nextDouble();
+        System.out.println("introduzca el coste");
+        nuevoEnvio.coste = in.nextDouble();
+        System.out.println("Introduce el lugar del envio");
+        nuevoEnvio.lugar = in.nextLine();
+        return nuevoEnvio;
     }
 
     //metodo to string
