@@ -78,7 +78,7 @@ public class Mantenimiento extends Servicio {
 
     @Override
     public String toString() {
-        return "el trabajador ha trabajado" + horastrabajadas + "y tiene reparaciones" + reparaciones;
+        return "el trabajador ha trabajado" + horastrabajadas + "y tiene reparaciones " + reparaciones;
     }
 
     private void setReparaciones(String Reparaciones) {

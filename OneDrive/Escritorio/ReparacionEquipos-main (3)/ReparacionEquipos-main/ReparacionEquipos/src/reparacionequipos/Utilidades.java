@@ -17,6 +17,22 @@ import java.util.Date;
  */
 public class Utilidades {
 
+    public static final Mantenimiento Mantenimientos[] = {
+        new Mantenimiento(),
+    
+    };
+
+    public static final int numMantenimiento = Mantenimientos.length;
+
+    public static final Reparacion Reparaciones[] = {
+        new Reparacion(12555, 25),
+        new Reparacion(1257878, 27),
+        new Reparacion(55878, 35)
+
+    };
+
+    public static final int numReparaciones = Reparaciones.length;
+
     public static Date introducirFecha() {
 
         System.out.println("Introduzca la fecha en format dd/mm/aaaa");
