@@ -95,9 +95,7 @@ public class Empleado {
         Scanner in = new Scanner(System.in);
         System.out.print("Introduzca el id del nuevo empleado: ");
         nuevoEmpleado.id = in.nextInt();
-        System.out.println("El caracter que ha introducido no no es un Número");
-        nuevoEmpleado.nombre = in.nextLine();
-        nuevoEmpleado.nombre = in.nextLine();
+        nuevoEmpleado.nombre = in.nextLine();   //esta linea es para que no se salte el proximo nextLine
         System.out.print("Introduzca el nombre del nuevo empleado: ");
         nuevoEmpleado.nombre = in.nextLine();
         System.out.print("Introduzca el teléfono del nuevo empleado: ");
@@ -113,7 +111,7 @@ public class Empleado {
 
     @Override
     public String toString() {
-        return "Empleado{" + "id=" + id + ", nombre=" + nombre + ", tel\u00e9fono=" + teléfono + ", nif=" + nif + ", apellido=" + apellido + ", direcci\u00f3n=" + direccion + '}';
+        return "Empleado{" + "id=" + id + ", nombre=" + nombre + ", telefono=" + teléfono + ", nif=" + nif + ", apellido=" + apellido + ", direccion=" + direccion + '}';
     }
 
 }
