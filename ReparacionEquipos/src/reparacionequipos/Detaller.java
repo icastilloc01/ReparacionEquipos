@@ -12,24 +12,26 @@ import java.util.Scanner;
  * @author icasc
  */
 public class Detaller extends Empleado {
+
     private boolean senior;
 
     public Detaller() {
         super();
     }
-    
-    public Detaller (boolean senior) {
+
+    public Detaller(boolean senior) {
         this.senior = senior;
     }
-    
-    public Detaller (Detaller d) {
+
+    public Detaller(Detaller d) {
         this.senior = d.senior;
     }
+
     /**
      *
      * @return
      */
-    
+
     public boolean isSenior() {
         return senior;
     }
@@ -37,12 +39,12 @@ public class Detaller extends Empleado {
     public void setSenior(boolean senior) {
         this.senior = senior;
     }
-    
-    public static Detaller nuevoDetaller(){
+
+    public static Detaller nuevoDetaller() {
         Detaller nuevoDetaller = new Detaller();
         Scanner in = new Scanner(System.in);
-        System.out.println("¿Es senior?");
-        nuevoDetaller.senior = in.nextBoolean();
+        System.out.println("¿Es senior? s/n/S/N: ");
+        nuevoDetaller.senior = Utilidades.leerBoolean();
         return nuevoDetaller;
     }
 
@@ -50,5 +52,5 @@ public class Detaller extends Empleado {
     public String toString() {
         return "Detaller{" + "senior=" + senior + '}';
     }
-    
+
 }
