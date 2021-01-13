@@ -7,6 +7,7 @@ package reparacionequipos;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 /**
  *
@@ -28,6 +29,12 @@ public class Mantenimiento extends Servicio {
 
     public Mantenimiento(Mantenimiento m) {
         super(m);
+        if (horastrabajadas >= 0) {
+            System.out.println("Los datos son validos");
+
+        } else {
+            System.out.println("Los datos no son validos");
+        }
         this.horastrabajadas = m.horastrabajadas;
     }
 
@@ -54,5 +61,28 @@ public class Mantenimiento extends Servicio {
     public void setReparaciones(ArrayList<Reparacion> reparaciones) {
         this.reparaciones = reparaciones;
     }
-    
+
+    public static Mantenimiento nuevomantenimiento() {
+
+        Mantenimiento nuevomantenimiento = new Mantenimiento();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Dame las horas trabajadas que has trabajado");
+        int horastrabajadas = sc.nextInt();
+        nuevomantenimiento.setHorastrabajadas(horastrabajadas);
+        System.out.println("Dime si tienes reparaciones pendientes");
+        String Reparaciones = sc.nextLine();
+        nuevomantenimiento.setReparaciones(Reparaciones);
+        return nuevomantenimiento;
+
+    }
+
+    @Override
+    public String toString() {
+        return "el trabajador ha trabajado" + horastrabajadas + "y tiene reparaciones" + reparaciones;
+    }
+
+    private void setReparaciones(String Reparaciones) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

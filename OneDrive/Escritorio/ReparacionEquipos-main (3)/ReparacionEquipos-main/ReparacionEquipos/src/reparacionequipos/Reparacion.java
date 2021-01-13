@@ -5,6 +5,8 @@
  */
 package reparacionequipos;
 
+import java.util.Scanner;
+
 /**
  *
  * @author aitor
@@ -22,7 +24,23 @@ public class Reparacion {
     }
 
     public Reparacion(long id, int duraciontotal) {
+        
+        if(id>=0){
+            System.out.println("Datos validos");
+        }
+        else{
+            System.out.println("Datos invalidos");
+        }
         this.id = id;
+        
+        if(duraciontotal>=0){
+            System.out.println("Datos validos");
+        
+        }
+        else{
+            System.out.println("Datos invalidos");
+        
+        }
         this.duraciontotal = duraciontotal;
     }
 
@@ -37,5 +55,26 @@ public class Reparacion {
     public int getDuraciontotal() {
         return duraciontotal;
     }
+
+    public static Reparacion nuevoreparacion() {
+
+        Reparacion nuevoreparacion = new Reparacion();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Dame tu id");
+        long id = sc.nextLong();
+        nuevoreparacion.setId(id);
+        int duracionhoras = sc.nextInt();
+        nuevoreparacion.setDuraciontotal(duracionhoras);
+
+        return nuevoreparacion;
+
+    }
+
+    @Override
+    public String toString() {
+        return "Hay trabajadores con el id :"+id+"y han trabajado estas horas"+duraciontotal;
+    }
+    
+    
 
 }
