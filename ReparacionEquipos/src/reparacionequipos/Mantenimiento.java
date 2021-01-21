@@ -54,5 +54,12 @@ public class Mantenimiento extends Servicio {
     public void setReparaciones(ArrayList<Reparacion> reparaciones) {
         this.reparaciones = reparaciones;
     }
+
+    @Override
+    public String toString() {
+        return "Mantenimiento{" + "horastrabajadas=" + horastrabajadas + ", reparaciones=" + reparaciones + '}';
+    }
+    
+    
     
 }
