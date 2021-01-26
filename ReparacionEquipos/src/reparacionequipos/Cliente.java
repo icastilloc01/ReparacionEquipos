@@ -168,12 +168,12 @@ public class Cliente {
         return ret + "]";
     }
     
-    public static ArrayList<Servicio> arrayde(ArrayList<Servicio> lista, int[] ids) {
-        ArrayList<Servicio> ret = new ArrayList<Servicio>();
+    public static ArrayList<Cliente> arrayde(ArrayList<Cliente> lista, int[] ids) {
+        ArrayList<Cliente> ret = new ArrayList<Cliente>();
         for (int i = 0; i < ids.length; i++) {
             for (int j = 0; j < lista.size(); j++) {
                 if (lista.get(j).getId() == ids[i]) {
-                    ret.add((Servicio) lista.get(ids[i]));
+                    ret.add((Cliente) lista.get(ids[i]));
                     break;
                 }
             }
@@ -181,8 +181,8 @@ public class Cliente {
         return ret;
     }
     
-    public static ArrayList<Servicio> convertir(Servicio[] array) {
-        return new Gen<Servicio>().convertir(array);
+    public static ArrayList<Cliente> convertir(Cliente[] array) {
+        return new Gen<Cliente>().convertir(array);
     }
     
     @Override

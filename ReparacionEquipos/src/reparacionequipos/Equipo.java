@@ -80,6 +80,16 @@ public class Equipo {
         return e;
     }
 
+//    public static void verEquipos() {
+//        System.out.println("Lista de equipos disponibles:");
+//        for (int i = 0; i < Utilidades.numEquipos; i++) {
+//            Equipos eq = Utilidades.Equipos[i];
+//            if (p.getExistencias() > 0) {
+//                System.out.println(p.toString());
+//            }
+//        }
+//    }
+    
     @Override
     public String toString() {
         return "Equipo{" + "idEquipo=" + idEquipo + ", precioEquipo=" + precioEquipo + ", modeloEquipo=" + modeloEquipo + '}';

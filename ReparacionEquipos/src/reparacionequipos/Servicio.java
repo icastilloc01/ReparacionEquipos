@@ -5,7 +5,6 @@
  */
 package reparacionequipos;
 
-import static java.lang.System.in;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -25,7 +24,7 @@ public class Servicio {
         this.id = id;
         this.fechaServicio = fechaServicio;
         this.nota = nota;
-        this.clientes = new ArrayList<Cliente>();
+        this.clientes = clientes;
     }
 
     public long getId() {
@@ -102,12 +101,12 @@ public class Servicio {
         return s;
     }
 
-    public static ArrayList<Cliente> arrayde(ArrayList<Cliente> lista, int[] ids) {
-        ArrayList<Cliente> ret = new ArrayList<Cliente>();
+    public static ArrayList<Servicio> arrayde(ArrayList<Servicio> lista, int[] ids) {
+        ArrayList<Servicio> ret = new ArrayList<Servicio>();
         for (int i = 0; i < ids.length; i++) {
             for (int j = 0; j < lista.size(); j++) {
                 if (lista.get(j).getId() == ids[i]) {
-                    ret.add((Cliente) lista.get(ids[i]));
+                    ret.add((Servicio) lista.get(ids[i]));
                     break;
                 }
             }
@@ -115,8 +114,8 @@ public class Servicio {
         return ret;
     }
 
-    public static ArrayList<Cliente> convertir(Cliente[] array) {
-        return new Gen<Cliente>().convertir(array);
+    public static ArrayList<Servicio> convertir(Servicio[] array) {
+        return new Gen<Servicio>().convertir(array);
     }
 
     @Override
