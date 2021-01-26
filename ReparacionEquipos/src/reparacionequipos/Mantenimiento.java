@@ -21,8 +21,8 @@ public class Mantenimiento extends Servicio {
         super();
     }
 
-    public Mantenimiento(int horastrabajadas, long id, Date fechaServicio, String nota) {
-        super(id, fechaServicio, nota);
+    public Mantenimiento(int horastrabajadas, long id, Date fechaServicio, String nota, ArrayList<Cliente> clientes) {
+        super(id, fechaServicio, nota, clientes);
         this.horastrabajadas = horastrabajadas;
     }
 
@@ -39,14 +39,6 @@ public class Mantenimiento extends Servicio {
         this.horastrabajadas = horastrabajadas;
     }
 
-    public ArrayList<Cliente> getClientes() {
-        return clientes;
-    }
-
-    public void setClientes(ArrayList<Cliente> clientes) {
-        this.clientes = clientes;
-    }
-
     public ArrayList<Reparacion> getReparaciones() {
         return reparaciones;
     }
@@ -59,7 +51,5 @@ public class Mantenimiento extends Servicio {
     public String toString() {
         return "Mantenimiento{" + "horastrabajadas=" + horastrabajadas + ", reparaciones=" + reparaciones + '}';
     }
-    
-    
-    
+
 }

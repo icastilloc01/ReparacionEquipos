@@ -21,10 +21,11 @@ public class Servicio {
     protected String nota;// valores validos: cadena de caracteres con minimo de 4 letras - valor invalido: longitud de cadena menor de 4 letras
     protected ArrayList<Cliente> clientes = new ArrayList<>();
 
-    public Servicio(long id, Date fechaServicio, String nota) {
+    public Servicio(long id, Date fechaServicio, String nota, ArrayList<Cliente> clientes) {
         this.id = id;
         this.fechaServicio = fechaServicio;
         this.nota = nota;
+        this.clientes = new ArrayList<Cliente>();
     }
 
     public long getId() {
@@ -67,8 +68,8 @@ public class Servicio {
 
     public Servicio() {
     }
-    
-     public static Servicio nuevoServicio() {
+
+    public static Servicio nuevoServicio() {
         Servicio s = new Servicio();
         Scanner sc = new Scanner(System.in);
         boolean salir;
@@ -91,20 +92,36 @@ public class Servicio {
                 System.out.println("Quiere Introducir otro Cliente? s/n ");
                 d = sc.next().charAt(0);
             }
-     
+
             System.out.println("Son correctos los siguiente datos?(s/n)");
-            System.out.println("id:" +id);
-            System.out.println("fecha:" +fecha);
-            System.out.println("nota"+nota);
+            System.out.println("id:" + id);
+            System.out.println("fecha:" + fecha);
+            System.out.println("nota" + nota);
             salir = Utilidades.leerBoolean();
         } while (salir);
         return s;
+    }
+
+    public static ArrayList<Cliente> arrayde(ArrayList<Cliente> lista, int[] ids) {
+        ArrayList<Cliente> ret = new ArrayList<Cliente>();
+        for (int i = 0; i < ids.length; i++) {
+            for (int j = 0; j < lista.size(); j++) {
+                if (lista.get(j).getId() == ids[i]) {
+                    ret.add((Cliente) lista.get(ids[i]));
+                    break;
+                }
+            }
+        }
+        return ret;
+    }
+
+    public static ArrayList<Cliente> convertir(Cliente[] array) {
+        return new Gen<Cliente>().convertir(array);
     }
 
     @Override
     public String toString() {
         return "Servicio{" + "id=" + id + ", fechaServicio=" + fechaServicio + ", nota=" + nota + ", clientes=" + clientes + '}';
     }
-     
-     
+
 }

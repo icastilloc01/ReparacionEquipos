@@ -53,4 +53,10 @@ public class Utilidades {
         return check;
 
     }
+
+    /*public static final Cliente CLIENTES[] = {
+        new Cliente(1, "Pepe", "74638264T", "C-Los Santos 34 5ºA", "608347586", "874639872", "ES874938376", Cliente.arrayde(Cliente.convertir(CLIENTES), new int[]{1, 3}))
+    };
+
+    public static final int numClientes = CLIENTES.length;*/
 }

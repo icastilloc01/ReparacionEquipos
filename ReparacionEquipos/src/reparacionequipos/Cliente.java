@@ -21,14 +21,14 @@ public class Cliente {
     private String telefono;//valores validos: cadena de caracteres con 9 numeros - valor invalido: cadena menor de 9 numeros o que contenga alguna letra
     private String tarjetaCredito;//valores validos: 9 cifras numéricas - valor invalido: menos de 9 cifras númericas o con letras
     private String cuentaCorriente;//valores validos: 9 cifras numéricas con dos letras iniciales que indican el país - valor invalido: menos de 9 cifras o que no tenga letras
-    private ArrayList<Servicio> servicios = new ArrayList<>();//valores validos: solo onjetos de tipo Servicio
+    private ArrayList<Servicio> servicios = new ArrayList<Servicio>();//valores validos: solo onjetos de tipo Servicio
 
     //constructor por defecto
     public Cliente() {
     }
 
     //constructor parámetros
-    public Cliente(long id, String nombre, String nif, String direccion, String telefono, String tarjetaCredito, String cuentaCorriente) {
+    public Cliente(long id, String nombre, String nif, String direccion, String telefono, String tarjetaCredito, String cuentaCorriente, ArrayList<Servicio> servicios) {
         this.id = id;
         this.nombre = nombre;
         this.nif = nif;
@@ -36,6 +36,7 @@ public class Cliente {
         this.telefono = telefono;
         this.tarjetaCredito = tarjetaCredito;
         this.cuentaCorriente = cuentaCorriente;
+        this.servicios = servicios;
     }
 
     //constructor copia
@@ -47,6 +48,7 @@ public class Cliente {
         this.telefono = c.telefono;
         this.tarjetaCredito = c.tarjetaCredito;
         this.cuentaCorriente = c.cuentaCorriente;
+        this.servicios = c.servicios;
     }
 
     //getters and setters
@@ -157,10 +159,35 @@ public class Cliente {
         } while (salir);
         return c;
     }
-
+    
+    public String servicios() {
+        String ret = " servicios:[";
+        for (Servicio s : this.servicios) {
+            ret += "" + s.getId() + "(" + s.getId() + "), ";
+        }
+        return ret + "]";
+    }
+    
+    public static ArrayList<Servicio> arrayde(ArrayList<Servicio> lista, int[] ids) {
+        ArrayList<Servicio> ret = new ArrayList<Servicio>();
+        for (int i = 0; i < ids.length; i++) {
+            for (int j = 0; j < lista.size(); j++) {
+                if (lista.get(j).getId() == ids[i]) {
+                    ret.add((Servicio) lista.get(ids[i]));
+                    break;
+                }
+            }
+        }
+        return ret;
+    }
+    
+    public static ArrayList<Servicio> convertir(Servicio[] array) {
+        return new Gen<Servicio>().convertir(array);
+    }
+    
     @Override
     public String toString() {
-        return "Cliente{" + "id=" + id + ", nombre=" + nombre + ", nif=" + nif + ", direccion=" + direccion + ", telefono=" + telefono + ", tarjetaCredito=" + tarjetaCredito + ", cuentaCorriente=" + cuentaCorriente + ", servicios=" + servicios + '}';
+        return "Cliente{" + "id=" + id + ", nombre=" + nombre + ", nif=" + nif + ", direccion=" + direccion + ", telefono=" + telefono + ", tarjetaCredito=" + tarjetaCredito + ", cuentaCorriente=" + cuentaCorriente + servicios() + '}';
     }
 
     
