@@ -16,10 +16,21 @@ public class Sustituto extends Empleado {
 
     private String edad;
     private boolean exclusiónsocial;
-    private ArrayList<Baja> bajas = new ArrayList<>();
 
     public Sustituto() {
         super();
+    }
+
+    public Sustituto(String edad, boolean exclusiónsocial, long id, String nombre, String telefono, String nif, String apellido, String direccion) {
+        super(id, nombre, telefono, nif, apellido, direccion);
+        this.edad = edad;
+        this.exclusiónsocial = exclusiónsocial;
+    }
+
+    public Sustituto(String edad, boolean exclusiónsocial, Empleado e) {
+        super(e);
+        this.edad = edad;
+        this.exclusiónsocial = exclusiónsocial;
     }
 
     public Sustituto(String edad, boolean exclusiónsocial) {
@@ -48,16 +59,36 @@ public class Sustituto extends Empleado {
         this.exclusiónsocial = exclusiónsocial;
     }
 
-    public ArrayList<Baja> getBajas() {
-        return bajas;
+    public static ArrayList<Sustituto> arrayde(ArrayList<Sustituto> lista, int[] ids) {
+        ArrayList<Sustituto> ret = new ArrayList<Sustituto>();
+        for (int i = 0; i < ids.length; i++) {
+            for (int j = 0; j < lista.size(); j++) {
+                if (lista.get(j).getId() == ids[i]) {
+                    ret.add((Sustituto) lista.get(j));
+                    break;
+                }
+            }
+        }
+        return ret;
     }
 
-    public void setBajas(ArrayList<Baja> bajas) {
-        this.bajas = bajas;
+    public static ArrayList<Sustituto> convertir(Sustituto[] array) {
+        ArrayList<Sustituto> ret = new ArrayList<Sustituto>();
+        for (Sustituto s : array) {
+            ret.add((Sustituto) s);
+        }
+        return ret;
     }
 
-    public static Sustituto nuevoSustituto(){
+    public static Sustituto nuevoSustituto() {
         Sustituto nuevoSustituto = new Sustituto();
+        Empleado e = Empleado.nuevoEmpleado();
+        nuevoSustituto.setId(e.getId());
+        nuevoSustituto.setNombre(e.getNombre());
+        nuevoSustituto.setTelefono(e.getTelefono());
+        nuevoSustituto.setNif(e.getNif());
+        nuevoSustituto.setApellido(e.getApellido());
+        nuevoSustituto.setDireccion(e.getDireccion());
         Scanner in = new Scanner(System.in);
         System.out.print("Introduzca la edad del nuevo sustituto: ");
         nuevoSustituto.edad = in.nextLine();
@@ -70,5 +101,5 @@ public class Sustituto extends Empleado {
     public String toString() {
         return "Sustituto{" + "edad=" + edad + ", exclusi\u00f3nsocial=" + exclusiónsocial + '}';
     }
-    
+
 }

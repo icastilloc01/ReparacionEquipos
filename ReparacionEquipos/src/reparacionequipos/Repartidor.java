@@ -5,6 +5,10 @@
  */
 package reparacionequipos;
 
+import java.util.ArrayList;
+
+
+
 /**
  *
  * @author icasc
@@ -15,8 +19,31 @@ public class Repartidor extends Empleado {
         super();
     }
 
-    public Repartidor(long id, String nombre, String teléfono, String nif, String apellidos, String dirección) {
-        super(id, nombre, teléfono, nif, apellidos, dirección);
+    public Repartidor(long id, String nombre, String telefono, String nif, String apellido, String dirección) {
+        super(id, nombre, telefono, nif, apellido, dirección);
     }
 
+    public Repartidor(Empleado e) {
+        super(e);
+    }
+    
+    public static Repartidor nuevoRepartidor() {
+        Empleado e = Empleado.nuevoEmpleado();
+        Repartidor nuevoRepartidor = new Repartidor();
+        nuevoRepartidor.setId(e.getId());
+        nuevoRepartidor.setNombre(e.getNombre());
+        nuevoRepartidor.setTelefono(e.getTelefono());
+        nuevoRepartidor.setNif(e.getNif());
+        nuevoRepartidor.setApellido(e.getApellido());
+        nuevoRepartidor.setDireccion(e.getDireccion());
+        return nuevoRepartidor;
+    }
+    
+    public static ArrayList<Repartidor> convertir(Repartidor[] array) {
+        ArrayList<Repartidor> ret = new ArrayList<Repartidor>();
+        for (Repartidor r : array) {
+            ret.add((Repartidor) r);
+        }
+        return ret;
+    }
 }

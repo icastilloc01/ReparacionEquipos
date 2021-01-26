@@ -5,6 +5,7 @@
  */
 package reparacionequipos;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -13,14 +14,24 @@ import java.util.Scanner;
  */
 public class Detaller extends Empleado {
 
-    private boolean senior;
+    private boolean senior = false;
 
     public Detaller() {
         super();
     }
 
+    public Detaller(boolean senior, Empleado e) {
+        super(e);
+        this.senior = false;
+    }
+
+    public Detaller(boolean senior, long id, String nombre, String telefono, String nif, String apellido, String direccion) {
+        super(id, nombre, telefono, nif, apellido, direccion);
+        this.senior = false;
+    }
+
     public Detaller(boolean senior) {
-        this.senior = senior;
+        this.senior = false;
     }
 
     public Detaller(Detaller d) {
@@ -42,10 +53,24 @@ public class Detaller extends Empleado {
 
     public static Detaller nuevoDetaller() {
         Detaller nuevoDetaller = new Detaller();
-        Scanner in = new Scanner(System.in);
+        Empleado e = Empleado.nuevoEmpleado();
+        nuevoDetaller.setId(e.getId());
+        nuevoDetaller.setNombre(e.getNombre());
+        nuevoDetaller.setTelefono(e.getTelefono());
+        nuevoDetaller.setNif(e.getNif());
+        nuevoDetaller.setApellido(e.getApellido());
+        nuevoDetaller.setDireccion(e.getDireccion());
         System.out.println("¿Es senior? s/n/S/N: ");
         nuevoDetaller.senior = Utilidades.leerBoolean();
         return nuevoDetaller;
+    }
+    
+    public static ArrayList<Detaller> convertir(Detaller[] array) {
+        ArrayList<Detaller> ret = new ArrayList<Detaller>();
+        for (Detaller d : array) {
+            ret.add((Detaller) d);
+        }
+        return ret;
     }
 
     @Override

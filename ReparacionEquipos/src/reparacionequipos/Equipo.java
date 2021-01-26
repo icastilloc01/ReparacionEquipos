@@ -5,6 +5,7 @@
  */
 package reparacionequipos;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -80,15 +81,13 @@ public class Equipo {
         return e;
     }
 
-//    public static void verEquipos() {
-//        System.out.println("Lista de equipos disponibles:");
-//        for (int i = 0; i < Utilidades.numEquipos; i++) {
-//            Equipos eq = Utilidades.Equipos[i];
-//            if (p.getExistencias() > 0) {
-//                System.out.println(p.toString());
-//            }
-//        }
-//    }
+    public static ArrayList<Equipo> convertir(Equipo[] array) {
+        ArrayList<Equipo> ret = new ArrayList<Equipo>();
+        for (Equipo e : array) {
+            ret.add((Equipo) e);
+        }
+        return ret;
+    }
     
     @Override
     public String toString() {

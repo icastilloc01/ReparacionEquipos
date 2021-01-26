@@ -5,6 +5,7 @@
  */
 package reparacionequipos;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -18,6 +19,16 @@ public class ReparacionEquipos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        ArrayList<Empleado> empleados = new ArrayList<Empleado>();
+        ArrayList<Cliente> clientes = Cliente.convertir(Utilidades.CLIENTES);
+        ArrayList<Servicio> servicios = Servicio.convertir(Utilidades.SERVICIOS);
+        ArrayList<Equipo> equipos = Equipo.convertir(Utilidades.EQUIPOS);
+        ArrayList<Detaller> detalleres = Detaller.convertir(Utilidades.DETALLERES);
+        ArrayList<Repartidor> repartidores = Repartidor.convertir(Utilidades.REPARTIDORES);
+        ArrayList<Sustituto> sustitutos = Sustituto.convertir(Utilidades.SUSTITUTOS);
+        ArrayList<Baja> bajas = Baja.convertir(Utilidades.BAJAS);
+        
         mostrarMenuPrincipal();
         Scanner in = new Scanner(System.in);
         int opcion;
@@ -49,9 +60,9 @@ public class ReparacionEquipos {
                                         System.out.println("Ha introducido un numero que no va del 1 al 3");
                                 }
 
-                            } while (op1 > 4 || op1 < 0);
+                            } while (op1 > 3 || op1 < 0);
                         } catch (InputMismatchException ex) {
-                            System.out.println("El caracter introducido no es un entero");
+                            System.out.println("El caracter introducido no es un número");
                         }
                         break;
                     case 2:
@@ -77,9 +88,9 @@ public class ReparacionEquipos {
                                         System.out.println("Ha introducido un numero que no va del 1 al 3");
                                 }
 
-                            } while (op2 > 4 || op2 < 0);
+                            } while (op2 > 3 || op2 < 0);
                         } catch (InputMismatchException ex) {
-                            System.out.println("El caracter introducido no es un entero");
+                            System.out.println("El caracter introducido no es un número");
                         }
                         break;
                     case 3:
@@ -91,13 +102,38 @@ public class ReparacionEquipos {
                                 op3 = in.nextInt();
                                 switch (op3) {
                                     case 1:
-                                        //Empleado.verEmpleado();
+                                        Empleado.verEmpleado(empleados);
                                         break;
                                     case 2:
-                                        Empleado.nuevoEmpleado();
+                                        mostrarTiposEmpleados();
+                                        int emp2;
+                                        try {
+                                            do {
+                                                in.reset();
+                                                emp2 = in.nextInt();
+                                                switch (emp2) {
+                                                    case 1:
+                                                        Detaller.nuevoDetaller();
+                                                        break;
+                                                    case 2:
+                                                        Repartidor.nuevoRepartidor();
+                                                        break;
+                                                    case 3:
+                                                        Sustituto.nuevoSustituto();
+                                                        break;
+                                                    case 0:
+                                                        break;
+                                                    default:
+                                                        System.out.println("Ha introducido un numero que no va del 1 al 3");
+                                                }
+
+                                            } while (emp2 > 3 || emp2 < 0);
+                                        } catch (InputMismatchException ex) {
+                                            System.out.println("El caracter introducido no es un número");
+                                        }
                                         break;
                                     case 3:
-                                        //Empleado.buscarEmpleado();
+                                        //Empleado.buscarEmpleado;
                                         break;
                                     case 4:
                                         //metodo para cubrir bajas
@@ -105,12 +141,12 @@ public class ReparacionEquipos {
                                     case 0:
                                         break;
                                     default:
-                                        System.out.println("Ha introducido un numero que no va del 1 al 3");
+                                        System.out.println("Ha introducido un numero que no va del 1 al 4");
                                 }
 
                             } while (op3 > 4 || op3 < 0);
                         } catch (InputMismatchException ex) {
-                            System.out.println("El caracter introducido no es un entero");
+                            System.out.println("El caracter introducido no es un número");
                         }
                         break;
                     case 4:
@@ -136,9 +172,9 @@ public class ReparacionEquipos {
                                         System.out.println("Ha introducido un numero que no va del 1 al 3");
                                 }
 
-                            } while (op4 > 4 || op4 < 0);
+                            } while (op4 > 3 || op4 < 0);
                         } catch (InputMismatchException ex) {
-                            System.out.println("El caracter introducido no es un entero");
+                            System.out.println("El caracter introducido no es un número");
                         }
                         break;
                     case 0:
@@ -149,7 +185,7 @@ public class ReparacionEquipos {
 
             } while (opcion > 4 || opcion < 0);
         } catch (InputMismatchException ex) {
-            System.out.println("El caracter introducido no es un entero");
+            System.out.println("El caracter introducido no es un número");
         }
 
     }
@@ -159,21 +195,21 @@ public class ReparacionEquipos {
         System.out.println("Pulse 2 para gestionar Equipos");
         System.out.println("Pulse 3 para gestionar Empleados");
         System.out.println("Pulse 4 para gestionar Servicios");
-        System.out.println("Pulse 0 para Salir");
+        System.out.println("Pulse 0 para salir");
     }
 
     public static void mostrarGestionClientes() {
         System.out.println("Pulse 1 para ver los clientes");
         System.out.println("Pulse 2 para registrar un nuevo cliente");
         System.out.println("Pulse 3 para buscar un cliente");
-        System.out.println("Pulse 0 para Salir");
+        System.out.println("Pulse 0 para salir");
     }
 
     public static void mostrarGestionEquipos() {
         System.out.println("Pulse 1 para ver los equipos");
         System.out.println("Pulse 2 para registrar un nuevo equipo");
         System.out.println("Pulse 3 para buscar un equipo");
-        System.out.println("Pulse 0 para Salir");
+        System.out.println("Pulse 0 para salir");
     }
 
     public static void mostrarGestionEmpleados() {
@@ -181,13 +217,20 @@ public class ReparacionEquipos {
         System.out.println("Pulse 2 para registrar un nuevo empleado");
         System.out.println("Pulse 3 para buscar un empleado");
         System.out.println("Pulse 4 para cubrir una baja");
-        System.out.println("Pulse 0 para Salir");
+        System.out.println("Pulse 0 para salir");
+    }
+
+    public static void mostrarTiposEmpleados() {
+        System.out.println("Pulse 1 para registrar un nuevo empleado de taller");
+        System.out.println("Pulse 2 para registrar un nuevo empleado repartidor");
+        System.out.println("Pulse 3 para registrar un nuevo empleado sustituto");
+        System.out.println("Pulse 0 para salir");
     }
 
     public static void mostrarGestionServicios() {
         System.out.println("Pulse 1 para registrar una nueva compra");
         System.out.println("Pulse 2 para registrar una nueva reparacion");
         System.out.println("Pulse 3 para registrar un nuevo envio");
-        System.out.println("Pulse 0 para Salir");
+        System.out.println("Pulse 0 para salir");
     }
 }

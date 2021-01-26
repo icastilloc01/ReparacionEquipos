@@ -5,6 +5,7 @@
  */
 package reparacionequipos;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -18,15 +19,17 @@ public class Baja {
     private Date fechainicio;
     private Date fechafin;
     private String motivo;
+    private ArrayList<Sustituto> sustitutos = new ArrayList<Sustituto>();
 
     public Baja() {
     }
 
-    public Baja(long id, Date fechainicio, Date fechafin, String motivo) {
+    public Baja(long id, Date fechainicio, Date fechafin, String motivo, ArrayList<Sustituto> sustitutos) {
         this.id = id;
         this.fechainicio = fechainicio;
         this.fechafin = fechafin;
         this.motivo = motivo;
+        this.sustitutos = sustitutos;
     }
 
     public Baja(Baja b) {
@@ -34,6 +37,7 @@ public class Baja {
         this.fechainicio = b.fechainicio;
         this.fechafin = b.fechafin;
         this.motivo = b.motivo;
+        this.sustitutos = b.sustitutos;
     }
 
     public long getId() {
@@ -82,7 +86,15 @@ public class Baja {
         nuevaBaja.motivo = in.nextLine();
         return nuevaBaja;
     }
-
+    
+    public static ArrayList<Baja> convertir(Baja[] array) {
+        ArrayList<Baja> ret = new ArrayList<Baja>();
+        for (Baja b : array) {
+            ret.add((Baja) b);
+        }
+        return ret;
+    }
+    
     @Override
     public String toString() {
         return "Baja{" + "id=" + id + ", fechainicio=" + fechainicio + ", fechafin=" + fechafin + ", motivo=" + motivo + '}';

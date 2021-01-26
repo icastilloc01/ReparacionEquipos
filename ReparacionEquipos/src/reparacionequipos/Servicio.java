@@ -115,7 +115,11 @@ public class Servicio {
     }
 
     public static ArrayList<Servicio> convertir(Servicio[] array) {
-        return new Gen<Servicio>().convertir(array);
+        ArrayList<Servicio> ret = new ArrayList<Servicio>();
+        for (Servicio s : array) {
+            ret.add((Servicio) s);
+        }
+        return ret;
     }
 
     @Override

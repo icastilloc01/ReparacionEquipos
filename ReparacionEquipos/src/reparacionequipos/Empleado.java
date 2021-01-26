@@ -5,6 +5,7 @@
  */
 package reparacionequipos;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -16,7 +17,7 @@ public class Empleado {
 
     protected long id;                  //no puede ser menor de 0
     protected String nombre;
-    protected String teléfono;          //debe ser una sucesión de 9 números
+    protected String telefono;          //debe ser una sucesión de 9 números
     protected String nif;               //debe ser una sucesión de 8 números y 1 letra
     protected String apellido;
     protected String direccion;
@@ -27,7 +28,7 @@ public class Empleado {
     public Empleado(long id, String nombre, String teléfono, String nif, String apellido, String direccion) {
         this.id = id;
         this.nombre = nombre;
-        this.teléfono = teléfono;
+        this.telefono = teléfono;
         this.nif = nif;
         this.apellido = apellido;
         this.direccion = direccion;
@@ -36,7 +37,7 @@ public class Empleado {
     public Empleado(Empleado e) {
         this.id = e.id;
         this.nombre = e.nombre;
-        this.teléfono = e.teléfono;
+        this.telefono = e.telefono;
         this.nif = e.nif;
         this.apellido = e.apellido;
         this.direccion = e.direccion;
@@ -50,8 +51,8 @@ public class Empleado {
         return nombre;
     }
 
-    public String getTeléfono() {
-        return teléfono;
+    public String getTelefono() {
+        return telefono;
     }
 
     public String getNif() {
@@ -74,8 +75,8 @@ public class Empleado {
         this.nombre = nombre;
     }
 
-    public void setTeléfono(String teléfono) {
-        this.teléfono = teléfono;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public void setNif(String nif) {
@@ -99,7 +100,7 @@ public class Empleado {
         System.out.print("Introduzca el nombre del nuevo empleado: ");
         nuevoEmpleado.nombre = in.nextLine();
         System.out.print("Introduzca el teléfono del nuevo empleado: ");
-        nuevoEmpleado.teléfono = in.nextLine();
+        nuevoEmpleado.telefono = in.nextLine();
         System.out.print("Introduzca el nif del nuevo empleado: ");
         nuevoEmpleado.nif = in.nextLine();
         System.out.print("Introduzca el apellido del nuevo empleado: ");
@@ -109,9 +110,16 @@ public class Empleado {
         return nuevoEmpleado;
     }
 
+    public static void verEmpleado(ArrayList<Empleado> empleados) {
+        System.out.println("El en el sistema estan registrados los siguientes empleados:");
+        for (Empleado e : empleados) {
+            System.out.println(e.getId() + ". " + e.getNombre() + " (" + e.getClass().getSimpleName() + ")");
+        }
+    }
+
     @Override
     public String toString() {
-        return "Empleado{" + "id=" + id + ", nombre=" + nombre + ", telefono=" + teléfono + ", nif=" + nif + ", apellido=" + apellido + ", direccion=" + direccion + '}';
+        return "Empleado{" + "id=" + id + ", nombre=" + nombre + ", telefono=" + telefono + ", nif=" + nif + ", apellido=" + apellido + ", direccion=" + direccion + '}';
     }
 
 }
