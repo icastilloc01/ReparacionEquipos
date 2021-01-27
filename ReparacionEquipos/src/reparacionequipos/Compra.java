@@ -125,5 +125,30 @@ public class Compra extends Servicio {
         return "Compra{" + "idCompra=" + idCompra + ", precioTotal=" + precioTotal + ", metodoPago=" + metodoPago + ", equipos=" + equipos + ", lotes=" + lotes + '}';
     }
     
+    /*public static ArrayList<Compra> arrayde (ArrayList<Compra> listaC,int[] ids){
+    
+        ArrayList<Compra> ret = new ArrayList<Compra>();
+        for (int i = 0; i < ids.length; i++) {
+            for (int j = 0; j < listaC.size(); j++) {
+                if (listaC.get(j).getId() == ids[i]) {
+                    ret.add((Compra) listaC.get(j));
+                    break;
+                }
+            }
+        }
+        return ret;
+    
+    }
+    */
+    
+        
+    public static ArrayList<Compra> convertir(Compra[] array) {
+        ArrayList<Compra> ret = new ArrayList<Compra>();
+        for (Compra c : array) {
+            ret.add((Compra) c);
+        }
+        return ret;
+    }
+    
     
 }

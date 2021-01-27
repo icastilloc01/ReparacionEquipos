@@ -260,8 +260,8 @@ public class ReparacionEquipos {
                         mostrarGestionServicios(servicios);
                         break;
                     case 2:
-                        //Reparacion nuevoReparacion = Reparacion.nuevoReparacion();
-                        //servicios.add(nuevoReparacion);
+                        Reparacion nuevaReparacion = Reparacion.nuevaReparacion();
+                        //servicios.add(nuevaReparacion);
                         mostrarGestionServicios(servicios);
                         break;
                     case 3:

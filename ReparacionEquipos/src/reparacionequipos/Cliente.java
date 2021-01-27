@@ -168,6 +168,14 @@ public class Cliente {
         return ret + "]";
     }
     
+    /*
+    public String servicios() {
+        String ret = " servicios:[";
+        ret = this.servicios.stream().map((s) -> "" + s.getId() + "(" + s.getId() + "), ").reduce(ret, String::concat);
+        return ret + "]";
+    }
+    */
+    
     public static ArrayList<Cliente> arrayde(ArrayList<Cliente> lista, int[] ids) {
         ArrayList<Cliente> ret = new ArrayList<Cliente>();
         for (int i = 0; i < ids.length; i++) {

@@ -138,4 +138,30 @@ public class Envio {
         return "Envio{" + "id=" + id + ", fechaSalida=" + fechaSalida + ", precioDeReparto=" + precioDeReparto + ", precioTotal=" + precioTotal + ", coste=" + coste + ", lugar=" + lugar + ", servicios=" + servicios + ", repartidores=" + repartidores + '}';
     }
 
-}
+    public static ArrayList<Envio> arrayde (ArrayList<Envio> lista,int[] ids){
+    
+        ArrayList<Envio> ret = new ArrayList<Envio>();
+        for (int i = 0; i < ids.length; i++) {
+            for (int j = 0; j < lista.size(); j++) {
+                if (lista.get(j).getId() == ids[i]) {
+                    ret.add((Envio) lista.get(j));
+                    break;
+                }
+            }
+        }
+        return ret;
+    }
+    
+        
+    public static ArrayList<Envio> convertir(Envio[] array) {
+        ArrayList<Envio> ret = new ArrayList<Envio>();
+        for (Envio e : array) {
+            ret.add((Envio) e);
+        }
+        return ret;
+    }
+    
+    }
+    
+    
+

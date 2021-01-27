@@ -72,7 +72,6 @@ public class Servicio {
         Servicio s = new Servicio();
         Scanner sc = new Scanner(System.in);
         boolean salir;
-        char d;
         do {
             System.out.println("Introduzca id del servicio:");
             Long id = sc.nextLong();
@@ -83,13 +82,12 @@ public class Servicio {
             System.out.println("Introduzca fecha del servicio:");
             Date fecha = Utilidades.introducirFecha();
             System.out.println("Quiere Introducir un nuevo Cliente? s/n ");
-            d = sc.next().charAt(0);
-
-            while (d == 's') {
+            boolean p;
+            p = Utilidades.leerBoolean();
+            while (p) {
                 s.clientes.add(Cliente.nuevoCliente());
-
                 System.out.println("Quiere Introducir otro Cliente? s/n ");
-                d = sc.next().charAt(0);
+                p = Utilidades.leerBoolean();
             }
 
             System.out.println("Son correctos los siguiente datos?(s/n)");
