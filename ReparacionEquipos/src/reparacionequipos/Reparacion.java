@@ -104,6 +104,33 @@ public class Reparacion {
             ret.add((Reparacion) s);
         }
         return ret;
+        
+        
+    }
+    
+      public static Reparacion nuevoreparacion() {
+        Servicio se = Servicio.nuevoServicio();
+        Mantenimiento m = Mantenimiento.nuevomantenimiento();
+        Scanner sc = new Scanner(System.in);
+        Reparacion nuevoreparacion = new Reparacion();
+        //  long r1 = Reparacion.thenextid();
+        System.out.println(" Muestráme las horas que has trabajado :");
+        do {
+            int duraciontotal = sc.nextInt();
+            if (duraciontotal > 0) {
+                System.out.println("Los datos son validos");
+
+            } else {
+                System.out.println("Los datos no son validos");
+            }
+        } while (nuevoreparacion.duraciontotal <= 0);
+        System.out.println("Vuelve a esribir de manera correcta las horas por favor");
+        int duraciontotal = sc.nextInt();
+        nuevoreparacion.setDuraciontotal(duraciontotal);
+        System.out.println("Esta reparacion se ha asignado a un grupo");
+
+        return nuevoreparacion;
+
     }
 
     

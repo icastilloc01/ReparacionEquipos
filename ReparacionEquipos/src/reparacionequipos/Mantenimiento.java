@@ -7,6 +7,7 @@ package reparacionequipos;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 /**
  *
@@ -46,6 +47,39 @@ public class Mantenimiento extends Servicio {
     public void setReparaciones(ArrayList<Reparacion> reparaciones) {
         this.reparaciones = reparaciones;
     }
+    
+       
+     public static Mantenimiento nuevomantenimiento() {
+
+        Servicio nuevoservicio = Servicio.nuevoServicio();
+        
+        
+        for (int i = 0; i < Utilidades.CLIENTES.length; i++) {
+            Cliente s = Utilidades.CLIENTES[i];
+            System.out.println(" Servicio " + s.getId() + ",nombre " + s.getNombre());
+        }
+        Mantenimiento nuevomantenimiento = new Mantenimiento();
+        Scanner sc = new Scanner(System.in);
+
+        int horastrabajadas = 0;
+        //Long id = Mantenimiento.thenextid();
+
+        do {
+            System.out.println("Dame las horas trabajadas que has trabajado");
+            horastrabajadas = sc.nextInt();
+            if (horastrabajadas >= 0) {
+
+                System.out.println("Los datos introducidos son válidos");
+
+            } else {
+                System.out.println("Los datos introducidos no son válidos,por favor,introduzca a continuación los datos de forma correcta.");
+            }
+        } while (horastrabajadas < 0);
+        nuevomantenimiento.setHorastrabajadas(horastrabajadas);
+        //El campo de REPARACIONES se inicializa a un ArrayList vacío.
+        return nuevomantenimiento;
+    }
+     
 
     @Override
     public String toString() {

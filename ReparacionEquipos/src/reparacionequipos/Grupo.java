@@ -6,6 +6,7 @@
 package reparacionequipos;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -50,6 +51,20 @@ public class Grupo {
 
     public void setDetalleres(ArrayList<Detaller> detalleres) {
         this.detalleres = detalleres;
+    }
+
+    public static Grupo nuevigrupo() {
+        Reparacion r2 = Reparacion.nuevoreparacion();
+        Grupo nuevogrupo = new Grupo();
+        Scanner sc = new Scanner(System.in);
+        // System.out.println(" Este es tu id :" + Grupo.thenextid());
+        //Los dos arrays de Reparaciones y Detaller, se inicializan a dos arrays vacíos.
+        return nuevogrupo;
+    }
+
+    @Override
+    public String toString() {
+        return "Grupo{" + "id=" + id + ", reparaciones=" + reparaciones + ", detalleres=" + detalleres ;
     }
 
 }

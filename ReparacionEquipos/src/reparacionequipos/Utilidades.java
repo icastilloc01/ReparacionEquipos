@@ -121,5 +121,38 @@ public class Utilidades {
         new Baja(2, java.sql.Date.valueOf(LocalDate.parse("23/05/2020", dateFormatter)), java.sql.Date.valueOf(LocalDate.parse("16/09/2020", dateFormatter)), "Ruptura de brazo", Sustituto.arrayde(Sustituto.convertir(SUSTITUTOS), new int[]{8, 9})),
         new Baja(3, java.sql.Date.valueOf(LocalDate.parse("04/09/2020", dateFormatter)), java.sql.Date.valueOf(LocalDate.parse("25/01/2021", dateFormatter)), "Fisura de muñeca", Sustituto.arrayde(Sustituto.convertir(SUSTITUTOS), new int[]{7, 9}))
     };
+    
+       public static final Mantenimiento[] MANTENIMIENTOS = {
+        //int horastrabajadas, long id, Date fechaServicio, String nota, ArrayList<Cliente> clientes
+        new Mantenimiento(22, 2221214, new Date("22/02/2020"), "Servicio de reparaciones", new ArrayList<Cliente>()),
+        new Mantenimiento(40, 25585526, new Date("28/05/2012"), "Servicio de reparaciones", new ArrayList<Cliente>()),
+        new Mantenimiento(25,232584688, new Date("02/05/2014"), "Servicio de reparaciones", new ArrayList<Cliente>())
+    };
+    
+    
+    public static final int numMantenimientos = MANTENIMIENTOS.length;
+    
+    
+    public static final Reparacion[] REPARACIONES = {
+        //long id,int horastrabajadas
+        new Reparacion(12212478,22),
+        new Reparacion(55689889,29),
+        new Reparacion(96222555,48)
+     
+    };
+
+    public static final int numReparaciones = REPARACIONES.length;
+    
+    public static final Grupo [] GRUPOS = {
+        //long id
+       new Grupo(1),
+       new Grupo(2),
+       new Grupo(3),
+       new Grupo(4),
+       new Grupo(5)
+        
+    };
+
+    public static final int numGrupos= GRUPOS.length;
 
 }

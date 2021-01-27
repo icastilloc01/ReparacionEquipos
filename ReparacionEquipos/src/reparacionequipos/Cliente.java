@@ -7,6 +7,7 @@ package reparacionequipos;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import static reparacionequipos.Utilidades.CLIENTES;
 
 /**
  *
@@ -176,26 +177,61 @@ public class Cliente {
     }
     */
     
-    public static ArrayList<Cliente> arrayde(ArrayList<Cliente> lista, int[] ids) {
+     public static ArrayList<Cliente> listarclientes(ArrayList<Cliente> lista, int[] ids) {
         ArrayList<Cliente> ret = new ArrayList<Cliente>();
+        Cliente c1 = new Cliente();
         for (int i = 0; i < ids.length; i++) {
             for (int j = 0; j < lista.size(); j++) {
+                System.out.println("Este el número de clientes " + ids.length);
+                System.out.println("Estos son los nombres" + c1.getNombre());
+                //el método getIdentificador() es propio de Almacen
                 if (lista.get(j).getId() == ids[i]) {
-                    ret.add((Cliente) lista.get(j));
+                    ret.add((Cliente) lista.get(ids[i]));
+
                     break;
                 }
             }
         }
         return ret;
     }
-    
-    public static ArrayList<Cliente> convertir(Cliente[] array) {
+
+    public static ArrayList<Cliente> arrayde(ArrayList<Cliente> lista, int[] ids) {
         ArrayList<Cliente> ret = new ArrayList<Cliente>();
-        for (Cliente c : array) {
-            ret.add((Cliente) c);
+        for (int i = 0; i < ids.length; i++) {
+            for (int j = 0; j < lista.size(); j++) {
+                //el método getIdentificador() es propio de Almacen
+                if (lista.get(j).getId() == ids[i]) {
+                    ret.add((Cliente) lista.get(ids[i]));
+                    break;
+                }
+            }
         }
         return ret;
     }
+
+    public static ArrayList<Cliente> convertir(Cliente[] array) {
+        return new Gen<Cliente>().convertir(array);
+    }
+
+    public static Cliente buscarclientes(String nombre) {
+        for (Cliente c : Utilidades.CLIENTES) {
+            if (c.getNombre().equals(nombre)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public static Cliente verclientes() {
+
+        for (int i = 0; i < Utilidades.CLIENTES.length; i++) {
+            System.out.println("Los clientes son" + CLIENTES[i]);
+        }
+        return null;
+    }
+    
+    
+   
     
     @Override
     public String toString() {
