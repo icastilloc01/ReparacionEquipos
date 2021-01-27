@@ -1,5 +1,6 @@
 package reparacionequipos;
 
+import java.text.Normalizer;
 import java.text.ParseException;
 import java.util.Scanner;
 import java.text.SimpleDateFormat;
@@ -58,6 +59,12 @@ public class Utilidades {
         return check;
 
     }
+    
+    public static String removeDiacriticalMarks(String string) {
+        //Form.NFC acepta ñ y distingue las tildes en español
+        return Normalizer.normalize(string, Normalizer.Form.NFC)
+                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+    }
 
     public static final Cliente CLIENTES[] = {
         new Cliente(1, "Pepe", "74638264T", "C-Los Santos 34 5ºA", "608347586", "874639872", "ES874938376", new ArrayList<Servicio>()),
@@ -86,7 +93,8 @@ public class Utilidades {
         new Empleado(6, "Susana", "756498231", "76583934R", "Diaz", "C-Los Santos 23 5ºD"),
         new Empleado(7, "Federica", "875983847", "92837461J", "Lopez", "C-San Lorenzo 13 3ºC"),
         new Empleado(8, "Fernando", "765874938", "64830289N", "Gomez", "C-Los Santos 23 4ºD"),
-        new Empleado(9, "Beatriz", "874590873", "74628712U", "Garcia", "C-Los Santos 12 7ºD")        
+        new Empleado(9, "Beatriz", "874590873", "74628712U", "Garcia", "C-Los Santos 12 7ºD"),
+        new Empleado(10, "Anastasia", "874875908", "12345678I", "Gomez", "C-Menendez Pelayo 5 3ºA")
     };
     
     public static final Detaller DETALLERES[] = {
@@ -102,9 +110,10 @@ public class Utilidades {
     };
     
     public static final Sustituto SUSTITUTOS[] = {
-        new Sustituto("28", false,EMPLEADOS[6]),
-        new Sustituto("35", false,EMPLEADOS[7]),
-        new Sustituto("32", false,EMPLEADOS[8])
+        new Sustituto("28", false, EMPLEADOS[6]),
+        new Sustituto("35", false, EMPLEADOS[7]),
+        new Sustituto("32", false, EMPLEADOS[8]),
+        new Sustituto("25", false, EMPLEADOS[9])
     };
 
     public static final Baja BAJAS[] = {

@@ -19,6 +19,8 @@ public class ReparacionEquipos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        //Inicializar los datos de la clase Utilidades en ArrayLists
         ArrayList<Empleado> empleados = new ArrayList<Empleado>();
         ArrayList<Cliente> clientes = Cliente.convertir(Utilidades.CLIENTES);
         ArrayList<Servicio> servicios = Servicio.convertir(Utilidades.SERVICIOS);
@@ -27,9 +29,13 @@ public class ReparacionEquipos {
         ArrayList<Repartidor> repartidores = Repartidor.convertir(Utilidades.REPARTIDORES);
         ArrayList<Sustituto> sustitutos = Sustituto.convertir(Utilidades.SUSTITUTOS);
         ArrayList<Baja> bajas = Baja.convertir(Utilidades.BAJAS);
+        
+        //Anadir al ArrayList de empleados los datos de los empleados de tipo Detalleres, Repartidores, Sustitutos
         empleados.addAll(detalleres);
         empleados.addAll(repartidores);
         empleados.addAll(sustitutos);
+        
+        //Comienzo del menu
         mostrarMenuPrincipal();
         Scanner in = new Scanner(System.in);
         int opcion;
@@ -53,12 +59,14 @@ public class ReparacionEquipos {
                     case 0:
                         break;
                     default:
-                        System.out.println("Ha introducido un numero que no va del 1 al 4");
+                        System.out.println("Ha introducido un numero que no va del 0 al 4");
+                        System.out.println("");
                 }
 
             } while (opcion > 4 || opcion < 0);
         } catch (InputMismatchException ex) {
             System.out.println("El caracter introducido no es un número");
+            System.out.println("");
         }
     }
 
@@ -87,7 +95,8 @@ public class ReparacionEquipos {
                         mostrarGestionClientes(clientes);
                         break;
                     case 2:
-                        Cliente.nuevoCliente();
+                        Cliente nuevoCliente = Cliente.nuevoCliente();
+                        clientes.add(nuevoCliente);
                         mostrarGestionClientes(clientes);
                         break;
                     case 3:
@@ -97,12 +106,14 @@ public class ReparacionEquipos {
                     case 0:
                         break;
                     default:
-                        System.out.println("Ha introducido un numero que no va del 1 al 3");
+                        System.out.println("Ha introducido un numero que no va del 0 al 3");
+                        System.out.println("");
                 }
 
             } while (op1 > 3 || op1 < 0);
         } catch (InputMismatchException ex) {
             System.out.println("El caracter introducido no es un número");
+            System.out.println("");
         }
     }
 
@@ -124,7 +135,8 @@ public class ReparacionEquipos {
                         mostrarGestionEquipos(equipos);
                         break;
                     case 2:
-                        Equipo.nuevoEquipo();
+                        Equipo nuevoEquipo = Equipo.nuevoEquipo();
+                        equipos.add(nuevoEquipo);
                         mostrarGestionEquipos(equipos);
                         break;
                     case 3:
@@ -134,12 +146,14 @@ public class ReparacionEquipos {
                     case 0:
                         break;
                     default:
-                        System.out.println("Ha introducido un numero que no va del 1 al 3");
+                        System.out.println("Ha introducido un numero que no va del 0 al 3");
+                        System.out.println("");
                 }
 
             } while (op2 > 3 || op2 < 0);
         } catch (InputMismatchException ex) {
             System.out.println("El caracter introducido no es un número");
+            System.out.println("");
         }
     }
 
@@ -165,7 +179,7 @@ public class ReparacionEquipos {
                         mostrarGestionEmpleados(empleados);
                         break;
                     case 3:
-                        //Empleado.buscarEmpleado;
+                        Empleado.buscarEmpleado(empleados);
                         mostrarGestionEmpleados(empleados);
                         break;
                     case 4:
@@ -175,12 +189,14 @@ public class ReparacionEquipos {
                     case 0:
                         break;
                     default:
-                        System.out.println("Ha introducido un numero que no va del 1 al 4");
+                        System.out.println("Ha introducido un numero que no va del 0 al 4");
+                        System.out.println("");
                 }
 
             } while (op3 > 4 || op3 < 0);
         } catch (InputMismatchException ex) {
             System.out.println("El caracter introducido no es un número");
+            System.out.println("");
         }
     }
 
@@ -190,12 +206,12 @@ public class ReparacionEquipos {
         System.out.println("Pulse 3 para registrar un nuevo empleado sustituto");
         System.out.println("Pulse 0 para volver");
         Scanner in = new Scanner(System.in);
-        int emp2;
+        int emp;
         try {
             do {
                 in.reset();
-                emp2 = in.nextInt();
-                switch (emp2) {
+                emp = in.nextInt();
+                switch (emp) {
                     case 1:
                         Detaller nuevoDetaller = Detaller.nuevoDetaller();
                         empleados.add(nuevoDetaller);
@@ -215,12 +231,14 @@ public class ReparacionEquipos {
                         mostrarGestionEmpleados(empleados);
                         break;
                     default:
-                        System.out.println("Ha introducido un numero que no va del 1 al 3");
+                        System.out.println("Ha introducido un numero que no va del 0 al 3");
+                        System.out.println("");
                 }
 
-            } while (emp2 > 3 || emp2 < 0);
+            } while (emp > 3 || emp < 0);
         } catch (InputMismatchException ex) {
             System.out.println("El caracter introducido no es un número");
+            System.out.println("");
         }
     }
 
@@ -237,26 +255,31 @@ public class ReparacionEquipos {
                 op4 = in.nextInt();
                 switch (op4) {
                     case 1:
-                        Compra.nuevaCompra();
+                        Compra nuevaCompra = Compra.nuevaCompra();
+                        servicios.add(nuevaCompra);
                         mostrarGestionServicios(servicios);
                         break;
                     case 2:
-                        //Reparacion.nuevoReparacion();
+                        //Reparacion nuevoReparacion = Reparacion.nuevoReparacion();
+                        //servicios.add(nuevoReparacion);
                         mostrarGestionServicios(servicios);
                         break;
                     case 3:
-                        Envio.nuevoEnvio();
+                        Envio nuevoEnvio = Envio.nuevoEnvio();
+                        //servicios.add(nuevoEnvio);
                         mostrarGestionServicios(servicios);
                         break;
                     case 0:
                         break;
                     default:
-                        System.out.println("Ha introducido un numero que no va del 1 al 3");
+                        System.out.println("Ha introducido un numero que no va del 0 al 3");
+                        System.out.println("");
                 }
 
             } while (op4 > 3 || op4 < 0);
         } catch (InputMismatchException ex) {
             System.out.println("El caracter introducido no es un número");
+            System.out.println("");
         }
     }
 }

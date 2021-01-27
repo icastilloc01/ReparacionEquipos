@@ -140,6 +140,218 @@ public class Empleado {
         }
     }
 
+    public static void buscarEmpleado(ArrayList<Empleado> empleados) {
+        ArrayList<Empleado> valores;
+        Scanner in = new Scanner(System.in);
+        valores = new ArrayList<Empleado>();
+        System.out.println("Pulse 1 para buscar un empleado por el id");
+        System.out.println("Pulse 2 para buscar un empleado por el nombre");
+        System.out.println("Pulse 3 para buscar un empleado por el telefono");
+        System.out.println("Pulse 4 para buscar un empleado por el nif");
+        System.out.println("Pulse 5 para buscar un empleado por el apellido");
+        System.out.println("Pulse 6 para buscar un empleado por la direccion");
+        System.out.println("Pulse 0 para volver");
+        in.reset();
+        int opcion = in.nextInt();
+        try {
+            do {
+                switch (opcion) {
+                    case 1:
+                        buscarEmpleadoPorId(empleados);
+                        ReparacionEquipos.mostrarGestionEmpleados(empleados);
+                        break;
+                    case 2:
+                        System.out.println("Introduzca el nombre del empleado que desea buscar:");
+                        String nombreEmp = in.nextLine(); //linea para que no se salte el nextLine()
+                        nombreEmp = in.nextLine();
+                        valores = buscarEmpleadoPorNombre(nombreEmp, empleados);
+                        if (valores.size() > 0) {
+                            System.out.println("Se han encontrado datos: ");
+                            for (Empleado e : valores) {
+                                System.out.println(e.getId() + ". " + e.getNombre() + ". " + e.getApellido() + ". " + e.getTelefono() + ". " + e.getNif() + ". " + e.getDireccion() + ". (" + e.getClass().getSimpleName() + ")");
+                            }
+                        } else {
+                            System.out.println("El empleado con nombre " + nombreEmp + " no se ha encontrado en el sistema.");
+                        }
+                        System.out.println("");
+                        ReparacionEquipos.mostrarGestionEmpleados(empleados);
+                        break;
+                    case 3:
+                        System.out.println("Introduzca el telefono del empleado que desea buscar:");
+                        String telefonoEmp = in.nextLine(); //linea para que no se salte el nextLine()
+                        telefonoEmp = in.nextLine();
+                        valores = buscarEmpleadoPorTelefono(telefonoEmp, empleados);
+                        if (valores.size() > 0) {
+                            System.out.println("Se han encontrado datos: ");
+                            for (Empleado e : valores) {
+                                System.out.println(e.getId() + ". " + e.getNombre() + ". " + e.getApellido() + ". " + e.getTelefono() + ". " + e.getNif() + ". " + e.getDireccion() + ". (" + e.getClass().getSimpleName() + ")");
+                            }
+                        } else {
+                            System.out.println("El empleado con telefono " + telefonoEmp + " no se ha encontrado en el sistema.");
+                        }
+                        System.out.println("");
+                        ReparacionEquipos.mostrarGestionEmpleados(empleados);
+                        break;
+                    case 4:
+                        System.out.println("Introduzca el NIF del empleado que desea buscar:");
+                        String nifEmp = in.nextLine(); //linea para que no se salte el nextLine()
+                        nifEmp = in.nextLine();
+                        valores = buscarEmpleadoPorNif(nifEmp, empleados);
+                        if (valores.size() > 0) {
+                            System.out.println("Se han encontrado datos: ");
+                            for (Empleado e : valores) {
+                                System.out.println(e.getId() + ". " + e.getNombre() + ". " + e.getApellido() + ". " + e.getTelefono() + ". " + e.getNif() + ". " + e.getDireccion() + ". (" + e.getClass().getSimpleName() + ")");
+                            }
+                        } else {
+                            System.out.println("El empleado con NIF " + nifEmp + " no se ha encontrado en el sistema.");
+                        }
+                        System.out.println("");
+                        ReparacionEquipos.mostrarGestionEmpleados(empleados);
+                        break;
+                    case 5:
+                        System.out.println("Introduzca el apellido del empleado que desea buscar:");
+                        String apellidoEmp = in.nextLine(); //linea para que no se salte el nextLine()
+                        apellidoEmp = in.nextLine();
+                        valores = buscarEmpleadoPorApellido(apellidoEmp, empleados);
+                        if (valores.size() > 0) {
+                            System.out.println("Se han encontrado datos: ");
+                            for (Empleado e : valores) {
+                                System.out.println(e.getId() + ". " + e.getNombre() + ". " + e.getApellido() + ". " + e.getTelefono() + ". " + e.getNif() + ". " + e.getDireccion() + ". (" + e.getClass().getSimpleName() + ")");
+                            }
+                        } else {
+                            System.out.println("El empleado con apellido " + apellidoEmp + " no se ha encontrado en el sistema.");
+                        }
+                        System.out.println("");
+                        ReparacionEquipos.mostrarGestionEmpleados(empleados);
+                        break;
+                    case 6:
+                        System.out.println("Introduzca el direccion del empleado que desea buscar:");
+                        String direccionEmp = in.nextLine(); //linea para que no se salte el nextLine()
+                        direccionEmp = in.nextLine();
+                        valores = buscarEmpleadoPorDireccion(direccionEmp, empleados);
+                        if (valores.size() > 0) {
+                            System.out.println("Se han encontrado datos: ");
+                            for (Empleado e : valores) {
+                                System.out.println(e.getId() + ". " + e.getNombre() + ". " + e.getApellido() + ". " + e.getTelefono() + ". " + e.getNif() + ". " + e.getDireccion() + ". (" + e.getClass().getSimpleName() + ")");
+                            }
+                        } else {
+                            System.out.println("El empleado con direccion " + direccionEmp + " no se ha encontrado en el sistema.");
+                        }
+                        System.out.println("");
+                        ReparacionEquipos.mostrarGestionEmpleados(empleados);
+                        break;
+                    case 0:
+                        ReparacionEquipos.mostrarGestionEmpleados(empleados);
+                        break;
+                    default:
+                        System.out.println("El valor que ha introducido no es un número del 0 al 6");
+                        System.out.println("");
+                }
+            } while (opcion > 6 || opcion < 0);
+        } catch (InputMismatchException ex) {
+            System.out.println("El caracter introducido no es un número");
+            System.out.println("");
+            buscarEmpleado(empleados);
+        }
+    }
+
+    public static void buscarEmpleadoPorId(ArrayList<Empleado> empleados) {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Introduzca el id del empleado que quiere buscar");
+        in.reset();
+        int idEmpleado = in.nextInt();
+        Empleado ret = null;
+        for (Empleado e : empleados) {
+            if (e.getId() == idEmpleado) {
+                ret = e;
+                break;
+            }
+        }
+        if (ret != null) {
+            System.out.println("Se ha encontrado a un empleado");
+            System.out.print("El empleado encontrado tiene los siguientes datos: ");
+            System.out.println(ret.getId() + ". " + ret.getNombre() + ". " + ret.getApellido() + ". " + ret.getTelefono() + ". " + ret.getNif() + ". " + ret.getDireccion() + ". (" + ret.getClass().getSimpleName() + ")");
+        } else {
+            System.out.println("Empleado con id " + idEmpleado + " no se ha encontrado en el sistema.");
+        }
+        System.out.println("");
+    }
+
+    public static ArrayList<Empleado> buscarEmpleadoPorNombre(String nombreEmp, ArrayList<Empleado> empleados) {
+        ArrayList<Empleado> ret = new ArrayList<Empleado>();
+        for (Empleado e : empleados) {
+            if (Utilidades.removeDiacriticalMarks(e.getNombre().toLowerCase()).contains(Utilidades.removeDiacriticalMarks(nombreEmp.toLowerCase()))) {
+                ret.add(e);
+            }
+            if (e.getNombre().toLowerCase().contains(nombreEmp.toLowerCase())) {
+                if (!ret.contains(e)) {
+                    ret.add(e);
+                }
+            }
+        }
+        return ret;
+    }
+
+    public static ArrayList<Empleado> buscarEmpleadoPorTelefono(String telefonoEmp, ArrayList<Empleado> empleados) {
+        ArrayList<Empleado> ret = new ArrayList<Empleado>();
+        for (Empleado e : empleados) {
+            if (Utilidades.removeDiacriticalMarks(e.getTelefono().toLowerCase()).contains(Utilidades.removeDiacriticalMarks(telefonoEmp.toLowerCase()))) {
+                ret.add(e);
+            }
+            if (e.getTelefono().toLowerCase().contains(telefonoEmp.toLowerCase())) {
+                if (!ret.contains(e)) {
+                    ret.add(e);
+                }
+            }
+        }
+        return ret;
+    }
+
+    public static ArrayList<Empleado> buscarEmpleadoPorNif(String nifEmp, ArrayList<Empleado> empleados) {
+        ArrayList<Empleado> ret = new ArrayList<Empleado>();
+        for (Empleado e : empleados) {
+            if (Utilidades.removeDiacriticalMarks(e.getNif().toLowerCase()).contains(Utilidades.removeDiacriticalMarks(nifEmp.toLowerCase()))) {
+                ret.add(e);
+            }
+            if (e.getNif().toLowerCase().contains(nifEmp.toLowerCase())) {
+                if (!ret.contains(e)) {
+                    ret.add(e);
+                }
+            }
+        }
+        return ret;
+    }
+
+    public static ArrayList<Empleado> buscarEmpleadoPorApellido(String apellidoEmp, ArrayList<Empleado> empleados) {
+        ArrayList<Empleado> ret = new ArrayList<Empleado>();
+        for (Empleado e : empleados) {
+            if (Utilidades.removeDiacriticalMarks(e.getApellido().toLowerCase()).contains(Utilidades.removeDiacriticalMarks(apellidoEmp.toLowerCase()))) {
+                ret.add(e);
+            }
+            if (e.getApellido().toLowerCase().contains(apellidoEmp.toLowerCase())) {
+                if (!ret.contains(e)) {
+                    ret.add(e);
+                }
+            }
+        }
+        return ret;
+    }
+
+    public static ArrayList<Empleado> buscarEmpleadoPorDireccion(String direccionEmp, ArrayList<Empleado> empleados) {
+        ArrayList<Empleado> ret = new ArrayList<Empleado>();
+        for (Empleado e : empleados) {
+            if (Utilidades.removeDiacriticalMarks(e.getDireccion().toLowerCase()).contains(Utilidades.removeDiacriticalMarks(direccionEmp.toLowerCase()))) {
+                ret.add(e);
+            }
+            if (e.getDireccion().toLowerCase().contains(direccionEmp.toLowerCase())) {
+                if (!ret.contains(e)) {
+                    ret.add(e);
+                }
+            }
+        }
+        return ret;
+    }
+
     @Override
     public String toString() {
         return "Empleado{" + "id=" + id + ", nombre=" + nombre + ", telefono=" + telefono + ", nif=" + nif + ", apellido=" + apellido + ", direccion=" + direccion + '}';
