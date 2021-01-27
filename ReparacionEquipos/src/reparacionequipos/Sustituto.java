@@ -92,7 +92,7 @@ public class Sustituto extends Empleado {
         Scanner in = new Scanner(System.in);
         System.out.print("Introduzca la edad del nuevo sustituto: ");
         nuevoSustituto.edad = in.nextLine();
-        System.out.print("¿Tiene exclusión social? ");
+        System.out.print("¿Tiene exclusión social? S/N");
         nuevoSustituto.exclusiónsocial = in.nextBoolean();
         return nuevoSustituto;
     }

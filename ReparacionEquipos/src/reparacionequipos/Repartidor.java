@@ -46,4 +46,9 @@ public class Repartidor extends Empleado {
         }
         return ret;
     }
+
+    @Override
+    public String toString() {
+        return super.id + ". " + super.nombre + ". " + super.telefono + ". " + super.nif + ". " + super.apellido + ". " + super.direccion;
+    }
 }

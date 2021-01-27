@@ -91,12 +91,35 @@ public class Empleado {
         this.direccion = direccion;
     }
 
+    public static long nextIdEmpleado() {
+        long ret = 0;
+        for (Empleado e : Utilidades.EMPLEADOS) {
+            if (e.getId() > ret) {
+                ret = e.getId();
+            }
+        }
+        for (Repartidor r : Utilidades.REPARTIDORES) {
+            if (r.getId() > ret) {
+                ret = r.getId();
+            }
+        }
+        for (Sustituto s : Utilidades.SUSTITUTOS) {
+            if (s.getId() > ret) {
+                ret = s.getId();
+            }
+        }
+        for (Detaller s : Utilidades.DETALLERES) {
+            if (s.getId() > ret) {
+                ret = s.getId();
+            }
+        }
+        return ret + 1;
+    }
+
     public static Empleado nuevoEmpleado() {
         Empleado nuevoEmpleado = new Empleado();
         Scanner in = new Scanner(System.in);
-        System.out.print("Introduzca el id del nuevo empleado: ");
-        nuevoEmpleado.id = in.nextInt();
-        nuevoEmpleado.nombre = in.nextLine();   //esta linea es para que no se salte el proximo nextLine
+        nuevoEmpleado.id = nextIdEmpleado();
         System.out.print("Introduzca el nombre del nuevo empleado: ");
         nuevoEmpleado.nombre = in.nextLine();
         System.out.print("Introduzca el teléfono del nuevo empleado: ");
@@ -116,8 +139,6 @@ public class Empleado {
             System.out.println(e.getId() + ". " + e.getNombre() + ". " + e.getApellido() + ". " + e.getTelefono() + ". " + e.getNif() + ". " + e.getDireccion() + ". (" + e.getClass().getSimpleName() + ")");
         }
     }
-    
-    
 
     @Override
     public String toString() {

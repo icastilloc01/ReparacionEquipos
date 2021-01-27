@@ -31,14 +31,6 @@ public class ReparacionEquipos {
         empleados.addAll(repartidores);
         empleados.addAll(sustitutos);
         mostrarMenuPrincipal();
-    }
-
-    public static void mostrarMenuPrincipal() {
-        System.out.println("Pulse 1 para gestionar clientes");
-        System.out.println("Pulse 2 para gestionar Equipos");
-        System.out.println("Pulse 3 para gestionar Empleados");
-        System.out.println("Pulse 4 para gestionar Servicios");
-        System.out.println("Pulse 0 para salir");
         Scanner in = new Scanner(System.in);
         int opcion;
         try {
@@ -47,16 +39,16 @@ public class ReparacionEquipos {
                 opcion = in.nextInt();
                 switch (opcion) {
                     case 1:
-                        mostrarGestionClientes();
+                        mostrarGestionClientes(clientes);
                         break;
                     case 2:
-                        mostrarGestionEquipos();
+                        mostrarGestionEquipos(equipos);
                         break;
                     case 3:
-                        mostrarGestionEmpleados();
+                        mostrarGestionEmpleados(empleados);
                         break;
                     case 4:
-                        mostrarGestionServicios();
+                        mostrarGestionServicios(servicios);
                         break;
                     case 0:
                         break;
@@ -70,7 +62,15 @@ public class ReparacionEquipos {
         }
     }
 
-    public static void mostrarGestionClientes() {
+    public static void mostrarMenuPrincipal() {
+        System.out.println("Pulse 1 para gestionar clientes");
+        System.out.println("Pulse 2 para gestionar Equipos");
+        System.out.println("Pulse 3 para gestionar Empleados");
+        System.out.println("Pulse 4 para gestionar Servicios");
+        System.out.println("Pulse 0 para salir");
+    }
+
+    public static void mostrarGestionClientes(ArrayList<Cliente> clientes) {
         System.out.println("Pulse 1 para ver los clientes");
         System.out.println("Pulse 2 para registrar un nuevo cliente");
         System.out.println("Pulse 3 para buscar un cliente");
@@ -84,18 +84,17 @@ public class ReparacionEquipos {
                 switch (op1) {
                     case 1:
                         //Cliente.verCliente();
-                        mostrarGestionClientes();
+                        mostrarGestionClientes(clientes);
                         break;
                     case 2:
                         Cliente.nuevoCliente();
-                        mostrarGestionClientes();
+                        mostrarGestionClientes(clientes);
                         break;
                     case 3:
                         //Cliente.buscarCliente();
-                        mostrarGestionClientes();
+                        mostrarGestionClientes(clientes);
                         break;
                     case 0:
-                        mostrarMenuPrincipal();
                         break;
                     default:
                         System.out.println("Ha introducido un numero que no va del 1 al 3");
@@ -107,7 +106,7 @@ public class ReparacionEquipos {
         }
     }
 
-    public static void mostrarGestionEquipos() {
+    public static void mostrarGestionEquipos(ArrayList<Equipo> equipos) {
         ArrayList<Empleado> empleados = new ArrayList<Empleado>();
         System.out.println("Pulse 1 para ver los equipos");
         System.out.println("Pulse 2 para registrar un nuevo equipo");
@@ -122,18 +121,17 @@ public class ReparacionEquipos {
                 switch (op2) {
                     case 1:
                         //Equipo.verEquipo();
-                        mostrarGestionEquipos();
+                        mostrarGestionEquipos(equipos);
                         break;
                     case 2:
                         Equipo.nuevoEquipo();
-                        mostrarGestionEquipos();
+                        mostrarGestionEquipos(equipos);
                         break;
                     case 3:
                         //Equipo.buscarEquipo();
-                        mostrarGestionEquipos();
+                        mostrarGestionEquipos(equipos);
                         break;
                     case 0:
-                        mostrarMenuPrincipal();
                         break;
                     default:
                         System.out.println("Ha introducido un numero que no va del 1 al 3");
@@ -145,19 +143,12 @@ public class ReparacionEquipos {
         }
     }
 
-    public static void mostrarGestionEmpleados() {
+    public static void mostrarGestionEmpleados(ArrayList<Empleado> empleados) {
         System.out.println("Pulse 1 para ver los empleados");
         System.out.println("Pulse 2 para registrar un nuevo empleado");
         System.out.println("Pulse 3 para buscar un empleado");
         System.out.println("Pulse 4 para cubrir una baja");
         System.out.println("Pulse 0 para volver");
-        ArrayList<Empleado> empleados = new ArrayList<Empleado>();
-        ArrayList<Detaller> detalleres = Detaller.convertir(Utilidades.DETALLERES);
-        ArrayList<Repartidor> repartidores = Repartidor.convertir(Utilidades.REPARTIDORES);
-        ArrayList<Sustituto> sustitutos = Sustituto.convertir(Utilidades.SUSTITUTOS);
-        empleados.addAll(detalleres);
-        empleados.addAll(repartidores);
-        empleados.addAll(sustitutos);
         Scanner in = new Scanner(System.in);
         int op3;
         try {
@@ -167,22 +158,21 @@ public class ReparacionEquipos {
                 switch (op3) {
                     case 1:
                         Empleado.verEmpleado(empleados);
-                        mostrarGestionEmpleados();
+                        mostrarGestionEmpleados(empleados);
                         break;
                     case 2:
-                        mostrarTiposEmpleados();
-                        mostrarGestionEmpleados();
+                        mostrarTiposEmpleados(empleados);
+                        mostrarGestionEmpleados(empleados);
                         break;
                     case 3:
                         //Empleado.buscarEmpleado;
-                        mostrarGestionEmpleados();
+                        mostrarGestionEmpleados(empleados);
                         break;
                     case 4:
                         //metodo para cubrir bajas
-                        mostrarGestionEmpleados();
+                        mostrarGestionEmpleados(empleados);
                         break;
                     case 0:
-                        mostrarMenuPrincipal();
                         break;
                     default:
                         System.out.println("Ha introducido un numero que no va del 1 al 4");
@@ -194,7 +184,7 @@ public class ReparacionEquipos {
         }
     }
 
-    public static void mostrarTiposEmpleados() {
+    public static void mostrarTiposEmpleados(ArrayList<Empleado> empleados) {
         System.out.println("Pulse 1 para registrar un nuevo empleado de taller");
         System.out.println("Pulse 2 para registrar un nuevo empleado repartidor");
         System.out.println("Pulse 3 para registrar un nuevo empleado sustituto");
@@ -207,19 +197,22 @@ public class ReparacionEquipos {
                 emp2 = in.nextInt();
                 switch (emp2) {
                     case 1:
-                        Detaller.nuevoDetaller();
-                        mostrarTiposEmpleados();
+                        Detaller nuevoDetaller = Detaller.nuevoDetaller();
+                        empleados.add(nuevoDetaller);
+                        mostrarTiposEmpleados(empleados);
                         break;
                     case 2:
-                        Repartidor.nuevoRepartidor();
-                        mostrarTiposEmpleados();
+                        Repartidor nuevoRepartidor = Repartidor.nuevoRepartidor();
+                        empleados.add(nuevoRepartidor);
+                        mostrarTiposEmpleados(empleados);
                         break;
                     case 3:
-                        Sustituto.nuevoSustituto();
-                        mostrarTiposEmpleados();
+                        Sustituto nuevoSustituto = Sustituto.nuevoSustituto();
+                        empleados.add(nuevoSustituto);
+                        mostrarTiposEmpleados(empleados);
                         break;
                     case 0:
-                        mostrarGestionEmpleados();
+                        mostrarGestionEmpleados(empleados);
                         break;
                     default:
                         System.out.println("Ha introducido un numero que no va del 1 al 3");
@@ -231,7 +224,7 @@ public class ReparacionEquipos {
         }
     }
 
-    public static void mostrarGestionServicios() {
+    public static void mostrarGestionServicios(ArrayList<Servicio> servicios) {
         System.out.println("Pulse 1 para registrar una nueva compra");
         System.out.println("Pulse 2 para registrar una nueva reparacion");
         System.out.println("Pulse 3 para registrar un nuevo envio");
@@ -245,18 +238,17 @@ public class ReparacionEquipos {
                 switch (op4) {
                     case 1:
                         Compra.nuevaCompra();
-                        mostrarGestionServicios();
+                        mostrarGestionServicios(servicios);
                         break;
                     case 2:
                         //Reparacion.nuevoReparacion();
-                        mostrarGestionServicios();
+                        mostrarGestionServicios(servicios);
                         break;
                     case 3:
                         Envio.nuevoEnvio();
-                        mostrarGestionServicios();
+                        mostrarGestionServicios(servicios);
                         break;
                     case 0:
-                        mostrarMenuPrincipal();
                         break;
                     default:
                         System.out.println("Ha introducido un numero que no va del 1 al 3");
