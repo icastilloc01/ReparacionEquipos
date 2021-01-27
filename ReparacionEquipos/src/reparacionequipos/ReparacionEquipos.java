@@ -19,7 +19,6 @@ public class ReparacionEquipos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
         ArrayList<Empleado> empleados = new ArrayList<Empleado>();
         ArrayList<Cliente> clientes = Cliente.convertir(Utilidades.CLIENTES);
         ArrayList<Servicio> servicios = Servicio.convertir(Utilidades.SERVICIOS);
@@ -32,6 +31,14 @@ public class ReparacionEquipos {
         empleados.addAll(repartidores);
         empleados.addAll(sustitutos);
         mostrarMenuPrincipal();
+    }
+
+    public static void mostrarMenuPrincipal() {
+        System.out.println("Pulse 1 para gestionar clientes");
+        System.out.println("Pulse 2 para gestionar Equipos");
+        System.out.println("Pulse 3 para gestionar Empleados");
+        System.out.println("Pulse 4 para gestionar Servicios");
+        System.out.println("Pulse 0 para salir");
         Scanner in = new Scanner(System.in);
         int opcion;
         try {
@@ -61,15 +68,6 @@ public class ReparacionEquipos {
         } catch (InputMismatchException ex) {
             System.out.println("El caracter introducido no es un número");
         }
-
-    }
-
-    public static void mostrarMenuPrincipal() {
-        System.out.println("Pulse 1 para gestionar clientes");
-        System.out.println("Pulse 2 para gestionar Equipos");
-        System.out.println("Pulse 3 para gestionar Empleados");
-        System.out.println("Pulse 4 para gestionar Servicios");
-        System.out.println("Pulse 0 para salir");
     }
 
     public static void mostrarGestionClientes() {
@@ -86,12 +84,15 @@ public class ReparacionEquipos {
                 switch (op1) {
                     case 1:
                         //Cliente.verCliente();
+                        mostrarGestionClientes();
                         break;
                     case 2:
                         Cliente.nuevoCliente();
+                        mostrarGestionClientes();
                         break;
                     case 3:
                         //Cliente.buscarCliente();
+                        mostrarGestionClientes();
                         break;
                     case 0:
                         mostrarMenuPrincipal();
@@ -120,13 +121,16 @@ public class ReparacionEquipos {
                 op2 = in.nextInt();
                 switch (op2) {
                     case 1:
-                        //Equipo.verEquipo()
+                        //Equipo.verEquipo();
+                        mostrarGestionEquipos();
                         break;
                     case 2:
                         Equipo.nuevoEquipo();
+                        mostrarGestionEquipos();
                         break;
                     case 3:
                         //Equipo.buscarEquipo();
+                        mostrarGestionEquipos();
                         break;
                     case 0:
                         mostrarMenuPrincipal();
@@ -163,15 +167,19 @@ public class ReparacionEquipos {
                 switch (op3) {
                     case 1:
                         Empleado.verEmpleado(empleados);
+                        mostrarGestionEmpleados();
                         break;
                     case 2:
                         mostrarTiposEmpleados();
+                        mostrarGestionEmpleados();
                         break;
                     case 3:
                         //Empleado.buscarEmpleado;
+                        mostrarGestionEmpleados();
                         break;
                     case 4:
                         //metodo para cubrir bajas
+                        mostrarGestionEmpleados();
                         break;
                     case 0:
                         mostrarMenuPrincipal();
@@ -200,12 +208,15 @@ public class ReparacionEquipos {
                 switch (emp2) {
                     case 1:
                         Detaller.nuevoDetaller();
+                        mostrarTiposEmpleados();
                         break;
                     case 2:
                         Repartidor.nuevoRepartidor();
+                        mostrarTiposEmpleados();
                         break;
                     case 3:
                         Sustituto.nuevoSustituto();
+                        mostrarTiposEmpleados();
                         break;
                     case 0:
                         mostrarGestionEmpleados();
@@ -234,12 +245,15 @@ public class ReparacionEquipos {
                 switch (op4) {
                     case 1:
                         Compra.nuevaCompra();
+                        mostrarGestionServicios();
                         break;
                     case 2:
                         //Reparacion.nuevoReparacion();
+                        mostrarGestionServicios();
                         break;
                     case 3:
                         Envio.nuevoEnvio();
+                        mostrarGestionServicios();
                         break;
                     case 0:
                         mostrarMenuPrincipal();

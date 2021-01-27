@@ -111,11 +111,13 @@ public class Empleado {
     }
 
     public static void verEmpleado(ArrayList<Empleado> empleados) {
-        System.out.println("El en el sistema estan registrados los siguientes empleados:");
+        System.out.println("En el sistema estan registrados los siguientes empleados:");
         for (Empleado e : empleados) {
-            System.out.println(e.getId() + ". " + e.getNombre() + " (" + e.getClass().getSimpleName() + ")");
+            System.out.println(e.getId() + ". " + e.getNombre() + ". " + e.getApellido() + ". " + e.getTelefono() + ". " + e.getNif() + ". " + e.getDireccion() + ". (" + e.getClass().getSimpleName() + ")");
         }
     }
+    
+    
 
     @Override
     public String toString() {
