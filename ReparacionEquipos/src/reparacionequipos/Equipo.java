@@ -78,7 +78,7 @@ public class Equipo {
             System.out.println("precio equipo" + precio);
             System.out.println("modelo:" + modelo);
             salir = Utilidades.leerBoolean();
-        } while (salir);
+        } while (salir = false);
         return e;
     }
 

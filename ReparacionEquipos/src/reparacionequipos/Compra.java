@@ -141,10 +141,10 @@ public class Compra extends Servicio {
                 d = sc.next().charAt(0);
             }     
             System.out.println("Son correctos los siguiente datos?(s/n)");
-            System.out.println("precio total:" +precio);
-            System.out.println("forma de pago"+pago);
+            System.out.println("precio total:" + precio);
+            System.out.println("forma de pago"+ pago);
             salir = Utilidades.leerBoolean();
-        } while (salir);
+        } while (salir = false);
         return c;
 }
 

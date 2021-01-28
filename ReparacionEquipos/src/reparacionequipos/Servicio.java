@@ -117,7 +117,7 @@ public class Servicio {
             System.out.println("fecha:" + fecha);
             System.out.println("nota" + nota);
             salir = Utilidades.leerBoolean();
-        } while (salir);
+        } while (salir = false);
         return s;
     }
 

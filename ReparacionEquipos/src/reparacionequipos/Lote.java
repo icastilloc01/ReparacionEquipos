@@ -79,7 +79,7 @@ public class Lote {
             System.out.println("id:" +id);
             System.out.println("descuento:" +descuento);
             salir = Utilidades.leerBoolean();
-        } while (salir);
+        } while (salir = false);
         return l;
     
 }
