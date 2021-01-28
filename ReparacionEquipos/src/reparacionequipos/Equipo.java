@@ -82,7 +82,7 @@ public class Equipo {
         return e;
     }
 
-    public static void verEqupo(ArrayList<Equipo> equipos) {
+    public static void verEquipo(ArrayList<Equipo> equipos) {
         System.out.println("en el sistema estan registrados los siguientes equipos");
         for (Equipo e : equipos) {
             System.out.println(e.getIdEquipo() + ", " + e.getModeloEquipo() + ", " + e.getPrecioEquipo() );

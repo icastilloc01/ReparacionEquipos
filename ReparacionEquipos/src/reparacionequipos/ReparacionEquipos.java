@@ -135,7 +135,7 @@ public class ReparacionEquipos {
                 op2 = in.nextInt();
                 switch (op2) {
                     case 1:
-                        //Equipo.verEquipo();
+                        Equipo.verEquipo(equipos);
                         mostrarGestionEquipos(equipos);
                         break;
                     case 2:
