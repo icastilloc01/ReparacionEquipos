@@ -6,6 +6,7 @@
 package reparacionequipos;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import static reparacionequipos.Utilidades.CLIENTES;
 
@@ -223,8 +224,8 @@ public class Cliente {
         return new Gen<Cliente>().convertir(array);
     }
 
-    public static Cliente buscarClientes(String nombre) {
-        for (Cliente c : Utilidades.CLIENTES) {
+ public static Cliente verclientes(String nombre,ArrayList<Cliente>clientes) {
+        for (Cliente c : clientes) {
             if (c.getNombre().equals(nombre)) {
                 return c;
             }
@@ -232,12 +233,239 @@ public class Cliente {
         return null;
     }
 
-    public static Cliente verClientes() {
+    //Método para buscar
+    public static Cliente buscarporid(ArrayList<Cliente> lista) {
 
-        for (int i = 0; i < Utilidades.CLIENTES.length; i++) {
-            System.out.println("Los clientes son" + CLIENTES[i]);
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introduzca su id");
+        sc.reset();
+        int idCliente = sc.nextInt();
+        Cliente ret = null;
+        for (Cliente c : Utilidades.CLIENTES) {
+            if (c.getId() == idCliente) {
+                ret = c;
+                break;
+            }
         }
-        return null;
+
+        return ret;
+    }
+
+    public static ArrayList<Cliente> buscarclientepornombre(String nombrecl, ArrayList<Cliente> clientes) {
+        ArrayList<Cliente> ret = new ArrayList<Cliente>();
+        for (Cliente c : clientes) {
+            if (Utilidades.removeDiacriticalMarks(c.getNombre().toLowerCase()).contains(Utilidades.removeDiacriticalMarks(nombrecl.toLowerCase()))) {
+                ret.add(c);
+            }
+            if (c.getNombre().toLowerCase().contains(nombrecl.toLowerCase())) {
+                if (!ret.contains(c)) {
+                    ret.add(c);
+                }
+            }
+        }
+        return ret;
+    }
+
+    public static ArrayList<Cliente> buscarclientepornif(String nifcl, ArrayList<Cliente> clientes) {
+        ArrayList<Cliente> ret = new ArrayList<Cliente>();
+        for (Cliente c : clientes) {
+            if (Utilidades.removeDiacriticalMarks(c.getNif().toLowerCase()).contains(Utilidades.removeDiacriticalMarks(nifcl.toLowerCase()))) {
+                ret.add(c);
+            }
+            if (c.getNif().toLowerCase().contains(nifcl.toLowerCase())) {
+                if (!ret.contains(c)) {
+                    ret.add(c);
+                }
+            }
+        }
+        return ret;
+    }
+
+    public static ArrayList<Cliente> buscarclientepordireccion(String direccioncl, ArrayList<Cliente> clientes) {
+        ArrayList<Cliente> ret = new ArrayList<Cliente>();
+        for (Cliente c : clientes) {
+            if (Utilidades.removeDiacriticalMarks(c.getDireccion().toLowerCase()).contains(Utilidades.removeDiacriticalMarks(direccioncl.toLowerCase()))) {
+                ret.add(c);
+            }
+            if (c.getNif().toLowerCase().contains(direccioncl.toLowerCase())) {
+                if (!ret.contains(c)) {
+                    ret.add(c);
+                }
+            }
+        }
+        return ret;
+    }
+
+    public static ArrayList<Cliente> buscarclienteportelefono(String tlfcl, ArrayList<Cliente> clientes) {
+        ArrayList<Cliente> ret = new ArrayList<Cliente>();
+        for (Cliente c : clientes) {
+            if (Utilidades.removeDiacriticalMarks(c.getTelefono().toLowerCase()).contains(Utilidades.removeDiacriticalMarks(tlfcl.toLowerCase()))) {
+                ret.add(c);
+            }
+            if (c.getNif().toLowerCase().contains(tlfcl.toLowerCase())) {
+                if (!ret.contains(c)) {
+                    ret.add(c);
+                }
+            }
+        }
+        return ret;
+    }
+
+    public static ArrayList<Cliente> buscarclienteportarjetadecredito(String tdcrcl, ArrayList<Cliente> clientes) {
+        ArrayList<Cliente> ret = new ArrayList<Cliente>();
+        for (Cliente c : clientes) {
+            if (Utilidades.removeDiacriticalMarks(c.getTarjetaCredito().toLowerCase()).contains(Utilidades.removeDiacriticalMarks(tdcrcl.toLowerCase()))) {
+                ret.add(c);
+            }
+            if (c.getNif().toLowerCase().contains(tdcrcl.toLowerCase())) {
+                if (!ret.contains(c)) {
+                    ret.add(c);
+                }
+            }
+        }
+        return ret;
+    }
+
+    public static ArrayList<Cliente> buscarclienteporcuentacorriente(String cccl, ArrayList<Cliente> clientes) {
+        ArrayList<Cliente> ret = new ArrayList<Cliente>();
+        for (Cliente c : clientes) {
+            if (Utilidades.removeDiacriticalMarks(c.getCuentaCorriente().toLowerCase()).contains(Utilidades.removeDiacriticalMarks(cccl.toLowerCase()))) {
+                ret.add(c);
+            }
+            if (c.getNif().toLowerCase().contains(cccl.toLowerCase())) {
+                if (!ret.contains(c)) {
+                    ret.add(c);
+                }
+            }
+        }
+        return ret;
+    }
+
+    public static void buscarclientes(ArrayList<Cliente> clientes) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Cliente> lista = new ArrayList<Cliente>();
+        System.out.println("Pulse 1 para buscar un empleado por el id");
+        System.out.println("Pulse 2 para buscar un empleado por el nombre");
+        System.out.println("Pulse 3 para buscar un empleado por el telefono");
+        System.out.println("Pulse 4 para buscar un empleado por el nif");
+        System.out.println("Pulse 5 para buscar un empleado por el apellido");
+        System.out.println("Pulse 6 para buscar un empleado por la direccion");
+        System.out.println("Pulse 0 para volver");
+        sc.reset();
+        int opcion = sc.nextInt();
+
+        try {
+            do {
+                switch (opcion) {
+                    case 1:
+
+                        buscarporid(clientes);
+                        ReparacionEquipos.mostrarGestionClientes(clientes);
+                        break;
+
+                    case 2:
+                        System.out.println("Introduzca el nombre del empleado que desea buscar:");
+                        String nombrecl = sc.nextLine(); //linea para que no se salte el nextLine()
+                        nombrecl = sc.nextLine();
+                        lista = buscarclientepornombre(nombrecl, clientes);
+                        if (lista.size() > 0) {
+                            System.out.println("Se han encontrado datos: ");
+                            for (Cliente c : lista) {
+                                System.out.println(c.getId() + "." + c.getNombre() + "." + c.getNif() + "." + c.getDireccion() + "." + c.getCuentaCorriente() + "." + c.getTelefono() + "." + c.getTarjetaCredito() + "." + c.getCuentaCorriente() + c.getClass().getSimpleName());
+                            }
+                        } else {
+                            System.out.println("El empleado con nombre " + nombrecl + " no se ha encontrado en el sistema.");
+                        }
+                        System.out.println("");
+                        ReparacionEquipos.mostrarGestionClientes(clientes);
+                        break;
+
+                    case 3:
+                    case 4:
+                        System.out.println("Introduzca el nif del cliente que desea buscar");
+                        String nifcl = sc.nextLine(); //linea para que no se salte el nextLine()
+                        nifcl = sc.nextLine();
+                        lista = buscarclientepornif(nifcl, clientes);
+                        if (lista.size() > 0) {
+                            System.out.println("Se han encontrado datos: ");
+                            for (Cliente c : lista) {
+                                System.out.println(c.getId() + "." + c.getNombre() + "." + c.getNif() + "." + c.getDireccion() + "." + c.getCuentaCorriente() + "." + c.getTelefono() + "." + c.getTarjetaCredito() + "." + c.getCuentaCorriente() + c.getClass().getSimpleName());
+                            }
+                        } else {
+                            System.out.println("El empleado con nombre " + nifcl + " no se ha encontrado en el sistema.");
+                        }
+                        System.out.println("");
+                        ReparacionEquipos.mostrarGestionClientes(clientes);
+                        break;
+
+                    case 5:
+                        System.out.println("Introduzca la direccion del cliente que desea buscar");
+                        String direccioncl = sc.nextLine(); //linea para que no se salte el nextLine()
+                        direccioncl = sc.nextLine();
+                        lista = buscarclientepordireccion(direccioncl, clientes);
+                        if (lista.size() > 0) {
+                            System.out.println("Se han encontrado datos: ");
+                            for (Cliente c : lista) {
+                                System.out.println(c.getId() + "." + c.getNombre() + "." + c.getNif() + "." + c.getDireccion() + "." + c.getCuentaCorriente() + "." + c.getTelefono() + "." + c.getTarjetaCredito() + "." + c.getCuentaCorriente() + c.getClass().getSimpleName());
+                            }
+                        } else {
+                            System.out.println("El empleado con nombre " + direccioncl + " no se ha encontrado en el sistema.");
+                        }
+                        System.out.println("");
+                        ReparacionEquipos.mostrarGestionClientes(clientes);
+                        break;
+
+                    case 6:
+                        System.out.println("Introduzca el telefono del cliente que desea buscar");
+                        String tlfcl = sc.nextLine(); //linea para que no se salte el nextLine()
+                        tlfcl = sc.nextLine();
+                        lista = buscarclienteportelefono(tlfcl, clientes);
+                        if (lista.size() > 0) {
+                            System.out.println("Se han encontrado datos: ");
+                            for (Cliente c : lista) {
+                                System.out.println(c.getId() + "." + c.getNombre() + "." + c.getNif() + "." + c.getDireccion() + "." + c.getCuentaCorriente() + "." + c.getTelefono() + "." + c.getTarjetaCredito() + "." + c.getCuentaCorriente() + c.getClass().getSimpleName());
+                            }
+                        } else {
+                            System.out.println("El empleado con nombre " + tlfcl + " no se ha encontrado en el sistema.");
+                        }
+                        System.out.println("");
+                        ReparacionEquipos.mostrarGestionClientes(clientes);
+                        break;
+
+                    case 7:
+                        System.out.println("Introduzca la cuenta corriente del cliente que desea buscar");
+                        String cccl = sc.nextLine(); //linea para que no se salte el nextLine()
+                        cccl = sc.nextLine();
+                        lista = buscarclienteporcuentacorriente(cccl, clientes);
+                        if (lista.size() > 0) {
+                            System.out.println("Se han encontrado datos: ");
+                            for (Cliente c : lista) {
+                                System.out.println(c.getId() + "." + c.getNombre() + "." + c.getNif() + "." + c.getDireccion() + "." + c.getCuentaCorriente() + "." + c.getTelefono() + "." + c.getTarjetaCredito() + "." + c.getCuentaCorriente() + c.getClass().getSimpleName());
+                            }
+                        } else {
+                            System.out.println("El empleado con nombre " + cccl + " no se ha encontrado en el sistema.");
+                        }
+                        System.out.println("");
+                        ReparacionEquipos.mostrarGestionClientes(clientes);
+                        break;
+
+                    case 0:
+                        ReparacionEquipos.mostrarGestionClientes(clientes);
+                    default:
+                        System.out.println("El valor que ha introducido no es un número del 0 al 6");
+                        System.out.println("");
+                }
+
+            } while (opcion > 7 || opcion < 0);
+
+        } catch (InputMismatchException ex) {
+
+            System.out.println("El cáracter introducido no es un número entero");
+            System.out.println("");
+            buscarclientes(clientes);
+
+        }
+
     }
 
     @Override
