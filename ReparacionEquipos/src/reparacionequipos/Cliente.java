@@ -223,7 +223,7 @@ public class Cliente {
         return new Gen<Cliente>().convertir(array);
     }
 
-    public static Cliente buscarclientes(String nombre) {
+    public static Cliente buscarClientes(String nombre) {
         for (Cliente c : Utilidades.CLIENTES) {
             if (c.getNombre().equals(nombre)) {
                 return c;
@@ -232,7 +232,7 @@ public class Cliente {
         return null;
     }
 
-    public static Cliente verclientes() {
+    public static Cliente verClientes() {
 
         for (int i = 0; i < Utilidades.CLIENTES.length; i++) {
             System.out.println("Los clientes son" + CLIENTES[i]);

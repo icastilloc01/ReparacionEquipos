@@ -93,7 +93,7 @@ public class ReparacionEquipos {
                 op1 = in.nextInt();
                 switch (op1) {
                     case 1:
-                        //Cliente.verCliente();
+                        Cliente.verClientes();
                         mostrarGestionClientes(clientes);
                         break;
                     case 2:
@@ -102,7 +102,7 @@ public class ReparacionEquipos {
                         mostrarGestionClientes(clientes);
                         break;
                     case 3:
-                        //Cliente.buscarCliente();
+                        //Cliente.buscarClientes();
                         mostrarGestionClientes(clientes);
                         break;
                     case 0:
