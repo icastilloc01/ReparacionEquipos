@@ -99,7 +99,7 @@ public class Servicio {
         return s;
     }
 
-    public static ArrayList<Servicio> arrayde(ArrayList<Servicio> lista, int[] ids) {
+    public static ArrayList<Servicio> arraydeServicio(ArrayList<Servicio> lista, int[] ids) {
         ArrayList<Servicio> ret = new ArrayList<Servicio>();
         for (int i = 0; i < ids.length; i++) {
             for (int j = 0; j < lista.size(); j++) {

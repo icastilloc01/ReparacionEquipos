@@ -29,6 +29,8 @@ public class ReparacionEquipos {
         ArrayList<Repartidor> repartidores = Repartidor.convertir(Utilidades.REPARTIDORES);
         ArrayList<Sustituto> sustitutos = Sustituto.convertir(Utilidades.SUSTITUTOS);
         ArrayList<Baja> bajas = Baja.convertir(Utilidades.BAJAS);
+        ArrayList<Reparacion> reparaciones = Reparacion.convertir(Utilidades.REPARACIONES);
+        ArrayList<Envio> envios = Envio.convertir(Utilidades.ENVIOS);
         
         //Anadir al ArrayList de empleados los datos de los empleados de tipo Detalleres, Repartidores, Sustitutos
         empleados.addAll(detalleres);
@@ -261,12 +263,12 @@ public class ReparacionEquipos {
                         break;
                     case 2:
                         Reparacion nuevaReparacion = Reparacion.nuevaReparacion();
-                        //servicios.add(nuevaReparacion);
+                        servicios.add(nuevaReparacion);
                         mostrarGestionServicios(servicios);
                         break;
                     case 3:
                         Envio nuevoEnvio = Envio.nuevoEnvio();
-                        //servicios.add(nuevoEnvio);
+                        servicios.add(nuevoEnvio);
                         mostrarGestionServicios(servicios);
                         break;
                     case 0:

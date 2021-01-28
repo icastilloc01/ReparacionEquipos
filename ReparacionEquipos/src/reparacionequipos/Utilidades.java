@@ -128,6 +128,13 @@ public class Utilidades {
         new Mantenimiento(40, 25585526, new Date("28/05/2012"), "Servicio de reparaciones", new ArrayList<Cliente>()),
         new Mantenimiento(25,232584688, new Date("02/05/2014"), "Servicio de reparaciones", new ArrayList<Cliente>())
     };
+       public static final Envio [] ENVIOS = {
+       
+        new Envio (1, new Date("22/07/2020"), 20, 40.00, 20.00, "C-Los olmos 23", new ArrayList<Servicio>(), new ArrayList<Repartidor>()),
+        new Envio (1, new Date("17/11/2020"), 15, 3.000, 15.00, "C-Wiston Churchil 11", new ArrayList<Servicio>(), new ArrayList<Repartidor>()),
+        new Envio (1, new Date("11/05/2020"), 22, 420.00, 398.00, "C-Los Santos 420", new ArrayList<Servicio>(), new ArrayList<Repartidor>()),
+       
+       };
     
     
     public static final int numMantenimientos = MANTENIMIENTOS.length;

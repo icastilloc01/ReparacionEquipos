@@ -13,7 +13,7 @@ import java.util.Scanner;
  *
  * @author PC_Alba
  */
-public class Envio {
+public class Envio extends Servicio {
 
     private long id;
     private Date fechaSalida;
@@ -37,6 +37,17 @@ public class Envio {
         this.coste = coste;
         this.lugar = lugar;
     }
+    
+    public Envio(long id, Date fechaSalida, int precioDeReparto, double precioTotal, double coste, String lugar, ArrayList<Servicio> servicios, ArrayList<Repartidor> repartidores) {
+        this.id = id;
+        this.fechaSalida = fechaSalida;
+        this.precioDeReparto = precioDeReparto;
+        this.precioTotal = precioTotal;
+        this.coste = coste;
+        this.lugar = lugar;
+        this.servicios = servicios;
+        this.repartidores = repartidores;
+    }
 
     //constructor de copia
     public Envio(Envio en) {
@@ -47,6 +58,12 @@ public class Envio {
         this.coste = en.coste;
         this.lugar = en.lugar;
     }
+
+    Envio(int i, java.sql.Date valueOf, int i0, double d, double d0, String cLos_Santos_3, ArrayList<Servicio> arrayde, ArrayList<Repartidor> arrayde0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 
     //geters y seters
     public long getId() {
@@ -137,8 +154,9 @@ public class Envio {
     public String toString() {
         return "Envio{" + "id=" + id + ", fechaSalida=" + fechaSalida + ", precioDeReparto=" + precioDeReparto + ", precioTotal=" + precioTotal + ", coste=" + coste + ", lugar=" + lugar + ", servicios=" + servicios + ", repartidores=" + repartidores + '}';
     }
-
-    public static ArrayList<Envio> arrayde (ArrayList<Envio> lista,int[] ids){
+    
+    
+    public static ArrayList<Envio> arraydeEnvio (ArrayList<Envio> lista,int[] ids){
     
         ArrayList<Envio> ret = new ArrayList<Envio>();
         for (int i = 0; i < ids.length; i++) {
@@ -160,6 +178,9 @@ public class Envio {
         }
         return ret;
     }
+    
+    
+    
     
     }
     

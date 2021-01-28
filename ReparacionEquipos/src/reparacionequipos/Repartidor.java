@@ -46,6 +46,19 @@ public class Repartidor extends Empleado {
         }
         return ret;
     }
+    
+    public static ArrayList<Repartidor> arrayde(ArrayList<Repartidor> lista, int[] ids) {
+        ArrayList<Repartidor> ret = new ArrayList<Repartidor>();
+        for (int i = 0; i < ids.length; i++) {
+            for (int j = 0; j < lista.size(); j++) {
+                if (lista.get(j).getId() == ids[i]) {
+                    ret.add((Repartidor) lista.get(ids[i]));
+                    break;
+                }
+            }
+        }
+        return ret;
+    }
 
     @Override
     public String toString() {

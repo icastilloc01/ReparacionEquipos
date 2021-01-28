@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  * @author aitor
  */
-public class Reparacion {
+public class Reparacion extends Servicio {
 
 
     private long id;
