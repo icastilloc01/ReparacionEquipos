@@ -131,6 +131,8 @@ public class Equipo {
                         ReparacionEquipos.mostrarGestionEquipos(equipos);
                         break;
                     case 3:
+                        BuscarPorPrecio(equipos);
+                        ReparacionEquipos.mostrarGestionEquipos(equipos);
                         break;
                     case 0:
                         ReparacionEquipos.mostrarGestionEquipos(equipos);
@@ -184,8 +186,25 @@ public class Equipo {
         return ret;
     }
 
-    public static void BuscarPorPrecio() {
-        //no se como hacer este metodo
+    public static void BuscarPorPrecio(ArrayList<Equipo> equipos) {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Introduzca el precio del equipo que quiera buscar");
+        in.reset();
+        double precioEquipo = in.nextDouble();
+        Equipo ret = null;
+        for (Equipo e : equipos) {
+            if (e.getPrecioEquipo() == precioEquipo) {
+                ret = e;
+            }
+            break;
+        }
+        if (ret != null) {
+            System.out.println("se a encontrado un equipo");
+            System.out.println("El equipo encontrado tiene los siguientes datos");
+            System.out.println(ret.getIdEquipo() + ", " + ret.getModeloEquipo() + ", " + ret.getPrecioEquipo());
+        } else {
+            System.out.println("el quipo con el id " + precioEquipo + " no se a encontrado \n");
+        }
 
     }
 
