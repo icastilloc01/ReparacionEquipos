@@ -60,7 +60,7 @@ public class Detaller extends Empleado {
         nuevoDetaller.setNif(e.getNif());
         nuevoDetaller.setApellido(e.getApellido());
         nuevoDetaller.setDireccion(e.getDireccion());
-        System.out.println("¿Es senior? s/n/S/N: ");
+        System.out.println("¿Es senior? s/n: ");
         nuevoDetaller.senior = Utilidades.leerBoolean();
         return nuevoDetaller;
     }
