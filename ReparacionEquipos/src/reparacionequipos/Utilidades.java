@@ -59,7 +59,7 @@ public class Utilidades {
         return check;
 
     }
-    
+
     public static String removeDiacriticalMarks(String string) {
         //Form.NFC acepta ñ y distingue las tildes en español
         return Normalizer.normalize(string, Normalizer.Form.NFC)
@@ -77,13 +77,13 @@ public class Utilidades {
         new Servicio(2, java.sql.Date.valueOf(LocalDate.parse("22/11/2020", dateFormatter)), "El servicio se realizo con exito", Cliente.arrayde(Cliente.convertir(CLIENTES), new int[]{1, 2})),
         new Servicio(3, java.sql.Date.valueOf(LocalDate.parse("25/10/2020", dateFormatter)), "El servicio se realizo con exito", Cliente.arrayde(Cliente.convertir(CLIENTES), new int[]{0, 1}))
     };
-    
+
     public static final Equipo EQUIPOS[] = {
         new Equipo(1, 244.99, "Equipo 1"),
         new Equipo(2, 399.99, "Equipo 2"),
         new Equipo(3, 495.49, "Equipo 3")
     };
-    
+
     public static final Empleado EMPLEADOS[] = {
         new Empleado(1, "JoseManuel", "785904034", "78594834Y", "Ramirez", "C-Los Santos 23 4ºA"),
         new Empleado(2, "Eustaquio", "765889239", "56749823R", "Fernandez", "C-Los Santos 45 3ºC"),
@@ -97,69 +97,70 @@ public class Utilidades {
         new Empleado(10, "Anastasia", "874875908", "12345678I", "Gomez", "C-Menendez Pelayo 5 3ºA")
     };
     
+    public static final int numEmpleados = EMPLEADOS.length;
+
     public static final Detaller DETALLERES[] = {
-        new Detaller(false,EMPLEADOS[0]),
-        new Detaller(false,EMPLEADOS[1]),
-        new Detaller(false,EMPLEADOS[2])
+        new Detaller(false, EMPLEADOS[0]),
+        new Detaller(false, EMPLEADOS[1]),
+        new Detaller(false, EMPLEADOS[2])
     };
-    
+
     public static final Repartidor REPARTIDORES[] = {
         new Repartidor(EMPLEADOS[3]),
         new Repartidor(EMPLEADOS[4]),
         new Repartidor(EMPLEADOS[5])
     };
-    
-    public static final Sustituto SUSTITUTOS[] = {
-        new Sustituto("28", false, EMPLEADOS[6]),
-        new Sustituto("35", false, EMPLEADOS[7]),
-        new Sustituto("32", false, EMPLEADOS[8]),
-        new Sustituto("25", false, EMPLEADOS[9])
-    };
 
     public static final Baja BAJAS[] = {
-        new Baja(1, java.sql.Date.valueOf(LocalDate.parse("12/10/2020", dateFormatter)), java.sql.Date.valueOf(LocalDate.parse("05/12/2020", dateFormatter)), "Cuarentena por coronavirus", Sustituto.arrayde(Sustituto.convertir(SUSTITUTOS), new int[]{7, 9})),
-        new Baja(2, java.sql.Date.valueOf(LocalDate.parse("23/05/2020", dateFormatter)), java.sql.Date.valueOf(LocalDate.parse("16/09/2020", dateFormatter)), "Ruptura de brazo", Sustituto.arrayde(Sustituto.convertir(SUSTITUTOS), new int[]{8, 9})),
-        new Baja(3, java.sql.Date.valueOf(LocalDate.parse("04/09/2020", dateFormatter)), java.sql.Date.valueOf(LocalDate.parse("25/01/2021", dateFormatter)), "Fisura de muñeca", Sustituto.arrayde(Sustituto.convertir(SUSTITUTOS), new int[]{7, 9}))
+        new Baja(1, java.sql.Date.valueOf(LocalDate.parse("12/10/2020", dateFormatter)), java.sql.Date.valueOf(LocalDate.parse("05/12/2020", dateFormatter)), "Cuarentena por coronavirus", EMPLEADOS[3]),
+        new Baja(2, java.sql.Date.valueOf(LocalDate.parse("23/05/2020", dateFormatter)), java.sql.Date.valueOf(LocalDate.parse("16/09/2020", dateFormatter)), "Ruptura de brazo", EMPLEADOS[5]),
+        new Baja(3, java.sql.Date.valueOf(LocalDate.parse("04/09/2020", dateFormatter)), java.sql.Date.valueOf(LocalDate.parse("25/01/2021", dateFormatter)), "Fisura de muñeca", EMPLEADOS[2])
+    };
+
+    public static final int numBajas = BAJAS.length;
+    
+    public static final Sustituto SUSTITUTOS[] = {
+        new Sustituto("28", false, null, EMPLEADOS[6]),
+        new Sustituto("35", false, null, EMPLEADOS[7]),
+        new Sustituto("32", false, null, EMPLEADOS[8]),
+        new Sustituto("25", false, null, EMPLEADOS[9])
     };
     
-       public static final Mantenimiento[] MANTENIMIENTOS = {
+    public static final int numSustitutos = SUSTITUTOS.length;
+
+    public static final Mantenimiento[] MANTENIMIENTOS = {
         //int horastrabajadas, long id, Date fechaServicio, String nota, ArrayList<Cliente> clientes
         new Mantenimiento(22, 2221214, new Date("22/02/2020"), "Servicio de reparaciones", new ArrayList<Cliente>()),
         new Mantenimiento(40, 25585526, new Date("28/05/2012"), "Servicio de reparaciones", new ArrayList<Cliente>()),
-        new Mantenimiento(25,232584688, new Date("02/05/2014"), "Servicio de reparaciones", new ArrayList<Cliente>())
+        new Mantenimiento(25, 232584688, new Date("02/05/2014"), "Servicio de reparaciones", new ArrayList<Cliente>())
     };
-       public static final Envio [] ENVIOS = {
-       
-        new Envio (1, new Date("22/07/2020"), 20, 40.00, 20.00, "C-Los olmos 23", new ArrayList<Servicio>(), new ArrayList<Repartidor>()),
-        new Envio (1, new Date("17/11/2020"), 15, 3.000, 15.00, "C-Wiston Churchil 11", new ArrayList<Servicio>(), new ArrayList<Repartidor>()),
-        new Envio (1, new Date("11/05/2020"), 22, 420.00, 398.00, "C-Los Santos 420", new ArrayList<Servicio>(), new ArrayList<Repartidor>()),
-       
-       };
-    
-    
+    public static final Envio[] ENVIOS = {
+        new Envio(1, new Date("22/07/2020"), 20, 40.00, 20.00, "C-Los olmos 23", new ArrayList<Servicio>(), new ArrayList<Repartidor>()),
+        new Envio(1, new Date("17/11/2020"), 15, 3.000, 15.00, "C-Wiston Churchil 11", new ArrayList<Servicio>(), new ArrayList<Repartidor>()),
+        new Envio(1, new Date("11/05/2020"), 22, 420.00, 398.00, "C-Los Santos 420", new ArrayList<Servicio>(), new ArrayList<Repartidor>()),};
+
     public static final int numMantenimientos = MANTENIMIENTOS.length;
-    
-    
+
     public static final Reparacion[] REPARACIONES = {
         //long id,int horastrabajadas
-        new Reparacion(12212478,22),
-        new Reparacion(55689889,29),
-        new Reparacion(96222555,48)
-     
+        new Reparacion(12212478, 22),
+        new Reparacion(55689889, 29),
+        new Reparacion(96222555, 48)
+
     };
 
     public static final int numReparaciones = REPARACIONES.length;
-    
-    public static final Grupo [] GRUPOS = {
+
+    public static final Grupo[] GRUPOS = {
         //long id
-       new Grupo(1),
-       new Grupo(2),
-       new Grupo(3),
-       new Grupo(4),
-       new Grupo(5)
-        
+        new Grupo(1),
+        new Grupo(2),
+        new Grupo(3),
+        new Grupo(4),
+        new Grupo(5)
+
     };
 
-    public static final int numGrupos= GRUPOS.length;
+    public static final int numGrupos = GRUPOS.length;
 
 }

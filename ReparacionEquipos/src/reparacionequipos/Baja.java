@@ -19,17 +19,17 @@ public class Baja {
     private Date fechainicio;
     private Date fechafin;
     private String motivo;
-    private ArrayList<Sustituto> sustitutos = new ArrayList<Sustituto>();
+    private Empleado empleado;
 
     public Baja() {
     }
 
-    public Baja(long id, Date fechainicio, Date fechafin, String motivo, ArrayList<Sustituto> sustitutos) {
+    public Baja(long id, Date fechainicio, Date fechafin, String motivo, Empleado empleado) {
         this.id = id;
         this.fechainicio = fechainicio;
         this.fechafin = fechafin;
         this.motivo = motivo;
-        this.sustitutos = sustitutos;
+        this.empleado = empleado;
     }
 
     public Baja(Baja b) {
@@ -37,7 +37,7 @@ public class Baja {
         this.fechainicio = b.fechainicio;
         this.fechafin = b.fechafin;
         this.motivo = b.motivo;
-        this.sustitutos = b.sustitutos;
+        this.empleado = b.empleado;
     }
 
     public long getId() {
@@ -72,6 +72,14 @@ public class Baja {
         this.motivo = motivo;
     }
 
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
+    }
+
     public static Baja nuevaBaja() {
         Baja nuevaBaja = new Baja();
         Scanner in = new Scanner(System.in);
@@ -80,8 +88,6 @@ public class Baja {
         nuevaBaja.motivo = in.nextLine(); //esta linea es para que no se salte el proximo nextLine
         System.out.print("Introduzca la fecha de inicio de la baja: ");
         nuevaBaja.fechainicio = Utilidades.introducirFecha();
-        System.out.print("Introduzca la fecha de fin de la baja: ");
-        nuevaBaja.fechafin = Utilidades.introducirFecha();
         System.out.println("Introduzca el motivo de la baja: ");
         nuevaBaja.motivo = in.nextLine();
         return nuevaBaja;

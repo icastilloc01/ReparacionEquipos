@@ -166,6 +166,7 @@ public class ReparacionEquipos {
         System.out.println("Pulse 2 para registrar un nuevo empleado");
         System.out.println("Pulse 3 para buscar un empleado");
         System.out.println("Pulse 4 para cubrir una baja");
+        System.out.println("Pulse 5 para comprobar las bajas que los sustitutos cubren");
         System.out.println("Pulse 0 para volver");
         Scanner in = new Scanner(System.in);
         int op3;
@@ -187,7 +188,12 @@ public class ReparacionEquipos {
                         mostrarGestionEmpleados(empleados);
                         break;
                     case 4:
-                        //metodo para cubrir bajas
+                        Sustituto.cubrirBaja(bajas, sustitutos, empleados);
+                        empleados.addAll(sustitutos);
+                        mostrarGestionEmpleados(empleados);
+                        break;
+                    case 5:
+                        Sustituto.verSustitutoCubreBaja(sustitutos);
                         mostrarGestionEmpleados(empleados);
                         break;
                     case 0:
