@@ -6,6 +6,7 @@
 package reparacionequipos;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -97,7 +98,7 @@ public class Equipo {
         return ret;
     }
 
-    public static void buscarEquipo() {
+    public static void buscarEquipo(ArrayList<Equipo> equipos) {
         ArrayList<Equipo> valores;
         Scanner in = new Scanner(System.in);
         valores = new ArrayList<Equipo>();
@@ -106,6 +107,43 @@ public class Equipo {
         System.out.println("Pulse 3 para buscar un equipo por el precio");
         in.reset();
         int opcion = in.nextInt();
+        try {
+            do {
+                switch (opcion) {
+                    case 1:
+                        buscarEquipoPorId(equipos);
+                        ReparacionEquipos.mostrarGestionEquipos(equipos);
+                        break;
+                    case 2:
+                        System.out.println("introduzca el modeo de equipo que quiera buacar");
+                        String modeloEqui = in.nextLine();
+                        modeloEqui = in.nextLine();
+                        valores = buscarEquipoPorModelo(modeloEqui, equipos);
+                        if (valores.size() > 0) {
+                            System.out.println("");
+                            for (Equipo e : valores) {
+                                System.out.println(e.getIdEquipo() + ", " + e.getModeloEquipo() + ", " + ", " + e.getPrecioEquipo());
+                            }
+                        } else {
+                            System.out.println("El equipo de modelo " + modeloEqui + "no se a encontrado en el sistema");
+                        }
+                        System.out.println("");
+                        ReparacionEquipos.mostrarGestionEquipos(equipos);
+                        break;
+                    case 3:
+                        break;
+                    case 0:
+                        ReparacionEquipos.mostrarGestionEquipos(equipos);
+                        break;
+
+                }
+            } while (opcion > 3 || opcion < 0);
+
+        } catch (InputMismatchException ex) {
+            System.out.println("El caracter introducido no es un número");
+            System.out.println("");
+            buscarEquipo(equipos);
+        }
 
     }
 
@@ -144,6 +182,11 @@ public class Equipo {
             }
         }
         return ret;
+    }
+
+    public static void BuscarPorPrecio() {
+        //no se como hacer este metodo
+
     }
 
     @Override
