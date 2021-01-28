@@ -68,6 +68,7 @@ public class ReparacionEquipos {
                         mostrarMenuPrincipal();
                         break;
                     case 0:
+                        System.exit(0);
                         break;
                     default:
                         System.out.println("Ha introducido un numero que no va del 0 al 4");
@@ -93,7 +94,7 @@ public class ReparacionEquipos {
                 op1 = in.nextInt();
                 switch (op1) {
                     case 1:
-                        Cliente.verclientes("f",clientes);
+                        Cliente.verClientes(clientes);
                         mostrarGestionClientes(clientes);
                         break;
                     case 2:

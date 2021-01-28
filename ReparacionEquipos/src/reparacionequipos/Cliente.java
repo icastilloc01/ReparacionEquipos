@@ -224,13 +224,11 @@ public class Cliente {
         return new Gen<Cliente>().convertir(array);
     }
 
- public static Cliente verclientes(String nombre,ArrayList<Cliente>clientes) {
+    public static void verClientes(ArrayList<Cliente> clientes) {
+        System.out.println("En el sistema estan registrados los siguientes clientes:");
         for (Cliente c : clientes) {
-            if (c.getNombre().equals(nombre)) {
-                return c;
-            }
+            System.out.println(c.getId() + ". " + c.getNombre() + ". " + c.getNif() + ". " + c.getDireccion() + ". " + c.getTelefono() + ". " + c.getTarjetaCredito() + ". " + c.getCuentaCorriente());
         }
-        return null;
     }
 
     //Método para buscar
