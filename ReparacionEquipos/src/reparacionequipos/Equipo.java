@@ -85,7 +85,7 @@ public class Equipo {
     public static void verEquipo(ArrayList<Equipo> equipos) {
         System.out.println("en el sistema estan registrados los siguientes equipos");
         for (Equipo e : equipos) {
-            System.out.println(e.getIdEquipo() + ", " + e.getModeloEquipo() + ", " + e.getPrecioEquipo() );
+            System.out.println(e.getIdEquipo() + ", " + e.getModeloEquipo() + ", " + e.getPrecioEquipo());
         }
     }
 
@@ -93,6 +93,55 @@ public class Equipo {
         ArrayList<Equipo> ret = new ArrayList<Equipo>();
         for (Equipo e : array) {
             ret.add((Equipo) e);
+        }
+        return ret;
+    }
+
+    public static void buscarEquipo() {
+        ArrayList<Equipo> valores;
+        Scanner in = new Scanner(System.in);
+        valores = new ArrayList<Equipo>();
+        System.out.println("Pulse 1 para buscar un equipo por el id");
+        System.out.println("Pulse 2 para buscar un equipo por el modelo");
+        System.out.println("Pulse 3 para buscar un equipo por el precio");
+        in.reset();
+        int opcion = in.nextInt();
+
+    }
+
+    public static void buscarEquipoPorId(ArrayList<Equipo> equipos) {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Introduzca el id del equipo que quiera buscar");
+        in.reset();
+        int idEquipo = in.nextInt();
+        Equipo ret = null;
+        for (Equipo e : equipos) {
+            if (e.getIdEquipo() == idEquipo) {
+                ret = e;
+                break;
+            }
+            if (ret != null) {
+                System.out.println("se ha encontrado un equipo ");
+                System.out.println("el equipo contiene los siguientes datos");
+                System.out.println(ret.getIdEquipo() + ", " + ret.getModeloEquipo() + ", " + ret.getPrecioEquipo());
+            } else {
+                System.out.println("el quipo con el id " + idEquipo + " no se a encontrado \n");
+            }
+        }
+
+    }
+
+    public static ArrayList<Equipo> buscarEquipoPorModelo(String modeloEqui, ArrayList<Equipo> equipos) {
+        ArrayList<Equipo> ret = new ArrayList<Equipo>();
+        for (Equipo e : equipos) {
+            if (Utilidades.removeDiacriticalMarks(e.getModeloEquipo().toLowerCase()).contains(Utilidades.removeDiacriticalMarks(modeloEqui.toLowerCase()))) {
+                ret.add(e);
+            }
+            if (e.getModeloEquipo().toLowerCase().contains(modeloEqui.toLowerCase())) {
+                if (!ret.contains(e)) {
+                    ret.add(e);
+                }
+            }
         }
         return ret;
     }
