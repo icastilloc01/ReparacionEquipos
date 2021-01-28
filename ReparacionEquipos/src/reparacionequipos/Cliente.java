@@ -117,11 +117,22 @@ public class Cliente {
         this.servicios = servicios;
     }
 
+    public static long nextIdCliente() {
+        long ret = 0;
+        for (Cliente c : Utilidades.CLIENTES) {
+            if (c.getId() > ret) {
+                ret = c.getId();
+            }
+        }
+        return ret + 1;
+    }
+
     public static Cliente nuevoCliente() {
         Cliente c = new Cliente();
         Scanner sc = new Scanner(System.in);
         boolean salir;
         do {
+            c.id = nextIdCliente();
             System.out.println("Introduzca su nombre:");
             String nombre = sc.nextLine();
             c.setNombre(nombre);
@@ -150,17 +161,17 @@ public class Cliente {
                 p = Utilidades.leerBoolean();
             }
             System.out.println("Son correctos los siguiente datos?(s/n)");
-            System.out.println("nombre:" +nombre);
-            System.out.println("telefono:" +tlfn);
-            System.out.println("tarjeta de credito:" +credito);
-            System.out.println("cuenta corriente:" +ccorriente);
-            System.out.println("nif:" +nif);
-            System.out.println("direccion:" +direccion);
+            System.out.println("nombre:" + nombre);
+            System.out.println("telefono:" + tlfn);
+            System.out.println("tarjeta de credito:" + credito);
+            System.out.println("cuenta corriente:" + ccorriente);
+            System.out.println("nif:" + nif);
+            System.out.println("direccion:" + direccion);
             salir = Utilidades.leerBoolean();
         } while (salir);
         return c;
     }
-    
+
     public String servicios() {
         String ret = " servicios:[";
         for (Servicio s : this.servicios) {
@@ -168,16 +179,15 @@ public class Cliente {
         }
         return ret + "]";
     }
-    
+
     /*
     public String servicios() {
         String ret = " servicios:[";
         ret = this.servicios.stream().map((s) -> "" + s.getId() + "(" + s.getId() + "), ").reduce(ret, String::concat);
         return ret + "]";
     }
-    */
-    
-     public static ArrayList<Cliente> listarclientes(ArrayList<Cliente> lista, int[] ids) {
+     */
+    public static ArrayList<Cliente> listarclientes(ArrayList<Cliente> lista, int[] ids) {
         ArrayList<Cliente> ret = new ArrayList<Cliente>();
         Cliente c1 = new Cliente();
         for (int i = 0; i < ids.length; i++) {
@@ -229,15 +239,10 @@ public class Cliente {
         }
         return null;
     }
-    
-    
-   
-    
+
     @Override
     public String toString() {
         return "Cliente{" + "id=" + id + ", nombre=" + nombre + ", nif=" + nif + ", direccion=" + direccion + ", telefono=" + telefono + ", tarjetaCredito=" + tarjetaCredito + ", cuentaCorriente=" + cuentaCorriente + servicios() + '}';
     }
 
-    
-    
 }
