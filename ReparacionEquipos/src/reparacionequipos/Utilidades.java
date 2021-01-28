@@ -73,9 +73,9 @@ public class Utilidades {
     };
 
     public static final Servicio SERVICIOS[] = {
-        new Servicio(1, java.sql.Date.valueOf(LocalDate.parse("12/12/2020", dateFormatter)), "El servicio se realizo con exito", Cliente.arrayde(Cliente.convertir(CLIENTES), new int[]{1, 3})),
-        new Servicio(2, java.sql.Date.valueOf(LocalDate.parse("22/11/2020", dateFormatter)), "El servicio se realizo con exito", Cliente.arrayde(Cliente.convertir(CLIENTES), new int[]{2, 3})),
-        new Servicio(3, java.sql.Date.valueOf(LocalDate.parse("25/10/2020", dateFormatter)), "El servicio se realizo con exito", Cliente.arrayde(Cliente.convertir(CLIENTES), new int[]{1, 2}))
+        new Servicio(1, java.sql.Date.valueOf(LocalDate.parse("12/12/2020", dateFormatter)), "El servicio se realizo con exito", Cliente.arrayde(Cliente.convertir(CLIENTES), new int[]{0, 2})),
+        new Servicio(2, java.sql.Date.valueOf(LocalDate.parse("22/11/2020", dateFormatter)), "El servicio se realizo con exito", Cliente.arrayde(Cliente.convertir(CLIENTES), new int[]{1, 2})),
+        new Servicio(3, java.sql.Date.valueOf(LocalDate.parse("25/10/2020", dateFormatter)), "El servicio se realizo con exito", Cliente.arrayde(Cliente.convertir(CLIENTES), new int[]{0, 1}))
     };
     
     public static final Equipo EQUIPOS[] = {

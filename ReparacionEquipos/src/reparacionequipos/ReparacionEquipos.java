@@ -18,27 +18,32 @@ public class ReparacionEquipos {
     /**
      * @param args the command line arguments
      */
+    //Inicializar los datos de la clase Utilidades en ArrayLists
+    static ArrayList<Empleado> empleados = new ArrayList<Empleado>();
+    static ArrayList<Cliente> clientes = Cliente.convertir(Utilidades.CLIENTES);
+    static ArrayList<Servicio> servicios = Servicio.convertir(Utilidades.SERVICIOS);
+    static ArrayList<Equipo> equipos = Equipo.convertir(Utilidades.EQUIPOS);
+    static ArrayList<Detaller> detalleres = Detaller.convertir(Utilidades.DETALLERES);
+    static ArrayList<Repartidor> repartidores = Repartidor.convertir(Utilidades.REPARTIDORES);
+    static ArrayList<Sustituto> sustitutos = Sustituto.convertir(Utilidades.SUSTITUTOS);
+    static ArrayList<Baja> bajas = Baja.convertir(Utilidades.BAJAS);
+    
     public static void main(String[] args) {
-        
-        //Inicializar los datos de la clase Utilidades en ArrayLists
-        ArrayList<Empleado> empleados = new ArrayList<Empleado>();
-        ArrayList<Cliente> clientes = Cliente.convertir(Utilidades.CLIENTES);
-        ArrayList<Servicio> servicios = Servicio.convertir(Utilidades.SERVICIOS);
-        ArrayList<Equipo> equipos = Equipo.convertir(Utilidades.EQUIPOS);
-        ArrayList<Detaller> detalleres = Detaller.convertir(Utilidades.DETALLERES);
-        ArrayList<Repartidor> repartidores = Repartidor.convertir(Utilidades.REPARTIDORES);
-        ArrayList<Sustituto> sustitutos = Sustituto.convertir(Utilidades.SUSTITUTOS);
-        ArrayList<Baja> bajas = Baja.convertir(Utilidades.BAJAS);
-        ArrayList<Reparacion> reparaciones = Reparacion.convertir(Utilidades.REPARACIONES);
-        ArrayList<Envio> envios = Envio.convertir(Utilidades.ENVIOS);
-        
         //Anadir al ArrayList de empleados los datos de los empleados de tipo Detalleres, Repartidores, Sustitutos
         empleados.addAll(detalleres);
         empleados.addAll(repartidores);
         empleados.addAll(sustitutos);
         
         //Comienzo del menu
-        mostrarMenuPrincipal();
+        mostrarMenuPrincipal();        
+    }
+
+    public static void mostrarMenuPrincipal() {
+        System.out.println("Pulse 1 para gestionar clientes");
+        System.out.println("Pulse 2 para gestionar Equipos");
+        System.out.println("Pulse 3 para gestionar Empleados");
+        System.out.println("Pulse 4 para gestionar Servicios");
+        System.out.println("Pulse 0 para salir");
         Scanner in = new Scanner(System.in);
         int opcion;
         try {
@@ -48,15 +53,19 @@ public class ReparacionEquipos {
                 switch (opcion) {
                     case 1:
                         mostrarGestionClientes(clientes);
+                        mostrarMenuPrincipal();
                         break;
                     case 2:
                         mostrarGestionEquipos(equipos);
+                        mostrarMenuPrincipal();
                         break;
                     case 3:
                         mostrarGestionEmpleados(empleados);
+                        mostrarMenuPrincipal();
                         break;
                     case 4:
                         mostrarGestionServicios(servicios);
+                        mostrarMenuPrincipal();
                         break;
                     case 0:
                         break;
@@ -64,20 +73,11 @@ public class ReparacionEquipos {
                         System.out.println("Ha introducido un numero que no va del 0 al 4");
                         System.out.println("");
                 }
-
             } while (opcion > 4 || opcion < 0);
         } catch (InputMismatchException ex) {
             System.out.println("El caracter introducido no es un número");
             System.out.println("");
         }
-    }
-
-    public static void mostrarMenuPrincipal() {
-        System.out.println("Pulse 1 para gestionar clientes");
-        System.out.println("Pulse 2 para gestionar Equipos");
-        System.out.println("Pulse 3 para gestionar Empleados");
-        System.out.println("Pulse 4 para gestionar Servicios");
-        System.out.println("Pulse 0 para salir");
     }
 
     public static void mostrarGestionClientes(ArrayList<Cliente> clientes) {
@@ -106,6 +106,7 @@ public class ReparacionEquipos {
                         mostrarGestionClientes(clientes);
                         break;
                     case 0:
+                        mostrarMenuPrincipal();
                         break;
                     default:
                         System.out.println("Ha introducido un numero que no va del 0 al 3");
@@ -146,6 +147,7 @@ public class ReparacionEquipos {
                         mostrarGestionEquipos(equipos);
                         break;
                     case 0:
+                        mostrarMenuPrincipal();
                         break;
                     default:
                         System.out.println("Ha introducido un numero que no va del 0 al 3");
@@ -189,6 +191,7 @@ public class ReparacionEquipos {
                         mostrarGestionEmpleados(empleados);
                         break;
                     case 0:
+                        mostrarMenuPrincipal();
                         break;
                     default:
                         System.out.println("Ha introducido un numero que no va del 0 al 4");
@@ -272,6 +275,7 @@ public class ReparacionEquipos {
                         mostrarGestionServicios(servicios);
                         break;
                     case 0:
+                        mostrarMenuPrincipal();
                         break;
                     default:
                         System.out.println("Ha introducido un numero que no va del 0 al 3");
