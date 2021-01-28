@@ -221,7 +221,11 @@ public class Cliente {
     }
 
     public static ArrayList<Cliente> convertir(Cliente[] array) {
-        return new Gen<Cliente>().convertir(array);
+        ArrayList<Cliente> ret = new ArrayList<Cliente>();
+        for (Cliente c : array) {
+            ret.add((Cliente) c);
+        }
+        return ret;
     }
 
     public static void verClientes(ArrayList<Cliente> clientes) {
