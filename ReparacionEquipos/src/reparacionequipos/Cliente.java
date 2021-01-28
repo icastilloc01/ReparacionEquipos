@@ -341,7 +341,7 @@ public class Cliente {
         return ret;
     }
 
-    public static void buscarclientes(ArrayList<Cliente> clientes) {
+    public static void buscarClientes(ArrayList<Cliente> clientes) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Cliente> lista = new ArrayList<Cliente>();
         System.out.println("Pulse 1 para buscar un empleado por el id");
@@ -462,7 +462,7 @@ public class Cliente {
 
             System.out.println("El cáracter introducido no es un número entero");
             System.out.println("");
-            buscarclientes(clientes);
+            buscarClientes(clientes);
 
         }
 

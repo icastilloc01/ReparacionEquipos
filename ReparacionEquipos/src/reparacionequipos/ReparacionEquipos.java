@@ -102,7 +102,7 @@ public class ReparacionEquipos {
                         mostrarGestionClientes(clientes);
                         break;
                     case 3:
-                        //Cliente.buscarClientes();
+                        Cliente.buscarClientes(clientes);
                         mostrarGestionClientes(clientes);
                         break;
                     case 0:
