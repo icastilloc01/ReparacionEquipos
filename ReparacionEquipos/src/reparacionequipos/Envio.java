@@ -15,63 +15,69 @@ import java.util.Scanner;
  */
 public class Envio extends Servicio {
 
-    private long id;
+    private long idEnvio;
     private Date fechaSalida;
     private int precioDeReparto;
     private double precioTotal;
     private double coste;
     private String lugar;
-    private ArrayList<Servicio> servicios = new ArrayList<>();
     private ArrayList<Repartidor> repartidores = new ArrayList<>();
 
     //constructor por defecto
     public Envio() {
+        super();
     }
 
     //constructor por atributos
-    public Envio(long id, Date fechaSalida, int precioDeReparto, double precioTotal, double coste, String lugar) {
-        this.id = id;
+    public Envio(long idEnvio, Date fechaSalida, int precioDeReparto, double precioTotal, double coste, String lugar, ArrayList<Repartidor> repartidores, long id, Date fechaServicio, String nota, ArrayList<Cliente> clientes) {
+        super(id, fechaServicio, nota, clientes);
+        this.idEnvio = idEnvio;
         this.fechaSalida = fechaSalida;
         this.precioDeReparto = precioDeReparto;
         this.precioTotal = precioTotal;
         this.coste = coste;
         this.lugar = lugar;
-    }
-    
-    public Envio(long id, Date fechaSalida, int precioDeReparto, double precioTotal, double coste, String lugar, ArrayList<Servicio> servicios, ArrayList<Repartidor> repartidores) {
-        this.id = id;
-        this.fechaSalida = fechaSalida;
-        this.precioDeReparto = precioDeReparto;
-        this.precioTotal = precioTotal;
-        this.coste = coste;
-        this.lugar = lugar;
-        this.servicios = servicios;
         this.repartidores = repartidores;
     }
 
+    public Envio(long idEnvio, Date fechaSalida, int precioDeReparto, double precioTotal, double coste, String lugar, ArrayList<Repartidor> repartidores, Servicio se) {
+        super(se);
+        this.idEnvio = idEnvio;
+        this.fechaSalida = fechaSalida;
+        this.precioDeReparto = precioDeReparto;
+        this.precioTotal = precioTotal;
+        this.coste = coste;
+        this.lugar = lugar;
+        this.repartidores = repartidores;
+    }
+    
     //constructor de copia
     public Envio(Envio en) {
-        this.id = en.id;
+        this.idEnvio = en.idEnvio;
         this.fechaSalida = en.fechaSalida;
         this.precioDeReparto = en.precioDeReparto;
         this.precioTotal = en.precioTotal;
         this.coste = en.coste;
         this.lugar = en.lugar;
-    }
-
-    Envio(int i, java.sql.Date valueOf, int i0, double d, double d0, String cLos_Santos_3, ArrayList<Servicio> arrayde, ArrayList<Repartidor> arrayde0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        this.repartidores = en.repartidores;
+    } 
     
-    
-
     //geters y seters
-    public long getId() {
-        return id;
+
+    public long getIdEnvio() {
+        return idEnvio;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setIdEnvio(long idEnvio) {
+        this.idEnvio = idEnvio;
+    }
+
+    public double getPrecioTotal() {
+        return precioTotal;
+    }
+
+    public void setPrecioTotal(double precioTotal) {
+        this.precioTotal = precioTotal;
     }
 
     public Date getFechaSalida() {
@@ -114,10 +120,6 @@ public class Envio extends Servicio {
         this.lugar = lugar;
     }
 
-    public ArrayList<Servicio> getServicios() {
-        return servicios;
-    }
-
     public ArrayList<Repartidor> getRepartidores() {
         return repartidores;
     }
@@ -125,16 +127,21 @@ public class Envio extends Servicio {
     public void setRepartidores(ArrayList<Repartidor> repartidores) {
         this.repartidores = repartidores;
     }
-
-    public void setServicios(ArrayList<Servicio> servicios) {
-        this.servicios = servicios;
+    
+    public static long nextIdEnvio() {
+        long ret = 0;
+        for (Envio e : Utilidades.ENVIOS) {
+            if (e.getIdEnvio() > ret) {
+                ret = e.getIdEnvio();
+            }
+        }
+        return ret + 1;
     }
 
     public static Envio nuevoEnvio() {
         Envio nuevoEnvio = new Envio();
         Scanner in = new Scanner(System.in);
-        System.out.println("Introduzca el id del envio");
-        nuevoEnvio.id = in.nextLong();
+        nuevoEnvio.idEnvio = nextIdEnvio();
         nuevoEnvio.lugar = in.nextLine();//esta linea es para que no se salte el proximo nextLine
         System.out.println("Introduzca la fecha de salidad del envio");
         nuevoEnvio.fechaSalida = Utilidades.introducirFecha();
@@ -152,7 +159,7 @@ public class Envio extends Servicio {
     //metodo to string
     @Override
     public String toString() {
-        return "Envio{" + "id=" + id + ", fechaSalida=" + fechaSalida + ", precioDeReparto=" + precioDeReparto + ", precioTotal=" + precioTotal + ", coste=" + coste + ", lugar=" + lugar + ", servicios=" + servicios + ", repartidores=" + repartidores + '}';
+        return "Envio{" + "id=" + id + ", fechaSalida=" + fechaSalida + ", precioDeReparto=" + precioDeReparto + ", precioTotal=" + precioTotal + ", coste=" + coste + ", lugar=" + lugar + ", repartidores=" + repartidores + '}';
     }
     
     

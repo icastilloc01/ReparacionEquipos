@@ -135,21 +135,21 @@ public class Utilidades {
         new Mantenimiento(25, 232584688, new Date("02/05/2014"), "Servicio de reparaciones", new ArrayList<Cliente>())
     };
     public static final Envio[] ENVIOS = {
-        new Envio(1, new Date("22/07/2020"), 20, 40.00, 20.00, "C-Los olmos 23", new ArrayList<Servicio>(), new ArrayList<Repartidor>()),
-        new Envio(1, new Date("17/11/2020"), 15, 3.000, 15.00, "C-Wiston Churchil 11", new ArrayList<Servicio>(), new ArrayList<Repartidor>()),
-        new Envio(1, new Date("11/05/2020"), 22, 420.00, 398.00, "C-Los Santos 420", new ArrayList<Servicio>(), new ArrayList<Repartidor>()),};
-
+        new Envio(1, new Date("22/07/2020"), 20, 40.00, 20.00, "C-Los olmos 23", new ArrayList<Repartidor>(), SERVICIOS[0])
+    };
     public static final int numMantenimientos = MANTENIMIENTOS.length;
 
     public static final Reparacion[] REPARACIONES = {
         //long id,int horastrabajadas
-        new Reparacion(12212478, 22),
-        new Reparacion(55689889, 29),
-        new Reparacion(96222555, 48)
-
+        new Reparacion(1, 22, MANTENIMIENTOS[1],SERVICIOS[1])
     };
 
     public static final int numReparaciones = REPARACIONES.length;
+    
+    public static final Compra[] COMPRAS = {
+      //long idcompra, double preciototal, char metodoPago, ArrayList<Equipo> equipos, ArrayList<Lote> lotes
+      new Compra(1, 240.99, 'T', new ArrayList<Equipo>(), new ArrayList<Lote>(), SERVICIOS[2])
+    };
 
     public static final Grupo[] GRUPOS = {
         //long id

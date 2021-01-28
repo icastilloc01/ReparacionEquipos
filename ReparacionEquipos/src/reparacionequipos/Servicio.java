@@ -67,15 +67,38 @@ public class Servicio {
 
     public Servicio() {
     }
+    
+    public static long nextIdServicio() {
+        long ret = 0;
+        for (Servicio s : Utilidades.SERVICIOS) {
+            if (s.getId() > ret) {
+                ret = s.getId();
+            }
+        }
+        for (Reparacion r : Utilidades.REPARACIONES) {
+            if (r.getId() > ret) {
+                ret = r.getId();
+            }
+        }
+        for (Envio e : Utilidades.ENVIOS) {
+            if (e.getId() > ret) {
+                ret = e.getId();
+            }
+        }
+        for (Compra c : Utilidades.COMPRAS) {
+            if (c.getId() > ret) {
+                ret = c.getId();
+            }
+        }
+        return ret + 1;
+    }
 
     public static Servicio nuevoServicio() {
         Servicio s = new Servicio();
         Scanner sc = new Scanner(System.in);
         boolean salir;
         do {
-            System.out.println("Introduzca id del servicio:");
-            Long id = sc.nextLong();
-            s.setId(id);
+            s.setId(nextIdServicio());
             System.out.println("Introduzca nota de servicio:");
             String nota = sc.nextLine();
             s.setNota(nota);
@@ -91,7 +114,6 @@ public class Servicio {
             }
 
             System.out.println("Son correctos los siguiente datos?(s/n)");
-            System.out.println("id:" + id);
             System.out.println("fecha:" + fecha);
             System.out.println("nota" + nota);
             salir = Utilidades.leerBoolean();

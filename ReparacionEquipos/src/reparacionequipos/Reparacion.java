@@ -6,7 +6,9 @@
 package reparacionequipos;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,8 +16,7 @@ import java.util.Scanner;
  */
 public class Reparacion extends Servicio {
 
-
-    private long id;
+    private long idreparacion;
     private int duraciontotal;
     private Mantenimiento mantenimiento;
 
@@ -24,31 +25,46 @@ public class Reparacion extends Servicio {
     }
 
     public Reparacion() {
+        super();
     }
 
-    public Reparacion(long id, int duraciontotal) {
-        this.id = id;
+    public Reparacion(long idreparacion, int duraciontotal, Mantenimiento mantenimiento, long id, Date fechaServicio, String nota, ArrayList<Cliente> clientes) {
+        super(id, fechaServicio, nota, clientes);
+        this.idreparacion = idreparacion;
         this.duraciontotal = duraciontotal;
+        this.mantenimiento = mantenimiento;
     }
 
-    public long getId() {
-        return id;
+    public Reparacion(long idreparacion, int duraciontotal, Mantenimiento mantenimiento, Servicio se) {
+        super(se);
+        this.idreparacion = idreparacion;
+        this.duraciontotal = duraciontotal;
+        this.mantenimiento = mantenimiento;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public Reparacion(Reparacion e) {
+        this.idreparacion = e.idreparacion;
+        this.duraciontotal = e.duraciontotal;
+        this.mantenimiento = e.mantenimiento;
+    }
+
+    public long getIdreparacion() {
+        return idreparacion;
+    }
+
+    public void setIdreparacion(long idreparacion) {
+        this.idreparacion = idreparacion;
     }
 
     public int getDuraciontotal() {
         return duraciontotal;
     }
 
-    
-    public static Reparacion nuevaReparacion(){
+    public static Reparacion nuevaReparacion() {
         Reparacion r = new Reparacion();
         Scanner in = new Scanner(System.in);
         boolean salir;
-        do{
+        do {
             System.out.println("Introduzca el id de la reparación:");
             long id = in.nextLong();
             r.setId(id);
@@ -56,13 +72,13 @@ public class Reparacion extends Servicio {
             int duracion = in.nextInt();
             r.setDuraciontotal(duracion);
             System.out.println("Son correctos los siguientes datos?(s/n):");
-            System.out.println("id:" +id);
-            System.out.println("duracion:"+duracion);
+            System.out.println("id:" + id);
+            System.out.println("duracion:" + duracion);
             salir = Utilidades.leerBoolean();
-        }while(salir);
-        
+        } while (salir);
+
         return r;
-    
+
     }
 
     @Override
@@ -83,8 +99,7 @@ public class Reparacion extends Servicio {
     public void setMantenimiento(Mantenimiento mantenimiento) {
         this.mantenimiento = mantenimiento;
     }
-    
-    
+
     public static ArrayList<Reparacion> arrayde(ArrayList<Reparacion> lista, int[] ids) {
         ArrayList<Reparacion> ret = new ArrayList<Reparacion>();
         for (int i = 0; i < ids.length; i++) {
@@ -104,16 +119,25 @@ public class Reparacion extends Servicio {
             ret.add((Reparacion) s);
         }
         return ret;
-        
-        
+
     }
-    
-      public static Reparacion nuevoreparacion() {
+
+    public static long nextIdReparacion() {
+        long ret = 0;
+        for (Reparacion r : Utilidades.REPARACIONES) {
+            if (r.getIdreparacion() > ret) {
+                ret = r.getIdreparacion();
+            }
+        }
+        return ret + 1;
+    }
+
+    public static Reparacion nuevoreparacion() {
         Servicio se = Servicio.nuevoServicio();
         Mantenimiento m = Mantenimiento.nuevomantenimiento();
         Scanner sc = new Scanner(System.in);
         Reparacion nuevoreparacion = new Reparacion();
-        //  long r1 = Reparacion.thenextid();
+        nuevoreparacion.idreparacion = nextIdReparacion();
         System.out.println(" Muestráme las horas que has trabajado :");
         do {
             int duraciontotal = sc.nextInt();
@@ -133,5 +157,4 @@ public class Reparacion extends Servicio {
 
     }
 
-    
 }

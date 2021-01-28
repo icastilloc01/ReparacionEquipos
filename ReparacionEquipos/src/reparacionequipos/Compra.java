@@ -21,18 +21,40 @@ public class Compra extends Servicio {
     private ArrayList<Equipo> equipos = new ArrayList<>();
     private ArrayList<Lote> lotes = new ArrayList<>();
 
-    public Compra(long idCompra, double precioTotal, char metodoPago) {
+    public Compra(long idCompra, double precioTotal, char metodoPago, ArrayList<Equipo> equipos, ArrayList<Lote> lotes, long id, Date fechaServicio, String nota, ArrayList<Cliente> clientes) {
+        super(id, fechaServicio, nota, clientes);
+        this.idCompra = idCompra;
+        this.precioTotal = precioTotal;
+        this.metodoPago = metodoPago;
+        this.equipos = equipos;
+        this.lotes = lotes;
+    }
+
+    public Compra(long idCompra, double precioTotal, char metodoPago, ArrayList<Equipo> equipos, ArrayList<Lote> lotes, Servicio se) {
+        super(se);
+        this.idCompra = idCompra;
+        this.precioTotal = precioTotal;
+        this.metodoPago = metodoPago;
+        this.equipos = equipos;
+        this.lotes = lotes;
+    }
+    
+    public Compra(long idCompra, double precioTotal, char metodoPago, ArrayList<Equipo> equipos, ArrayList<Lote> lotes) {
         super();
         this.idCompra = idCompra;
         this.precioTotal = precioTotal;
         this.metodoPago = metodoPago;
+        this.equipos = equipos;
+        this.lotes = lotes;
     }
 
     public Compra(Compra c) {
         super();
-        this.idCompra = c.getIdCompra();
-        this.metodoPago = c.getMetodoPago();
-        this.precioTotal = c.getPrecioTotal();
+        this.idCompra = c.idCompra;
+        this.metodoPago = c.metodoPago;
+        this.precioTotal = c.precioTotal;
+        this.equipos = c.equipos;
+        this.lotes = c.lotes;
     }
 
     public Compra() {
@@ -79,15 +101,23 @@ public class Compra extends Servicio {
         this.lotes = lotes;
     }
 
+    public static long nextIdCompra() {
+        long ret = 0;
+        for (Compra c : Utilidades.COMPRAS) {
+            if (c.getIdCompra() > ret) {
+                ret = c.getIdCompra();
+            }
+        }
+        return ret + 1;
+    }
+    
     public static Compra nuevaCompra() {
         Compra c = new Compra();
         Scanner sc = new Scanner(System.in);
         boolean salir;
         char d;
         do {
-            System.out.println("Introduzca id de la compra:");
-            Long id = sc.nextLong();
-            c.setId(id);
+            c.setId(nextIdCompra());
             System.out.println("Introduzca precio de la compra:");
             double precio = sc.nextDouble();
             c.setPrecioTotal(precio);
@@ -109,10 +139,8 @@ public class Compra extends Servicio {
 
                 System.out.println("Quiere Introducir otro Lote? s/n ");
                 d = sc.next().charAt(0);
-            }
-     
+            }     
             System.out.println("Son correctos los siguiente datos?(s/n)");
-            System.out.println("id:" +id);
             System.out.println("precio total:" +precio);
             System.out.println("forma de pago"+pago);
             salir = Utilidades.leerBoolean();
