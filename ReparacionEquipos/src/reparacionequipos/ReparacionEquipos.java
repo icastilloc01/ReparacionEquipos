@@ -144,7 +144,7 @@ public class ReparacionEquipos {
                         mostrarGestionEquipos(equipos);
                         break;
                     case 3:
-                        //Equipo.buscarEquipo();
+                        Equipo.buscarEquipo(equipos);
                         mostrarGestionEquipos(equipos);
                         break;
                     case 0:

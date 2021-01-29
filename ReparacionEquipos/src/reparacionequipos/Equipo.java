@@ -160,13 +160,13 @@ public class Equipo {
                 ret = e;
                 break;
             }
-            if (ret != null) {
-                System.out.println("se ha encontrado un equipo ");
-                System.out.println("el equipo contiene los siguientes datos");
-                System.out.println(ret.getIdEquipo() + ", " + ret.getModeloEquipo() + ", " + ret.getPrecioEquipo());
-            } else {
-                System.out.println("el quipo con el id " + idEquipo + " no se a encontrado \n");
-            }
+        }
+        if (ret != null) {
+            System.out.println("se ha encontrado un equipo ");
+            System.out.println("el equipo contiene los siguientes datos");
+            System.out.println(ret.getIdEquipo() + ", " + ret.getModeloEquipo() + ", " + ret.getPrecioEquipo());
+        } else {
+            System.out.println("el quipo con el id " + idEquipo + " no se a encontrado \n");
         }
 
     }
@@ -203,7 +203,7 @@ public class Equipo {
             System.out.println("El equipo encontrado tiene los siguientes datos");
             System.out.println(ret.getIdEquipo() + ", " + ret.getModeloEquipo() + ", " + ret.getPrecioEquipo());
         } else {
-            System.out.println("el quipo con el id " + precioEquipo + " no se a encontrado \n");
+            System.out.println("el quipo con el precio " + precioEquipo + " no se a encontrado \n");
         }
 
     }
