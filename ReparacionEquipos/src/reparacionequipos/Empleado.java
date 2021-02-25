@@ -257,24 +257,29 @@ public class Empleado {
 
     public static void buscarEmpleadoPorId(ArrayList<Empleado> empleados) {
         Scanner in = new Scanner(System.in);
-        System.out.println("Introduzca el id del empleado que quiere buscar");
-        in.reset();
-        int idEmpleado = in.nextInt();
-        Empleado ret = null;
-        for (Empleado e : empleados) {
-            if (e.getId() == idEmpleado) {
-                ret = e;
-                break;
+        try {
+            System.out.println("Introduzca el id del empleado que quiere buscar");
+            in.reset();
+            int idEmpleado = in.nextInt();
+            Empleado ret = null;
+            for (Empleado e : empleados) {
+                if (e.getId() == idEmpleado) {
+                    ret = e;
+                    break;
+                }
             }
+            if (ret != null) {
+                System.out.println("Se ha encontrado a un empleado");
+                System.out.print("El empleado encontrado tiene los siguientes datos: ");
+                System.out.println(ret.getId() + ". " + ret.getNombre() + ". " + ret.getApellido() + ". " + ret.getTelefono() + ". " + ret.getNif() + ". " + ret.getDireccion() + ". (" + ret.getClass().getSimpleName() + ")");
+            } else {
+                System.out.println("Empleado con id " + idEmpleado + " no se ha encontrado en el sistema.");
+            }
+            System.out.println("");
+        } catch (InputMismatchException ex) {
+            System.out.println("El carácter introducido no es un número, porfavor introduzca un número");
+            buscarEmpleadoPorId(empleados);
         }
-        if (ret != null) {
-            System.out.println("Se ha encontrado a un empleado");
-            System.out.print("El empleado encontrado tiene los siguientes datos: ");
-            System.out.println(ret.getId() + ". " + ret.getNombre() + ". " + ret.getApellido() + ". " + ret.getTelefono() + ". " + ret.getNif() + ". " + ret.getDireccion() + ". (" + ret.getClass().getSimpleName() + ")");
-        } else {
-            System.out.println("Empleado con id " + idEmpleado + " no se ha encontrado en el sistema.");
-        }
-        System.out.println("");
     }
 
     public static ArrayList<Empleado> buscarEmpleadoPorNombre(String nombreEmp, ArrayList<Empleado> empleados) {

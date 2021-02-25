@@ -6,6 +6,7 @@
 package reparacionequipos;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -114,48 +115,53 @@ public class Sustituto extends Empleado {
         Scanner in = new Scanner(System.in);
         System.out.println("Introduzca el id de la baja que quiera cubrir: ");
         in.reset();
-        int idBaja = in.nextInt();
-        Baja cubrir = null;
-        if (idBaja <= 0 || idBaja > Utilidades.numBajas) {
-            System.out.println("El numero de id que ha introducido no corresponde con ninguna baja registrada");
-            System.out.println("");
-            cubrirBaja(bajas, sustitutos, empleados);
-        } else {
-            for (Baja b : bajas) {
-                if (b.getId() == idBaja) {
-                    cubrir = b;
-                    break;
+        try {
+            int idBaja = in.nextInt();
+            Baja cubrir = null;
+            if (idBaja <= 0 || idBaja > Utilidades.numBajas) {
+                System.out.println("El numero de id que ha introducido no corresponde con ninguna baja registrada");
+                System.out.println("");
+                cubrirBaja(bajas, sustitutos, empleados);
+            } else {
+                for (Baja b : bajas) {
+                    if (b.getId() == idBaja) {
+                        cubrir = b;
+                        break;
+                    }
                 }
             }
-        }
-        System.out.println("Introduzca el id de sustituto que quiere que cubra esa baja: ");
-        in.reset();
-        int idSustituto = in.nextInt();
-        Sustituto cubridor = null;
-        if (idSustituto <= 0 || idBaja > Utilidades.numSustitutos) {
-            System.out.println("El numero de id que ha introducido no corresponde con ningun sustituto registrado");
-            System.out.println("");
-            cubrirBaja(bajas, sustitutos, empleados);
-        } else {
-            for (Sustituto s : sustitutos) {
-                if (s.getId() == idSustituto) {
-                    cubridor = s;
-                    cubridor.setBaja(cubrir);
-                    break;
+            System.out.println("Introduzca el id de sustituto que quiere que cubra esa baja: ");
+            in.reset();
+            int idSustituto = in.nextInt();
+            Sustituto cubridor = null;
+            if (idSustituto <= 0 || idBaja > Utilidades.numSustitutos) {
+                System.out.println("El numero de id que ha introducido no corresponde con ningun sustituto registrado");
+                System.out.println("");
+                cubrirBaja(bajas, sustitutos, empleados);
+            } else {
+                for (Sustituto s : sustitutos) {
+                    if (s.getId() == idSustituto) {
+                        cubridor = s;
+                        cubridor.setBaja(cubrir);
+                        break;
+                    }
                 }
             }
+            empleados.set(idSustituto - 1, cubridor);
+            System.out.println("la baja" + Utilidades.BAJAS[idBaja - 1] + "ha sido cubierta");
+        } catch (InputMismatchException ex) {
+            System.out.println("El carácter introducido no es número, porfavor introduzca un número");
+            cubrirBaja(bajas, sustitutos, empleados);
         }
-        empleados.set(idSustituto - 1, cubridor);
-        System.out.println("la baja" + Utilidades.BAJAS[idBaja - 1] + "ha sido cubierta");
         return sustitutos;
     }
 
     public static void verSustitutoCubreBaja(ArrayList<Sustituto> sustitutos) {
         System.out.println("En el sistema se encuentran los siguientes empleados de tipo sustituto: ");
         for (Sustituto s : sustitutos) {
-                System.out.println(s.getId() + ". " + s.getApellido() + ". " + s.getTelefono() + ". " + s.getNif() + ". " + s.getDireccion() + ". " + s.getEdad() + ". " + s.getBaja());
-            }
+            System.out.println(s.getId() + ". " + s.getApellido() + ". " + s.getTelefono() + ". " + s.getNif() + ". " + s.getDireccion() + ". " + s.getEdad() + ". " + s.getBaja());
         }
+    }
 
     @Override
     public String toString() {
