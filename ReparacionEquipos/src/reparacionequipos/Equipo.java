@@ -151,24 +151,28 @@ public class Equipo {
 
     public static void buscarEquipoPorId(ArrayList<Equipo> equipos) {
         Scanner in = new Scanner(System.in);
-        System.out.println("Introduzca el id del equipo que quiera buscar");
-        in.reset();
-        int idEquipo = in.nextInt();
-        Equipo ret = null;
-        for (Equipo e : equipos) {
-            if (e.getIdEquipo() == idEquipo) {
-                ret = e;
-                break;
+        try {
+            System.out.println("Introduzca el id del equipo que quiera buscar");
+            in.reset();
+            int idEquipo = in.nextInt();
+            Equipo ret = null;
+            for (Equipo e : equipos) {
+                if (e.getIdEquipo() == idEquipo) {
+                    ret = e;
+                    break;
+                }
             }
+            if (ret != null) {
+                System.out.println("se ha encontrado un equipo ");
+                System.out.println("el equipo contiene los siguientes datos");
+                System.out.println(ret.getIdEquipo() + ", " + ret.getModeloEquipo() + ", " + ret.getPrecioEquipo());
+            } else {
+                System.out.println("el quipo con el id " + idEquipo + " no se a encontrado \n");
+            }
+        } catch (InputMismatchException ex) {
+            System.out.println("El carácter introducido no es un número, porfavor introduzca un número");
+            buscarEquipoPorId(equipos);
         }
-        if (ret != null) {
-            System.out.println("se ha encontrado un equipo ");
-            System.out.println("el equipo contiene los siguientes datos");
-            System.out.println(ret.getIdEquipo() + ", " + ret.getModeloEquipo() + ", " + ret.getPrecioEquipo());
-        } else {
-            System.out.println("el quipo con el id " + idEquipo + " no se a encontrado \n");
-        }
-
     }
 
     public static ArrayList<Equipo> buscarEquipoPorModelo(String modeloEqui, ArrayList<Equipo> equipos) {
@@ -188,24 +192,29 @@ public class Equipo {
 
     public static void BuscarPorPrecio(ArrayList<Equipo> equipos) {
         Scanner in = new Scanner(System.in);
-        System.out.println("Introduzca el precio del equipo que quiera buscar");
-        in.reset();
-        double precioEquipo = in.nextDouble();
-        Equipo ret = null;
-        for (Equipo e : equipos) {
-            if (e.getPrecioEquipo() == precioEquipo) {
-                ret = e;
-            }
-            break;
-        }
-        if (ret != null) {
-            System.out.println("se a encontrado un equipo");
-            System.out.println("El equipo encontrado tiene los siguientes datos");
-            System.out.println(ret.getIdEquipo() + ", " + ret.getModeloEquipo() + ", " + ret.getPrecioEquipo());
-        } else {
-            System.out.println("el quipo con el precio " + precioEquipo + " no se a encontrado \n");
-        }
+        try {
 
+            System.out.println("Introduzca el precio del equipo que quiera buscar");
+            in.reset();
+            double precioEquipo = in.nextDouble();
+            Equipo ret = null;
+            for (Equipo e : equipos) {
+                if (e.getPrecioEquipo() == precioEquipo) {
+                    ret = e;
+                }
+                break;
+            }
+            if (ret != null) {
+                System.out.println("se a encontrado un equipo");
+                System.out.println("El equipo encontrado tiene los siguientes datos");
+                System.out.println(ret.getIdEquipo() + ", " + ret.getModeloEquipo() + ", " + ret.getPrecioEquipo());
+            } else {
+                System.out.println("el quipo con el precio " + precioEquipo + " no se a encontrado \n");
+            }
+        }catch (InputMismatchException ex){
+            System.out.println("El carácter introducido no es un número, porfavor introduzca un número");
+            BuscarPorPrecio(equipos);
+        }
     }
 
     @Override
