@@ -30,7 +30,7 @@ public class Cliente {
     }
 
     //constructor parámetros
-    public Cliente(long id, String nombre, String nif, String direccion, String telefono, String tarjetaCredito, String cuentaCorriente, ArrayList<Servicio> servicios) {
+    public Cliente(long id, String nombre, String nif, String direccion, String telefono, String tarjetaCredito, String cuentaCorriente, ArrayList<Servicio> servicios){
         this.id = id;
         this.nombre = nombre;
         this.nif = nif;
@@ -128,7 +128,7 @@ public class Cliente {
         return ret + 1;
     }
 
-    public static Cliente nuevoCliente() {
+    public static Cliente nuevoCliente() throws ClienteException {
         Cliente c = new Cliente();
         Scanner sc = new Scanner(System.in);
         boolean salir;
@@ -170,6 +170,18 @@ public class Cliente {
             System.out.println("direccion:" + direccion);
             salir = Utilidades.leerBoolean();
         } while (salir);
+        if (!ClienteException.comprobarTelefono(c.getTelefono())){
+            throw new ClienteException("El telefono no es valido");
+        } else if(!ClienteException.comprobarNombre(c.getNombre())){
+            throw new ClienteException("El nombre no es valido");
+            } else if(!ClienteException.comprobarNif(c.getNif())){
+            throw new ClienteException("El nif no es valido");
+        } else if(!ClienteException.comprobarDireccion(c.getDireccion())){
+            throw new ClienteException("La dirección no es valida");
+        } else if(!ClienteException.comprobarTarjetaCredito(c.getTarjetaCredito())){
+            throw new ClienteException("La tarjeta de credito no es valida");
+        } else if(!ClienteException.comprobarCuentaCorriente(c.getCuentaCorriente())){
+            throw new ClienteException("El nombre no es valido");}
         return c;
     }
 
@@ -343,20 +355,20 @@ public class Cliente {
         return ret;
     }
 
-    public static void buscarClientes(ArrayList<Cliente> clientes) {
+    public static void buscarClientes(ArrayList<Cliente> clientes) throws ClienteException {
         Scanner sc = new Scanner(System.in);
         ArrayList<Cliente> lista = new ArrayList<Cliente>();
-        System.out.println("Pulse 1 para buscar un empleado por el id");
-        System.out.println("Pulse 2 para buscar un empleado por el nombre");
-        System.out.println("Pulse 3 para buscar un empleado por el telefono");
-        System.out.println("Pulse 4 para buscar un empleado por el nif");
-        System.out.println("Pulse 5 para buscar un empleado por el apellido");
-        System.out.println("Pulse 6 para buscar un empleado por la direccion");
+        System.out.println("Pulse 1 para buscar un cliente por el id");
+        System.out.println("Pulse 2 para buscar un cliente por el nombre");
+        System.out.println("Pulse 3 para buscar un cliente por el telefono");
+        System.out.println("Pulse 4 para buscar un cliente por el nif");
+        System.out.println("Pulse 5 para buscar un cliente por el apellido");
+        System.out.println("Pulse 6 para buscar un cliente por la direccion");
         System.out.println("Pulse 0 para volver");
         sc.reset();
         int opcion = sc.nextInt();
 
-        try {
+     
             do {
                 switch (opcion) {
                     case 1:
@@ -366,7 +378,7 @@ public class Cliente {
                         break;
 
                     case 2:
-                        System.out.println("Introduzca el nombre del empleado que desea buscar:");
+                        System.out.println("Introduzca el nombre del cliente que desea buscar:");
                         String nombrecl = sc.nextLine(); //linea para que no se salte el nextLine()
                         nombrecl = sc.nextLine();
                         lista = buscarclientepornombre(nombrecl, clientes);
@@ -376,7 +388,7 @@ public class Cliente {
                                 System.out.println(c.getId() + "." + c.getNombre() + "." + c.getNif() + "." + c.getDireccion() + "." + c.getCuentaCorriente() + "." + c.getTelefono() + "." + c.getTarjetaCredito() + "." + c.getCuentaCorriente() + c.getClass().getSimpleName());
                             }
                         } else {
-                            System.out.println("El empleado con nombre " + nombrecl + " no se ha encontrado en el sistema.");
+                            System.out.println("El cliente con nombre " + nombrecl + " no se ha encontrado en el sistema.");
                         }
                         System.out.println("");
                         ReparacionEquipos.mostrarGestionClientes(clientes);
@@ -394,7 +406,7 @@ public class Cliente {
                                 System.out.println(c.getId() + "." + c.getNombre() + "." + c.getNif() + "." + c.getDireccion() + "." + c.getCuentaCorriente() + "." + c.getTelefono() + "." + c.getTarjetaCredito() + "." + c.getCuentaCorriente() + c.getClass().getSimpleName());
                             }
                         } else {
-                            System.out.println("El empleado con nombre " + nifcl + " no se ha encontrado en el sistema.");
+                            System.out.println("El cliente con nombre " + nifcl + " no se ha encontrado en el sistema.");
                         }
                         System.out.println("");
                         ReparacionEquipos.mostrarGestionClientes(clientes);
@@ -411,7 +423,7 @@ public class Cliente {
                                 System.out.println(c.getId() + "." + c.getNombre() + "." + c.getNif() + "." + c.getDireccion() + "." + c.getCuentaCorriente() + "." + c.getTelefono() + "." + c.getTarjetaCredito() + "." + c.getCuentaCorriente() + c.getClass().getSimpleName());
                             }
                         } else {
-                            System.out.println("El empleado con nombre " + direccioncl + " no se ha encontrado en el sistema.");
+                            System.out.println("El cliente con nombre " + direccioncl + " no se ha encontrado en el sistema.");
                         }
                         System.out.println("");
                         ReparacionEquipos.mostrarGestionClientes(clientes);
@@ -428,7 +440,7 @@ public class Cliente {
                                 System.out.println(c.getId() + "." + c.getNombre() + "." + c.getNif() + "." + c.getDireccion() + "." + c.getCuentaCorriente() + "." + c.getTelefono() + "." + c.getTarjetaCredito() + "." + c.getCuentaCorriente() + c.getClass().getSimpleName());
                             }
                         } else {
-                            System.out.println("El empleado con nombre " + tlfcl + " no se ha encontrado en el sistema.");
+                            System.out.println("El cliente con nombre " + tlfcl + " no se ha encontrado en el sistema.");
                         }
                         System.out.println("");
                         ReparacionEquipos.mostrarGestionClientes(clientes);
@@ -445,7 +457,7 @@ public class Cliente {
                                 System.out.println(c.getId() + "." + c.getNombre() + "." + c.getNif() + "." + c.getDireccion() + "." + c.getCuentaCorriente() + "." + c.getTelefono() + "." + c.getTarjetaCredito() + "." + c.getCuentaCorriente() + c.getClass().getSimpleName());
                             }
                         } else {
-                            System.out.println("El empleado con nombre " + cccl + " no se ha encontrado en el sistema.");
+                            System.out.println("El cliente con nombre " + cccl + " no se ha encontrado en el sistema.");
                         }
                         System.out.println("");
                         ReparacionEquipos.mostrarGestionClientes(clientes);
@@ -458,17 +470,11 @@ public class Cliente {
                         System.out.println("");
                 }
 
-            } while (opcion > 7 || opcion < 0);
-
-        } catch (InputMismatchException ex) {
-
-            System.out.println("El cáracter introducido no es un número entero");
-            System.out.println("");
-            buscarClientes(clientes);
+            } while (opcion > 7 || opcion < 0);        
 
         }
 
-    }
+    
 
     @Override
     public String toString() {

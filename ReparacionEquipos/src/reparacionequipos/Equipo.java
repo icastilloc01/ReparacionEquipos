@@ -144,7 +144,7 @@ public class Equipo {
         } catch (InputMismatchException ex) {
             System.out.println("El caracter introducido no es un número");
             System.out.println("");
-            buscarEquipo(equipos);
+
         }
 
     }
@@ -171,7 +171,7 @@ public class Equipo {
             }
         } catch (InputMismatchException ex) {
             System.out.println("El carácter introducido no es un número, porfavor introduzca un número");
-            buscarEquipoPorId(equipos);
+
         }
     }
 
@@ -213,7 +213,6 @@ public class Equipo {
             }
         }catch (InputMismatchException ex){
             System.out.println("El carácter introducido no es un número, porfavor introduzca un número");
-            BuscarPorPrecio(equipos);
         }
     }
 

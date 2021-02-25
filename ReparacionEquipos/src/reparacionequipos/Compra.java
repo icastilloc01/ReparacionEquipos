@@ -111,11 +111,12 @@ public class Compra extends Servicio {
         return ret + 1;
     }
     
-    public static Compra nuevaCompra() {
+    public static Compra nuevaCompra() throws CompraException {
         Compra c = new Compra();
         Scanner sc = new Scanner(System.in);
         boolean salir;
         char d;
+        try{
         do {
             c.setId(nextIdCompra());
             System.out.println("Introduzca precio de la compra:");
@@ -145,6 +146,9 @@ public class Compra extends Servicio {
             System.out.println("forma de pago"+ pago);
             salir = Utilidades.leerBoolean();
         } while (salir = false);
+        }catch(CompraException e){
+            System.out.println("Valor no válido ");
+        }
         return c;
 }
 

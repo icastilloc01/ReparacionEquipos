@@ -5,6 +5,7 @@
  */
 package reparacionequipos;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -93,7 +94,7 @@ public class Servicio {
         return ret + 1;
     }
 
-    public static Servicio nuevoServicio() {
+    public static Servicio nuevoServicio() throws ServicioException {
         Servicio s = new Servicio();
         Scanner sc = new Scanner(System.in);
         boolean salir;
@@ -118,6 +119,8 @@ public class Servicio {
             System.out.println("nota" + nota);
             salir = Utilidades.leerBoolean();
         } while (salir = false);
+        if(!ServicioException.comprobarNota(s.getNota())){
+            throw new ServicioException("La nota no es valida");}
         return s;
     }
 

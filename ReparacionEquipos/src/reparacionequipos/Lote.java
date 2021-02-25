@@ -89,5 +89,15 @@ public class Lote {
         return "Lote{" + "idLote=" + idLote + ", descuento=" + descuento + ", equipos=" + equipos + '}';
     }
     
+    public static void calcularPrecioLote(ArrayList<Equipo> equipos){
+        equipos = new ArrayList<Equipo>();
+        double precioTotal = 0.0;
+        double precio;
+        for (int i = 0;i<equipos.size();i++){
+            precio = equipos.get(i).getPrecioEquipo();
+            precioTotal = precioTotal + precio;        
+        }
+        System.out.println("El precio de su compra es:" +precioTotal);
     
+    }
 }
