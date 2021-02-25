@@ -5,7 +5,9 @@
  */
 package reparacionequipos;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -14,27 +16,27 @@ import java.util.Scanner;
  */
 public class Grupo {
 
-    private long id;
+    private long idgrupo;
     private ArrayList<Reparacion> reparaciones = new ArrayList<>();
     private ArrayList<Detaller> detalleres = new ArrayList<>();
 
     public long getId() {
-        return id;
+        return idgrupo;
     }
 
     public void setId(long id) {
-        this.id = id;
+        this.idgrupo = id;
     }
 
     public Grupo() {
     }
 
     public Grupo(long id) {
-        this.id = id;
+        this.idgrupo = id;
     }
 
     public Grupo(Grupo g) {
-        this.id = g.id;
+        this.idgrupo = g.idgrupo;
     }
 
     public ArrayList<Reparacion> getReparaciones() {
@@ -53,18 +55,42 @@ public class Grupo {
         this.detalleres = detalleres;
     }
 
-    public static Grupo nuevigrupo() {
-        Reparacion r2 = Reparacion.nuevoreparacion();
+    public static Grupo nuevogrupo() {
+        Reparacion r2 = Reparacion.listareparaciones();
         Grupo nuevogrupo = new Grupo();
         Scanner sc = new Scanner(System.in);
-        // System.out.println(" Este es tu id :" + Grupo.thenextid());
+        //Muestro el día y la hora
+        SimpleDateFormat sdf = new SimpleDateFormat(" EEEE dd MMMM yyyy(hh:mm:ss)");
+        System.out.println("Ahora es el día y la hora : " + sdf.format(new Date()));
+        //System.out.println(" Este es tu id :" + Grupo.thenextid());
+        if (nuevogrupo.getId() <= 0) {
+            throw new GrupoException("Valor no valido");
+        }
+        if (nuevogrupo.getReparaciones().isEmpty()) {
+            throw new GrupoException("Este ArrayList es un ArrayList vacío");
+        } else {
+            StringBuffer sb = new StringBuffer("Estos son los datos del arraydeReparaciones:" + nuevogrupo.getReparaciones());
+            sb.insert(sb.indexOf(" . "), " Adios");
+            System.out.println(sb);
+
+        }
+
+        if (nuevogrupo.getDetalleres().isEmpty()) {
+            throw new GrupoException("Este ArrayList es un ArrayList vacío");
+        } else {
+            StringBuffer sb = new StringBuffer("Estos son los datos del arraydeReparaciones:" + nuevogrupo.getDetalleres());
+            sb.insert(sb.indexOf(" . "), " Adios");
+            System.out.println(sb);
+
+        }
+
         //Los dos arrays de Reparaciones y Detaller, se inicializan a dos arrays vacíos.
         return nuevogrupo;
     }
 
     @Override
     public String toString() {
-        return "Grupo{" + "id=" + id + ", reparaciones=" + reparaciones + ", detalleres=" + detalleres ;
+        return "Grupo{" + "id=" + idgrupo + ", reparaciones=" + reparaciones + ", detalleres=" + detalleres;
     }
 
 }

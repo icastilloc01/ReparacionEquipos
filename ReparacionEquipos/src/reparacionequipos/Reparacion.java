@@ -5,6 +5,7 @@
  */
 package reparacionequipos;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -61,12 +62,17 @@ public class Reparacion extends Servicio {
     }
 
     public static Reparacion nuevaReparacion() {
+        SimpleDateFormat sdf = new SimpleDateFormat(" EEEE dd MMMM yyyy(hh:mm:ss)");
+        System.out.println("Ahora es el día y la hora : " + sdf.format(new Date()));
         Reparacion r = new Reparacion();
         Scanner in = new Scanner(System.in);
         boolean salir;
         do {
             System.out.println("Introduzca el id de la reparación:");
             long id = in.nextLong();
+            if (r.getIdreparacion() < 0) {
+                throw new ReparacionException("Valor inválido");
+            }
             r.setId(id);
             System.out.println("Introduzca la duración de la reparación:");
             int duracion = in.nextInt();
@@ -132,7 +138,9 @@ public class Reparacion extends Servicio {
         return ret + 1;
     }
 
-    public static Reparacion nuevoreparacion() {
+    public static Reparacion listareparaciones() {
+        SimpleDateFormat sdf = new SimpleDateFormat(" EEEE dd MMMM yyyy(hh:mm:ss)");
+        System.out.println("Ahora es el día y la hora : " + sdf.format(new Date()));
         Servicio se = Servicio.nuevoServicio();
         Mantenimiento m = Mantenimiento.nuevomantenimiento();
         Scanner sc = new Scanner(System.in);
@@ -150,6 +158,9 @@ public class Reparacion extends Servicio {
         } while (nuevoreparacion.duraciontotal <= 0);
         System.out.println("Vuelve a esribir de manera correcta las horas por favor");
         int duraciontotal = sc.nextInt();
+        if (nuevoreparacion.getDuraciontotal() <= 0) {
+            throw new ReparacionException("Valor no válido");
+        }
         nuevoreparacion.setDuraciontotal(duraciontotal);
         System.out.println("Esta reparacion se ha asignado a un grupo");
 

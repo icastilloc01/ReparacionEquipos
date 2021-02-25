@@ -5,6 +5,8 @@
  */
 package reparacionequipos;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -52,7 +54,10 @@ public class Mantenimiento extends Servicio {
      public static Mantenimiento nuevomantenimiento() {
 
         Servicio nuevoservicio = Servicio.nuevoServicio();
-        
+        boolean exit;
+        exit=false;
+        SimpleDateFormat sdf = new SimpleDateFormat(" EEEE dd MMMM yyyy(hh:mm:ss)");
+        System.out.println("Ahora es el día y la hora : " + sdf.format(new Date()));
         
         for (int i = 0; i < Utilidades.CLIENTES.length; i++) {
             Cliente s = Utilidades.CLIENTES[i];
@@ -76,6 +81,9 @@ public class Mantenimiento extends Servicio {
             }
         } while (horastrabajadas < 0);
         nuevomantenimiento.setHorastrabajadas(horastrabajadas);
+        if(nuevomantenimiento.getHorastrabajadas()<0){
+            throw new MantenimientoException("Valor introducido no válido");
+        }
         //El campo de REPARACIONES se inicializa a un ArrayList vacío.
         return nuevomantenimiento;
     }
