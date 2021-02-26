@@ -7,6 +7,7 @@ package reparacionequipos;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -50,7 +51,7 @@ public class Envio extends Servicio {
         this.lugar = lugar;
         this.repartidores = repartidores;
     }
-    
+
     //constructor de copia
     public Envio(Envio en) {
         this.idEnvio = en.idEnvio;
@@ -60,10 +61,9 @@ public class Envio extends Servicio {
         this.coste = en.coste;
         this.lugar = en.lugar;
         this.repartidores = en.repartidores;
-    } 
-    
-    //geters y seters
+    }
 
+    //geters y seters
     public long getIdEnvio() {
         return idEnvio;
     }
@@ -127,7 +127,7 @@ public class Envio extends Servicio {
     public void setRepartidores(ArrayList<Repartidor> repartidores) {
         this.repartidores = repartidores;
     }
-    
+
     public static long nextIdEnvio() {
         long ret = 0;
         for (Envio e : Utilidades.ENVIOS) {
@@ -141,18 +141,24 @@ public class Envio extends Servicio {
     public static Envio nuevoEnvio() {
         Envio nuevoEnvio = new Envio();
         Scanner in = new Scanner(System.in);
-        nuevoEnvio.idEnvio = nextIdEnvio();
-        nuevoEnvio.lugar = in.nextLine();//esta linea es para que no se salte el proximo nextLine
-        System.out.println("Introduzca la fecha de salidad del envio");
-        nuevoEnvio.fechaSalida = Utilidades.introducirFecha();
-        System.out.println("introduzca el precio del reparto");
-        nuevoEnvio.precioDeReparto = in.nextInt();
-        System.out.println("introduzca el precio total");
-        nuevoEnvio.precioTotal = in.nextDouble();
-        System.out.println("introduzca el coste");
-        nuevoEnvio.coste = in.nextDouble();
-        System.out.println("Introduce el lugar del envio");
-        nuevoEnvio.lugar = in.nextLine();
+        try {
+
+            nuevoEnvio.idEnvio = nextIdEnvio();
+            nuevoEnvio.lugar = in.nextLine();//esta linea es para que no se salte el proximo nextLine
+            System.out.println("Introduzca la fecha de salidad del envio");
+            nuevoEnvio.fechaSalida = Utilidades.introducirFecha();
+            System.out.println("introduzca el precio del reparto");
+            nuevoEnvio.precioDeReparto = in.nextInt();
+            System.out.println("introduzca el precio total");
+            nuevoEnvio.precioTotal = in.nextDouble();
+            System.out.println("introduzca el coste");
+            nuevoEnvio.coste = in.nextDouble();
+            System.out.println("Introduce el lugar del envio");
+            nuevoEnvio.lugar = in.nextLine();
+
+        } catch (InputMismatchException ex) {
+            System.out.println("El caracter introducido no es valido");
+        }
         return nuevoEnvio;
     }
 
@@ -161,10 +167,9 @@ public class Envio extends Servicio {
     public String toString() {
         return "Envio{" + "id=" + id + ", fechaSalida=" + fechaSalida + ", precioDeReparto=" + precioDeReparto + ", precioTotal=" + precioTotal + ", coste=" + coste + ", lugar=" + lugar + ", repartidores=" + repartidores + '}';
     }
-    
-    
-    public static ArrayList<Envio> arraydeEnvio (ArrayList<Envio> lista,int[] ids){
-    
+
+    public static ArrayList<Envio> arraydeEnvio(ArrayList<Envio> lista, int[] ids) {
+
         ArrayList<Envio> ret = new ArrayList<Envio>();
         for (int i = 0; i < ids.length; i++) {
             for (int j = 0; j < lista.size(); j++) {
@@ -176,8 +181,7 @@ public class Envio extends Servicio {
         }
         return ret;
     }
-    
-        
+
     public static ArrayList<Envio> convertir(Envio[] array) {
         ArrayList<Envio> ret = new ArrayList<Envio>();
         for (Envio e : array) {
@@ -185,11 +189,5 @@ public class Envio extends Servicio {
         }
         return ret;
     }
-    
-    
-    
-    
-    }
-    
-    
 
+}
