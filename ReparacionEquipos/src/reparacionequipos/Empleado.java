@@ -122,10 +122,20 @@ public class Empleado {
         nuevoEmpleado.id = nextIdEmpleado();
         System.out.print("Introduzca el nombre del nuevo empleado: ");
         nuevoEmpleado.nombre = in.nextLine();
-        System.out.print("Introduzca el teléfono del nuevo empleado: ");
-        nuevoEmpleado.telefono = in.nextLine();
-        System.out.print("Introduzca el nif del nuevo empleado: ");
-        nuevoEmpleado.nif = in.nextLine();
+        do {
+            System.out.print("Introduzca el teléfono del nuevo empleado: ");
+            nuevoEmpleado.telefono = in.nextLine();
+            if (nuevoEmpleado.telefono.length() != 9 || Utilidades.isNumeric(nuevoEmpleado.telefono) == false) {
+                System.out.println("La cadena introducida para teléfono contiene algún caracter que no es un número o no tiene una longitud de 9 carácteres");
+            }
+        } while (nuevoEmpleado.telefono.length() != 9 || Utilidades.isNumeric(nuevoEmpleado.telefono) == false);
+        do {
+            System.out.print("Introduzca el nif del nuevo empleado: ");
+            nuevoEmpleado.nif = in.nextLine();
+            if (Utilidades.validarNIF(nuevoEmpleado.nif) == false) {
+                System.out.println("La cadena introducida no corresponde con el formato de un nif");
+            }
+        } while (Utilidades.validarNIF(nuevoEmpleado.nif) == false);
         System.out.print("Introduzca el apellido del nuevo empleado: ");
         nuevoEmpleado.apellido = in.nextLine();
         System.out.print("Introduzca la direccion del nuevo empleado: ");

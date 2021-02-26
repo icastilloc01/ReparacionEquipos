@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /*
@@ -60,6 +62,40 @@ public class Utilidades {
 
     }
 
+    public static boolean isNumeric(String cadena) {
+        boolean resultado;
+        try {
+            Integer.parseInt(cadena);
+            resultado = true;
+        } catch (NumberFormatException excepcion) {
+            resultado = false;
+        }
+
+        return resultado;
+    }
+
+    public static boolean validarNIF(String nif) {
+        boolean resultado = false;
+        Pattern pattern = Pattern.compile("(\\d{1,8})([TRWAGMYFPDXBNJZSQVHLCKEtrwagmyfpdxbnjzsqvhlcke])");
+        Matcher matcher = pattern.matcher(nif);
+        if (matcher.matches()) {
+            String letra = matcher.group(2);
+            String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+            int index = Integer.parseInt(matcher.group(1));
+            index = index % 23;
+            String reference = letras.substring(index, index + 1);
+            if (reference.equalsIgnoreCase(letra)) {
+                resultado = true;
+            } else {
+                resultado = false;
+            }
+        } else {
+            resultado = false;
+        }
+        return resultado;
+
+    }
+
     public static String removeDiacriticalMarks(String string) {
         //Form.NFC acepta ñ y distingue las tildes en español
         return Normalizer.normalize(string, Normalizer.Form.NFC)
@@ -96,7 +132,7 @@ public class Utilidades {
         new Empleado(9, "Beatriz", "874590873", "74628712U", "Garcia", "C-Los Santos 12 7ºD"),
         new Empleado(10, "Anastasia", "874875908", "12345678I", "Gomez", "C-Menendez Pelayo 5 3ºA")
     };
-    
+
     public static final int numEmpleados = EMPLEADOS.length;
 
     public static final Detaller DETALLERES[] = {
@@ -118,14 +154,14 @@ public class Utilidades {
     };
 
     public static final int numBajas = BAJAS.length;
-    
+
     public static final Sustituto SUSTITUTOS[] = {
         new Sustituto("28", false, null, EMPLEADOS[6]),
         new Sustituto("35", false, null, EMPLEADOS[7]),
         new Sustituto("32", false, null, EMPLEADOS[8]),
         new Sustituto("25", false, null, EMPLEADOS[9])
     };
-    
+
     public static final int numSustitutos = SUSTITUTOS.length;
 
     public static final Mantenimiento[] MANTENIMIENTOS = {
@@ -141,14 +177,14 @@ public class Utilidades {
 
     public static final Reparacion[] REPARACIONES = {
         //long id,int horastrabajadas
-        new Reparacion(1, 22, MANTENIMIENTOS[1],SERVICIOS[1])
+        new Reparacion(1, 22, MANTENIMIENTOS[1], SERVICIOS[1])
     };
 
     public static final int numReparaciones = REPARACIONES.length;
-    
+
     public static final Compra[] COMPRAS = {
-      //long idcompra, double preciototal, char metodoPago, ArrayList<Equipo> equipos, ArrayList<Lote> lotes
-      new Compra(1, 240.99, 'T', new ArrayList<Equipo>(), new ArrayList<Lote>(), SERVICIOS[2])
+        //long idcompra, double preciototal, char metodoPago, ArrayList<Equipo> equipos, ArrayList<Lote> lotes
+        new Compra(1, 240.99, 'T', new ArrayList<Equipo>(), new ArrayList<Lote>(), SERVICIOS[2])
     };
 
     public static final Grupo[] GRUPOS = {
