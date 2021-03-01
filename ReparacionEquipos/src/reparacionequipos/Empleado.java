@@ -5,6 +5,13 @@
  */
 package reparacionequipos;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -365,6 +372,95 @@ public class Empleado {
             }
         }
         return ret;
+    }
+
+    /**
+     * Este metodo exporta todos los datos de un objeto de tipo empleado a un
+     * fichero de texto pasado anteriormente mediante un String llamado path
+     *
+     * @param path
+     */
+    public void exportarObjetoEmpleado(String path) {
+        File fichero = new File(path);
+        FileWriter empleado = null;
+        PrintWriter buffer = null;
+        try {
+            try {
+                empleado = new FileWriter(fichero, true);
+                buffer = new PrintWriter(empleado);
+                buffer.print(this.data() + "\r\n");
+            } finally {
+                if (buffer != null) {
+                    buffer.close();
+                }
+                if (empleado != null) {
+                    empleado.close();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero");
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error en la inserción de los datos");
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error inesperado intentelo de nuevo");
+        }
+    }
+    
+    /**
+     * Este metodo exporta todos los datos de una coleccion de objetos de la clase empleado empleado a un
+     * fichero de texto pasado anteriormente mediante un String llamado path
+     * @param path 
+     */
+    public void exportarColeccionDeObjetosEmpleado(String path) {
+        ArrayList<Empleado> coleccion = new ArrayList<Empleado>();
+        File fichero = new File(path);
+        FileWriter empleado = null;
+        PrintWriter buffer = null;
+        try {
+            try {
+                empleado = new FileWriter(fichero, true);
+                buffer = new PrintWriter(empleado);
+                buffer.print(coleccion + "\r\n");
+            } finally {
+                if (buffer != null) {
+                    buffer.close();
+                }
+                if (empleado != null) {
+                    empleado.close();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero");
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error en la inserción de los datos");
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error inesperado intentelo de nuevo");
+        }
+    }
+
+    /**
+     * Este metodo exporta todos los datos de un objeto de tipo empleado a un
+     * fichero de bytes pasado anteriormente mediante un String llamado path
+     * @param path 
+     */
+    public void exportarEmpleadoaArchivoBinario(String path) {
+        try {
+            FileOutputStream fichero = new FileOutputStream(path, true);
+            ObjectOutputStream empleado = new ObjectOutputStream(fichero);
+            empleado.writeObject(this);
+            empleado.flush();
+            empleado.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero");
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error en la inserción de los datos");
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error inesperado intentelo de nuevo");
+        }
+    }
+
+    public String data() {
+        return id + '|' + nombre + '|' + telefono + '|' + nif + '|' + apellido + '|' + direccion;
     }
 
     @Override
