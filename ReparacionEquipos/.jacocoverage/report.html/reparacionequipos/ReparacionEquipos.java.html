@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ReparacionEquipos.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ReparacionEquipos&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">reparacionequipos</a> &gt; <span class="el_source">ReparacionEquipos.java</span></div><h1>ReparacionEquipos.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package reparacionequipos;
+
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+/**
+ *
+ * @author DAM105
+ */
+<span class="nc" id="L16">public class ReparacionEquipos {</span>
+
+    /**
+     * @param args the command line arguments
+     */
+    //Inicializar los datos de la clase Utilidades en ArrayLists
+<span class="nc" id="L22">    static ArrayList&lt;Empleado&gt; empleados = new ArrayList&lt;Empleado&gt;();</span>
+<span class="nc" id="L23">    static ArrayList&lt;Cliente&gt; clientes = Cliente.convertir(Utilidades.CLIENTES);</span>
+<span class="nc" id="L24">    static ArrayList&lt;Servicio&gt; servicios = Servicio.convertir(Utilidades.SERVICIOS);</span>
+<span class="nc" id="L25">    static ArrayList&lt;Equipo&gt; equipos = Equipo.convertir(Utilidades.EQUIPOS);</span>
+<span class="nc" id="L26">    static ArrayList&lt;Detaller&gt; detalleres = Detaller.convertir(Utilidades.DETALLERES);</span>
+<span class="nc" id="L27">    static ArrayList&lt;Repartidor&gt; repartidores = Repartidor.convertir(Utilidades.REPARTIDORES);</span>
+<span class="nc" id="L28">    static ArrayList&lt;Sustituto&gt; sustitutos = Sustituto.convertir(Utilidades.SUSTITUTOS);</span>
+<span class="nc" id="L29">    static ArrayList&lt;Baja&gt; bajas = Baja.convertir(Utilidades.BAJAS);</span>
+    
+    public static void main(String[] args) {
+        //Anadir al ArrayList de empleados los datos de los empleados de tipo Detalleres, Repartidores, Sustitutos
+<span class="nc" id="L33">        empleados.addAll(detalleres);</span>
+<span class="nc" id="L34">        empleados.addAll(repartidores);</span>
+<span class="nc" id="L35">        empleados.addAll(sustitutos);</span>
+        
+<span class="nc" id="L37">        System.out.println(&quot;Escribe el path&quot;);</span>
+<span class="nc" id="L38">        Scanner in = new Scanner(System.in);</span>
+<span class="nc" id="L39">        String path = in.nextLine();</span>
+<span class="nc" id="L40">        Empleado e = new Empleado();</span>
+<span class="nc" id="L41">        e.exportarColeccionDeObjetosEmpleado(path);</span>
+        
+        //Comienzo del menu
+<span class="nc" id="L44">        mostrarMenuPrincipal();        </span>
+<span class="nc" id="L45">    }</span>
+
+    public static void mostrarMenuPrincipal() {
+<span class="nc" id="L48">        System.out.println(&quot;Pulse 1 para gestionar clientes&quot;);</span>
+<span class="nc" id="L49">        System.out.println(&quot;Pulse 2 para gestionar Equipos&quot;);</span>
+<span class="nc" id="L50">        System.out.println(&quot;Pulse 3 para gestionar Empleados&quot;);</span>
+<span class="nc" id="L51">        System.out.println(&quot;Pulse 4 para gestionar Servicios&quot;);</span>
+<span class="nc" id="L52">        System.out.println(&quot;Pulse 0 para salir&quot;);</span>
+<span class="nc" id="L53">        Scanner in = new Scanner(System.in);</span>
+        int opcion;
+        try {
+            do {
+<span class="nc" id="L57">                in.reset();</span>
+<span class="nc" id="L58">                opcion = in.nextInt();</span>
+<span class="nc bnc" id="L59" title="All 6 branches missed.">                switch (opcion) {</span>
+                    case 1:
+<span class="nc" id="L61">                        mostrarGestionClientes(clientes);</span>
+<span class="nc" id="L62">                        mostrarMenuPrincipal();</span>
+<span class="nc" id="L63">                        break;</span>
+                    case 2:
+<span class="nc" id="L65">                        mostrarGestionEquipos(equipos);</span>
+<span class="nc" id="L66">                        mostrarMenuPrincipal();</span>
+<span class="nc" id="L67">                        break;</span>
+                    case 3:
+<span class="nc" id="L69">                        mostrarGestionEmpleados(empleados);</span>
+<span class="nc" id="L70">                        mostrarMenuPrincipal();</span>
+<span class="nc" id="L71">                        break;</span>
+                    case 4:
+<span class="nc" id="L73">                        mostrarGestionServicios(servicios);</span>
+<span class="nc" id="L74">                        mostrarMenuPrincipal();</span>
+<span class="nc" id="L75">                        break;</span>
+                    case 0:
+<span class="nc" id="L77">                        System.exit(0);</span>
+<span class="nc" id="L78">                        break;</span>
+                    default:
+<span class="nc" id="L80">                        System.out.println(&quot;Ha introducido un numero que no va del 0 al 4&quot;);</span>
+<span class="nc" id="L81">                        System.out.println(&quot;&quot;);</span>
+                }
+<span class="nc bnc" id="L83" title="All 4 branches missed.">            } while (opcion &gt; 4 || opcion &lt; 0);</span>
+<span class="nc" id="L84">        } catch (InputMismatchException ex) {</span>
+<span class="nc" id="L85">            System.out.println(&quot;El caracter introducido no es un número&quot;);</span>
+<span class="nc" id="L86">            System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L87">        }</span>
+<span class="nc" id="L88">    }</span>
+
+    public static void mostrarGestionClientes(ArrayList&lt;Cliente&gt; clientes) {
+<span class="nc" id="L91">        System.out.println(&quot;Pulse 1 para ver los clientes&quot;);</span>
+<span class="nc" id="L92">        System.out.println(&quot;Pulse 2 para registrar un nuevo cliente&quot;);</span>
+<span class="nc" id="L93">        System.out.println(&quot;Pulse 3 para buscar un cliente&quot;);</span>
+<span class="nc" id="L94">        System.out.println(&quot;Pulse 0 para volver&quot;);</span>
+<span class="nc" id="L95">        Scanner in = new Scanner(System.in);</span>
+        int op1;
+        try {
+            do {
+<span class="nc" id="L99">                in.reset();</span>
+<span class="nc" id="L100">                op1 = in.nextInt();</span>
+<span class="nc bnc" id="L101" title="All 5 branches missed.">                switch (op1) {</span>
+                    case 1:
+<span class="nc" id="L103">                        Cliente.verClientes(clientes);</span>
+<span class="nc" id="L104">                        mostrarGestionClientes(clientes);</span>
+<span class="nc" id="L105">                        break;</span>
+                    case 2:
+<span class="nc" id="L107">                        Cliente nuevoCliente = Cliente.nuevoCliente();</span>
+<span class="nc" id="L108">                        clientes.add(nuevoCliente);</span>
+<span class="nc" id="L109">                        mostrarGestionClientes(clientes);</span>
+<span class="nc" id="L110">                        break;</span>
+                    case 3:
+<span class="nc" id="L112">                        Cliente.buscarClientes(clientes);</span>
+<span class="nc" id="L113">                        mostrarGestionClientes(clientes);</span>
+<span class="nc" id="L114">                        break;</span>
+                    case 0:
+<span class="nc" id="L116">                        mostrarMenuPrincipal();</span>
+<span class="nc" id="L117">                        break;</span>
+                    default:
+<span class="nc" id="L119">                        System.out.println(&quot;Ha introducido un numero que no va del 0 al 3&quot;);</span>
+<span class="nc" id="L120">                        System.out.println(&quot;&quot;);</span>
+                }
+
+<span class="nc bnc" id="L123" title="All 4 branches missed.">            } while (op1 &gt; 3 || op1 &lt; 0);</span>
+<span class="nc" id="L124">        } catch (InputMismatchException ex) {</span>
+<span class="nc" id="L125">            System.out.println(&quot;El caracter introducido no es un número&quot;);</span>
+<span class="nc" id="L126">            System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L127">        }</span>
+<span class="nc" id="L128">    }</span>
+
+    public static void mostrarGestionEquipos(ArrayList&lt;Equipo&gt; equipos) {
+<span class="nc" id="L131">        ArrayList&lt;Empleado&gt; empleados = new ArrayList&lt;Empleado&gt;();</span>
+<span class="nc" id="L132">        System.out.println(&quot;Pulse 1 para ver los equipos&quot;);</span>
+<span class="nc" id="L133">        System.out.println(&quot;Pulse 2 para registrar un nuevo equipo&quot;);</span>
+<span class="nc" id="L134">        System.out.println(&quot;Pulse 3 para buscar un equipo&quot;);</span>
+<span class="nc" id="L135">        System.out.println(&quot;Pulse 0 para volver&quot;);</span>
+<span class="nc" id="L136">        Scanner in = new Scanner(System.in);</span>
+        int op2;
+        try {
+            do {
+<span class="nc" id="L140">                in.reset();</span>
+<span class="nc" id="L141">                op2 = in.nextInt();</span>
+<span class="nc bnc" id="L142" title="All 5 branches missed.">                switch (op2) {</span>
+                    case 1:
+<span class="nc" id="L144">                        Equipo.verEquipo(equipos);</span>
+<span class="nc" id="L145">                        mostrarGestionEquipos(equipos);</span>
+<span class="nc" id="L146">                        break;</span>
+                    case 2:
+<span class="nc" id="L148">                        Equipo nuevoEquipo = Equipo.nuevoEquipo();</span>
+<span class="nc" id="L149">                        equipos.add(nuevoEquipo);</span>
+<span class="nc" id="L150">                        mostrarGestionEquipos(equipos);</span>
+<span class="nc" id="L151">                        break;</span>
+                    case 3:
+<span class="nc" id="L153">                        Equipo.buscarEquipo(equipos);</span>
+<span class="nc" id="L154">                        mostrarGestionEquipos(equipos);</span>
+<span class="nc" id="L155">                        break;</span>
+                    case 0:
+<span class="nc" id="L157">                        mostrarMenuPrincipal();</span>
+<span class="nc" id="L158">                        break;</span>
+                    default:
+<span class="nc" id="L160">                        System.out.println(&quot;Ha introducido un numero que no va del 0 al 3&quot;);</span>
+<span class="nc" id="L161">                        System.out.println(&quot;&quot;);</span>
+                }
+
+<span class="nc bnc" id="L164" title="All 4 branches missed.">            } while (op2 &gt; 3 || op2 &lt; 0);</span>
+<span class="nc" id="L165">        } catch (InputMismatchException ex) {</span>
+<span class="nc" id="L166">            System.out.println(&quot;El caracter introducido no es un número&quot;);</span>
+<span class="nc" id="L167">            System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L168">        }</span>
+<span class="nc" id="L169">    }</span>
+
+    public static void mostrarGestionEmpleados(ArrayList&lt;Empleado&gt; empleados) {
+<span class="nc" id="L172">        System.out.println(&quot;Pulse 1 para ver los empleados&quot;);</span>
+<span class="nc" id="L173">        System.out.println(&quot;Pulse 2 para registrar un nuevo empleado&quot;);</span>
+<span class="nc" id="L174">        System.out.println(&quot;Pulse 3 para buscar un empleado&quot;);</span>
+<span class="nc" id="L175">        System.out.println(&quot;Pulse 4 para cubrir una baja&quot;);</span>
+<span class="nc" id="L176">        System.out.println(&quot;Pulse 5 para comprobar las bajas que los sustitutos cubren&quot;);</span>
+<span class="nc" id="L177">        System.out.println(&quot;Pulse 0 para volver&quot;);</span>
+<span class="nc" id="L178">        Scanner in = new Scanner(System.in);</span>
+        int op3;
+        try {
+            do {
+<span class="nc" id="L182">                in.reset();</span>
+<span class="nc" id="L183">                op3 = in.nextInt();</span>
+<span class="nc bnc" id="L184" title="All 7 branches missed.">                switch (op3) {</span>
+                    case 1:
+<span class="nc" id="L186">                        Empleado.verEmpleado(empleados);</span>
+<span class="nc" id="L187">                        mostrarGestionEmpleados(empleados);</span>
+<span class="nc" id="L188">                        break;</span>
+                    case 2:
+<span class="nc" id="L190">                        mostrarTiposEmpleados(empleados);</span>
+<span class="nc" id="L191">                        mostrarGestionEmpleados(empleados);</span>
+<span class="nc" id="L192">                        break;</span>
+                    case 3:
+<span class="nc" id="L194">                        Empleado.buscarEmpleado(empleados);</span>
+<span class="nc" id="L195">                        mostrarGestionEmpleados(empleados);</span>
+<span class="nc" id="L196">                        break;</span>
+                    case 4:
+<span class="nc" id="L198">                        Sustituto.cubrirBaja(bajas, sustitutos, empleados);</span>
+<span class="nc" id="L199">                        empleados.addAll(sustitutos);</span>
+<span class="nc" id="L200">                        mostrarGestionEmpleados(empleados);</span>
+<span class="nc" id="L201">                        break;</span>
+                    case 5:
+<span class="nc" id="L203">                        Sustituto.verSustitutoCubreBaja(sustitutos);</span>
+<span class="nc" id="L204">                        mostrarGestionEmpleados(empleados);</span>
+<span class="nc" id="L205">                        break;</span>
+                    case 0:
+<span class="nc" id="L207">                        mostrarMenuPrincipal();</span>
+<span class="nc" id="L208">                        break;</span>
+                    default:
+<span class="nc" id="L210">                        System.out.println(&quot;Ha introducido un numero que no va del 0 al 4&quot;);</span>
+<span class="nc" id="L211">                        System.out.println(&quot;&quot;);</span>
+                }
+
+<span class="nc bnc" id="L214" title="All 4 branches missed.">            } while (op3 &gt; 4 || op3 &lt; 0);</span>
+<span class="nc" id="L215">        } catch (InputMismatchException ex) {</span>
+<span class="nc" id="L216">            System.out.println(&quot;El caracter introducido no es un número&quot;);</span>
+<span class="nc" id="L217">            System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L218">        }</span>
+<span class="nc" id="L219">    }</span>
+
+    public static void mostrarTiposEmpleados(ArrayList&lt;Empleado&gt; empleados) {
+<span class="nc" id="L222">        System.out.println(&quot;Pulse 1 para registrar un nuevo empleado de taller&quot;);</span>
+<span class="nc" id="L223">        System.out.println(&quot;Pulse 2 para registrar un nuevo empleado repartidor&quot;);</span>
+<span class="nc" id="L224">        System.out.println(&quot;Pulse 3 para registrar un nuevo empleado sustituto&quot;);</span>
+<span class="nc" id="L225">        System.out.println(&quot;Pulse 0 para volver&quot;);</span>
+<span class="nc" id="L226">        Scanner in = new Scanner(System.in);</span>
+        int emp;
+        try {
+            do {
+<span class="nc" id="L230">                in.reset();</span>
+<span class="nc" id="L231">                emp = in.nextInt();</span>
+<span class="nc bnc" id="L232" title="All 5 branches missed.">                switch (emp) {</span>
+                    case 1:
+<span class="nc" id="L234">                        Detaller nuevoDetaller = Detaller.nuevoDetaller();</span>
+<span class="nc" id="L235">                        empleados.add(nuevoDetaller);</span>
+<span class="nc" id="L236">                        mostrarTiposEmpleados(empleados);</span>
+<span class="nc" id="L237">                        break;</span>
+                    case 2:
+<span class="nc" id="L239">                        Repartidor nuevoRepartidor = Repartidor.nuevoRepartidor();</span>
+<span class="nc" id="L240">                        empleados.add(nuevoRepartidor);</span>
+<span class="nc" id="L241">                        mostrarTiposEmpleados(empleados);</span>
+<span class="nc" id="L242">                        break;</span>
+                    case 3:
+<span class="nc" id="L244">                        Sustituto nuevoSustituto = Sustituto.nuevoSustituto();</span>
+<span class="nc" id="L245">                        empleados.add(nuevoSustituto);</span>
+<span class="nc" id="L246">                        mostrarTiposEmpleados(empleados);</span>
+<span class="nc" id="L247">                        break;</span>
+                    case 0:
+<span class="nc" id="L249">                        mostrarGestionEmpleados(empleados);</span>
+<span class="nc" id="L250">                        break;</span>
+                    default:
+<span class="nc" id="L252">                        System.out.println(&quot;Ha introducido un numero que no va del 0 al 3&quot;);</span>
+<span class="nc" id="L253">                        System.out.println(&quot;&quot;);</span>
+                }
+
+<span class="nc bnc" id="L256" title="All 4 branches missed.">            } while (emp &gt; 3 || emp &lt; 0);</span>
+<span class="nc" id="L257">        } catch (InputMismatchException ex) {</span>
+<span class="nc" id="L258">            System.out.println(&quot;El caracter introducido no es un número&quot;);</span>
+<span class="nc" id="L259">            System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L260">        }</span>
+<span class="nc" id="L261">    }</span>
+
+    public static void mostrarGestionServicios(ArrayList&lt;Servicio&gt; servicios) {
+<span class="nc" id="L264">        System.out.println(&quot;Pulse 1 para registrar una nueva compra&quot;);</span>
+<span class="nc" id="L265">        System.out.println(&quot;Pulse 2 para registrar una nueva reparacion&quot;);</span>
+<span class="nc" id="L266">        System.out.println(&quot;Pulse 3 para registrar un nuevo envio&quot;);</span>
+<span class="nc" id="L267">        System.out.println(&quot;Pulse 0 para volver&quot;);</span>
+<span class="nc" id="L268">        Scanner in = new Scanner(System.in);</span>
+        int op4;
+        try {
+            do {
+<span class="nc" id="L272">                in.reset();</span>
+<span class="nc" id="L273">                op4 = in.nextInt();</span>
+<span class="nc bnc" id="L274" title="All 5 branches missed.">                switch (op4) {</span>
+                    case 1:
+<span class="nc" id="L276">                        Compra nuevaCompra = Compra.nuevaCompra();</span>
+<span class="nc" id="L277">                        servicios.add(nuevaCompra);</span>
+<span class="nc" id="L278">                        mostrarGestionServicios(servicios);</span>
+<span class="nc" id="L279">                        break;</span>
+                    case 2:
+<span class="nc" id="L281">                        Reparacion nuevaReparacion = Reparacion.nuevaReparacion();</span>
+<span class="nc" id="L282">                        servicios.add(nuevaReparacion);</span>
+<span class="nc" id="L283">                        mostrarGestionServicios(servicios);</span>
+<span class="nc" id="L284">                        break;</span>
+                    case 3:
+<span class="nc" id="L286">                        Envio nuevoEnvio = Envio.nuevoEnvio();</span>
+<span class="nc" id="L287">                        servicios.add(nuevoEnvio);</span>
+<span class="nc" id="L288">                        mostrarGestionServicios(servicios);</span>
+<span class="nc" id="L289">                        break;</span>
+                    case 0:
+<span class="nc" id="L291">                        mostrarMenuPrincipal();</span>
+<span class="nc" id="L292">                        break;</span>
+                    default:
+<span class="nc" id="L294">                        System.out.println(&quot;Ha introducido un numero que no va del 0 al 3&quot;);</span>
+<span class="nc" id="L295">                        System.out.println(&quot;&quot;);</span>
+                }
+
+<span class="nc bnc" id="L298" title="All 4 branches missed.">            } while (op4 &gt; 3 || op4 &lt; 0);</span>
+<span class="nc" id="L299">        } catch (InputMismatchException ex) {</span>
+<span class="nc" id="L300">            System.out.println(&quot;El caracter introducido no es un número&quot;);</span>
+<span class="nc" id="L301">            System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L302">        }</span>
+<span class="nc" id="L303">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

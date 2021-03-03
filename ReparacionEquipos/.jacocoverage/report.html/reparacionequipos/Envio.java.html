@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Envio.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ReparacionEquipos&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">reparacionequipos</a> &gt; <span class="el_source">Envio.java</span></div><h1>Envio.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package reparacionequipos;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+/**
+ *
+ * @author PC_Alba
+ */
+public class Envio extends Servicio {
+
+    private long idEnvio;
+    private Date fechaSalida;
+    private int precioDeReparto;
+    private double precioTotal;
+    private double coste;
+    private String lugar;
+<span class="nc" id="L25">    private ArrayList&lt;Repartidor&gt; repartidores = new ArrayList&lt;&gt;();</span>
+
+    //constructor por defecto
+    public Envio() {
+<span class="nc" id="L29">        super();</span>
+<span class="nc" id="L30">    }</span>
+
+    //constructor por atributos
+    public Envio(long idEnvio, Date fechaSalida, int precioDeReparto, double precioTotal, double coste, String lugar, ArrayList&lt;Repartidor&gt; repartidores, long id, Date fechaServicio, String nota, ArrayList&lt;Cliente&gt; clientes) {
+<span class="nc" id="L34">        super(id, fechaServicio, nota, clientes);</span>
+<span class="nc" id="L35">        this.idEnvio = idEnvio;</span>
+<span class="nc" id="L36">        this.fechaSalida = fechaSalida;</span>
+<span class="nc" id="L37">        this.precioDeReparto = precioDeReparto;</span>
+<span class="nc" id="L38">        this.precioTotal = precioTotal;</span>
+<span class="nc" id="L39">        this.coste = coste;</span>
+<span class="nc" id="L40">        this.lugar = lugar;</span>
+<span class="nc" id="L41">        this.repartidores = repartidores;</span>
+<span class="nc" id="L42">    }</span>
+
+    public Envio(long idEnvio, Date fechaSalida, int precioDeReparto, double precioTotal, double coste, String lugar, ArrayList&lt;Repartidor&gt; repartidores, Servicio se) {
+<span class="nc" id="L45">        super(se);</span>
+<span class="nc" id="L46">        this.idEnvio = idEnvio;</span>
+<span class="nc" id="L47">        this.fechaSalida = fechaSalida;</span>
+<span class="nc" id="L48">        this.precioDeReparto = precioDeReparto;</span>
+<span class="nc" id="L49">        this.precioTotal = precioTotal;</span>
+<span class="nc" id="L50">        this.coste = coste;</span>
+<span class="nc" id="L51">        this.lugar = lugar;</span>
+<span class="nc" id="L52">        this.repartidores = repartidores;</span>
+<span class="nc" id="L53">    }</span>
+
+    //constructor de copia
+<span class="nc" id="L56">    public Envio(Envio en) {</span>
+<span class="nc" id="L57">        this.idEnvio = en.idEnvio;</span>
+<span class="nc" id="L58">        this.fechaSalida = en.fechaSalida;</span>
+<span class="nc" id="L59">        this.precioDeReparto = en.precioDeReparto;</span>
+<span class="nc" id="L60">        this.precioTotal = en.precioTotal;</span>
+<span class="nc" id="L61">        this.coste = en.coste;</span>
+<span class="nc" id="L62">        this.lugar = en.lugar;</span>
+<span class="nc" id="L63">        this.repartidores = en.repartidores;</span>
+<span class="nc" id="L64">    }</span>
+
+    //geters y seters
+    public long getIdEnvio() {
+<span class="nc" id="L68">        return idEnvio;</span>
+    }
+
+    public void setIdEnvio(long idEnvio) {
+<span class="nc" id="L72">        this.idEnvio = idEnvio;</span>
+<span class="nc" id="L73">    }</span>
+
+    public double getPrecioTotal() {
+<span class="nc" id="L76">        return precioTotal;</span>
+    }
+
+    public void setPrecioTotal(double precioTotal) {
+<span class="nc" id="L80">        this.precioTotal = precioTotal;</span>
+<span class="nc" id="L81">    }</span>
+
+    public Date getFechaSalida() {
+<span class="nc" id="L84">        return fechaSalida;</span>
+    }
+
+    public void setFechaSalida(Date fechaSalida) {
+<span class="nc" id="L88">        this.fechaSalida = fechaSalida;</span>
+<span class="nc" id="L89">    }</span>
+
+    public int getPrecioDeReparto() {
+<span class="nc" id="L92">        return precioDeReparto;</span>
+    }
+
+    public void setPrecioDeReparto(int precioDeReparto) {
+<span class="nc" id="L96">        this.precioDeReparto = precioDeReparto;</span>
+<span class="nc" id="L97">    }</span>
+
+    public double getPtrcioTotal() {
+<span class="nc" id="L100">        return precioTotal;</span>
+    }
+
+    public void setPtrcioTotal(double ptrcioTotal) {
+<span class="nc" id="L104">        this.precioTotal = ptrcioTotal;</span>
+<span class="nc" id="L105">    }</span>
+
+    public double getCoste() {
+<span class="nc" id="L108">        return coste;</span>
+    }
+
+    public void setCoste(double coste) {
+<span class="nc" id="L112">        this.coste = coste;</span>
+<span class="nc" id="L113">    }</span>
+
+    public String getLugar() {
+<span class="nc" id="L116">        return lugar;</span>
+    }
+
+    public void setLugar(String lugar) {
+<span class="nc" id="L120">        this.lugar = lugar;</span>
+<span class="nc" id="L121">    }</span>
+
+    public ArrayList&lt;Repartidor&gt; getRepartidores() {
+<span class="nc" id="L124">        return repartidores;</span>
+    }
+
+    public void setRepartidores(ArrayList&lt;Repartidor&gt; repartidores) {
+<span class="nc" id="L128">        this.repartidores = repartidores;</span>
+<span class="nc" id="L129">    }</span>
+
+    public static long nextIdEnvio() {
+<span class="nc" id="L132">        long ret = 0;</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">        for (Envio e : Utilidades.ENVIOS) {</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">            if (e.getIdEnvio() &gt; ret) {</span>
+<span class="nc" id="L135">                ret = e.getIdEnvio();</span>
+            }
+        }
+<span class="nc" id="L138">        return ret + 1;</span>
+    }
+
+    public static Envio nuevoEnvio() {
+<span class="nc" id="L142">        Envio nuevoEnvio = new Envio();</span>
+<span class="nc" id="L143">        Scanner in = new Scanner(System.in);</span>
+        try {
+
+<span class="nc" id="L146">            nuevoEnvio.idEnvio = nextIdEnvio();</span>
+<span class="nc" id="L147">            nuevoEnvio.lugar = in.nextLine();//esta linea es para que no se salte el proximo nextLine</span>
+<span class="nc" id="L148">            System.out.println(&quot;Introduzca la fecha de salidad del envio&quot;);</span>
+<span class="nc" id="L149">            nuevoEnvio.fechaSalida = Utilidades.introducirFecha();</span>
+<span class="nc" id="L150">            System.out.println(&quot;introduzca el precio del reparto&quot;);</span>
+<span class="nc" id="L151">            nuevoEnvio.precioDeReparto = in.nextInt();</span>
+<span class="nc" id="L152">            System.out.println(&quot;introduzca el precio total&quot;);</span>
+<span class="nc" id="L153">            nuevoEnvio.precioTotal = in.nextDouble();</span>
+<span class="nc" id="L154">            System.out.println(&quot;introduzca el coste&quot;);</span>
+<span class="nc" id="L155">            nuevoEnvio.coste = in.nextDouble();</span>
+<span class="nc" id="L156">            System.out.println(&quot;Introduce el lugar del envio&quot;);</span>
+<span class="nc" id="L157">            nuevoEnvio.lugar = in.nextLine();</span>
+
+<span class="nc" id="L159">        } catch (InputMismatchException ex) {</span>
+<span class="nc" id="L160">            System.out.println(&quot;El caracter introducido no es valido&quot;);</span>
+<span class="nc" id="L161">        }</span>
+<span class="nc" id="L162">        return nuevoEnvio;</span>
+    }
+
+    //metodo to string
+    @Override
+    public String toString() {
+<span class="nc" id="L168">        return &quot;Envio{&quot; + &quot;id=&quot; + id + &quot;, fechaSalida=&quot; + fechaSalida + &quot;, precioDeReparto=&quot; + precioDeReparto + &quot;, precioTotal=&quot; + precioTotal + &quot;, coste=&quot; + coste + &quot;, lugar=&quot; + lugar + &quot;, repartidores=&quot; + repartidores + '}';</span>
+    }
+
+    public static ArrayList&lt;Envio&gt; arraydeEnvio(ArrayList&lt;Envio&gt; lista, int[] ids) {
+
+<span class="nc" id="L173">        ArrayList&lt;Envio&gt; ret = new ArrayList&lt;Envio&gt;();</span>
+<span class="nc bnc" id="L174" title="All 2 branches missed.">        for (int i = 0; i &lt; ids.length; i++) {</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">            for (int j = 0; j &lt; lista.size(); j++) {</span>
+<span class="nc bnc" id="L176" title="All 2 branches missed.">                if (lista.get(j).getId() == ids[i]) {</span>
+<span class="nc" id="L177">                    ret.add((Envio) lista.get(j));</span>
+<span class="nc" id="L178">                    break;</span>
+                }
+            }
+        }
+<span class="nc" id="L182">        return ret;</span>
+    }
+
+    public static ArrayList&lt;Envio&gt; convertir(Envio[] array) {
+<span class="nc" id="L186">        ArrayList&lt;Envio&gt; ret = new ArrayList&lt;Envio&gt;();</span>
+<span class="nc bnc" id="L187" title="All 2 branches missed.">        for (Envio e : array) {</span>
+<span class="nc" id="L188">            ret.add((Envio) e);</span>
+        }
+<span class="nc" id="L190">        return ret;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

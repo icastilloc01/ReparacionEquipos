@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Repartidor.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ReparacionEquipos&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">reparacionequipos</a> &gt; <span class="el_source">Repartidor.java</span></div><h1>Repartidor.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package reparacionequipos;
+
+import java.util.ArrayList;
+
+
+
+/**
+ *
+ * @author icasc
+ */
+public class Repartidor extends Empleado {
+
+    public Repartidor() {
+<span class="nc" id="L19">        super();</span>
+<span class="nc" id="L20">    }</span>
+
+    public Repartidor(long id, String nombre, String telefono, String nif, String apellido, String dirección) {
+<span class="nc" id="L23">        super(id, nombre, telefono, nif, apellido, dirección);</span>
+<span class="nc" id="L24">    }</span>
+
+    public Repartidor(Empleado e) {
+<span class="nc" id="L27">        super(e);</span>
+<span class="nc" id="L28">    }</span>
+    
+    public static Repartidor nuevoRepartidor() {
+<span class="nc" id="L31">        Empleado e = Empleado.nuevoEmpleado();</span>
+<span class="nc" id="L32">        Repartidor nuevoRepartidor = new Repartidor();</span>
+<span class="nc" id="L33">        nuevoRepartidor.setId(e.getId());</span>
+<span class="nc" id="L34">        nuevoRepartidor.setNombre(e.getNombre());</span>
+<span class="nc" id="L35">        nuevoRepartidor.setTelefono(e.getTelefono());</span>
+<span class="nc" id="L36">        nuevoRepartidor.setNif(e.getNif());</span>
+<span class="nc" id="L37">        nuevoRepartidor.setApellido(e.getApellido());</span>
+<span class="nc" id="L38">        nuevoRepartidor.setDireccion(e.getDireccion());</span>
+<span class="nc" id="L39">        return nuevoRepartidor;</span>
+    }
+    
+    public static ArrayList&lt;Repartidor&gt; convertir(Repartidor[] array) {
+<span class="nc" id="L43">        ArrayList&lt;Repartidor&gt; ret = new ArrayList&lt;Repartidor&gt;();</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        for (Repartidor r : array) {</span>
+<span class="nc" id="L45">            ret.add((Repartidor) r);</span>
+        }
+<span class="nc" id="L47">        return ret;</span>
+    }
+    
+    public static ArrayList&lt;Repartidor&gt; arrayde(ArrayList&lt;Repartidor&gt; lista, int[] ids) {
+<span class="nc" id="L51">        ArrayList&lt;Repartidor&gt; ret = new ArrayList&lt;Repartidor&gt;();</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        for (int i = 0; i &lt; ids.length; i++) {</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">            for (int j = 0; j &lt; lista.size(); j++) {</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">                if (lista.get(j).getId() == ids[i]) {</span>
+<span class="nc" id="L55">                    ret.add((Repartidor) lista.get(ids[i]));</span>
+<span class="nc" id="L56">                    break;</span>
+                }
+            }
+        }
+<span class="nc" id="L60">        return ret;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L65">        return super.id + &quot;. &quot; + super.nombre + &quot;. &quot; + super.telefono + &quot;. &quot; + super.nif + &quot;. &quot; + super.apellido + &quot;. &quot; + super.direccion;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Baja.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ReparacionEquipos&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">reparacionequipos</a> &gt; <span class="el_source">Baja.java</span></div><h1>Baja.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package reparacionequipos;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
+
+/**
+ *
+ * @author icasc
+ */
+public class Baja {
+
+    private long id;
+    private Date fechainicio;
+    private Date fechafin;
+    private String motivo;
+    private Empleado empleado;
+
+<span class="nc" id="L24">    public Baja() {</span>
+<span class="nc" id="L25">    }</span>
+
+<span class="nc" id="L27">    public Baja(long id, Date fechainicio, Date fechafin, String motivo, Empleado empleado) {</span>
+<span class="nc" id="L28">        this.id = id;</span>
+<span class="nc" id="L29">        this.fechainicio = fechainicio;</span>
+<span class="nc" id="L30">        this.fechafin = fechafin;</span>
+<span class="nc" id="L31">        this.motivo = motivo;</span>
+<span class="nc" id="L32">        this.empleado = empleado;</span>
+<span class="nc" id="L33">    }</span>
+
+<span class="nc" id="L35">    public Baja(Baja b) {</span>
+<span class="nc" id="L36">        this.id = b.id;</span>
+<span class="nc" id="L37">        this.fechainicio = b.fechainicio;</span>
+<span class="nc" id="L38">        this.fechafin = b.fechafin;</span>
+<span class="nc" id="L39">        this.motivo = b.motivo;</span>
+<span class="nc" id="L40">        this.empleado = b.empleado;</span>
+<span class="nc" id="L41">    }</span>
+
+    public long getId() {
+<span class="nc" id="L44">        return id;</span>
+    }
+
+    public Date getFechainicio() {
+<span class="nc" id="L48">        return fechainicio;</span>
+    }
+
+    public Date getFechafin() {
+<span class="nc" id="L52">        return fechafin;</span>
+    }
+
+    public String getMotivo() {
+<span class="nc" id="L56">        return motivo;</span>
+    }
+
+    public void setId(long id) {
+<span class="nc" id="L60">        this.id = id;</span>
+<span class="nc" id="L61">    }</span>
+
+    public void setFechainicio(Date fechainicio) {
+<span class="nc" id="L64">        this.fechainicio = fechainicio;</span>
+<span class="nc" id="L65">    }</span>
+
+    public void setFechafin(Date fechafin) {
+<span class="nc" id="L68">        this.fechafin = fechafin;</span>
+<span class="nc" id="L69">    }</span>
+
+    public void setMotivo(String motivo) {
+<span class="nc" id="L72">        this.motivo = motivo;</span>
+<span class="nc" id="L73">    }</span>
+
+    public Empleado getEmpleado() {
+<span class="nc" id="L76">        return empleado;</span>
+    }
+
+    public void setEmpleado(Empleado empleado) {
+<span class="nc" id="L80">        this.empleado = empleado;</span>
+<span class="nc" id="L81">    }</span>
+
+    public static Baja nuevaBaja() {
+<span class="nc" id="L84">        Baja nuevaBaja = new Baja();</span>
+<span class="nc" id="L85">        Scanner in = new Scanner(System.in);</span>
+<span class="nc" id="L86">        System.out.print(&quot;Introduzca el id de la baja: &quot;);</span>
+<span class="nc" id="L87">        nuevaBaja.id = in.nextLong();</span>
+<span class="nc" id="L88">        nuevaBaja.motivo = in.nextLine(); //esta linea es para que no se salte el proximo nextLine</span>
+<span class="nc" id="L89">        System.out.print(&quot;Introduzca la fecha de inicio de la baja: &quot;);</span>
+<span class="nc" id="L90">        nuevaBaja.fechainicio = Utilidades.introducirFecha();</span>
+<span class="nc" id="L91">        System.out.println(&quot;Introduzca el motivo de la baja: &quot;);</span>
+<span class="nc" id="L92">        nuevaBaja.motivo = in.nextLine();</span>
+<span class="nc" id="L93">        return nuevaBaja;</span>
+    }
+    
+    public static ArrayList&lt;Baja&gt; convertir(Baja[] array) {
+<span class="nc" id="L97">        ArrayList&lt;Baja&gt; ret = new ArrayList&lt;Baja&gt;();</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">        for (Baja b : array) {</span>
+<span class="nc" id="L99">            ret.add((Baja) b);</span>
+        }
+<span class="nc" id="L101">        return ret;</span>
+    }
+    
+    @Override
+    public String toString() {
+<span class="nc" id="L106">        return &quot;Baja{&quot; + &quot;id=&quot; + id + &quot;, fechainicio=&quot; + fechainicio + &quot;, fechafin=&quot; + fechafin + &quot;, motivo=&quot; + motivo + '}';</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

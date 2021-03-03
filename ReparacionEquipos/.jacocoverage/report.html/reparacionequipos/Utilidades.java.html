@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Utilidades.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ReparacionEquipos&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">reparacionequipos</a> &gt; <span class="el_source">Utilidades.java</span></div><h1>Utilidades.java</h1><pre class="source lang-java linenums">package reparacionequipos;
+
+import java.text.Normalizer;
+import java.text.ParseException;
+import java.util.Scanner;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+/**
+ *
+ * @author Rxndy
+ */
+<span class="nc" id="L24">public class Utilidades {</span>
+
+<span class="nc" id="L26">    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(&quot;dd/MM/yyyy&quot;);</span>
+
+    public static Date introducirFecha() {
+
+<span class="nc" id="L30">        System.out.println(&quot;Introduzca la fecha en format dd/mm/aaaa&quot;);</span>
+<span class="nc" id="L31">        Scanner sc = new Scanner(System.in);</span>
+
+<span class="nc" id="L33">        String fechaTexto = sc.nextLine();</span>
+<span class="nc" id="L34">        SimpleDateFormat df = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;);</span>
+<span class="nc" id="L35">        Date fecha = null;</span>
+        try {
+<span class="nc" id="L37">            fecha = df.parse(fechaTexto);</span>
+<span class="nc" id="L38">        } catch (ParseException ex) {</span>
+<span class="nc" id="L39">            System.out.println(&quot;La fecha es incorrecta...\n&quot;</span>
+                    + &quot;Introduzca la fecha en formato dd/mm/aaaa&quot;);
+<span class="nc" id="L41">        }</span>
+
+<span class="nc" id="L43">        return fecha;</span>
+    }
+
+    public static boolean leerBoolean() {
+<span class="nc" id="L47">        boolean check = false;</span>
+        char r;
+<span class="nc" id="L49">        Scanner in = new Scanner(System.in);</span>
+<span class="nc" id="L50">        r = in.next().charAt(0);</span>
+<span class="nc bnc" id="L51" title="All 8 branches missed.">        while (r != 's' &amp;&amp; r != 'S' &amp;&amp; r != 'N' &amp;&amp; r != 'n') {</span>
+<span class="nc" id="L52">            System.out.println(&quot;Por favor, introduzca un carácter válido (s/n)&quot;);</span>
+<span class="nc" id="L53">            r = in.next().charAt(0);</span>
+        }
+<span class="nc bnc" id="L55" title="All 4 branches missed.">        if ((r == 's') || (r == 'S')) {</span>
+<span class="nc" id="L56">            check = true;</span>
+<span class="nc bnc" id="L57" title="All 4 branches missed.">        } else if ((r == 'n') || (r == 'N')) {</span>
+<span class="nc" id="L58">            check = false;</span>
+
+        }
+<span class="nc" id="L61">        return check;</span>
+
+    }
+
+    public static boolean isNumeric(String cadena) {
+        boolean resultado;
+        try {
+<span class="nc" id="L68">            Integer.parseInt(cadena);</span>
+<span class="nc" id="L69">            resultado = true;</span>
+<span class="nc" id="L70">        } catch (NumberFormatException excepcion) {</span>
+<span class="nc" id="L71">            resultado = false;</span>
+<span class="nc" id="L72">        }</span>
+
+<span class="nc" id="L74">        return resultado;</span>
+    }
+
+    public static boolean validarNIF(String nif) {
+<span class="nc" id="L78">        boolean resultado = false;</span>
+<span class="nc" id="L79">        Pattern pattern = Pattern.compile(&quot;(\\d{1,8})([TRWAGMYFPDXBNJZSQVHLCKEtrwagmyfpdxbnjzsqvhlcke])&quot;);</span>
+<span class="nc" id="L80">        Matcher matcher = pattern.matcher(nif);</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">        if (matcher.matches()) {</span>
+<span class="nc" id="L82">            String letra = matcher.group(2);</span>
+<span class="nc" id="L83">            String letras = &quot;TRWAGMYFPDXBNJZSQVHLCKE&quot;;</span>
+<span class="nc" id="L84">            int index = Integer.parseInt(matcher.group(1));</span>
+<span class="nc" id="L85">            index = index % 23;</span>
+<span class="nc" id="L86">            String reference = letras.substring(index, index + 1);</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">            if (reference.equalsIgnoreCase(letra)) {</span>
+<span class="nc" id="L88">                resultado = true;</span>
+            } else {
+<span class="nc" id="L90">                resultado = false;</span>
+            }
+<span class="nc" id="L92">        } else {</span>
+<span class="nc" id="L93">            resultado = false;</span>
+        }
+<span class="nc" id="L95">        return resultado;</span>
+
+    }
+
+    public static String removeDiacriticalMarks(String string) {
+        //Form.NFC acepta ñ y distingue las tildes en español
+<span class="nc" id="L101">        return Normalizer.normalize(string, Normalizer.Form.NFC)</span>
+<span class="nc" id="L102">                .replaceAll(&quot;\\p{InCombiningDiacriticalMarks}+&quot;, &quot;&quot;);</span>
+    }
+
+<span class="nc" id="L105">    public static final Cliente CLIENTES[] = {</span>
+        new Cliente(1, &quot;Pepe&quot;, &quot;74638264T&quot;, &quot;C-Los Santos 34 5ºA&quot;, &quot;608347586&quot;, &quot;874639872&quot;, &quot;ES874938376&quot;, new ArrayList&lt;Servicio&gt;()),
+        new Cliente(2, &quot;Juan&quot;, &quot;84756292G&quot;, &quot;C-San Lorenzo 24 15ºC&quot;, &quot;654783223&quot;, &quot;498398578&quot;, &quot;ES754834721&quot;, new ArrayList&lt;Servicio&gt;()),
+        new Cliente(3, &quot;Aitor&quot;, &quot;56748302F&quot;, &quot;C-Marques de valdecilla 12 3ºD&quot;, &quot;758694830&quot;, &quot;567483980&quot;, &quot;ES887499823&quot;, new ArrayList&lt;Servicio&gt;())
+    };
+
+<span class="nc" id="L111">    public static final Servicio SERVICIOS[] = {</span>
+<span class="nc" id="L112">        new Servicio(1, java.sql.Date.valueOf(LocalDate.parse(&quot;12/12/2020&quot;, dateFormatter)), &quot;El servicio se realizo con exito&quot;, Cliente.arrayde(Cliente.convertir(CLIENTES), new int[]{0, 2})),</span>
+<span class="nc" id="L113">        new Servicio(2, java.sql.Date.valueOf(LocalDate.parse(&quot;22/11/2020&quot;, dateFormatter)), &quot;El servicio se realizo con exito&quot;, Cliente.arrayde(Cliente.convertir(CLIENTES), new int[]{1, 2})),</span>
+<span class="nc" id="L114">        new Servicio(3, java.sql.Date.valueOf(LocalDate.parse(&quot;25/10/2020&quot;, dateFormatter)), &quot;El servicio se realizo con exito&quot;, Cliente.arrayde(Cliente.convertir(CLIENTES), new int[]{0, 1}))</span>
+    };
+
+<span class="nc" id="L117">    public static final Equipo EQUIPOS[] = {</span>
+        new Equipo(1, 244.99, &quot;Equipo 1&quot;),
+        new Equipo(2, 399.99, &quot;Equipo 2&quot;),
+        new Equipo(3, 495.49, &quot;Equipo 3&quot;)
+    };
+
+<span class="nc" id="L123">    public static final Empleado EMPLEADOS[] = {</span>
+        new Empleado(1, &quot;JoseManuel&quot;, &quot;785904034&quot;, &quot;78594834Y&quot;, &quot;Ramirez&quot;, &quot;C-Los Santos 23 4ºA&quot;),
+        new Empleado(2, &quot;Eustaquio&quot;, &quot;765889239&quot;, &quot;56749823R&quot;, &quot;Fernandez&quot;, &quot;C-Los Santos 45 3ºC&quot;),
+        new Empleado(3, &quot;Federico&quot;, &quot;657387298&quot;, &quot;87498923G&quot;, &quot;Garcia&quot;, &quot;C-Menendez Pelayo 3 3ºC&quot;),
+        new Empleado(4, &quot;Rigoberta&quot;, &quot;897869589&quot;, &quot;34873892F&quot;, &quot;Diaz&quot;, &quot;C-San Lorenzo 15 4ºA&quot;),
+        new Empleado(5, &quot;Anastasia&quot;, &quot;567388298&quot;, &quot;64538723H&quot;, &quot;Larios&quot;, &quot;C-Los Santos 34 10ºC&quot;),
+        new Empleado(6, &quot;Susana&quot;, &quot;756498231&quot;, &quot;76583934R&quot;, &quot;Diaz&quot;, &quot;C-Los Santos 23 5ºD&quot;),
+        new Empleado(7, &quot;Federica&quot;, &quot;875983847&quot;, &quot;92837461J&quot;, &quot;Lopez&quot;, &quot;C-San Lorenzo 13 3ºC&quot;),
+        new Empleado(8, &quot;Fernando&quot;, &quot;765874938&quot;, &quot;64830289N&quot;, &quot;Gomez&quot;, &quot;C-Los Santos 23 4ºD&quot;),
+        new Empleado(9, &quot;Beatriz&quot;, &quot;874590873&quot;, &quot;74628712U&quot;, &quot;Garcia&quot;, &quot;C-Los Santos 12 7ºD&quot;),
+        new Empleado(10, &quot;Anastasia&quot;, &quot;874875908&quot;, &quot;12345678I&quot;, &quot;Gomez&quot;, &quot;C-Menendez Pelayo 5 3ºA&quot;)
+    };
+
+<span class="nc" id="L136">    public static final int numEmpleados = EMPLEADOS.length;</span>
+
+<span class="nc" id="L138">    public static final Detaller DETALLERES[] = {</span>
+        new Detaller(false, EMPLEADOS[0]),
+        new Detaller(false, EMPLEADOS[1]),
+        new Detaller(false, EMPLEADOS[2])
+    };
+
+<span class="nc" id="L144">    public static final Repartidor REPARTIDORES[] = {</span>
+        new Repartidor(EMPLEADOS[3]),
+        new Repartidor(EMPLEADOS[4]),
+        new Repartidor(EMPLEADOS[5])
+    };
+
+<span class="nc" id="L150">    public static final Baja BAJAS[] = {</span>
+<span class="nc" id="L151">        new Baja(1, java.sql.Date.valueOf(LocalDate.parse(&quot;12/10/2020&quot;, dateFormatter)), java.sql.Date.valueOf(LocalDate.parse(&quot;05/12/2020&quot;, dateFormatter)), &quot;Cuarentena por coronavirus&quot;, EMPLEADOS[3]),</span>
+<span class="nc" id="L152">        new Baja(2, java.sql.Date.valueOf(LocalDate.parse(&quot;23/05/2020&quot;, dateFormatter)), java.sql.Date.valueOf(LocalDate.parse(&quot;16/09/2020&quot;, dateFormatter)), &quot;Ruptura de brazo&quot;, EMPLEADOS[5]),</span>
+<span class="nc" id="L153">        new Baja(3, java.sql.Date.valueOf(LocalDate.parse(&quot;04/09/2020&quot;, dateFormatter)), java.sql.Date.valueOf(LocalDate.parse(&quot;25/01/2021&quot;, dateFormatter)), &quot;Fisura de muñeca&quot;, EMPLEADOS[2])</span>
+    };
+
+<span class="nc" id="L156">    public static final int numBajas = BAJAS.length;</span>
+
+<span class="nc" id="L158">    public static final Sustituto SUSTITUTOS[] = {</span>
+        new Sustituto(&quot;28&quot;, false, null, EMPLEADOS[6]),
+        new Sustituto(&quot;35&quot;, false, null, EMPLEADOS[7]),
+        new Sustituto(&quot;32&quot;, false, null, EMPLEADOS[8]),
+        new Sustituto(&quot;25&quot;, false, null, EMPLEADOS[9])
+    };
+
+<span class="nc" id="L165">    public static final int numSustitutos = SUSTITUTOS.length;</span>
+
+<span class="nc" id="L167">    public static final Mantenimiento[] MANTENIMIENTOS = {</span>
+        //int horastrabajadas, long id, Date fechaServicio, String nota, ArrayList&lt;Cliente&gt; clientes
+        new Mantenimiento(22, 2221214, new Date(&quot;22/02/2020&quot;), &quot;Servicio de reparaciones&quot;, new ArrayList&lt;Cliente&gt;()),
+        new Mantenimiento(40, 25585526, new Date(&quot;28/05/2012&quot;), &quot;Servicio de reparaciones&quot;, new ArrayList&lt;Cliente&gt;()),
+        new Mantenimiento(25, 232584688, new Date(&quot;02/05/2014&quot;), &quot;Servicio de reparaciones&quot;, new ArrayList&lt;Cliente&gt;())
+    };
+<span class="nc" id="L173">    public static final Envio[] ENVIOS = {</span>
+        new Envio(1, new Date(&quot;22/07/2020&quot;), 20, 40.00, 20.00, &quot;C-Los olmos 23&quot;, new ArrayList&lt;Repartidor&gt;(), SERVICIOS[0])
+    };
+<span class="nc" id="L176">    public static final int numMantenimientos = MANTENIMIENTOS.length;</span>
+
+<span class="nc" id="L178">    public static final Reparacion[] REPARACIONES = {</span>
+        //long id,int horastrabajadas
+        new Reparacion(1, 22, MANTENIMIENTOS[1], SERVICIOS[1])
+    };
+
+<span class="nc" id="L183">    public static final int numReparaciones = REPARACIONES.length;</span>
+
+<span class="nc" id="L185">    public static final Compra[] COMPRAS = {</span>
+        //long idcompra, double preciototal, char metodoPago, ArrayList&lt;Equipo&gt; equipos, ArrayList&lt;Lote&gt; lotes
+        new Compra(1, 240.99, 'T', new ArrayList&lt;Equipo&gt;(), new ArrayList&lt;Lote&gt;(), SERVICIOS[2])
+    };
+
+<span class="nc" id="L190">    public static final Grupo[] GRUPOS = {</span>
+        //long id
+        new Grupo(1),
+        new Grupo(2),
+        new Grupo(3),
+        new Grupo(4),
+        new Grupo(5)
+
+    };
+
+<span class="nc" id="L200">    public static final int numGrupos = GRUPOS.length;</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

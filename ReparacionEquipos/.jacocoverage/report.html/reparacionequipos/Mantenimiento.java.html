@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Mantenimiento.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ReparacionEquipos&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">reparacionequipos</a> &gt; <span class="el_source">Mantenimiento.java</span></div><h1>Mantenimiento.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package reparacionequipos;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
+
+/**
+ *
+ * @author aitor
+ */
+public class Mantenimiento extends Servicio {
+
+    private int horastrabajadas;
+<span class="nc" id="L21">    private ArrayList&lt;Reparacion&gt; reparaciones = new ArrayList&lt;&gt;();</span>
+
+    public Mantenimiento() {
+<span class="nc" id="L24">        super();</span>
+<span class="nc" id="L25">    }</span>
+
+    public Mantenimiento(int horastrabajadas, long id, Date fechaServicio, String nota, ArrayList&lt;Cliente&gt; clientes) {
+<span class="nc" id="L28">        super(id, fechaServicio, nota, clientes);</span>
+<span class="nc" id="L29">        this.horastrabajadas = horastrabajadas;</span>
+<span class="nc" id="L30">    }</span>
+
+    public Mantenimiento(Mantenimiento m) {
+<span class="nc" id="L33">        super(m);</span>
+<span class="nc" id="L34">        this.horastrabajadas = m.horastrabajadas;</span>
+<span class="nc" id="L35">    }</span>
+
+    public int getHorastrabajadas() {
+<span class="nc" id="L38">        return horastrabajadas;</span>
+    }
+
+    public void setHorastrabajadas(int horastrabajadas) {
+<span class="nc" id="L42">        this.horastrabajadas = horastrabajadas;</span>
+<span class="nc" id="L43">    }</span>
+
+    public ArrayList&lt;Reparacion&gt; getReparaciones() {
+<span class="nc" id="L46">        return reparaciones;</span>
+    }
+
+    public void setReparaciones(ArrayList&lt;Reparacion&gt; reparaciones) {
+<span class="nc" id="L50">        this.reparaciones = reparaciones;</span>
+<span class="nc" id="L51">    }</span>
+    
+       
+     public static Mantenimiento nuevomantenimiento() {
+
+<span class="nc" id="L56">        Servicio nuevoservicio = Servicio.nuevoServicio();</span>
+        boolean exit;
+<span class="nc" id="L58">        exit=false;</span>
+<span class="nc" id="L59">        SimpleDateFormat sdf = new SimpleDateFormat(&quot; EEEE dd MMMM yyyy(hh:mm:ss)&quot;);</span>
+<span class="nc" id="L60">        System.out.println(&quot;Ahora es el día y la hora : &quot; + sdf.format(new Date()));</span>
+        
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        for (int i = 0; i &lt; Utilidades.CLIENTES.length; i++) {</span>
+<span class="nc" id="L63">            Cliente s = Utilidades.CLIENTES[i];</span>
+<span class="nc" id="L64">            System.out.println(&quot; Servicio &quot; + s.getId() + &quot;,nombre &quot; + s.getNombre());</span>
+        }
+<span class="nc" id="L66">        Mantenimiento nuevomantenimiento = new Mantenimiento();</span>
+<span class="nc" id="L67">        Scanner sc = new Scanner(System.in);</span>
+
+<span class="nc" id="L69">        int horastrabajadas = 0;</span>
+        //Long id = Mantenimiento.thenextid();
+
+        do {
+<span class="nc" id="L73">            System.out.println(&quot;Dame las horas trabajadas que has trabajado&quot;);</span>
+<span class="nc" id="L74">            horastrabajadas = sc.nextInt();</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">            if (horastrabajadas &gt;= 0) {</span>
+
+<span class="nc" id="L77">                System.out.println(&quot;Los datos introducidos son válidos&quot;);</span>
+
+            } else {
+<span class="nc" id="L80">                System.out.println(&quot;Los datos introducidos no son válidos,por favor,introduzca a continuación los datos de forma correcta.&quot;);</span>
+            }
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        } while (horastrabajadas &lt; 0);</span>
+<span class="nc" id="L83">        nuevomantenimiento.setHorastrabajadas(horastrabajadas);</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        if(nuevomantenimiento.getHorastrabajadas()&lt;0){</span>
+<span class="nc" id="L85">            throw new MantenimientoException(&quot;Valor introducido no válido&quot;);</span>
+        }
+        //El campo de REPARACIONES se inicializa a un ArrayList vacío.
+<span class="nc" id="L88">        return nuevomantenimiento;</span>
+    }
+     
+
+    @Override
+    public String toString() {
+<span class="nc" id="L94">        return &quot;Mantenimiento{&quot; + &quot;horastrabajadas=&quot; + horastrabajadas + &quot;, reparaciones=&quot; + reparaciones + '}';</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

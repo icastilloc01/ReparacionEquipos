@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Grupo.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ReparacionEquipos&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">reparacionequipos</a> &gt; <span class="el_source">Grupo.java</span></div><h1>Grupo.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package reparacionequipos;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
+
+/**
+ *
+ * @author aitor
+ */
+public class Grupo {
+
+    private long idgrupo;
+<span class="nc" id="L20">    private ArrayList&lt;Reparacion&gt; reparaciones = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L21">    private ArrayList&lt;Detaller&gt; detalleres = new ArrayList&lt;&gt;();</span>
+
+    public long getId() {
+<span class="nc" id="L24">        return idgrupo;</span>
+    }
+
+    public void setId(long id) {
+<span class="nc" id="L28">        this.idgrupo = id;</span>
+<span class="nc" id="L29">    }</span>
+
+<span class="nc" id="L31">    public Grupo() {</span>
+<span class="nc" id="L32">    }</span>
+
+<span class="nc" id="L34">    public Grupo(long id) {</span>
+<span class="nc" id="L35">        this.idgrupo = id;</span>
+<span class="nc" id="L36">    }</span>
+
+<span class="nc" id="L38">    public Grupo(Grupo g) {</span>
+<span class="nc" id="L39">        this.idgrupo = g.idgrupo;</span>
+<span class="nc" id="L40">    }</span>
+
+    public ArrayList&lt;Reparacion&gt; getReparaciones() {
+<span class="nc" id="L43">        return reparaciones;</span>
+    }
+
+    public void setReparaciones(ArrayList&lt;Reparacion&gt; reparaciones) {
+<span class="nc" id="L47">        this.reparaciones = reparaciones;</span>
+<span class="nc" id="L48">    }</span>
+
+    public ArrayList&lt;Detaller&gt; getDetalleres() {
+<span class="nc" id="L51">        return detalleres;</span>
+    }
+
+    public void setDetalleres(ArrayList&lt;Detaller&gt; detalleres) {
+<span class="nc" id="L55">        this.detalleres = detalleres;</span>
+<span class="nc" id="L56">    }</span>
+
+    public static Grupo nuevogrupo() {
+<span class="nc" id="L59">        Reparacion r2 = Reparacion.listareparaciones();</span>
+<span class="nc" id="L60">        Grupo nuevogrupo = new Grupo();</span>
+<span class="nc" id="L61">        Scanner sc = new Scanner(System.in);</span>
+        //Muestro el día y la hora
+<span class="nc" id="L63">        SimpleDateFormat sdf = new SimpleDateFormat(&quot; EEEE dd MMMM yyyy(hh:mm:ss)&quot;);</span>
+<span class="nc" id="L64">        System.out.println(&quot;Ahora es el día y la hora : &quot; + sdf.format(new Date()));</span>
+        //System.out.println(&quot; Este es tu id :&quot; + Grupo.thenextid());
+<span class="nc bnc" id="L66" title="All 2 branches missed.">        if (nuevogrupo.getId() &lt;= 0) {</span>
+<span class="nc" id="L67">            throw new GrupoException(&quot;Valor no valido&quot;);</span>
+        }
+<span class="nc bnc" id="L69" title="All 2 branches missed.">        if (nuevogrupo.getReparaciones().isEmpty()) {</span>
+<span class="nc" id="L70">            throw new GrupoException(&quot;Este ArrayList es un ArrayList vacío&quot;);</span>
+        } else {
+<span class="nc" id="L72">            StringBuffer sb = new StringBuffer(&quot;Estos son los datos del arraydeReparaciones:&quot; + nuevogrupo.getReparaciones());</span>
+<span class="nc" id="L73">            sb.insert(sb.indexOf(&quot; . &quot;), &quot; Adios&quot;);</span>
+<span class="nc" id="L74">            System.out.println(sb);</span>
+
+        }
+
+<span class="nc bnc" id="L78" title="All 2 branches missed.">        if (nuevogrupo.getDetalleres().isEmpty()) {</span>
+<span class="nc" id="L79">            throw new GrupoException(&quot;Este ArrayList es un ArrayList vacío&quot;);</span>
+        } else {
+<span class="nc" id="L81">            StringBuffer sb = new StringBuffer(&quot;Estos son los datos del arraydeReparaciones:&quot; + nuevogrupo.getDetalleres());</span>
+<span class="nc" id="L82">            sb.insert(sb.indexOf(&quot; . &quot;), &quot; Adios&quot;);</span>
+<span class="nc" id="L83">            System.out.println(sb);</span>
+
+        }
+
+        //Los dos arrays de Reparaciones y Detaller, se inicializan a dos arrays vacíos.
+<span class="nc" id="L88">        return nuevogrupo;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L93">        return &quot;Grupo{&quot; + &quot;id=&quot; + idgrupo + &quot;, reparaciones=&quot; + reparaciones + &quot;, detalleres=&quot; + detalleres;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Reparacion.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ReparacionEquipos&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">reparacionequipos</a> &gt; <span class="el_source">Reparacion.java</span></div><h1>Reparacion.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package reparacionequipos;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author aitor
+ */
+public class Reparacion extends Servicio {
+
+    private long idreparacion;
+    private int duraciontotal;
+    private Mantenimiento mantenimiento;
+
+    public void setDuraciontotal(int duraciontotal) {
+<span class="nc" id="L25">        this.duraciontotal = duraciontotal;</span>
+<span class="nc" id="L26">    }</span>
+
+    public Reparacion() {
+<span class="nc" id="L29">        super();</span>
+<span class="nc" id="L30">    }</span>
+
+    public Reparacion(long idreparacion, int duraciontotal, Mantenimiento mantenimiento, long id, Date fechaServicio, String nota, ArrayList&lt;Cliente&gt; clientes) {
+<span class="nc" id="L33">        super(id, fechaServicio, nota, clientes);</span>
+<span class="nc" id="L34">        this.idreparacion = idreparacion;</span>
+<span class="nc" id="L35">        this.duraciontotal = duraciontotal;</span>
+<span class="nc" id="L36">        this.mantenimiento = mantenimiento;</span>
+<span class="nc" id="L37">    }</span>
+
+    public Reparacion(long idreparacion, int duraciontotal, Mantenimiento mantenimiento, Servicio se) {
+<span class="nc" id="L40">        super(se);</span>
+<span class="nc" id="L41">        this.idreparacion = idreparacion;</span>
+<span class="nc" id="L42">        this.duraciontotal = duraciontotal;</span>
+<span class="nc" id="L43">        this.mantenimiento = mantenimiento;</span>
+<span class="nc" id="L44">    }</span>
+
+<span class="nc" id="L46">    public Reparacion(Reparacion e) {</span>
+<span class="nc" id="L47">        this.idreparacion = e.idreparacion;</span>
+<span class="nc" id="L48">        this.duraciontotal = e.duraciontotal;</span>
+<span class="nc" id="L49">        this.mantenimiento = e.mantenimiento;</span>
+<span class="nc" id="L50">    }</span>
+
+    public long getIdreparacion() {
+<span class="nc" id="L53">        return idreparacion;</span>
+    }
+
+    public void setIdreparacion(long idreparacion) {
+<span class="nc" id="L57">        this.idreparacion = idreparacion;</span>
+<span class="nc" id="L58">    }</span>
+
+    public int getDuraciontotal() {
+<span class="nc" id="L61">        return duraciontotal;</span>
+    }
+
+    public static Reparacion nuevaReparacion() {
+<span class="nc" id="L65">        SimpleDateFormat sdf = new SimpleDateFormat(&quot; EEEE dd MMMM yyyy(hh:mm:ss)&quot;);</span>
+<span class="nc" id="L66">        System.out.println(&quot;Ahora es el día y la hora : &quot; + sdf.format(new Date()));</span>
+<span class="nc" id="L67">        Reparacion r = new Reparacion();</span>
+<span class="nc" id="L68">        Scanner in = new Scanner(System.in);</span>
+        boolean salir;
+        do {
+<span class="nc" id="L71">            System.out.println(&quot;Introduzca el id de la reparación:&quot;);</span>
+<span class="nc" id="L72">            long id = in.nextLong();</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">            if (r.getIdreparacion() &lt; 0) {</span>
+<span class="nc" id="L74">                throw new ReparacionException(&quot;Valor inválido&quot;);</span>
+            }
+<span class="nc" id="L76">            r.setId(id);</span>
+<span class="nc" id="L77">            System.out.println(&quot;Introduzca la duración de la reparación:&quot;);</span>
+<span class="nc" id="L78">            int duracion = in.nextInt();</span>
+<span class="nc" id="L79">            r.setDuraciontotal(duracion);</span>
+<span class="nc" id="L80">            System.out.println(&quot;Son correctos los siguientes datos?(s/n):&quot;);</span>
+<span class="nc" id="L81">            System.out.println(&quot;id:&quot; + id);</span>
+<span class="nc" id="L82">            System.out.println(&quot;duracion:&quot; + duracion);</span>
+<span class="nc" id="L83">            salir = Utilidades.leerBoolean();</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        } while (salir);</span>
+
+<span class="nc" id="L86">        return r;</span>
+
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L92">        return &quot;Reparacion{&quot; + &quot;id=&quot; + id + &quot;, duraciontotal=&quot; + duraciontotal + '}';</span>
+    }
+
+<span class="nc" id="L95">    public Reparacion(long id, int duraciontotal, Mantenimiento mantenimiento) {</span>
+<span class="nc" id="L96">        this.id = id;</span>
+<span class="nc" id="L97">        this.duraciontotal = duraciontotal;</span>
+<span class="nc" id="L98">        this.mantenimiento = mantenimiento;</span>
+<span class="nc" id="L99">    }</span>
+
+    public Mantenimiento getMantenimiento() {
+<span class="nc" id="L102">        return mantenimiento;</span>
+    }
+
+    public void setMantenimiento(Mantenimiento mantenimiento) {
+<span class="nc" id="L106">        this.mantenimiento = mantenimiento;</span>
+<span class="nc" id="L107">    }</span>
+
+    public static ArrayList&lt;Reparacion&gt; arrayde(ArrayList&lt;Reparacion&gt; lista, int[] ids) {
+<span class="nc" id="L110">        ArrayList&lt;Reparacion&gt; ret = new ArrayList&lt;Reparacion&gt;();</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">        for (int i = 0; i &lt; ids.length; i++) {</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">            for (int j = 0; j &lt; lista.size(); j++) {</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">                if (lista.get(j).getId() == ids[i]) {</span>
+<span class="nc" id="L114">                    ret.add((Reparacion) lista.get(ids[i]));</span>
+<span class="nc" id="L115">                    break;</span>
+                }
+            }
+        }
+<span class="nc" id="L119">        return ret;</span>
+    }
+
+    public static ArrayList&lt;Reparacion&gt; convertir(Reparacion[] array) {
+<span class="nc" id="L123">        ArrayList&lt;Reparacion&gt; ret = new ArrayList&lt;Reparacion&gt;();</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">        for (Reparacion s : array) {</span>
+<span class="nc" id="L125">            ret.add((Reparacion) s);</span>
+        }
+<span class="nc" id="L127">        return ret;</span>
+
+    }
+
+    public static long nextIdReparacion() {
+<span class="nc" id="L132">        long ret = 0;</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">        for (Reparacion r : Utilidades.REPARACIONES) {</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">            if (r.getIdreparacion() &gt; ret) {</span>
+<span class="nc" id="L135">                ret = r.getIdreparacion();</span>
+            }
+        }
+<span class="nc" id="L138">        return ret + 1;</span>
+    }
+
+    public static Reparacion listareparaciones() {
+<span class="nc" id="L142">        SimpleDateFormat sdf = new SimpleDateFormat(&quot; EEEE dd MMMM yyyy(hh:mm:ss)&quot;);</span>
+<span class="nc" id="L143">        System.out.println(&quot;Ahora es el día y la hora : &quot; + sdf.format(new Date()));</span>
+<span class="nc" id="L144">        Servicio se = Servicio.nuevoServicio();</span>
+<span class="nc" id="L145">        Mantenimiento m = Mantenimiento.nuevomantenimiento();</span>
+<span class="nc" id="L146">        Scanner sc = new Scanner(System.in);</span>
+<span class="nc" id="L147">        Reparacion nuevoreparacion = new Reparacion();</span>
+<span class="nc" id="L148">        nuevoreparacion.idreparacion = nextIdReparacion();</span>
+<span class="nc" id="L149">        System.out.println(&quot; Muestráme las horas que has trabajado :&quot;);</span>
+        do {
+<span class="nc" id="L151">            int duraciontotal = sc.nextInt();</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">            if (duraciontotal &gt; 0) {</span>
+<span class="nc" id="L153">                System.out.println(&quot;Los datos son validos&quot;);</span>
+
+            } else {
+<span class="nc" id="L156">                System.out.println(&quot;Los datos no son validos&quot;);</span>
+            }
+<span class="nc bnc" id="L158" title="All 2 branches missed.">        } while (nuevoreparacion.duraciontotal &lt;= 0);</span>
+<span class="nc" id="L159">        System.out.println(&quot;Vuelve a esribir de manera correcta las horas por favor&quot;);</span>
+<span class="nc" id="L160">        int duraciontotal = sc.nextInt();</span>
+<span class="nc bnc" id="L161" title="All 2 branches missed.">        if (nuevoreparacion.getDuraciontotal() &lt;= 0) {</span>
+<span class="nc" id="L162">            throw new ReparacionException(&quot;Valor no válido&quot;);</span>
+        }
+<span class="nc" id="L164">        nuevoreparacion.setDuraciontotal(duraciontotal);</span>
+<span class="nc" id="L165">        System.out.println(&quot;Esta reparacion se ha asignado a un grupo&quot;);</span>
+
+<span class="nc" id="L167">        return nuevoreparacion;</span>
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

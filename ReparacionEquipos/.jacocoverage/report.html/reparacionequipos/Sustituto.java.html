@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Sustituto.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ReparacionEquipos&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">reparacionequipos</a> &gt; <span class="el_source">Sustituto.java</span></div><h1>Sustituto.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package reparacionequipos;
+
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+/**
+ *
+ * @author icasc
+ */
+public class Sustituto extends Empleado {
+
+    private String edad;
+    private boolean exclusionsocial;
+<span class="nc" id="L20">    private Baja baja = null;</span>
+
+    public Sustituto() {
+<span class="nc" id="L23">        super();</span>
+<span class="nc" id="L24">    }</span>
+
+    public Sustituto(String edad, boolean exclusiónsocial, Baja baja, long id, String nombre, String telefono, String nif, String apellido, String direccion) {
+<span class="nc" id="L27">        super(id, nombre, telefono, nif, apellido, direccion);</span>
+<span class="nc" id="L28">        this.edad = edad;</span>
+<span class="nc" id="L29">        this.exclusionsocial = exclusiónsocial;</span>
+<span class="nc" id="L30">        this.baja = baja;</span>
+<span class="nc" id="L31">    }</span>
+
+    public Sustituto(String edad, boolean exclusiónsocial, Baja baja, Empleado e) {
+<span class="nc" id="L34">        super(e);</span>
+<span class="nc" id="L35">        this.edad = edad;</span>
+<span class="nc" id="L36">        this.exclusionsocial = exclusiónsocial;</span>
+<span class="nc" id="L37">        this.baja = baja;</span>
+<span class="nc" id="L38">    }</span>
+
+<span class="nc" id="L40">    public Sustituto(String edad, boolean exclusiónsocial, Baja baja) {</span>
+<span class="nc" id="L41">        this.edad = edad;</span>
+<span class="nc" id="L42">        this.exclusionsocial = exclusiónsocial;</span>
+<span class="nc" id="L43">        this.baja = baja;</span>
+<span class="nc" id="L44">    }</span>
+
+<span class="nc" id="L46">    public Sustituto(Sustituto s) {</span>
+<span class="nc" id="L47">        this.edad = s.edad;</span>
+<span class="nc" id="L48">        this.exclusionsocial = s.exclusionsocial;</span>
+<span class="nc" id="L49">        this.baja = s.baja;</span>
+<span class="nc" id="L50">    }</span>
+
+    public String getEdad() {
+<span class="nc" id="L53">        return edad;</span>
+    }
+
+    public boolean isExclusionsocial() {
+<span class="nc" id="L57">        return exclusionsocial;</span>
+    }
+
+    public void setEdad(String edad) {
+<span class="nc" id="L61">        this.edad = edad;</span>
+<span class="nc" id="L62">    }</span>
+
+    public void setExclusionsocial(boolean exclusionsocial) {
+<span class="nc" id="L65">        this.exclusionsocial = exclusionsocial;</span>
+<span class="nc" id="L66">    }</span>
+
+    public Baja getBaja() {
+<span class="nc" id="L69">        return baja;</span>
+    }
+
+    public void setBaja(Baja baja) {
+<span class="nc" id="L73">        this.baja = baja;</span>
+<span class="nc" id="L74">    }</span>
+
+    public static ArrayList&lt;Sustituto&gt; arrayde(ArrayList&lt;Sustituto&gt; lista, int[] ids) {
+<span class="nc" id="L77">        ArrayList&lt;Sustituto&gt; ret = new ArrayList&lt;Sustituto&gt;();</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">        for (int i = 0; i &lt; ids.length; i++) {</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">            for (int j = 0; j &lt; lista.size(); j++) {</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">                if (lista.get(j).getId() == ids[i]) {</span>
+<span class="nc" id="L81">                    ret.add((Sustituto) lista.get(j));</span>
+<span class="nc" id="L82">                    break;</span>
+                }
+            }
+        }
+<span class="nc" id="L86">        return ret;</span>
+    }
+
+    public static ArrayList&lt;Sustituto&gt; convertir(Sustituto[] array) {
+<span class="nc" id="L90">        ArrayList&lt;Sustituto&gt; ret = new ArrayList&lt;Sustituto&gt;();</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">        for (Sustituto s : array) {</span>
+<span class="nc" id="L92">            ret.add((Sustituto) s);</span>
+        }
+<span class="nc" id="L94">        return ret;</span>
+    }
+
+    public static Sustituto nuevoSustituto() {
+<span class="nc" id="L98">        Sustituto nuevoSustituto = new Sustituto();</span>
+<span class="nc" id="L99">        Empleado e = Empleado.nuevoEmpleado();</span>
+<span class="nc" id="L100">        nuevoSustituto.setId(e.getId());</span>
+<span class="nc" id="L101">        nuevoSustituto.setNombre(e.getNombre());</span>
+<span class="nc" id="L102">        nuevoSustituto.setTelefono(e.getTelefono());</span>
+<span class="nc" id="L103">        nuevoSustituto.setNif(e.getNif());</span>
+<span class="nc" id="L104">        nuevoSustituto.setApellido(e.getApellido());</span>
+<span class="nc" id="L105">        nuevoSustituto.setDireccion(e.getDireccion());</span>
+<span class="nc" id="L106">        Scanner in = new Scanner(System.in);</span>
+<span class="nc" id="L107">        System.out.print(&quot;Introduzca la edad del nuevo sustituto: &quot;);</span>
+<span class="nc" id="L108">        nuevoSustituto.edad = in.nextLine();</span>
+<span class="nc" id="L109">        System.out.println(&quot;¿Tiene exclusión social? s/n&quot;);</span>
+<span class="nc" id="L110">        nuevoSustituto.exclusionsocial = Utilidades.leerBoolean();</span>
+<span class="nc" id="L111">        return nuevoSustituto;</span>
+    }
+
+    public static ArrayList&lt;Sustituto&gt; cubrirBaja(ArrayList&lt;Baja&gt; bajas, ArrayList&lt;Sustituto&gt; sustitutos, ArrayList&lt;Empleado&gt; empleados) {
+<span class="nc" id="L115">        Scanner in = new Scanner(System.in);</span>
+<span class="nc" id="L116">        System.out.println(&quot;Introduzca el id de la baja que quiera cubrir: &quot;);</span>
+<span class="nc" id="L117">        in.reset();</span>
+        try {
+<span class="nc" id="L119">            int idBaja = in.nextInt();</span>
+<span class="nc" id="L120">            Baja cubrir = null;</span>
+<span class="nc bnc" id="L121" title="All 4 branches missed.">            if (idBaja &lt;= 0 || idBaja &gt; Utilidades.numBajas) {</span>
+<span class="nc" id="L122">                System.out.println(&quot;El numero de id que ha introducido no corresponde con ninguna baja registrada&quot;);</span>
+<span class="nc" id="L123">                System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L124">                cubrirBaja(bajas, sustitutos, empleados);</span>
+            } else {
+<span class="nc bnc" id="L126" title="All 2 branches missed.">                for (Baja b : bajas) {</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">                    if (b.getId() == idBaja) {</span>
+<span class="nc" id="L128">                        cubrir = b;</span>
+<span class="nc" id="L129">                        break;</span>
+                    }
+<span class="nc" id="L131">                }</span>
+            }
+<span class="nc" id="L133">            System.out.println(&quot;Introduzca el id de sustituto que quiere que cubra esa baja: &quot;);</span>
+<span class="nc" id="L134">            in.reset();</span>
+<span class="nc" id="L135">            int idSustituto = in.nextInt();</span>
+<span class="nc" id="L136">            Sustituto cubridor = null;</span>
+<span class="nc bnc" id="L137" title="All 4 branches missed.">            if (idSustituto &lt;= 0 || idBaja &gt; Utilidades.numSustitutos) {</span>
+<span class="nc" id="L138">                System.out.println(&quot;El numero de id que ha introducido no corresponde con ningun sustituto registrado&quot;);</span>
+<span class="nc" id="L139">                System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L140">                cubrirBaja(bajas, sustitutos, empleados);</span>
+            } else {
+<span class="nc bnc" id="L142" title="All 2 branches missed.">                for (Sustituto s : sustitutos) {</span>
+<span class="nc bnc" id="L143" title="All 2 branches missed.">                    if (s.getId() == idSustituto) {</span>
+<span class="nc" id="L144">                        cubridor = s;</span>
+<span class="nc" id="L145">                        cubridor.setBaja(cubrir);</span>
+<span class="nc" id="L146">                        break;</span>
+                    }
+<span class="nc" id="L148">                }</span>
+            }
+<span class="nc" id="L150">            empleados.set(idSustituto - 1, cubridor);</span>
+<span class="nc" id="L151">            System.out.println(&quot;la baja&quot; + Utilidades.BAJAS[idBaja - 1] + &quot;ha sido cubierta&quot;);</span>
+<span class="nc" id="L152">        } catch (InputMismatchException ex) {</span>
+<span class="nc" id="L153">            System.out.println(&quot;El carácter introducido no es número, porfavor introduzca un número&quot;);</span>
+<span class="nc" id="L154">            cubrirBaja(bajas, sustitutos, empleados);</span>
+<span class="nc" id="L155">        }</span>
+<span class="nc" id="L156">        return sustitutos;</span>
+    }
+
+    public static void verSustitutoCubreBaja(ArrayList&lt;Sustituto&gt; sustitutos) {
+<span class="nc" id="L160">        System.out.println(&quot;En el sistema se encuentran los siguientes empleados de tipo sustituto: &quot;);</span>
+<span class="nc bnc" id="L161" title="All 2 branches missed.">        for (Sustituto s : sustitutos) {</span>
+<span class="nc" id="L162">            System.out.println(s.getId() + &quot;. &quot; + s.getApellido() + &quot;. &quot; + s.getTelefono() + &quot;. &quot; + s.getNif() + &quot;. &quot; + s.getDireccion() + &quot;. &quot; + s.getEdad() + &quot;. &quot; + s.getBaja());</span>
+<span class="nc" id="L163">        }</span>
+<span class="nc" id="L164">    }</span>
+
+    @Override
+    public String toString() {
+<span class="nc" id="L168">        return &quot;Sustituto{&quot; + &quot;edad=&quot; + edad + &quot;, exclusionsocial=&quot; + exclusionsocial + '}';</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

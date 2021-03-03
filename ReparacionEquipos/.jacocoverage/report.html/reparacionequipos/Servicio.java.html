@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Servicio.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ReparacionEquipos&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">reparacionequipos</a> &gt; <span class="el_source">Servicio.java</span></div><h1>Servicio.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package reparacionequipos;
+
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
+
+/**
+ *
+ * @author Rxndy
+ */
+public class Servicio {
+
+    protected long id;//valores validos: números positivos mayores que 0 - valor invalido: números menores o iguales que 0
+    protected Date fechaServicio;//valores validos: fechas con numeros de dia &gt;0 y &lt;31, meses &gt;0 y &lt;13 y año &gt;1900 y &lt;2021
+    protected String nota;// valores validos: cadena de caracteres con minimo de 4 letras - valor invalido: longitud de cadena menor de 4 letras
+<span class="nc" id="L22">    protected ArrayList&lt;Cliente&gt; clientes = new ArrayList&lt;&gt;();</span>
+
+<span class="nc" id="L24">    public Servicio(long id, Date fechaServicio, String nota, ArrayList&lt;Cliente&gt; clientes) {</span>
+<span class="nc" id="L25">        this.id = id;</span>
+<span class="nc" id="L26">        this.fechaServicio = fechaServicio;</span>
+<span class="nc" id="L27">        this.nota = nota;</span>
+<span class="nc" id="L28">        this.clientes = clientes;</span>
+<span class="nc" id="L29">    }</span>
+
+    public long getId() {
+<span class="nc" id="L32">        return id;</span>
+    }
+
+    public void setId(long id) {
+<span class="nc" id="L36">        this.id = id;</span>
+<span class="nc" id="L37">    }</span>
+
+    public Date getFechaServicio() {
+<span class="nc" id="L40">        return fechaServicio;</span>
+    }
+
+    public void setFechaServicio(Date fechaServicio) {
+<span class="nc" id="L44">        this.fechaServicio = fechaServicio;</span>
+<span class="nc" id="L45">    }</span>
+
+    public String getNota() {
+<span class="nc" id="L48">        return nota;</span>
+    }
+
+    public void setNota(String nota) {
+<span class="nc" id="L52">        this.nota = nota;</span>
+<span class="nc" id="L53">    }</span>
+
+    public ArrayList&lt;Cliente&gt; getClientes() {
+<span class="nc" id="L56">        return clientes;</span>
+    }
+
+    public void setClientes(ArrayList&lt;Cliente&gt; clientes) {
+<span class="nc" id="L60">        this.clientes = clientes;</span>
+<span class="nc" id="L61">    }</span>
+
+<span class="nc" id="L63">    public Servicio(Servicio se) {</span>
+<span class="nc" id="L64">        this.fechaServicio = se.getFechaServicio();</span>
+<span class="nc" id="L65">        this.id = se.getId();</span>
+<span class="nc" id="L66">        this.nota = se.getNota();</span>
+<span class="nc" id="L67">    }</span>
+
+<span class="nc" id="L69">    public Servicio() {</span>
+<span class="nc" id="L70">    }</span>
+    
+    public static long nextIdServicio() {
+<span class="nc" id="L73">        long ret = 0;</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        for (Servicio s : Utilidades.SERVICIOS) {</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">            if (s.getId() &gt; ret) {</span>
+<span class="nc" id="L76">                ret = s.getId();</span>
+            }
+        }
+<span class="nc bnc" id="L79" title="All 2 branches missed.">        for (Reparacion r : Utilidades.REPARACIONES) {</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">            if (r.getId() &gt; ret) {</span>
+<span class="nc" id="L81">                ret = r.getId();</span>
+            }
+        }
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        for (Envio e : Utilidades.ENVIOS) {</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">            if (e.getId() &gt; ret) {</span>
+<span class="nc" id="L86">                ret = e.getId();</span>
+            }
+        }
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        for (Compra c : Utilidades.COMPRAS) {</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">            if (c.getId() &gt; ret) {</span>
+<span class="nc" id="L91">                ret = c.getId();</span>
+            }
+        }
+<span class="nc" id="L94">        return ret + 1;</span>
+    }
+
+    public static Servicio nuevoServicio() throws ServicioException {
+<span class="nc" id="L98">        Servicio s = new Servicio();</span>
+<span class="nc" id="L99">        Scanner sc = new Scanner(System.in);</span>
+        boolean salir;
+        do {
+<span class="nc" id="L102">            s.setId(nextIdServicio());</span>
+<span class="nc" id="L103">            System.out.println(&quot;Introduzca nota de servicio:&quot;);</span>
+<span class="nc" id="L104">            String nota = sc.nextLine();</span>
+<span class="nc" id="L105">            s.setNota(nota);</span>
+<span class="nc" id="L106">            System.out.println(&quot;Introduzca fecha del servicio:&quot;);</span>
+<span class="nc" id="L107">            Date fecha = Utilidades.introducirFecha();</span>
+<span class="nc" id="L108">            System.out.println(&quot;Quiere Introducir un nuevo Cliente? s/n &quot;);</span>
+            boolean p;
+<span class="nc" id="L110">            p = Utilidades.leerBoolean();</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">            while (p) {</span>
+<span class="nc" id="L112">                s.clientes.add(Cliente.nuevoCliente());</span>
+<span class="nc" id="L113">                System.out.println(&quot;Quiere Introducir otro Cliente? s/n &quot;);</span>
+<span class="nc" id="L114">                p = Utilidades.leerBoolean();</span>
+            }
+
+<span class="nc" id="L117">            System.out.println(&quot;Son correctos los siguiente datos?(s/n)&quot;);</span>
+<span class="nc" id="L118">            System.out.println(&quot;fecha:&quot; + fecha);</span>
+<span class="nc" id="L119">            System.out.println(&quot;nota&quot; + nota);</span>
+<span class="nc" id="L120">            salir = Utilidades.leerBoolean();</span>
+<span class="nc bnc" id="L121" title="All 2 branches missed.">        } while (salir = false);</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">        if(!ServicioException.comprobarNota(s.getNota())){</span>
+<span class="nc" id="L123">            throw new ServicioException(&quot;La nota no es valida&quot;);}</span>
+<span class="nc" id="L124">        return s;</span>
+    }
+
+    public static ArrayList&lt;Servicio&gt; arraydeServicio(ArrayList&lt;Servicio&gt; lista, int[] ids) {
+<span class="nc" id="L128">        ArrayList&lt;Servicio&gt; ret = new ArrayList&lt;Servicio&gt;();</span>
+<span class="nc bnc" id="L129" title="All 2 branches missed.">        for (int i = 0; i &lt; ids.length; i++) {</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">            for (int j = 0; j &lt; lista.size(); j++) {</span>
+<span class="nc bnc" id="L131" title="All 2 branches missed.">                if (lista.get(j).getId() == ids[i]) {</span>
+<span class="nc" id="L132">                    ret.add((Servicio) lista.get(ids[i]));</span>
+<span class="nc" id="L133">                    break;</span>
+                }
+            }
+        }
+<span class="nc" id="L137">        return ret;</span>
+    }
+
+    public static ArrayList&lt;Servicio&gt; convertir(Servicio[] array) {
+<span class="nc" id="L141">        ArrayList&lt;Servicio&gt; ret = new ArrayList&lt;Servicio&gt;();</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">        for (Servicio s : array) {</span>
+<span class="nc" id="L143">            ret.add((Servicio) s);</span>
+        }
+<span class="nc" id="L145">        return ret;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L150">        return &quot;Servicio{&quot; + &quot;id=&quot; + id + &quot;, fechaServicio=&quot; + fechaServicio + &quot;, nota=&quot; + nota + &quot;, clientes=&quot; + clientes + '}';</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

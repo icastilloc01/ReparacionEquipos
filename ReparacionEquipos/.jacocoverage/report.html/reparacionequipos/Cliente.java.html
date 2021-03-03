@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Cliente.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ReparacionEquipos&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">reparacionequipos</a> &gt; <span class="el_source">Cliente.java</span></div><h1>Cliente.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package reparacionequipos;
+
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+import static reparacionequipos.Utilidades.CLIENTES;
+
+/**
+ *
+ * @author Rxndy
+ */
+public class Cliente {
+
+    private long id; //valores validos: números positivos mayores que 0 - valor invalido: números menores o iguales que 0
+    private String nombre; //valores validos: cadenas de caracterés con mínimo de 3 letras - valor invalido: cadenas con numeros o menor de 3 letras
+    private String nif;//valores validos: cadena de caracterés con 8 números y una letra - valor invalido: cadenas con solo numeros o letras
+    private String direccion;// valores validos: cadena de caracteres con minimo de 4 letras - valor invalido: longitud de cadena menor de 4 letras
+    private String telefono;//valores validos: cadena de caracteres con 9 numeros - valor invalido: cadena menor de 9 numeros o que contenga alguna letra
+    private String tarjetaCredito;//valores validos: 9 cifras numéricas - valor invalido: menos de 9 cifras númericas o con letras
+    private String cuentaCorriente;//valores validos: 9 cifras numéricas con dos letras iniciales que indican el país - valor invalido: menos de 9 cifras o que no tenga letras
+<span class="nc" id="L26">    private ArrayList&lt;Servicio&gt; servicios = new ArrayList&lt;Servicio&gt;();//valores validos: solo onjetos de tipo Servicio</span>
+
+    //constructor por defecto
+<span class="nc" id="L29">    public Cliente() {</span>
+<span class="nc" id="L30">    }</span>
+
+    //constructor parámetros
+<span class="nc" id="L33">    public Cliente(long id, String nombre, String nif, String direccion, String telefono, String tarjetaCredito, String cuentaCorriente, ArrayList&lt;Servicio&gt; servicios){</span>
+<span class="nc" id="L34">        this.id = id;</span>
+<span class="nc" id="L35">        this.nombre = nombre;</span>
+<span class="nc" id="L36">        this.nif = nif;</span>
+<span class="nc" id="L37">        this.direccion = direccion;</span>
+<span class="nc" id="L38">        this.telefono = telefono;</span>
+<span class="nc" id="L39">        this.tarjetaCredito = tarjetaCredito;</span>
+<span class="nc" id="L40">        this.cuentaCorriente = cuentaCorriente;</span>
+<span class="nc" id="L41">        this.servicios = servicios;</span>
+<span class="nc" id="L42">    }</span>
+
+    //constructor copia
+<span class="nc" id="L45">    private Cliente(Cliente c) {</span>
+<span class="nc" id="L46">        this.id = c.id;</span>
+<span class="nc" id="L47">        this.nombre = c.nombre;</span>
+<span class="nc" id="L48">        this.nif = c.nif;</span>
+<span class="nc" id="L49">        this.direccion = c.direccion;</span>
+<span class="nc" id="L50">        this.telefono = c.telefono;</span>
+<span class="nc" id="L51">        this.tarjetaCredito = c.tarjetaCredito;</span>
+<span class="nc" id="L52">        this.cuentaCorriente = c.cuentaCorriente;</span>
+<span class="nc" id="L53">        this.servicios = c.servicios;</span>
+<span class="nc" id="L54">    }</span>
+
+    //getters and setters
+    public long getId() {
+<span class="nc" id="L58">        return id;</span>
+    }
+
+    public void setId(long id) {
+<span class="nc" id="L62">        this.id = id;</span>
+<span class="nc" id="L63">    }</span>
+
+    public String getNombre() {
+<span class="nc" id="L66">        return nombre;</span>
+    }
+
+    public void setNombre(String nombre) {
+<span class="nc" id="L70">        this.nombre = nombre;</span>
+<span class="nc" id="L71">    }</span>
+
+    public String getNif() {
+<span class="nc" id="L74">        return nif;</span>
+    }
+
+    public void setNif(String nif) {
+<span class="nc" id="L78">        this.nif = nif;</span>
+<span class="nc" id="L79">    }</span>
+
+    public String getDireccion() {
+<span class="nc" id="L82">        return direccion;</span>
+    }
+
+    public void setDireccion(String direccion) {
+<span class="nc" id="L86">        this.direccion = direccion;</span>
+<span class="nc" id="L87">    }</span>
+
+    public String getTelefono() {
+<span class="nc" id="L90">        return telefono;</span>
+    }
+
+    public void setTelefono(String telefono) {
+<span class="nc" id="L94">        this.telefono = telefono;</span>
+<span class="nc" id="L95">    }</span>
+
+    public String getTarjetaCredito() {
+<span class="nc" id="L98">        return tarjetaCredito;</span>
+    }
+
+    public void setTarjetaCredito(String tarjetaCredito) {
+<span class="nc" id="L102">        this.tarjetaCredito = tarjetaCredito;</span>
+<span class="nc" id="L103">    }</span>
+
+    public String getCuentaCorriente() {
+<span class="nc" id="L106">        return cuentaCorriente;</span>
+    }
+
+    public void setCuentaCorriente(String cuentaCorriente) {
+<span class="nc" id="L110">        this.cuentaCorriente = cuentaCorriente;</span>
+<span class="nc" id="L111">    }</span>
+
+    public ArrayList&lt;Servicio&gt; getServicios() {
+<span class="nc" id="L114">        return servicios;</span>
+    }
+
+    public void setServicios(ArrayList&lt;Servicio&gt; servicios) {
+<span class="nc" id="L118">        this.servicios = servicios;</span>
+<span class="nc" id="L119">    }</span>
+
+    public static long nextIdCliente() {
+<span class="nc" id="L122">        long ret = 0;</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">        for (Cliente c : Utilidades.CLIENTES) {</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">            if (c.getId() &gt; ret) {</span>
+<span class="nc" id="L125">                ret = c.getId();</span>
+            }
+        }
+<span class="nc" id="L128">        return ret + 1;</span>
+    }
+
+    public static Cliente nuevoCliente() throws ClienteException {
+<span class="nc" id="L132">        Cliente c = new Cliente();</span>
+<span class="nc" id="L133">        Scanner sc = new Scanner(System.in);</span>
+        boolean salir;
+        do {
+<span class="nc" id="L136">            c.id = nextIdCliente();</span>
+<span class="nc" id="L137">            System.out.println(&quot;Introduzca su nombre:&quot;);</span>
+<span class="nc" id="L138">            String nombre = sc.nextLine();</span>
+<span class="nc" id="L139">            c.setNombre(nombre);</span>
+<span class="nc" id="L140">            System.out.println(&quot;Introduzca su nif:&quot;);</span>
+<span class="nc" id="L141">            String nif = sc.nextLine();</span>
+<span class="nc" id="L142">            c.setNombre(nif);</span>
+<span class="nc" id="L143">            System.out.println(&quot;Introduzca su dirección:&quot;);</span>
+<span class="nc" id="L144">            String direccion = sc.nextLine();</span>
+<span class="nc" id="L145">            c.setNombre(direccion);</span>
+<span class="nc" id="L146">            System.out.println(&quot;Introduzca su número de teléfono&quot;);</span>
+<span class="nc" id="L147">            String tlfn = sc.nextLine();</span>
+<span class="nc" id="L148">            c.setTelefono(tlfn);</span>
+<span class="nc" id="L149">            System.out.println(&quot;Introduzca su tarjeta de credito:&quot;);</span>
+<span class="nc" id="L150">            String credito = sc.nextLine();</span>
+<span class="nc" id="L151">            c.setNombre(credito);</span>
+<span class="nc" id="L152">            System.out.println(&quot;Introduzca su cuenta corriente:&quot;);</span>
+<span class="nc" id="L153">            String ccorriente = sc.nextLine();</span>
+<span class="nc" id="L154">            c.setNombre(ccorriente);</span>
+<span class="nc" id="L155">            ArrayList&lt;Servicio&gt; ls = new ArrayList();</span>
+<span class="nc" id="L156">            System.out.println(&quot;¿Quiere introducir un servicio? (s/n)&quot;);</span>
+            boolean p;
+<span class="nc" id="L158">            p = Utilidades.leerBoolean();</span>
+<span class="nc bnc" id="L159" title="All 2 branches missed.">            while (p) {</span>
+<span class="nc" id="L160">                c.servicios.add(Servicio.nuevoServicio());</span>
+<span class="nc" id="L161">                System.out.println(&quot;¿Quiere introducir otro servicio? (s/n)&quot;);</span>
+<span class="nc" id="L162">                p = Utilidades.leerBoolean();</span>
+            }
+<span class="nc" id="L164">            System.out.println(&quot;Son correctos los siguiente datos?(s/n)&quot;);</span>
+<span class="nc" id="L165">            System.out.println(&quot;nombre:&quot; + nombre);</span>
+<span class="nc" id="L166">            System.out.println(&quot;telefono:&quot; + tlfn);</span>
+<span class="nc" id="L167">            System.out.println(&quot;tarjeta de credito:&quot; + credito);</span>
+<span class="nc" id="L168">            System.out.println(&quot;cuenta corriente:&quot; + ccorriente);</span>
+<span class="nc" id="L169">            System.out.println(&quot;nif:&quot; + nif);</span>
+<span class="nc" id="L170">            System.out.println(&quot;direccion:&quot; + direccion);</span>
+<span class="nc" id="L171">            salir = Utilidades.leerBoolean();</span>
+<span class="nc bnc" id="L172" title="All 2 branches missed.">        } while (salir);</span>
+<span class="nc bnc" id="L173" title="All 2 branches missed.">        if (!ClienteException.comprobarTelefono(c.getTelefono())){</span>
+<span class="nc" id="L174">            throw new ClienteException(&quot;El telefono no es valido&quot;);</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">        } else if(!ClienteException.comprobarNombre(c.getNombre())){</span>
+<span class="nc" id="L176">            throw new ClienteException(&quot;El nombre no es valido&quot;);</span>
+<span class="nc bnc" id="L177" title="All 2 branches missed.">            } else if(!ClienteException.comprobarNif(c.getNif())){</span>
+<span class="nc" id="L178">            throw new ClienteException(&quot;El nif no es valido&quot;);</span>
+<span class="nc bnc" id="L179" title="All 2 branches missed.">        } else if(!ClienteException.comprobarDireccion(c.getDireccion())){</span>
+<span class="nc" id="L180">            throw new ClienteException(&quot;La dirección no es valida&quot;);</span>
+<span class="nc bnc" id="L181" title="All 2 branches missed.">        } else if(!ClienteException.comprobarTarjetaCredito(c.getTarjetaCredito())){</span>
+<span class="nc" id="L182">            throw new ClienteException(&quot;La tarjeta de credito no es valida&quot;);</span>
+<span class="nc bnc" id="L183" title="All 2 branches missed.">        } else if(!ClienteException.comprobarCuentaCorriente(c.getCuentaCorriente())){</span>
+<span class="nc" id="L184">            throw new ClienteException(&quot;El nombre no es valido&quot;);}</span>
+<span class="nc" id="L185">        return c;</span>
+    }
+
+    public String servicios() {
+<span class="nc" id="L189">        String ret = &quot; servicios:[&quot;;</span>
+<span class="nc bnc" id="L190" title="All 2 branches missed.">        for (Servicio s : this.servicios) {</span>
+<span class="nc" id="L191">            ret += &quot;&quot; + s.getId() + &quot;(&quot; + s.getId() + &quot;), &quot;;</span>
+<span class="nc" id="L192">        }</span>
+<span class="nc" id="L193">        return ret + &quot;]&quot;;</span>
+    }
+
+    /*
+    public String servicios() {
+        String ret = &quot; servicios:[&quot;;
+        ret = this.servicios.stream().map((s) -&gt; &quot;&quot; + s.getId() + &quot;(&quot; + s.getId() + &quot;), &quot;).reduce(ret, String::concat);
+        return ret + &quot;]&quot;;
+    }
+     */
+    public static ArrayList&lt;Cliente&gt; listarclientes(ArrayList&lt;Cliente&gt; lista, int[] ids) {
+<span class="nc" id="L204">        ArrayList&lt;Cliente&gt; ret = new ArrayList&lt;Cliente&gt;();</span>
+<span class="nc" id="L205">        Cliente c1 = new Cliente();</span>
+<span class="nc bnc" id="L206" title="All 2 branches missed.">        for (int i = 0; i &lt; ids.length; i++) {</span>
+<span class="nc bnc" id="L207" title="All 2 branches missed.">            for (int j = 0; j &lt; lista.size(); j++) {</span>
+<span class="nc" id="L208">                System.out.println(&quot;Este el número de clientes &quot; + ids.length);</span>
+<span class="nc" id="L209">                System.out.println(&quot;Estos son los nombres&quot; + c1.getNombre());</span>
+                //el método getIdentificador() es propio de Almacen
+<span class="nc bnc" id="L211" title="All 2 branches missed.">                if (lista.get(j).getId() == ids[i]) {</span>
+<span class="nc" id="L212">                    ret.add((Cliente) lista.get(ids[i]));</span>
+
+<span class="nc" id="L214">                    break;</span>
+                }
+            }
+        }
+<span class="nc" id="L218">        return ret;</span>
+    }
+
+    public static ArrayList&lt;Cliente&gt; arrayde(ArrayList&lt;Cliente&gt; lista, int[] ids) {
+<span class="nc" id="L222">        ArrayList&lt;Cliente&gt; ret = new ArrayList&lt;Cliente&gt;();</span>
+<span class="nc bnc" id="L223" title="All 2 branches missed.">        for (int i = 0; i &lt; ids.length; i++) {</span>
+<span class="nc bnc" id="L224" title="All 2 branches missed.">            for (int j = 0; j &lt; lista.size(); j++) {</span>
+                //el método getIdentificador() es propio de Almacen
+<span class="nc bnc" id="L226" title="All 2 branches missed.">                if (lista.get(j).getId() == ids[i]) {</span>
+<span class="nc" id="L227">                    ret.add((Cliente) lista.get(ids[i]));</span>
+<span class="nc" id="L228">                    break;</span>
+                }
+            }
+        }
+<span class="nc" id="L232">        return ret;</span>
+    }
+
+    public static ArrayList&lt;Cliente&gt; convertir(Cliente[] array) {
+<span class="nc" id="L236">        ArrayList&lt;Cliente&gt; ret = new ArrayList&lt;Cliente&gt;();</span>
+<span class="nc bnc" id="L237" title="All 2 branches missed.">        for (Cliente c : array) {</span>
+<span class="nc" id="L238">            ret.add((Cliente) c);</span>
+        }
+<span class="nc" id="L240">        return ret;</span>
+    }
+
+    public static void verClientes(ArrayList&lt;Cliente&gt; clientes) {
+<span class="nc" id="L244">        System.out.println(&quot;En el sistema estan registrados los siguientes clientes:&quot;);</span>
+<span class="nc bnc" id="L245" title="All 2 branches missed.">        for (Cliente c : clientes) {</span>
+<span class="nc" id="L246">            System.out.println(c.getId() + &quot;. &quot; + c.getNombre() + &quot;. &quot; + c.getNif() + &quot;. &quot; + c.getDireccion() + &quot;. &quot; + c.getTelefono() + &quot;. &quot; + c.getTarjetaCredito() + &quot;. &quot; + c.getCuentaCorriente());</span>
+<span class="nc" id="L247">        }</span>
+<span class="nc" id="L248">    }</span>
+
+    //Método para buscar
+    public static Cliente buscarporid(ArrayList&lt;Cliente&gt; lista) {
+
+<span class="nc" id="L253">        Scanner sc = new Scanner(System.in);</span>
+<span class="nc" id="L254">        System.out.println(&quot;Introduzca su id&quot;);</span>
+<span class="nc" id="L255">        sc.reset();</span>
+<span class="nc" id="L256">        int idCliente = sc.nextInt();</span>
+<span class="nc" id="L257">        Cliente ret = null;</span>
+<span class="nc bnc" id="L258" title="All 2 branches missed.">        for (Cliente c : Utilidades.CLIENTES) {</span>
+<span class="nc bnc" id="L259" title="All 2 branches missed.">            if (c.getId() == idCliente) {</span>
+<span class="nc" id="L260">                ret = c;</span>
+<span class="nc" id="L261">                break;</span>
+            }
+        }
+
+<span class="nc" id="L265">        return ret;</span>
+    }
+
+    public static ArrayList&lt;Cliente&gt; buscarclientepornombre(String nombrecl, ArrayList&lt;Cliente&gt; clientes) {
+<span class="nc" id="L269">        ArrayList&lt;Cliente&gt; ret = new ArrayList&lt;Cliente&gt;();</span>
+<span class="nc bnc" id="L270" title="All 2 branches missed.">        for (Cliente c : clientes) {</span>
+<span class="nc bnc" id="L271" title="All 2 branches missed.">            if (Utilidades.removeDiacriticalMarks(c.getNombre().toLowerCase()).contains(Utilidades.removeDiacriticalMarks(nombrecl.toLowerCase()))) {</span>
+<span class="nc" id="L272">                ret.add(c);</span>
+            }
+<span class="nc bnc" id="L274" title="All 2 branches missed.">            if (c.getNombre().toLowerCase().contains(nombrecl.toLowerCase())) {</span>
+<span class="nc bnc" id="L275" title="All 2 branches missed.">                if (!ret.contains(c)) {</span>
+<span class="nc" id="L276">                    ret.add(c);</span>
+                }
+            }
+<span class="nc" id="L279">        }</span>
+<span class="nc" id="L280">        return ret;</span>
+    }
+
+    public static ArrayList&lt;Cliente&gt; buscarclientepornif(String nifcl, ArrayList&lt;Cliente&gt; clientes) {
+<span class="nc" id="L284">        ArrayList&lt;Cliente&gt; ret = new ArrayList&lt;Cliente&gt;();</span>
+<span class="nc bnc" id="L285" title="All 2 branches missed.">        for (Cliente c : clientes) {</span>
+<span class="nc bnc" id="L286" title="All 2 branches missed.">            if (Utilidades.removeDiacriticalMarks(c.getNif().toLowerCase()).contains(Utilidades.removeDiacriticalMarks(nifcl.toLowerCase()))) {</span>
+<span class="nc" id="L287">                ret.add(c);</span>
+            }
+<span class="nc bnc" id="L289" title="All 2 branches missed.">            if (c.getNif().toLowerCase().contains(nifcl.toLowerCase())) {</span>
+<span class="nc bnc" id="L290" title="All 2 branches missed.">                if (!ret.contains(c)) {</span>
+<span class="nc" id="L291">                    ret.add(c);</span>
+                }
+            }
+<span class="nc" id="L294">        }</span>
+<span class="nc" id="L295">        return ret;</span>
+    }
+
+    public static ArrayList&lt;Cliente&gt; buscarclientepordireccion(String direccioncl, ArrayList&lt;Cliente&gt; clientes) {
+<span class="nc" id="L299">        ArrayList&lt;Cliente&gt; ret = new ArrayList&lt;Cliente&gt;();</span>
+<span class="nc bnc" id="L300" title="All 2 branches missed.">        for (Cliente c : clientes) {</span>
+<span class="nc bnc" id="L301" title="All 2 branches missed.">            if (Utilidades.removeDiacriticalMarks(c.getDireccion().toLowerCase()).contains(Utilidades.removeDiacriticalMarks(direccioncl.toLowerCase()))) {</span>
+<span class="nc" id="L302">                ret.add(c);</span>
+            }
+<span class="nc bnc" id="L304" title="All 2 branches missed.">            if (c.getNif().toLowerCase().contains(direccioncl.toLowerCase())) {</span>
+<span class="nc bnc" id="L305" title="All 2 branches missed.">                if (!ret.contains(c)) {</span>
+<span class="nc" id="L306">                    ret.add(c);</span>
+                }
+            }
+<span class="nc" id="L309">        }</span>
+<span class="nc" id="L310">        return ret;</span>
+    }
+
+    public static ArrayList&lt;Cliente&gt; buscarclienteportelefono(String tlfcl, ArrayList&lt;Cliente&gt; clientes) {
+<span class="nc" id="L314">        ArrayList&lt;Cliente&gt; ret = new ArrayList&lt;Cliente&gt;();</span>
+<span class="nc bnc" id="L315" title="All 2 branches missed.">        for (Cliente c : clientes) {</span>
+<span class="nc bnc" id="L316" title="All 2 branches missed.">            if (Utilidades.removeDiacriticalMarks(c.getTelefono().toLowerCase()).contains(Utilidades.removeDiacriticalMarks(tlfcl.toLowerCase()))) {</span>
+<span class="nc" id="L317">                ret.add(c);</span>
+            }
+<span class="nc bnc" id="L319" title="All 2 branches missed.">            if (c.getNif().toLowerCase().contains(tlfcl.toLowerCase())) {</span>
+<span class="nc bnc" id="L320" title="All 2 branches missed.">                if (!ret.contains(c)) {</span>
+<span class="nc" id="L321">                    ret.add(c);</span>
+                }
+            }
+<span class="nc" id="L324">        }</span>
+<span class="nc" id="L325">        return ret;</span>
+    }
+
+    public static ArrayList&lt;Cliente&gt; buscarclienteportarjetadecredito(String tdcrcl, ArrayList&lt;Cliente&gt; clientes) {
+<span class="nc" id="L329">        ArrayList&lt;Cliente&gt; ret = new ArrayList&lt;Cliente&gt;();</span>
+<span class="nc bnc" id="L330" title="All 2 branches missed.">        for (Cliente c : clientes) {</span>
+<span class="nc bnc" id="L331" title="All 2 branches missed.">            if (Utilidades.removeDiacriticalMarks(c.getTarjetaCredito().toLowerCase()).contains(Utilidades.removeDiacriticalMarks(tdcrcl.toLowerCase()))) {</span>
+<span class="nc" id="L332">                ret.add(c);</span>
+            }
+<span class="nc bnc" id="L334" title="All 2 branches missed.">            if (c.getNif().toLowerCase().contains(tdcrcl.toLowerCase())) {</span>
+<span class="nc bnc" id="L335" title="All 2 branches missed.">                if (!ret.contains(c)) {</span>
+<span class="nc" id="L336">                    ret.add(c);</span>
+                }
+            }
+<span class="nc" id="L339">        }</span>
+<span class="nc" id="L340">        return ret;</span>
+    }
+
+    public static ArrayList&lt;Cliente&gt; buscarclienteporcuentacorriente(String cccl, ArrayList&lt;Cliente&gt; clientes) {
+<span class="nc" id="L344">        ArrayList&lt;Cliente&gt; ret = new ArrayList&lt;Cliente&gt;();</span>
+<span class="nc bnc" id="L345" title="All 2 branches missed.">        for (Cliente c : clientes) {</span>
+<span class="nc bnc" id="L346" title="All 2 branches missed.">            if (Utilidades.removeDiacriticalMarks(c.getCuentaCorriente().toLowerCase()).contains(Utilidades.removeDiacriticalMarks(cccl.toLowerCase()))) {</span>
+<span class="nc" id="L347">                ret.add(c);</span>
+            }
+<span class="nc bnc" id="L349" title="All 2 branches missed.">            if (c.getNif().toLowerCase().contains(cccl.toLowerCase())) {</span>
+<span class="nc bnc" id="L350" title="All 2 branches missed.">                if (!ret.contains(c)) {</span>
+<span class="nc" id="L351">                    ret.add(c);</span>
+                }
+            }
+<span class="nc" id="L354">        }</span>
+<span class="nc" id="L355">        return ret;</span>
+    }
+
+    public static void buscarClientes(ArrayList&lt;Cliente&gt; clientes) throws ClienteException {
+<span class="nc" id="L359">        Scanner sc = new Scanner(System.in);</span>
+<span class="nc" id="L360">        ArrayList&lt;Cliente&gt; lista = new ArrayList&lt;Cliente&gt;();</span>
+<span class="nc" id="L361">        System.out.println(&quot;Pulse 1 para buscar un cliente por el id&quot;);</span>
+<span class="nc" id="L362">        System.out.println(&quot;Pulse 2 para buscar un cliente por el nombre&quot;);</span>
+<span class="nc" id="L363">        System.out.println(&quot;Pulse 3 para buscar un cliente por el telefono&quot;);</span>
+<span class="nc" id="L364">        System.out.println(&quot;Pulse 4 para buscar un cliente por el nif&quot;);</span>
+<span class="nc" id="L365">        System.out.println(&quot;Pulse 5 para buscar un cliente por el apellido&quot;);</span>
+<span class="nc" id="L366">        System.out.println(&quot;Pulse 6 para buscar un cliente por la direccion&quot;);</span>
+<span class="nc" id="L367">        System.out.println(&quot;Pulse 0 para volver&quot;);</span>
+<span class="nc" id="L368">        sc.reset();</span>
+<span class="nc" id="L369">        int opcion = sc.nextInt();</span>
+
+     
+            do {
+<span class="nc bnc" id="L373" title="All 8 branches missed.">                switch (opcion) {</span>
+                    case 1:
+
+<span class="nc" id="L376">                        buscarporid(clientes);</span>
+<span class="nc" id="L377">                        ReparacionEquipos.mostrarGestionClientes(clientes);</span>
+<span class="nc" id="L378">                        break;</span>
+
+                    case 2:
+<span class="nc" id="L381">                        System.out.println(&quot;Introduzca el nombre del cliente que desea buscar:&quot;);</span>
+<span class="nc" id="L382">                        String nombrecl = sc.nextLine(); //linea para que no se salte el nextLine()</span>
+<span class="nc" id="L383">                        nombrecl = sc.nextLine();</span>
+<span class="nc" id="L384">                        lista = buscarclientepornombre(nombrecl, clientes);</span>
+<span class="nc bnc" id="L385" title="All 2 branches missed.">                        if (lista.size() &gt; 0) {</span>
+<span class="nc" id="L386">                            System.out.println(&quot;Se han encontrado datos: &quot;);</span>
+<span class="nc bnc" id="L387" title="All 2 branches missed.">                            for (Cliente c : lista) {</span>
+<span class="nc" id="L388">                                System.out.println(c.getId() + &quot;.&quot; + c.getNombre() + &quot;.&quot; + c.getNif() + &quot;.&quot; + c.getDireccion() + &quot;.&quot; + c.getCuentaCorriente() + &quot;.&quot; + c.getTelefono() + &quot;.&quot; + c.getTarjetaCredito() + &quot;.&quot; + c.getCuentaCorriente() + c.getClass().getSimpleName());</span>
+<span class="nc" id="L389">                            }</span>
+                        } else {
+<span class="nc" id="L391">                            System.out.println(&quot;El cliente con nombre &quot; + nombrecl + &quot; no se ha encontrado en el sistema.&quot;);</span>
+                        }
+<span class="nc" id="L393">                        System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L394">                        ReparacionEquipos.mostrarGestionClientes(clientes);</span>
+<span class="nc" id="L395">                        break;</span>
+
+                    case 3:
+                    case 4:
+<span class="nc" id="L399">                        System.out.println(&quot;Introduzca el nif del cliente que desea buscar&quot;);</span>
+<span class="nc" id="L400">                        String nifcl = sc.nextLine(); //linea para que no se salte el nextLine()</span>
+<span class="nc" id="L401">                        nifcl = sc.nextLine();</span>
+<span class="nc" id="L402">                        lista = buscarclientepornif(nifcl, clientes);</span>
+<span class="nc bnc" id="L403" title="All 2 branches missed.">                        if (lista.size() &gt; 0) {</span>
+<span class="nc" id="L404">                            System.out.println(&quot;Se han encontrado datos: &quot;);</span>
+<span class="nc bnc" id="L405" title="All 2 branches missed.">                            for (Cliente c : lista) {</span>
+<span class="nc" id="L406">                                System.out.println(c.getId() + &quot;.&quot; + c.getNombre() + &quot;.&quot; + c.getNif() + &quot;.&quot; + c.getDireccion() + &quot;.&quot; + c.getCuentaCorriente() + &quot;.&quot; + c.getTelefono() + &quot;.&quot; + c.getTarjetaCredito() + &quot;.&quot; + c.getCuentaCorriente() + c.getClass().getSimpleName());</span>
+<span class="nc" id="L407">                            }</span>
+                        } else {
+<span class="nc" id="L409">                            System.out.println(&quot;El cliente con nombre &quot; + nifcl + &quot; no se ha encontrado en el sistema.&quot;);</span>
+                        }
+<span class="nc" id="L411">                        System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L412">                        ReparacionEquipos.mostrarGestionClientes(clientes);</span>
+<span class="nc" id="L413">                        break;</span>
+
+                    case 5:
+<span class="nc" id="L416">                        System.out.println(&quot;Introduzca la direccion del cliente que desea buscar&quot;);</span>
+<span class="nc" id="L417">                        String direccioncl = sc.nextLine(); //linea para que no se salte el nextLine()</span>
+<span class="nc" id="L418">                        direccioncl = sc.nextLine();</span>
+<span class="nc" id="L419">                        lista = buscarclientepordireccion(direccioncl, clientes);</span>
+<span class="nc bnc" id="L420" title="All 2 branches missed.">                        if (lista.size() &gt; 0) {</span>
+<span class="nc" id="L421">                            System.out.println(&quot;Se han encontrado datos: &quot;);</span>
+<span class="nc bnc" id="L422" title="All 2 branches missed.">                            for (Cliente c : lista) {</span>
+<span class="nc" id="L423">                                System.out.println(c.getId() + &quot;.&quot; + c.getNombre() + &quot;.&quot; + c.getNif() + &quot;.&quot; + c.getDireccion() + &quot;.&quot; + c.getCuentaCorriente() + &quot;.&quot; + c.getTelefono() + &quot;.&quot; + c.getTarjetaCredito() + &quot;.&quot; + c.getCuentaCorriente() + c.getClass().getSimpleName());</span>
+<span class="nc" id="L424">                            }</span>
+                        } else {
+<span class="nc" id="L426">                            System.out.println(&quot;El cliente con nombre &quot; + direccioncl + &quot; no se ha encontrado en el sistema.&quot;);</span>
+                        }
+<span class="nc" id="L428">                        System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L429">                        ReparacionEquipos.mostrarGestionClientes(clientes);</span>
+<span class="nc" id="L430">                        break;</span>
+
+                    case 6:
+<span class="nc" id="L433">                        System.out.println(&quot;Introduzca el telefono del cliente que desea buscar&quot;);</span>
+<span class="nc" id="L434">                        String tlfcl = sc.nextLine(); //linea para que no se salte el nextLine()</span>
+<span class="nc" id="L435">                        tlfcl = sc.nextLine();</span>
+<span class="nc" id="L436">                        lista = buscarclienteportelefono(tlfcl, clientes);</span>
+<span class="nc bnc" id="L437" title="All 2 branches missed.">                        if (lista.size() &gt; 0) {</span>
+<span class="nc" id="L438">                            System.out.println(&quot;Se han encontrado datos: &quot;);</span>
+<span class="nc bnc" id="L439" title="All 2 branches missed.">                            for (Cliente c : lista) {</span>
+<span class="nc" id="L440">                                System.out.println(c.getId() + &quot;.&quot; + c.getNombre() + &quot;.&quot; + c.getNif() + &quot;.&quot; + c.getDireccion() + &quot;.&quot; + c.getCuentaCorriente() + &quot;.&quot; + c.getTelefono() + &quot;.&quot; + c.getTarjetaCredito() + &quot;.&quot; + c.getCuentaCorriente() + c.getClass().getSimpleName());</span>
+<span class="nc" id="L441">                            }</span>
+                        } else {
+<span class="nc" id="L443">                            System.out.println(&quot;El cliente con nombre &quot; + tlfcl + &quot; no se ha encontrado en el sistema.&quot;);</span>
+                        }
+<span class="nc" id="L445">                        System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L446">                        ReparacionEquipos.mostrarGestionClientes(clientes);</span>
+<span class="nc" id="L447">                        break;</span>
+
+                    case 7:
+<span class="nc" id="L450">                        System.out.println(&quot;Introduzca la cuenta corriente del cliente que desea buscar&quot;);</span>
+<span class="nc" id="L451">                        String cccl = sc.nextLine(); //linea para que no se salte el nextLine()</span>
+<span class="nc" id="L452">                        cccl = sc.nextLine();</span>
+<span class="nc" id="L453">                        lista = buscarclienteporcuentacorriente(cccl, clientes);</span>
+<span class="nc bnc" id="L454" title="All 2 branches missed.">                        if (lista.size() &gt; 0) {</span>
+<span class="nc" id="L455">                            System.out.println(&quot;Se han encontrado datos: &quot;);</span>
+<span class="nc bnc" id="L456" title="All 2 branches missed.">                            for (Cliente c : lista) {</span>
+<span class="nc" id="L457">                                System.out.println(c.getId() + &quot;.&quot; + c.getNombre() + &quot;.&quot; + c.getNif() + &quot;.&quot; + c.getDireccion() + &quot;.&quot; + c.getCuentaCorriente() + &quot;.&quot; + c.getTelefono() + &quot;.&quot; + c.getTarjetaCredito() + &quot;.&quot; + c.getCuentaCorriente() + c.getClass().getSimpleName());</span>
+<span class="nc" id="L458">                            }</span>
+                        } else {
+<span class="nc" id="L460">                            System.out.println(&quot;El cliente con nombre &quot; + cccl + &quot; no se ha encontrado en el sistema.&quot;);</span>
+                        }
+<span class="nc" id="L462">                        System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L463">                        ReparacionEquipos.mostrarGestionClientes(clientes);</span>
+<span class="nc" id="L464">                        break;</span>
+
+                    case 0:
+<span class="nc" id="L467">                        ReparacionEquipos.mostrarGestionClientes(clientes);</span>
+                    default:
+<span class="nc" id="L469">                        System.out.println(&quot;El valor que ha introducido no es un número del 0 al 6&quot;);</span>
+<span class="nc" id="L470">                        System.out.println(&quot;&quot;);</span>
+                }
+
+<span class="nc bnc" id="L473" title="All 4 branches missed.">            } while (opcion &gt; 7 || opcion &lt; 0);        </span>
+
+<span class="nc" id="L475">        }</span>
+
+    
+
+    @Override
+    public String toString() {
+<span class="nc" id="L481">        return &quot;Cliente{&quot; + &quot;id=&quot; + id + &quot;, nombre=&quot; + nombre + &quot;, nif=&quot; + nif + &quot;, direccion=&quot; + direccion + &quot;, telefono=&quot; + telefono + &quot;, tarjetaCredito=&quot; + tarjetaCredito + &quot;, cuentaCorriente=&quot; + cuentaCorriente + servicios() + '}';</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

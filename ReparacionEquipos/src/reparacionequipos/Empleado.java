@@ -5,14 +5,20 @@
  */
 package reparacionequipos;
 
+import java.io.BufferedReader;
+import java.io.EOFException;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -382,19 +388,19 @@ public class Empleado {
      */
     public void exportarObjetoEmpleado(String path) {
         File fichero = new File(path);
-        FileWriter empleado = null;
+        FileWriter escritor = null;
         PrintWriter buffer = null;
         try {
             try {
-                empleado = new FileWriter(fichero, true);
-                buffer = new PrintWriter(empleado);
+                escritor = new FileWriter(fichero, true);
+                buffer = new PrintWriter(escritor);
                 buffer.print(this.data() + "\r\n");
             } finally {
                 if (buffer != null) {
                     buffer.close();
                 }
-                if (empleado != null) {
-                    empleado.close();
+                if (escritor != null) {
+                    escritor.close();
                 }
             }
         } catch (FileNotFoundException e) {
@@ -405,28 +411,33 @@ public class Empleado {
             System.out.println("Se ha producido un error inesperado intentelo de nuevo");
         }
     }
-    
+
     /**
-     * Este metodo exporta todos los datos de una coleccion de objetos de la clase empleado empleado a un
-     * fichero de texto pasado anteriormente mediante un String llamado path
-     * @param path 
+     * Este metodo exporta todos los datos de una coleccion de objetos de la
+     * clase empleado empleado a un fichero de texto pasado anteriormente
+     * mediante un String llamado path
+     *
+     * @param path
      */
     public void exportarColeccionDeObjetosEmpleado(String path) {
-        ArrayList<Empleado> coleccion = new ArrayList<Empleado>();
+        ArrayList<Empleado> coleccion;
+        coleccion = Empleado.convertir(Utilidades.EMPLEADOS);
         File fichero = new File(path);
-        FileWriter empleado = null;
+        FileWriter escritor = null;
         PrintWriter buffer = null;
         try {
             try {
-                empleado = new FileWriter(fichero, true);
-                buffer = new PrintWriter(empleado);
-                buffer.print(coleccion + "\r\n");
+                escritor = new FileWriter(fichero, true);
+                buffer = new PrintWriter(escritor);
+                for (Empleado e : coleccion) {
+                    buffer.print(e.data() + "\n");
+                }
             } finally {
                 if (buffer != null) {
                     buffer.close();
                 }
-                if (empleado != null) {
-                    empleado.close();
+                if (escritor != null) {
+                    escritor.close();
                 }
             }
         } catch (FileNotFoundException e) {
@@ -441,7 +452,8 @@ public class Empleado {
     /**
      * Este metodo exporta todos los datos de un objeto de tipo empleado a un
      * fichero de bytes pasado anteriormente mediante un String llamado path
-     * @param path 
+     *
+     * @param path
      */
     public void exportarEmpleadoaArchivoBinario(String path) {
         try {
@@ -457,6 +469,73 @@ public class Empleado {
         } catch (Exception e) {
             System.out.println("Se ha producido un error inesperado intentelo de nuevo");
         }
+    }
+
+    /**
+     * Este metodo exporta una coleccion de objetos de tipo empleado a un
+     * fichero binario
+     *
+     * @param path
+     */
+    public void exportarColeccionEmpleadosaArchivoBinario(String path) {
+        ArrayList<Empleado> coleccion;
+        coleccion = Empleado.convertir(Utilidades.EMPLEADOS);
+        try {
+            FileOutputStream fichero = new FileOutputStream(path, true);
+            ObjectOutputStream escritor = new ObjectOutputStream(fichero);
+            escritor.writeObject(coleccion);
+            escritor.flush();
+            escritor.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero");
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error en la inserción de los datos");
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error inesperado intentelo de nuevo");
+        }
+    }
+
+    public static ArrayList<Empleado> importarEmpleadoDesdeFicheroBinario(String path) {
+        ArrayList<Empleado> ret = new ArrayList<Empleado>();
+        FileInputStream lector = null;
+        ObjectInputStream lectorObjeto = null;
+        try {
+            try {
+                lector = new FileInputStream(path);
+                lectorObjeto = new ObjectInputStream(lector);
+                Empleado e;
+                while ((e = (Empleado) lectorObjeto.readObject()) != null) {
+                    ret.add(e);
+                    lector.skip(4);
+                }
+            } finally {
+                if (lectorObjeto != null) {
+                    lectorObjeto.close();
+                }
+                if (lector != null) {
+                    lector.close();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Se ha producido una FileNotFoundException" + e.getMessage());
+        } catch (EOFException e) {
+            System.out.println("Final de fichero");
+        } catch (IOException e) {
+            System.out.println("Se ha producido una IOException: " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            System.out.println("Se ha producido una ClassNotFoundException" + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Se ha producido una Exception" + e.getMessage());
+        }
+        return ret;
+    }
+
+    public static ArrayList<Empleado> convertir(Empleado[] array) {
+        ArrayList<Empleado> ret = new ArrayList<Empleado>();
+        for (Empleado e : array) {
+            ret.add((Empleado) e);
+        }
+        return ret;
     }
 
     public String data() {

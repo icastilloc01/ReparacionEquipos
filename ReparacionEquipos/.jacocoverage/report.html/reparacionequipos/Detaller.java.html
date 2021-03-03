@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Detaller.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ReparacionEquipos&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">reparacionequipos</a> &gt; <span class="el_source">Detaller.java</span></div><h1>Detaller.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package reparacionequipos;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ *
+ * @author icasc
+ */
+public class Detaller extends Empleado {
+
+<span class="nc" id="L17">    private boolean senior = false;</span>
+
+    public Detaller() {
+<span class="nc" id="L20">        super();</span>
+<span class="nc" id="L21">    }</span>
+
+    public Detaller(boolean senior, Empleado e) {
+<span class="nc" id="L24">        super(e);</span>
+<span class="nc" id="L25">        this.senior = false;</span>
+<span class="nc" id="L26">    }</span>
+
+    public Detaller(boolean senior, long id, String nombre, String telefono, String nif, String apellido, String direccion) {
+<span class="nc" id="L29">        super(id, nombre, telefono, nif, apellido, direccion);</span>
+<span class="nc" id="L30">        this.senior = false;</span>
+<span class="nc" id="L31">    }</span>
+
+<span class="nc" id="L33">    public Detaller(boolean senior) {</span>
+<span class="nc" id="L34">        this.senior = false;</span>
+<span class="nc" id="L35">    }</span>
+
+<span class="nc" id="L37">    public Detaller(Detaller d) {</span>
+<span class="nc" id="L38">        this.senior = d.senior;</span>
+<span class="nc" id="L39">    }</span>
+
+    /**
+     *
+     * @return
+     */
+
+    public boolean isSenior() {
+<span class="nc" id="L47">        return senior;</span>
+    }
+
+    public void setSenior(boolean senior) {
+<span class="nc" id="L51">        this.senior = senior;</span>
+<span class="nc" id="L52">    }</span>
+
+    public static Detaller nuevoDetaller() {
+<span class="nc" id="L55">        Detaller nuevoDetaller = new Detaller();</span>
+<span class="nc" id="L56">        Empleado e = Empleado.nuevoEmpleado();</span>
+<span class="nc" id="L57">        nuevoDetaller.setId(e.getId());</span>
+<span class="nc" id="L58">        nuevoDetaller.setNombre(e.getNombre());</span>
+<span class="nc" id="L59">        nuevoDetaller.setTelefono(e.getTelefono());</span>
+<span class="nc" id="L60">        nuevoDetaller.setNif(e.getNif());</span>
+<span class="nc" id="L61">        nuevoDetaller.setApellido(e.getApellido());</span>
+<span class="nc" id="L62">        nuevoDetaller.setDireccion(e.getDireccion());</span>
+<span class="nc" id="L63">        System.out.println(&quot;¿Es senior? s/n: &quot;);</span>
+<span class="nc" id="L64">        nuevoDetaller.senior = Utilidades.leerBoolean();</span>
+<span class="nc" id="L65">        return nuevoDetaller;</span>
+    }
+    
+    public static ArrayList&lt;Detaller&gt; convertir(Detaller[] array) {
+<span class="nc" id="L69">        ArrayList&lt;Detaller&gt; ret = new ArrayList&lt;Detaller&gt;();</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        for (Detaller d : array) {</span>
+<span class="nc" id="L71">            ret.add((Detaller) d);</span>
+        }
+<span class="nc" id="L73">        return ret;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L78">        return &quot;Detaller{&quot; + &quot;senior=&quot; + senior + '}';</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
