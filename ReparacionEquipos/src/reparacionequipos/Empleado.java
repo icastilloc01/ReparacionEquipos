@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.InputMismatchException;
@@ -26,7 +27,7 @@ import java.util.Scanner;
  *
  * @author icasc
  */
-public class Empleado {
+public class Empleado implements Serializable {
 
     protected long id;                  //no puede ser menor de 0
     protected String nombre;
@@ -34,6 +35,8 @@ public class Empleado {
     protected String nif;               //debe ser una sucesión de 8 números y 1 letra
     protected String apellido;
     protected String direccion;
+
+    static final long serialVersionUID = 1L;
 
     public Empleado() {
     }
@@ -386,7 +389,7 @@ public class Empleado {
      *
      * @param path
      */
-    public void exportarObjetoEmpleado(String path) {
+    public void exportarObjetoEmpleadoTexto(String path) {
         File fichero = new File(path);
         FileWriter escritor = null;
         PrintWriter buffer = null;
@@ -419,7 +422,7 @@ public class Empleado {
      *
      * @param path
      */
-    public void exportarColeccionDeObjetosEmpleado(String path) {
+    public static void exportarColeccionDeObjetosEmpleadoTexto(String path) {
         ArrayList<Empleado> coleccion;
         coleccion = Empleado.convertir(Utilidades.EMPLEADOS);
         File fichero = new File(path);
@@ -477,7 +480,7 @@ public class Empleado {
      *
      * @param path
      */
-    public void exportarColeccionEmpleadosaArchivoBinario(String path) {
+    public static void exportarColeccionEmpleadosaArchivoBinario(String path) {
         ArrayList<Empleado> coleccion;
         coleccion = Empleado.convertir(Utilidades.EMPLEADOS);
         try {
@@ -495,6 +498,13 @@ public class Empleado {
         }
     }
 
+    /**
+     * Este metodo importa una coleccion de obejtos de tipo empleado desde un
+     * fichero de datos binario
+     *
+     * @param path
+     * @return
+     */
     public static ArrayList<Empleado> importarEmpleadoDesdeFicheroBinario(String path) {
         ArrayList<Empleado> ret = new ArrayList<Empleado>();
         FileInputStream lector = null;
@@ -517,15 +527,112 @@ public class Empleado {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Se ha producido una FileNotFoundException" + e.getMessage());
+            System.out.println("No se ha encontrado el fichero");
         } catch (EOFException e) {
             System.out.println("Final de fichero");
         } catch (IOException e) {
-            System.out.println("Se ha producido una IOException: " + e.getMessage());
+            System.out.println("Se ha producido un error en la inserción de los datos");
         } catch (ClassNotFoundException e) {
-            System.out.println("Se ha producido una ClassNotFoundException" + e.getMessage());
+            System.out.println("No se ha encontrado la clase a la cual haces referencia");
         } catch (Exception e) {
-            System.out.println("Se ha producido una Exception" + e.getMessage());
+            System.out.println("Se ha producido un error inesperado intentelo de nuevo");
+        }
+        return ret;
+    }
+
+    /**
+     * Este metodo importa una coleccion de objetos de tipo empleado desde un
+     * fichero de tecto
+     *
+     * @param path
+     * @return
+     */
+    public static ArrayList<Empleado> importarEmpleadoDesdeFicheroTexto(String path) {
+        ArrayList<Empleado> ret = new ArrayList<Empleado>();
+        FileReader inputStream = null;
+        BufferedReader lector = null;
+        try {
+            try {
+                inputStream = new FileReader(path);
+                lector = new BufferedReader(inputStream);
+                Empleado e;
+                while (lector.ready()) {
+                    String cadena = lector.readLine();
+                    if (cadena.isEmpty() == false) {
+                        String[] parametros = cadena.split("\\|");
+                        e = new Empleado(Integer.valueOf(parametros[0]), parametros[1], parametros[2], parametros[3], parametros[4], parametros[5]);
+                        ret.add(e);
+                    }
+                }
+            } finally {
+                if (lector != null) {
+                    lector.close();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero");
+        } catch (EOFException e) {
+            System.out.println("Final de fichero");
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error en la inserción de los datos");
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error inesperado intentelo de nuevo");
+        }
+        return ret;
+    }
+    
+    /**
+     * Este metodo busca un objeto de la coleccion de objetos de un fichero de texto mediante el id del objeto
+     * @param path
+     * @return 
+     */
+    public static ArrayList<Empleado> buscarPorIDEnFicheroDeTexto(String path) {
+        ArrayList<Empleado> ret = new ArrayList<Empleado>();
+        FileReader inputStream = null;
+        BufferedReader lector = null;
+        try {
+            try {
+                inputStream = new FileReader(path);
+                lector = new BufferedReader(inputStream);
+                Empleado e;
+                while (lector.ready()) {
+                    String cadena = lector.readLine();
+                    if (cadena.isEmpty() == false) {
+                        String[] parametros = cadena.split("\\|");
+                        e = new Empleado(Integer.valueOf(parametros[0]), parametros[1], parametros[2], parametros[3], parametros[4], parametros[5]);
+                        ret.add(e);
+                    }
+                }
+                Scanner in = new Scanner(System.in);
+                int idBuscar = 0;
+                do {
+                    System.out.print("Introduce el id que desea buscar dentro del fichero de texto: ");
+                    idBuscar = in.nextInt();
+                    if (idBuscar <= 0) {
+                        System.out.println("Debe introducir un valor mayor que cero");
+                    }
+                } while (idBuscar <= 0);
+                for (Empleado em : ret) {
+                    if (em.getId() == idBuscar) {
+                        System.out.println(em.data());
+                        break;
+                    }
+                }
+            } finally {
+                if (lector != null) {
+                    lector.close();
+                }
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("El carácter introducido no es un entero");
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero");
+        } catch (EOFException e) {
+            System.out.println("Final de fichero");
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error en la inserción de los datos");
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error inesperado intentelo de nuevo");
         }
         return ret;
     }
@@ -539,7 +646,7 @@ public class Empleado {
     }
 
     public String data() {
-        return id + '|' + nombre + '|' + telefono + '|' + nif + '|' + apellido + '|' + direccion;
+        return id + "|" + nombre + '|' + telefono + '|' + nif + '|' + apellido + '|' + direccion;
     }
 
     @Override

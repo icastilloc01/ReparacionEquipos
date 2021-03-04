@@ -34,12 +34,6 @@ public class ReparacionEquipos {
         empleados.addAll(repartidores);
         empleados.addAll(sustitutos);
         
-        System.out.println("Escribe el path");
-        Scanner in = new Scanner(System.in);
-        String path = in.nextLine();
-        Empleado e = new Empleado();
-        e.exportarColeccionDeObjetosEmpleado(path);
-        
         //Comienzo del menu
         mostrarMenuPrincipal();        
     }
