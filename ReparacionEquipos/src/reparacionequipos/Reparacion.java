@@ -41,6 +41,11 @@ public class Reparacion extends Servicio {
     public Reparacion() {
         super();
     }
+
+    public Reparacion(long idreparacion, int duraciontotal) {
+        this.idreparacion = idreparacion;
+        this.duraciontotal = duraciontotal;
+    }
     
       public static ArrayList<Reparacion> convertir(Reparacion[] array) {
         ArrayList<Reparacion> ret = new ArrayList<Reparacion>();
@@ -331,7 +336,7 @@ public class Reparacion extends Servicio {
                     String cadena = lector.readLine();
                     if (cadena.isEmpty() == false) {
                         String[] parametros = cadena.split("\\|");
-                        r = new Reparacion(Integer.valueOf(parametros[0]), parametros[1], parametros[2], parametros[3], parametros[4], parametros[5]);
+                        r = new Reparacion(Integer.valueOf(parametros[0]), Integer.valueOf(parametros[1]));
                         ret.add(r);
                     }
                 }
@@ -372,7 +377,7 @@ public class Reparacion extends Servicio {
                     String cadena = lector.readLine();
                     if (cadena.isEmpty() == false) {
                         String[] parametros = cadena.split("\\|");
-                        r = new Reparacion(Integer.valueOf(parametros[0]), parametros[1], parametros[2], parametros[3], parametros[4], parametros[5]);
+                        r = new Reparacion(Integer.valueOf(parametros[0]), Integer.valueOf(parametros[1]));
                         ret.add(r);
                     }
                 }

@@ -39,9 +39,6 @@ public class Mantenimiento extends Servicio implements Serializable {
     }
 
     
-    Mantenimiento(Integer valueOf, String parametro, String parametro0, String parametro1, String parametro2, String parametro3) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     public Mantenimiento(int horastrabajadas, long id, Date fechaServicio, String nota, ArrayList<Cliente> clientes) {
         super(id, fechaServicio, nota, clientes);
         this.horastrabajadas = horastrabajadas;
@@ -263,7 +260,7 @@ public class Mantenimiento extends Servicio implements Serializable {
                     String cadena = lector.readLine();
                     if (cadena.isEmpty() == false) {
                         String[] parametros = cadena.split("\\|");
-                        m = new Mantenimiento(Integer.valueOf(parametros[0]), parametros[1], parametros[2], parametros[3], parametros[4], parametros[5]);
+                        m = new Mantenimiento(Integer.valueOf(parametros[0]));
                         ret.add(m);
                     }
                 }
@@ -304,7 +301,7 @@ public class Mantenimiento extends Servicio implements Serializable {
                     String cadena = lector.readLine();
                     if (cadena.isEmpty() == false) {
                         String[] parametros = cadena.split("\\|");
-                        m = new Mantenimiento(Integer.valueOf(parametros[0]), parametros[1], parametros[2], parametros[3], parametros[4], parametros[5]);
+                        m = new Mantenimiento(Integer.valueOf(parametros[0]));
                         ret.add(m);
                     }
                 }

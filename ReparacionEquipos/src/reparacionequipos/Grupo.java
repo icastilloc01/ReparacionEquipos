@@ -32,11 +32,6 @@ public class Grupo {
     private long idgrupo;
     private ArrayList<Reparacion> reparaciones = new ArrayList<>();
     private ArrayList<Detaller> detalleres = new ArrayList<>();
-
-    
-    Grupo(Integer valueOf, String parametro, String parametro0, String parametro1, String parametro2, String parametro3) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
      public static ArrayList<Grupo> convertir(Grupo[] array) {
         ArrayList<Grupo> ret = new ArrayList<Grupo>();
@@ -261,7 +256,7 @@ public class Grupo {
                     String cadena = lector.readLine();
                     if (cadena.isEmpty() == false) {
                         String[] parametros = cadena.split("\\|");
-                        g = new Grupo(Integer.valueOf(parametros[0]), parametros[1], parametros[2], parametros[3], parametros[4], parametros[5]);
+                        g = new Grupo(Integer.valueOf(parametros[0]));
                         ret.add(g);
                     }
                 }
@@ -302,7 +297,7 @@ public class Grupo {
                     String cadena = lector.readLine();
                     if (cadena.isEmpty() == false) {
                         String[] parametros = cadena.split("\\|");
-                        g = new Grupo(Integer.valueOf(parametros[0]), parametros[1], parametros[2], parametros[3], parametros[4], parametros[5]);
+                        g = new Grupo(Integer.valueOf(parametros[0]));
                         ret.add(g);
                     }
                 }

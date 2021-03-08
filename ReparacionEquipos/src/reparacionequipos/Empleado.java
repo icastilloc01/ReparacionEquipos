@@ -136,8 +136,13 @@ public class Empleado implements Serializable {
         Empleado nuevoEmpleado = new Empleado();
         Scanner in = new Scanner(System.in);
         nuevoEmpleado.id = nextIdEmpleado();
-        System.out.print("Introduzca el nombre del nuevo empleado: ");
-        nuevoEmpleado.nombre = in.nextLine();
+        do {
+            System.out.print("Introduzca el nombre del nuevo empleado: ");
+            nuevoEmpleado.nombre = in.nextLine();
+            if (nuevoEmpleado.nombre.length() < 3 || nuevoEmpleado.nombre.length() > 25 || Utilidades.isNumeric(nuevoEmpleado.nombre) == true) {
+                System.out.println("El nombre introducido contiene números, es menos de 3 o mayor de 25 caracteres");
+            }
+        } while (nuevoEmpleado.nombre.length() < 3 || nuevoEmpleado.nombre.length() > 25 || Utilidades.isNumeric(nuevoEmpleado.nombre) == true);
         do {
             System.out.print("Introduzca el teléfono del nuevo empleado: ");
             nuevoEmpleado.telefono = in.nextLine();
@@ -580,11 +585,13 @@ public class Empleado implements Serializable {
         }
         return ret;
     }
-    
+
     /**
-     * Este metodo busca un objeto de la coleccion de objetos de un fichero de texto mediante el id del objeto
+     * Este metodo busca un objeto de la coleccion de objetos de un fichero de
+     * texto mediante el id del objeto
+     *
      * @param path
-     * @return 
+     * @return
      */
     public static ArrayList<Empleado> buscarPorIDEnFicheroDeTexto(String path) {
         ArrayList<Empleado> ret = new ArrayList<Empleado>();
