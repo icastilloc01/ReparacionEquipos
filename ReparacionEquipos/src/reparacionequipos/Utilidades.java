@@ -121,16 +121,16 @@ public class Utilidades {
     };
 
     public static final Empleado EMPLEADOS[] = {
-        new Empleado(1, "JoseManuel", "785904034", "78594834Y", "Ramirez", "C-Los Santos 23 4ºA"),
-        new Empleado(2, "Eustaquio", "765889239", "56749823R", "Fernandez", "C-Los Santos 45 3ºC"),
-        new Empleado(3, "Federico", "657387298", "87498923G", "Garcia", "C-Menendez Pelayo 3 3ºC"),
-        new Empleado(4, "Rigoberta", "897869589", "34873892F", "Diaz", "C-San Lorenzo 15 4ºA"),
-        new Empleado(5, "Anastasia", "567388298", "64538723H", "Larios", "C-Los Santos 34 10ºC"),
-        new Empleado(6, "Susana", "756498231", "76583934R", "Diaz", "C-Los Santos 23 5ºD"),
-        new Empleado(7, "Federica", "875983847", "92837461J", "Lopez", "C-San Lorenzo 13 3ºC"),
-        new Empleado(8, "Fernando", "765874938", "64830289N", "Gomez", "C-Los Santos 23 4ºD"),
-        new Empleado(9, "Beatriz", "874590873", "74628712U", "Garcia", "C-Los Santos 12 7ºD"),
-        new Empleado(10, "Anastasia", "874875908", "12345678I", "Gomez", "C-Menendez Pelayo 5 3ºA")
+        new Empleado(1, "JoseManuel", "785904034", "78594834Y", "Ramirez", "C\\Los Santos 23 4ºA"),
+        new Empleado(2, "Eustaquio", "765889239", "56749823R", "Fernandez", "C\\Los Santos 45 3ºC"),
+        new Empleado(3, "Federico", "657387298", "87498923G", "Garcia", "C\\Menendez Pelayo 3 3ºC"),
+        new Empleado(4, "Rigoberta", "897869589", "34873892F", "Diaz", "C\\San Lorenzo 15 4ºA"),
+        new Empleado(5, "Anastasia", "567388298", "64538723H", "Larios", "C\\Los Santos 34 10ºC"),
+        new Empleado(6, "Susana", "756498231", "76583934R", "Diaz", "C\\Los Santos 23 5ºD"),
+        new Empleado(7, "Federica", "875983847", "92837461J", "Lopez", "C\\San Lorenzo 13 3ºC"),
+        new Empleado(8, "Fernando", "765874938", "64830289N", "Gomez", "C\\Los Santos 23 4ºD"),
+        new Empleado(9, "Beatriz", "874590873", "74628712U", "Garcia", "C\\Los Santos 12 7ºD"),
+        new Empleado(10, "Anastasia", "874875908", "12345678I", "Gomez", "C\\Menendez Pelayo 5 3ºA")
     };
 
     public static final int numEmpleados = EMPLEADOS.length;

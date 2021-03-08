@@ -157,10 +157,20 @@ public class Empleado implements Serializable {
                 System.out.println("La cadena introducida no corresponde con el formato de un nif");
             }
         } while (Utilidades.validarNIF(nuevoEmpleado.nif) == false);
-        System.out.print("Introduzca el apellido del nuevo empleado: ");
-        nuevoEmpleado.apellido = in.nextLine();
+        do {
+            System.out.print("Introduzca el apellido del nuevo empleado: ");
+            nuevoEmpleado.apellido = in.nextLine();
+            if (nuevoEmpleado.nombre.length() < 3 || nuevoEmpleado.nombre.length() > 25 || Utilidades.isNumeric(nuevoEmpleado.nombre) == true) {
+                System.out.println("El apellido introducido contiene números, es menos de 3 o mayor de 25 caracteres");
+            }
+        } while (nuevoEmpleado.apellido.length() < 3 || nuevoEmpleado.apellido.length() > 25 || Utilidades.isNumeric(nuevoEmpleado.apellido) == true);
+        do {
         System.out.print("Introduzca la direccion del nuevo empleado: ");
         nuevoEmpleado.direccion = in.nextLine();
+            if(nuevoEmpleado.direccion.matches("C\\*") == false){
+                System.out.println("El formato de dirección que ha introducidono es valido,introduzca una dirección que empiece por C\\");
+            }
+        } while(nuevoEmpleado.direccion.matches("C\\*") == false);
         return nuevoEmpleado;
     }
 
