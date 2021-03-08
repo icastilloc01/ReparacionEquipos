@@ -142,13 +142,11 @@ public class Envio extends Servicio {
         Envio nuevoEnvio = new Envio();
         Scanner in = new Scanner(System.in);
         try {
-
             nuevoEnvio.idEnvio = nextIdEnvio();
-            nuevoEnvio.lugar = in.nextLine();//esta linea es para que no se salte el proximo nextLine
             System.out.println("Introduzca la fecha de salidad del envio");
             nuevoEnvio.fechaSalida = Utilidades.introducirFecha();
             System.out.println("introduzca el precio del reparto");
-            nuevoEnvio.precioDeReparto = in.nextInt();
+            nuevoEnvio.precioDeReparto = Integer.parseInt(in.nextLine());
             System.out.println("introduzca el precio total");
             nuevoEnvio.precioTotal = in.nextDouble();
             System.out.println("introduzca el coste");
