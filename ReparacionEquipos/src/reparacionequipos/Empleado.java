@@ -138,31 +138,31 @@ public class Empleado implements Serializable {
         do {
             System.out.print("Introduzca el nombre del nuevo empleado: ");
             nuevoEmpleado.nombre = in.nextLine();
-            if (nuevoEmpleado.nombre.length() < 3 || nuevoEmpleado.nombre.length() > 25 || Utilidades.isNumeric(nuevoEmpleado.nombre) == true) {
+            if (nuevoEmpleado.nombre.length() < 3 || nuevoEmpleado.nombre.length() > 25 || Utilidades.isNumeric(nuevoEmpleado.nombre)) {
                 System.out.println("El nombre introducido contiene números, es menos de 3 o mayor de 25 caracteres");
             }
-        } while (nuevoEmpleado.nombre.length() < 3 || nuevoEmpleado.nombre.length() > 25 || Utilidades.isNumeric(nuevoEmpleado.nombre) == true);
+        } while (nuevoEmpleado.nombre.length() < 3 || nuevoEmpleado.nombre.length() > 25 || Utilidades.isNumeric(nuevoEmpleado.nombre));
         do {
             System.out.print("Introduzca el teléfono del nuevo empleado: ");
             nuevoEmpleado.telefono = in.nextLine();
-            if (nuevoEmpleado.telefono.length() != 9 || Utilidades.isNumeric(nuevoEmpleado.telefono) == false) {
+            if (nuevoEmpleado.telefono.length() != 9 || !Utilidades.isNumeric(nuevoEmpleado.telefono)) {
                 System.out.println("La cadena introducida para teléfono contiene algún caracter que no es un número o no tiene una longitud de 9 carácteres");
             }
-        } while (nuevoEmpleado.telefono.length() != 9 || Utilidades.isNumeric(nuevoEmpleado.telefono) == false);
+        } while (nuevoEmpleado.telefono.length() != 9 || !Utilidades.isNumeric(nuevoEmpleado.telefono));
         do {
             System.out.print("Introduzca el nif del nuevo empleado: ");
             nuevoEmpleado.nif = in.nextLine();
-            if (Utilidades.validarNIF(nuevoEmpleado.nif) == false) {
+            if (!Utilidades.validarNIF(nuevoEmpleado.nif)) {
                 System.out.println("La cadena introducida no corresponde con el formato de un nif");
             }
-        } while (Utilidades.validarNIF(nuevoEmpleado.nif) == false);
+        } while (!Utilidades.validarNIF(nuevoEmpleado.nif));
         do {
             System.out.print("Introduzca el apellido del nuevo empleado: ");
             nuevoEmpleado.apellido = in.nextLine();
-            if (nuevoEmpleado.nombre.length() < 3 || nuevoEmpleado.nombre.length() > 25 || Utilidades.isNumeric(nuevoEmpleado.nombre) == true) {
+            if (nuevoEmpleado.nombre.length() < 3 || nuevoEmpleado.nombre.length() > 25 || Utilidades.isNumeric(nuevoEmpleado.nombre)) {
                 System.out.println("El apellido introducido contiene números, es menos de 3 o mayor de 25 caracteres");
             }
-        } while (nuevoEmpleado.apellido.length() < 3 || nuevoEmpleado.apellido.length() > 25 || Utilidades.isNumeric(nuevoEmpleado.apellido) == true);
+        } while (nuevoEmpleado.apellido.length() < 3 || nuevoEmpleado.apellido.length() > 25 || Utilidades.isNumeric(nuevoEmpleado.apellido));
         do {
             System.out.print("Introduzca la direccion del nuevo empleado: ");
             nuevoEmpleado.direccion = in.nextLine();
