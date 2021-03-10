@@ -145,14 +145,34 @@ public class Envio extends Servicio {
             nuevoEnvio.idEnvio = nextIdEnvio();
             System.out.println("Introduzca la fecha de salidad del envio");
             nuevoEnvio.fechaSalida = Utilidades.introducirFecha();
-            System.out.println("introduzca el precio del reparto");
-            nuevoEnvio.precioDeReparto = Integer.parseInt(in.nextLine());
-            System.out.println("introduzca el precio total");
-            nuevoEnvio.precioTotal = in.nextDouble();
-            System.out.println("introduzca el coste");
-            nuevoEnvio.coste = in.nextDouble();
-            System.out.println("Introduce el lugar del envio");
-            nuevoEnvio.lugar = in.nextLine();
+            do {
+                System.out.println("introduzca el precio del reparto");
+                nuevoEnvio.precioDeReparto = Integer.parseInt(in.nextLine());
+                if (nuevoEnvio.precioDeReparto < 1) {
+                    System.out.println("el precio de reparto introducido es menor o igual a 0");
+                }
+            } while (nuevoEnvio.precioDeReparto < 1);
+            do {
+                System.out.println("introduzca el precio total");
+                nuevoEnvio.precioTotal = in.nextDouble();
+                if (nuevoEnvio.precioTotal <= 0) {
+                    System.out.println("el valor introducido es menor o igual a 0");
+                }
+            } while (nuevoEnvio.precioTotal <= 0);
+            do {
+                System.out.println("introduzca el coste");
+                nuevoEnvio.coste = in.nextDouble();
+                if (nuevoEnvio.coste <= 0) {
+                    System.out.println("el valor introducido es menor o igual a 0");
+                }
+            } while (nuevoEnvio.coste <= 0);
+            do {
+                System.out.println("Introduce el lugar del envio");
+                nuevoEnvio.lugar = in.nextLine();
+                if (nuevoEnvio.lugar.isEmpty() || nuevoEnvio.lugar.length() < 3 || nuevoEnvio.lugar.length() > 25) {
+                    System.out.println("el campo esta vacio, su lonjitud es menor a 3 o mayor a 25");
+                }
+            } while (nuevoEnvio.lugar.isEmpty() || nuevoEnvio.lugar.length() < 3 || nuevoEnvio.lugar.length() > 25);
 
         } catch (InputMismatchException ex) {
             System.out.println("El caracter introducido no es valido");
@@ -186,6 +206,10 @@ public class Envio extends Servicio {
             ret.add((Envio) e);
         }
         return ret;
+    }
+
+    public String data() {
+        return idEnvio + "|" + fechaSalida + '|' + precioDeReparto + '|' + precioTotal + '|' + coste + '|' + lugar + '|' + repartidores;
     }
 
 }
