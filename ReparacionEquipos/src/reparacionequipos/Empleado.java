@@ -166,10 +166,10 @@ public class Empleado implements Serializable {
         do {
             System.out.print("Introduzca la direccion del nuevo empleado: ");
             nuevoEmpleado.direccion = in.nextLine();
-            if (nuevoEmpleado.direccion.matches("C\\*") == false) {
-                System.out.println("El formato de dirección que ha introducidono es valido,introduzca una dirección que empiece por C\\");
+            if (nuevoEmpleado.direccion.startsWith("C\\") == false) {
+                System.out.println("El formato de dirección que ha introducido no es valido,introduzca una dirección que empiece por C\\");
             }
-        } while (nuevoEmpleado.direccion.matches("C\\*") == false);
+        } while (nuevoEmpleado.direccion.startsWith("C\\") == false);
         return nuevoEmpleado;
     }
 

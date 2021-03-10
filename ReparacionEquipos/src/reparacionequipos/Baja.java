@@ -80,19 +80,32 @@ public class Baja {
         this.empleado = empleado;
     }
 
+    public static long nextIdBaja() {
+        long ret = 0;
+        for (Baja b : Utilidades.BAJAS) {
+            if (b.getId() > ret) {
+                ret = b.getId();
+            }
+        }
+        return ret;
+    }
+
     public static Baja nuevaBaja() {
         Baja nuevaBaja = new Baja();
         Scanner in = new Scanner(System.in);
-        System.out.print("Introduzca el id de la baja: ");
-        nuevaBaja.id = in.nextLong();
-        nuevaBaja.motivo = in.nextLine(); //esta linea es para que no se salte el proximo nextLine
+        nuevaBaja.setId(nextIdBaja());
         System.out.print("Introduzca la fecha de inicio de la baja: ");
         nuevaBaja.fechainicio = Utilidades.introducirFecha();
-        System.out.println("Introduzca el motivo de la baja: ");
-        nuevaBaja.motivo = in.nextLine();
+        do {
+            System.out.println("Introduzca el motivo de la baja: ");
+            nuevaBaja.motivo = in.nextLine();
+            if (nuevaBaja.motivo.length() > 100) {
+                System.out.println("El motivo introducido esta vacio o es demasiado largo");
+            }
+        } while (nuevaBaja.motivo.length() > 100 || nuevaBaja.motivo.length() == 0);
         return nuevaBaja;
     }
-    
+
     public static ArrayList<Baja> convertir(Baja[] array) {
         ArrayList<Baja> ret = new ArrayList<Baja>();
         for (Baja b : array) {
@@ -100,7 +113,7 @@ public class Baja {
         }
         return ret;
     }
-    
+
     @Override
     public String toString() {
         return "Baja{" + "id=" + id + ", fechainicio=" + fechainicio + ", fechafin=" + fechafin + ", motivo=" + motivo + '}';

@@ -104,8 +104,13 @@ public class Sustituto extends Empleado {
         nuevoSustituto.setApellido(e.getApellido());
         nuevoSustituto.setDireccion(e.getDireccion());
         Scanner in = new Scanner(System.in);
-        System.out.print("Introduzca la edad del nuevo sustituto: ");
-        nuevoSustituto.edad = in.nextLine();
+        do {
+            System.out.print("Introduzca la edad del nuevo sustituto: ");
+            nuevoSustituto.edad = in.nextLine();
+            if (Utilidades.isNumeric(nuevoSustituto.edad) == false || nuevoSustituto.edad.length() > 3 || nuevoSustituto.edad.length() < 0 || Integer.parseInt(nuevoSustituto.edad) < 0) {
+                System.out.println("La edad que ha introducido no es valida");
+            }
+        } while (Utilidades.isNumeric(nuevoSustituto.edad) == false || nuevoSustituto.edad.length() > 3 || nuevoSustituto.edad.length() < 0 || Integer.parseInt(nuevoSustituto.edad) < 0);
         System.out.println("¿Tiene exclusión social? s/n");
         nuevoSustituto.exclusionsocial = Utilidades.leerBoolean();
         return nuevoSustituto;
