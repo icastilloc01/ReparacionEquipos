@@ -81,8 +81,7 @@ public class Grupo {
         Grupo nuevogrupo = new Grupo();
         Scanner sc = new Scanner(System.in);
         //Muestro el día y la hora
-        SimpleDateFormat sdf = new SimpleDateFormat(" EEEE dd MMMM yyyy(hh:mm:ss)");
-        System.out.println("Ahora es el día y la hora : " + sdf.format(new Date()));
+        
         //System.out.println(" Este es tu id :" + Grupo.thenextid());
         if (nuevogrupo.getId() <= 0) {
             throw new GrupoException("Valor no valido");
@@ -254,7 +253,7 @@ public class Grupo {
                 Grupo g;
                 while (lector.ready()) {
                     String cadena = lector.readLine();
-                    if (cadena.isEmpty() == false) {
+                    if (!cadena.isEmpty()) {
                         String[] parametros = cadena.split("\\|");
                         g = new Grupo(Integer.valueOf(parametros[0]));
                         ret.add(g);

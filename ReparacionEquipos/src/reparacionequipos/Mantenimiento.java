@@ -38,7 +38,6 @@ public class Mantenimiento extends Servicio implements Serializable {
         super();
     }
 
-    
     public Mantenimiento(int horastrabajadas, long id, Date fechaServicio, String nota, ArrayList<Cliente> clientes) {
         super(id, fechaServicio, nota, clientes);
         this.horastrabajadas = horastrabajadas;
@@ -49,9 +48,11 @@ public class Mantenimiento extends Servicio implements Serializable {
         this.horastrabajadas = m.horastrabajadas;
     }
 
-    Mantenimiento(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Mantenimiento(int horastrabajadas) {
+        this.horastrabajadas = horastrabajadas;
     }
+
+    
 
     public int getHorastrabajadas() {
         return horastrabajadas;
@@ -68,8 +69,8 @@ public class Mantenimiento extends Servicio implements Serializable {
     public void setReparaciones(ArrayList<Reparacion> reparaciones) {
         this.reparaciones = reparaciones;
     }
-    
-     public static ArrayList<Mantenimiento> convertir(Mantenimiento[] array) {
+
+    public static ArrayList<Mantenimiento> convertir(Mantenimiento[] array) {
         ArrayList<Mantenimiento> ret = new ArrayList<Mantenimiento>();
         for (Mantenimiento m : array) {
             ret.add((Mantenimiento) m);
@@ -82,8 +83,6 @@ public class Mantenimiento extends Servicio implements Serializable {
         Servicio nuevoservicio = Servicio.nuevoServicio();
         boolean exit;
         exit = false;
-        SimpleDateFormat sdf = new SimpleDateFormat(" EEEE dd MMMM yyyy(hh:mm:ss)");
-        System.out.println("Ahora es el día y la hora : " + sdf.format(new Date()));
 
         for (int i = 0; i < Utilidades.CLIENTES.length; i++) {
             Cliente s = Utilidades.CLIENTES[i];
@@ -96,11 +95,13 @@ public class Mantenimiento extends Servicio implements Serializable {
         //Long id = Mantenimiento.thenextid();
 
         do {
+            boolean ret = false;
             System.out.println("Dame las horas trabajadas que has trabajado");
             horastrabajadas = sc.nextInt();
             if (horastrabajadas >= 0) {
 
                 System.out.println("Los datos introducidos son válidos");
+                ret = true;
 
             } else {
                 System.out.println("Los datos introducidos no son válidos,por favor,introduzca a continuación los datos de forma correcta.");
@@ -114,12 +115,12 @@ public class Mantenimiento extends Servicio implements Serializable {
         return nuevomantenimiento;
     }
 
-    public String data(){
-    
-    return this.getHorastrabajadas()+" | "+this.getReparaciones()+" | ";
+    public String data() {
+
+        return this.getHorastrabajadas() + " | " + this.getReparaciones() + " | ";
     }
     //*Los métodos de manejo de ficheros están en la clase Serialización
-    
+
     public void exportarObjetoMantenimientoTexto(String path) {
         File fichero = new File(path);
         FileWriter escritor = null;
@@ -145,8 +146,8 @@ public class Mantenimiento extends Servicio implements Serializable {
             System.out.println("Se ha producido un error inesperado intentelo de nuevo");
         }
     }
-    
-     public static void exportarColeccionDeObjetosMantenimientoTexto(String path) {
+
+    public static void exportarColeccionDeObjetosMantenimientoTexto(String path) {
         ArrayList<Mantenimiento> coleccion;
         coleccion = Mantenimiento.convertir(Utilidades.MANTENIMIENTOS);
         File fichero = new File(path);
@@ -156,7 +157,7 @@ public class Mantenimiento extends Servicio implements Serializable {
             try {
                 escritor = new FileWriter(fichero, true);
                 buffer = new PrintWriter(escritor);
-                for (Mantenimiento m: coleccion) {
+                for (Mantenimiento m : coleccion) {
                     buffer.print(m.data() + "\n");
                 }
             } finally {
@@ -175,13 +176,12 @@ public class Mantenimiento extends Servicio implements Serializable {
             System.out.println("Se ha producido un error inesperado intentelo de nuevo");
         }
     }
-     
-     
-        public void exportarMantenimientoaArchivoBinario(String path) {
+
+    public void exportarMantenimientoaArchivoBinario(String path) {
         try {
             FileOutputStream fichero = new FileOutputStream(path, true);
             ObjectOutputStream mantenimiento = new ObjectOutputStream(fichero);
-           mantenimiento.writeObject(this);
+            mantenimiento.writeObject(this);
             mantenimiento.flush();
             mantenimiento.close();
         } catch (FileNotFoundException e) {
@@ -193,8 +193,7 @@ public class Mantenimiento extends Servicio implements Serializable {
         }
     }
 
-
-        public static void exportarColeccionMantenimientoArchivoBinario(String path) {
+    public static void exportarColeccionMantenimientoArchivoBinario(String path) {
         ArrayList<Mantenimiento> coleccion;
         coleccion = Mantenimiento.convertir(Utilidades.MANTENIMIENTOS);
         try {
@@ -212,7 +211,7 @@ public class Mantenimiento extends Servicio implements Serializable {
         }
     }
 
-        public static ArrayList<Mantenimiento> importarMantenimientoDesdeFicheroBinario(String path) {
+    public static ArrayList<Mantenimiento> importarMantenimientoDesdeFicheroBinario(String path) {
         ArrayList<Mantenimiento> ret = new ArrayList<Mantenimiento>();
         FileInputStream lector = null;
         ObjectInputStream lectorObjeto = null;
@@ -246,8 +245,8 @@ public class Mantenimiento extends Servicio implements Serializable {
         }
         return ret;
     }
-    
-        public static ArrayList<Mantenimiento> importarMantenimientoDesdeFicheroTexto(String path) {
+
+    public static ArrayList<Mantenimiento> importarMantenimientoDesdeFicheroTexto(String path) {
         ArrayList<Mantenimiento> ret = new ArrayList<Mantenimiento>();
         FileReader inputStream = null;
         BufferedReader lector = null;
@@ -280,13 +279,13 @@ public class Mantenimiento extends Servicio implements Serializable {
         }
         return ret;
     }
-    
 
-       
     /**
-     * Este metodo busca un objeto de la coleccion de objetos de un fichero de texto mediante el id del objeto
+     * Este metodo busca un objeto de la coleccion de objetos de un fichero de
+     * texto mediante el id del objeto
+     *
      * @param path
-     * @return 
+     * @return
      */
     public static ArrayList<Mantenimiento> buscarPorIDEnFicheroDeTexto(String path) {
         ArrayList<Mantenimiento> ret = new ArrayList<Mantenimiento>();
@@ -339,11 +338,9 @@ public class Mantenimiento extends Servicio implements Serializable {
         return ret;
     }
 
-        @Override
-        public String toString
-        
-            () {
+    @Override
+    public String toString() {
         return "Mantenimiento{" + "horastrabajadas=" + horastrabajadas + ", reparaciones=" + reparaciones + '}';
-        }
-
     }
+
+}

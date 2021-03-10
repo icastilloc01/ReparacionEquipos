@@ -91,16 +91,21 @@ public class Reparacion extends Servicio {
     }
 
     public static Reparacion nuevaReparacion() {
-        SimpleDateFormat sdf = new SimpleDateFormat(" EEEE dd MMMM yyyy(hh:mm:ss)");
-        System.out.println("Ahora es el día y la hora : " + sdf.format(new Date()));
+        
         Reparacion r = new Reparacion();
         Scanner in = new Scanner(System.in);
+        boolean ret = false;
         boolean salir;
         do {
             System.out.println("Introduzca el id de la reparación:");
             long id = in.nextLong();
+            if(r.getIdreparacion()>0){
+                System.out.println("Id válido");
+                ret = true;
+            }
             if (r.getIdreparacion() < 0) {
                 throw new ReparacionException("Valor inválido");
+                
             }
             r.setId(id);
             System.out.println("Introduzca la duración de la reparación:");
@@ -118,6 +123,11 @@ public class Reparacion extends Servicio {
 
     @Override
     public String toString() {
+        return "Reparacion{" + "id=" + id + ", duraciontotal=" + duraciontotal + '}';
+    }
+    
+    
+    public String data() {
         return "Reparacion{" + "id=" + id + ", duraciontotal=" + duraciontotal + '}';
     }
 
@@ -190,10 +200,7 @@ public class Reparacion extends Servicio {
 
     }
     
-    public String data(){
     
-    return this.getDuraciontotal()+" | "+this.getIdreparacion()+" | "+this.getMantenimiento()+" | ";
-    }
     //*Los métodos de manejo de ficheros están en la clase Serialización
     
     public void exportarObjetoReparacionTexto(String path) {
@@ -334,7 +341,7 @@ public class Reparacion extends Servicio {
                 Reparacion r;
                 while (lector.ready()) {
                     String cadena = lector.readLine();
-                    if (cadena.isEmpty() == false) {
+                    if (!cadena.isEmpty()) {
                         String[] parametros = cadena.split("\\|");
                         r = new Reparacion(Integer.valueOf(parametros[0]), Integer.valueOf(parametros[1]));
                         ret.add(r);
@@ -375,7 +382,7 @@ public class Reparacion extends Servicio {
                 Reparacion r;
                 while (lector.ready()) {
                     String cadena = lector.readLine();
-                    if (cadena.isEmpty() == false) {
+                    if (!cadena.isEmpty()) {
                         String[] parametros = cadena.split("\\|");
                         r = new Reparacion(Integer.valueOf(parametros[0]), Integer.valueOf(parametros[1]));
                         ret.add(r);
