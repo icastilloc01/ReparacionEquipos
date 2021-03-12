@@ -82,12 +82,20 @@ public class Empleado implements Serializable {
         return direccion;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(long id) throws EmpleadoException{
+        if (id <= 0) {
+            this.id = id;
+        } else {
+            throw new EmpleadoException("El id introducido es menor que 1");
+        }
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombre(String nombre) throws EmpleadoException{
+        if (nombre.length() < 3 || nombre.length() > 25 || Utilidades.isNumeric(nombre)) {
+            this.nombre = nombre;
+        } else {
+            throw new EmpleadoException("El nombre introducido contiene números, es menos de 3 o mayor de 25 caracteres");
+        }
     }
 
     public void setTelefono(String telefono) {
