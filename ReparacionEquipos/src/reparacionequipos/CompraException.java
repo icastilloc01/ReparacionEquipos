@@ -5,6 +5,8 @@
  */
 package reparacionequipos;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Rxndy
@@ -17,5 +19,33 @@ public class CompraException extends RuntimeException {
         super(message);
     }
      
+    public static boolean validarMetodoPago(char metodoPago){
+
+    
+        return metodoPago=='E' || metodoPago=='T' || metodoPago=='B' ;
+        
+    }
+    
+    public static boolean validarPrecioTotal (double precio){
+        
+        return precio>0.0;
+    
+    }
+    
+    public static boolean validarId(long id){
+        
+        return id>0;
+    }
+    
+    
+    public static boolean comprobarArrayListEquipos(ArrayList <Equipo> Equipos){
+    
+        return Equipos.isEmpty();
+    }
+    
+    public static boolean comprobarArrayListLotes(ArrayList <Lote> Lotes){
+    
+        return Lotes.isEmpty();
+    }
     
 }

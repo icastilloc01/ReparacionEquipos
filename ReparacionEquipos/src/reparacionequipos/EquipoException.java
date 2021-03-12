@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/**package reparacionequipos;
-
+package reparacionequipos;
 /**
  *
  * @author Rxndy
-
+ */
 public class EquipoException extends RuntimeException {
 
 
@@ -24,6 +23,18 @@ public static boolean comprobarModeloEquipo(String modelo){
 
 }
     
+public static boolean comprobarId(long id){
+
+    return id>0;
+
 }
- */
+
+
+ public static boolean validarPrecioEquipo (double precio){
+        
+        return precio>0.0;
+    
+    }
+
+}
 

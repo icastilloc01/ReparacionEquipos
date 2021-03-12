@@ -318,7 +318,6 @@ public class Empleado implements Serializable {
             System.out.println("");
         } catch (InputMismatchException ex) {
             System.out.println("El carácter introducido no es un número, porfavor introduzca un número");
-            buscarEmpleadoPorId(empleados);
         }
     }
 

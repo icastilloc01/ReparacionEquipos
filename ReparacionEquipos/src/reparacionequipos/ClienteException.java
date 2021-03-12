@@ -5,6 +5,8 @@
  */
 package reparacionequipos;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Rxndy
@@ -43,6 +45,15 @@ public class ClienteException extends RuntimeException{
         return credito.matches(".\\.\\d\\d\\d\\d\\d\\d\\d\\d\\d");
     }
      
+    public static boolean comprobarArrayListServicios(ArrayList <Servicio> Servicios){
+    
+        return Servicios.isEmpty();
+    }
+    
+    public static boolean comprobarId(long id){
+    
+        return id>0;
+    }
     
     
 }

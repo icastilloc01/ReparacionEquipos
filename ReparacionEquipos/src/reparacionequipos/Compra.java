@@ -5,6 +5,21 @@
  */
 package reparacionequipos;
 
+import java.io.BufferedReader;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -29,6 +44,9 @@ public class Compra extends Servicio {
         this.equipos = equipos;
         this.lotes = lotes;
     }
+
+    
+    
 
     public Compra(long idCompra, double precioTotal, char metodoPago, ArrayList<Equipo> equipos, ArrayList<Lote> lotes, Servicio se) {
         super(se);
@@ -182,5 +200,149 @@ public class Compra extends Servicio {
         return ret;
     }
     
+    
+    
+    public void exportarCompraAFicheroDeTexto (String path){
+        File fichero = new File(path);
+        FileWriter escritor = null;
+        PrintWriter buffer = null ;
+        try {
+            try {
+                escritor = new FileWriter(fichero, true);
+                buffer = new PrintWriter(escritor);
+                buffer.print(this.data()+"\r\n");
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(escritor!=null)
+                    escritor.close();
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException"+e.getMessage());
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception"+e.getMessage());
+        }
+    }
+    
+    /**
+     * Este metodo exporta una coleccion de objetos de tipo empleado a un
+     * fichero binario
+     *
+     * @param path
+     */
+    public static void exportarColeccionComprasaArchivoBinario(String path) {
+        ArrayList<Compra> coleccion;
+        coleccion = Compra.convertir(Utilidades.COMPRAS);
+        try {
+            FileOutputStream fichero = new FileOutputStream(path, true);
+            ObjectOutputStream escritor = new ObjectOutputStream(fichero);
+            escritor.writeObject(coleccion);
+            escritor.flush();
+            escritor.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero");
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error en la inserción de los datos");
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error inesperado intentelo de nuevo");
+        }
+    }
+
+    /**
+     * Este metodo importa una coleccion de obejtos de tipo empleado desde un
+     * fichero de datos binario
+     *
+     * @param path
+     * @return
+     */
+    public static ArrayList<Compra> importarCompraDesdeFicheroBytes(String path) {
+        ArrayList<Compra> ret = new ArrayList<Compra>();
+        FileInputStream lector = null;
+        ObjectInputStream lectorObjeto = null;
+        try {
+            try {
+                lector = new FileInputStream(path);
+                lectorObjeto = new ObjectInputStream(lector);
+                Compra c;
+                while ((c = (Compra) lectorObjeto.readObject()) != null) {
+                    ret.add(c);
+                }
+            } finally {
+                if (lectorObjeto != null) {
+                    lectorObjeto.close();
+                }
+                if (lector != null) {
+                    lector.close();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero");
+        } catch (EOFException e) {
+            System.out.println("Final de fichero");
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error en la inserción de los datos");
+        } catch (ClassNotFoundException e) {
+            System.out.println("No se ha encontrado la clase a la cual haces referencia");
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error inesperado intentelo de nuevo");
+        }
+        return ret;
+    }
+
+    /**
+     * Este metodo importa una coleccion de objetos de tipo empleado desde un
+     * fichero de tecto
+     *
+     * @param path
+     * @return
+     */
+    /*public static ArrayList<Compra> importarCompraDesdeFicheroCaracteres(String path) {
+        ArrayList<Compra> ret = new ArrayList<Compra>();
+        File fichero = new File(path);
+        BufferedReader buffer = null;
+        FileReader lector = null;
+        try {
+            try {
+                lector = new FileReader(fichero);
+                buffer = new BufferedReader(lector);
+                String linea;
+                while ((linea = buffer.readLine())!= null) {
+                    String campos[] = linea.split("\\|");
+                    long idCompra = Long.parseLong(campos[0]);
+                    double precioTotal = Double.parseDouble(campos[1]);
+                    char metodoPago = campos[2].charAt(0);
+                    long id = Long.parseLong(campos[3]);
+                    Date fechaServicio = campos[4];
+                    String nota = campos[5];
+                    Compra c = new Compra (idCompra,precioTotal,metodoPago, id,fechaServicio,nota);
+                    ret.add(c);
+                }
+            } finally {
+                if (lector != null) {
+                    lector.close();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero");
+        } catch (EOFException e) {
+            System.out.println("Final de fichero");
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error en la inserción de los datos");
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error inesperado intentelo de nuevo");
+        }
+        return ret;
+    }*/
+
+    public String data() {
+        return id + "|" + precioTotal + '|' + metodoPago;
+    }
+
+ 
     
 }

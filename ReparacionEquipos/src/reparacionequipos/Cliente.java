@@ -5,6 +5,16 @@
  */
 package reparacionequipos;
 
+import java.io.BufferedReader;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -39,6 +49,16 @@ public class Cliente {
         this.tarjetaCredito = tarjetaCredito;
         this.cuentaCorriente = cuentaCorriente;
         this.servicios = servicios;
+    }
+    
+    public Cliente(long id, String nombre, String nif, String direccion, String telefono, String tarjetaCredito, String cuentaCorriente){
+        this.id = id;
+        this.nombre = nombre;
+        this.nif = nif;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.tarjetaCredito = tarjetaCredito;
+        this.cuentaCorriente = cuentaCorriente;
     }
 
     //constructor copia
@@ -181,7 +201,9 @@ public class Cliente {
         } else if(!ClienteException.comprobarTarjetaCredito(c.getTarjetaCredito())){
             throw new ClienteException("La tarjeta de credito no es valida");
         } else if(!ClienteException.comprobarCuentaCorriente(c.getCuentaCorriente())){
-            throw new ClienteException("El nombre no es valido");}
+            throw new ClienteException("El nombre no es valido");
+        }
+        
         return c;
     }
 
@@ -248,24 +270,27 @@ public class Cliente {
     }
 
     //Método para buscar
-    public static Cliente buscarporid(ArrayList<Cliente> lista) {
+    public static Cliente buscarporid(ArrayList<Cliente> lista) throws ClienteException{
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduzca su id");
         sc.reset();
         int idCliente = sc.nextInt();
-        Cliente ret = null;
-        for (Cliente c : Utilidades.CLIENTES) {
-            if (c.getId() == idCliente) {
-                ret = c;
+        Cliente c = null;
+        for (Cliente ret : Utilidades.CLIENTES) {
+            if (ret.getId() == idCliente) {
+                c = ret;
                 break;
             }
         }
-
-        return ret;
+         if (!ClienteException.comprobarId(c.getId())) {
+             throw new ClienteException("El id tiene que ser mayor que 0");
+         }
+       
+        return c;
     }
 
-    public static ArrayList<Cliente> buscarclientepornombre(String nombrecl, ArrayList<Cliente> clientes) {
+    public static ArrayList<Cliente> buscarclientepornombre(String nombrecl, ArrayList<Cliente> clientes) throws ClienteException {
         ArrayList<Cliente> ret = new ArrayList<Cliente>();
         for (Cliente c : clientes) {
             if (Utilidades.removeDiacriticalMarks(c.getNombre().toLowerCase()).contains(Utilidades.removeDiacriticalMarks(nombrecl.toLowerCase()))) {
@@ -276,11 +301,16 @@ public class Cliente {
                     ret.add(c);
                 }
             }
-        }
+            if(!ClienteException.comprobarNombre(c.getNombre())){
+            throw new ClienteException("El nombre no es valido");
+        }}
+        
+        
         return ret;
     }
+    
 
-    public static ArrayList<Cliente> buscarclientepornif(String nifcl, ArrayList<Cliente> clientes) {
+    public static ArrayList<Cliente> buscarclientepornif(String nifcl, ArrayList<Cliente> clientes) throws ClienteException {
         ArrayList<Cliente> ret = new ArrayList<Cliente>();
         for (Cliente c : clientes) {
             if (Utilidades.removeDiacriticalMarks(c.getNif().toLowerCase()).contains(Utilidades.removeDiacriticalMarks(nifcl.toLowerCase()))) {
@@ -291,11 +321,13 @@ public class Cliente {
                     ret.add(c);
                 }
             }
+            if(!ClienteException.comprobarNif(c.getNif())){
+            throw new ClienteException("El nif no es valido");}
         }
         return ret;
     }
 
-    public static ArrayList<Cliente> buscarclientepordireccion(String direccioncl, ArrayList<Cliente> clientes) {
+    public static ArrayList<Cliente> buscarclientepordireccion(String direccioncl, ArrayList<Cliente> clientes) throws ClienteException {
         ArrayList<Cliente> ret = new ArrayList<Cliente>();
         for (Cliente c : clientes) {
             if (Utilidades.removeDiacriticalMarks(c.getDireccion().toLowerCase()).contains(Utilidades.removeDiacriticalMarks(direccioncl.toLowerCase()))) {
@@ -306,11 +338,13 @@ public class Cliente {
                     ret.add(c);
                 }
             }
+            if(!ClienteException.comprobarDireccion(c.getDireccion())){
+            throw new ClienteException("La dirección no es valida");}
         }
         return ret;
     }
 
-    public static ArrayList<Cliente> buscarclienteportelefono(String tlfcl, ArrayList<Cliente> clientes) {
+    public static ArrayList<Cliente> buscarclienteportelefono(String tlfcl, ArrayList<Cliente> clientes) throws ClienteException {
         ArrayList<Cliente> ret = new ArrayList<Cliente>();
         for (Cliente c : clientes) {
             if (Utilidades.removeDiacriticalMarks(c.getTelefono().toLowerCase()).contains(Utilidades.removeDiacriticalMarks(tlfcl.toLowerCase()))) {
@@ -321,11 +355,13 @@ public class Cliente {
                     ret.add(c);
                 }
             }
+            if (!ClienteException.comprobarTelefono(c.getTelefono())){
+            throw new ClienteException("El telefono no es valido");}
         }
         return ret;
     }
 
-    public static ArrayList<Cliente> buscarclienteportarjetadecredito(String tdcrcl, ArrayList<Cliente> clientes) {
+    public static ArrayList<Cliente> buscarclienteportarjetadecredito(String tdcrcl, ArrayList<Cliente> clientes) throws ClienteException{
         ArrayList<Cliente> ret = new ArrayList<Cliente>();
         for (Cliente c : clientes) {
             if (Utilidades.removeDiacriticalMarks(c.getTarjetaCredito().toLowerCase()).contains(Utilidades.removeDiacriticalMarks(tdcrcl.toLowerCase()))) {
@@ -336,11 +372,14 @@ public class Cliente {
                     ret.add(c);
                 }
             }
+            if(!ClienteException.comprobarTarjetaCredito(c.getTarjetaCredito())){
+            throw new ClienteException("La tarjeta de credito no es valida");
+        }
         }
         return ret;
     }
 
-    public static ArrayList<Cliente> buscarclienteporcuentacorriente(String cccl, ArrayList<Cliente> clientes) {
+    public static ArrayList<Cliente> buscarclienteporcuentacorriente(String cccl, ArrayList<Cliente> clientes) throws ClienteException {
         ArrayList<Cliente> ret = new ArrayList<Cliente>();
         for (Cliente c : clientes) {
             if (Utilidades.removeDiacriticalMarks(c.getCuentaCorriente().toLowerCase()).contains(Utilidades.removeDiacriticalMarks(cccl.toLowerCase()))) {
@@ -351,6 +390,9 @@ public class Cliente {
                     ret.add(c);
                 }
             }
+            if(!ClienteException.comprobarCuentaCorriente(c.getCuentaCorriente())){
+            throw new ClienteException("El nombre no es valido");}
+            
         }
         return ret;
     }
@@ -470,7 +512,20 @@ public class Cliente {
                         System.out.println("");
                 }
 
-            } while (opcion > 7 || opcion < 0);        
+            } while (opcion > 7 || opcion < 0);
+            /*if (!ClienteException.comprobarTelefono(c.getTelefono())){
+            throw new ClienteException("El telefono no es valido");
+        } else if(!ClienteException.comprobarNombre(c.getNombre())){
+            throw new ClienteException("El nombre no es valido");
+            } else if(!ClienteException.comprobarNif(c.getNif())){
+            throw new ClienteException("El nif no es valido");
+        } else if(!ClienteException.comprobarDireccion(c.getDireccion())){
+            throw new ClienteException("La dirección no es valida");
+        } else if(!ClienteException.comprobarTarjetaCredito(c.getTarjetaCredito())){
+            throw new ClienteException("La tarjeta de credito no es valida");
+        } else if(!ClienteException.comprobarCuentaCorriente(c.getCuentaCorriente())){
+            throw new ClienteException("El nombre no es valido");
+        }*/
 
         }
 
@@ -480,5 +535,134 @@ public class Cliente {
     public String toString() {
         return "Cliente{" + "id=" + id + ", nombre=" + nombre + ", nif=" + nif + ", direccion=" + direccion + ", telefono=" + telefono + ", tarjetaCredito=" + tarjetaCredito + ", cuentaCorriente=" + cuentaCorriente + servicios() + '}';
     }
+    
+    
+    
+    /**
+     * Este metodo exporta una coleccion de objetos de tipo empleado a un
+     * fichero binario
+     *
+     * @param path
+     */
+    public static void exportarColeccionClientesaArchivoBinario(String path) {
+        ArrayList<Cliente> coleccion;
+        coleccion = Cliente.convertir(Utilidades.CLIENTES);
+        try {
+            FileOutputStream fichero = new FileOutputStream(path, true);
+            ObjectOutputStream escritor = new ObjectOutputStream(fichero);
+            escritor.writeObject(coleccion);
+            escritor.flush();
+            escritor.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero");
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error en la inserción de los datos");
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error inesperado intentelo de nuevo");
+        }
+    }
 
-}
+    /**
+     * Este metodo importa una coleccion de obejtos de tipo empleado desde un
+     * fichero de datos binario
+     *
+     * @param path
+     * @return
+     */
+    public static ArrayList<Cliente> importarClienteDesdeFicheroBytes(String path) {
+        ArrayList<Cliente> ret = new ArrayList<Cliente>();
+        FileInputStream lector = null;
+        ObjectInputStream lectorObjeto = null;
+        try {
+            try {
+                lector = new FileInputStream(path);
+                lectorObjeto = new ObjectInputStream(lector);
+                Cliente e;
+                while ((e = (Cliente) lectorObjeto.readObject()) != null) {
+                    ret.add(e);
+                }
+            } finally {
+                if (lectorObjeto != null) {
+                    lectorObjeto.close();
+                }
+                if (lector != null) {
+                    lector.close();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero");
+        } catch (EOFException e) {
+            System.out.println("Final de fichero");
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error en la inserción de los datos");
+        } catch (ClassNotFoundException e) {
+            System.out.println("No se ha encontrado la clase a la cual haces referencia");
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error inesperado intentelo de nuevo");
+        }
+        return ret;
+    }
+
+    /**
+     * Este metodo importa una coleccion de objetos de tipo empleado desde un
+     * fichero de tecto
+     *
+     * @param path
+     * @return
+     */
+    public static ArrayList<Cliente> importarClienteDesdeFicheroCaracteres(String path) {
+        ArrayList<Cliente> ret = new ArrayList<Cliente>();
+        File fichero = new File(path);
+        BufferedReader buffer = null;
+        FileReader lector = null;
+        try {
+            try {
+                lector = new FileReader(fichero);
+                buffer = new BufferedReader(lector);
+                String linea;
+                while ((linea = buffer.readLine())!= null) {
+                    String campos[] = linea.split("\\|");
+                    long id = Long.parseLong(campos[0]);
+                    String nombre = campos[1];
+                    String nif = campos[2];
+                    String direccion = campos[3];
+                    String telefono = campos[4];
+                    String tarjetaCredito = campos[5];
+                    String cuentaCorriente = campos[6];
+                    Cliente c = new Cliente (id,nombre, nif, direccion,telefono,tarjetaCredito, cuentaCorriente);
+                    ret.add(c);
+                }
+            } finally {
+                if (lector != null) {
+                    lector.close();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero");
+        } catch (EOFException e) {
+            System.out.println("Final de fichero");
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error en la inserción de los datos");
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error inesperado intentelo de nuevo");
+        }
+        return ret;
+    }
+
+    /**
+     * Este metodo busca un objeto de la coleccion de objetos de un fichero de
+     * texto mediante el id del objeto
+     *
+     * @param path
+     * @return
+     */
+ 
+
+    public String data() {
+        return id + "|" + nombre + '|' + telefono + '|' + nif +  '|' + direccion;
+    }
+
+    
+    }
+    
+

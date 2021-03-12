@@ -6,33 +6,33 @@
 package reparacionequipos;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  *
  * @author Rxndy
  */
-public class ServicioException extends RuntimeException{
+public class LoteException extends RuntimeException{
     
-    public ServicioException(){}
+    public LoteException(){}
     
-    public ServicioException(String message){
+    public LoteException(String message){
     
         super(message);
     
     }
     
-   public static boolean comprobarNota(String nota){
-   
-       return !nota.isEmpty();
-   }
    public static boolean comprobarId(long id){
    
        return id>0;
    }
    
-   public static boolean comprobarArrayListClientes(ArrayList <Cliente> Clientes){
+   public static boolean comprobarDescuento(int descuento){
+   
+       return descuento>0;
+   }
+   
+   public static boolean comprobarArrayListEquipos(ArrayList <Equipo> Equipos){
     
-        return Clientes.isEmpty();
+        return Equipos.isEmpty();
     }
 }

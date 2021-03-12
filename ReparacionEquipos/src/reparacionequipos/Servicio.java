@@ -5,6 +5,16 @@
  */
 package reparacionequipos;
 
+import java.io.BufferedReader;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -121,6 +131,9 @@ public class Servicio {
         } while (salir = false);
         if(!ServicioException.comprobarNota(s.getNota())){
             throw new ServicioException("La nota no es valida");}
+        else if(!ServicioException.comprobarId(s.getId())){
+            throw new ServicioException("El id no es valido");
+        }
         return s;
     }
 
@@ -150,4 +163,116 @@ public class Servicio {
         return "Servicio{" + "id=" + id + ", fechaServicio=" + fechaServicio + ", nota=" + nota + ", clientes=" + clientes + '}';
     }
 
+    
+        public static void exportarColeccionServiciosaArchivoBinario(String path) {
+        ArrayList<Servicio> coleccion;
+        coleccion = Servicio.convertir(Utilidades.SERVICIOS);
+        try {
+            FileOutputStream fichero = new FileOutputStream(path, true);
+            ObjectOutputStream escritor = new ObjectOutputStream(fichero);
+            escritor.writeObject(coleccion);
+            escritor.flush();
+            escritor.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero");
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error en la inserción de los datos");
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error inesperado intentelo de nuevo");
+        }
+    }
+
+    /**
+     * Este metodo importa una coleccion de obejtos de tipo empleado desde un
+     * fichero de datos binario
+     *
+     * @param path
+     * @return
+     */
+    public static ArrayList<Servicio> importarServicioDesdeFicheroBytes(String path) {
+        ArrayList<Servicio> ret = new ArrayList<Servicio>();
+        FileInputStream lector = null;
+        ObjectInputStream lectorObjeto = null;
+        try {
+            try {
+                lector = new FileInputStream(path);
+                lectorObjeto = new ObjectInputStream(lector);
+                Servicio e;
+                while ((e = (Servicio) lectorObjeto.readObject()) != null) {
+                    ret.add(e);
+                }
+            } finally {
+                if (lectorObjeto != null) {
+                    lectorObjeto.close();
+                }
+                if (lector != null) {
+                    lector.close();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero");
+        } catch (EOFException e) {
+            System.out.println("Final de fichero");
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error en la inserción de los datos");
+        } catch (ClassNotFoundException e) {
+            System.out.println("No se ha encontrado la clase a la cual haces referencia");
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error inesperado intentelo de nuevo");
+        }
+        return ret;
+    }
+
+    /**
+     * Este metodo importa una coleccion de objetos de tipo empleado desde un
+     * fichero de tecto
+     *
+     * @param path
+     * @return
+     */
+    public static ArrayList<Servicio> importarServicioDesdeFicheroCaracteres(String path) {
+        ArrayList<Servicio> ret = new ArrayList<Servicio>();
+        File fichero = new File(path);
+        BufferedReader buffer = null;
+        FileReader lector = null;
+        try {
+            try {
+                lector = new FileReader(fichero);
+                buffer = new BufferedReader(lector);
+                String linea;
+                while ((linea = buffer.readLine()) != null) {
+                    String campos[] = linea.split("\\|");
+                    long id = Long.parseLong(campos[0]);
+                    /*Date fechaServicio = Double.parseDouble(campos[1]);*/
+                    String nota = campos[2];
+                   /* Servicio e = new Servicio(id, fechaServicio, nota);
+                    ret.add(e);*/
+                }
+            } finally {
+                if (lector != null) {
+                    lector.close();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero");
+        } catch (EOFException e) {
+            System.out.println("Final de fichero");
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error en la inserción de los datos");
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error inesperado intentelo de nuevo");
+        }
+        return ret;
+    }
+
+    /**
+     * Este metodo busca un objeto de la coleccion de objetos de un fichero de
+     * texto mediante el id del objeto
+     *
+     * @param path
+     * @return
+     */
+    public String data() {
+        return id + "|" + nota + '|' + fechaServicio;
+    }
 }

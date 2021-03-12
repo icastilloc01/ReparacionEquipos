@@ -5,6 +5,16 @@
  */
 package reparacionequipos;
 
+import java.io.BufferedReader;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -53,7 +63,7 @@ public class Lote {
         this.equipos = equipos;
     }
     
-    public static Lote nuevoLote() {
+    public static Lote nuevoLote() throws LoteException {
         Lote l = new Lote();
         Scanner sc = new Scanner(System.in);
         boolean salir;
@@ -80,9 +90,24 @@ public class Lote {
             System.out.println("descuento:" +descuento);
             salir = Utilidades.leerBoolean();
         } while (salir = false);
+        if(!LoteException.comprobarId(l.getIdLote())){
+            throw new ServicioException("El id no es valida");}
+        else if(!LoteException.comprobarDescuento(l.getDescuento())){
+            throw new ServicioException("El descuento no es valido");
+        }
+        
+        
         return l;
     
 }
+    
+    public static ArrayList<Lote> convertir(Lote[] array) {
+        ArrayList<Lote> ret = new ArrayList<Lote>();
+        for (Lote l : array) {
+            ret.add((Lote) l);
+        }
+        return ret;
+    }
 
     @Override
     public String toString() {
@@ -99,5 +124,116 @@ public class Lote {
         }
         System.out.println("El precio de su compra es:" +precioTotal);
     
+    }
+    
+     public static void exportarColeccionLotesaArchivoBinario(String path) {
+        ArrayList<Lote> coleccion;
+        coleccion = Lote.convertir(Utilidades.LOTES);
+        try {
+            FileOutputStream fichero = new FileOutputStream(path, true);
+            ObjectOutputStream escritor = new ObjectOutputStream(fichero);
+            escritor.writeObject(coleccion);
+            escritor.flush();
+            escritor.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero");
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error en la inserción de los datos");
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error inesperado intentelo de nuevo");
+        }
+    }
+
+    /**
+     * Este metodo importa una coleccion de obejtos de tipo empleado desde un
+     * fichero de datos binario
+     *
+     * @param path
+     * @return
+     */
+    public static ArrayList<Lote> importarLoteDesdeFicheroBytes(String path) {
+        ArrayList<Lote> ret = new ArrayList<Lote>();
+        FileInputStream lector = null;
+        ObjectInputStream lectorObjeto = null;
+        try {
+            try {
+                lector = new FileInputStream(path);
+                lectorObjeto = new ObjectInputStream(lector);
+                Lote e;
+                while ((e = (Lote) lectorObjeto.readObject()) != null) {
+                    ret.add(e);
+                }
+            } finally {
+                if (lectorObjeto != null) {
+                    lectorObjeto.close();
+                }
+                if (lector != null) {
+                    lector.close();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero");
+        } catch (EOFException e) {
+            System.out.println("Final de fichero");
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error en la inserción de los datos");
+        } catch (ClassNotFoundException e) {
+            System.out.println("No se ha encontrado la clase a la cual haces referencia");
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error inesperado intentelo de nuevo");
+        }
+        return ret;
+    }
+
+    /**
+     * Este metodo importa una coleccion de objetos de tipo empleado desde un
+     * fichero de tecto
+     *
+     * @param path
+     * @return
+     */
+    public static ArrayList<Lote> importarLoteDesdeFicheroCaracteres(String path) {
+        ArrayList<Lote> ret = new ArrayList<Lote>();
+        File fichero = new File(path);
+        BufferedReader buffer = null;
+        FileReader lector = null;
+        try {
+            try {
+                lector = new FileReader(fichero);
+                buffer = new BufferedReader(lector);
+                String linea;
+                while ((linea = buffer.readLine()) != null) {
+                    String campos[] = linea.split("\\|");
+                    long id = Long.parseLong(campos[0]);
+                    int descuento = Integer.parseInt(campos[2]);
+                    Lote e = new Lote(id, descuento);
+                    ret.add(e);
+                }
+            } finally {
+                if (lector != null) {
+                    lector.close();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero");
+        } catch (EOFException e) {
+            System.out.println("Final de fichero");
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error en la inserción de los datos");
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error inesperado intentelo de nuevo");
+        }
+        return ret;
+    }
+
+    /**
+     * Este metodo busca un objeto de la coleccion de objetos de un fichero de
+     * texto mediante el id del objeto
+     *
+     * @param path
+     * @return
+     */
+    public String data() {
+        return idLote+ "|" + descuento + '|' + equipos;
     }
 }

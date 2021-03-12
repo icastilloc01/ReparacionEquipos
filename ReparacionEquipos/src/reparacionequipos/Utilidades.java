@@ -196,6 +196,8 @@ public class Utilidades {
         new Grupo(5)
 
     };
+    
+     public static final Lote[] LOTES = {};
 
     public static final int numGrupos = GRUPOS.length;
 

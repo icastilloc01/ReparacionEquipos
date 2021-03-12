@@ -5,6 +5,16 @@
  */
 package reparacionequipos;
 
+import java.io.BufferedReader;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -58,7 +68,7 @@ public class Equipo {
         this.modeloEquipo = modeloEquipo;
     }
 
-    public static Equipo nuevoEquipo() {
+    public static Equipo nuevoEquipo() throws EquipoException {
         Equipo e = new Equipo();
         Scanner sc = new Scanner(System.in);
         boolean salir;
@@ -80,6 +90,15 @@ public class Equipo {
             System.out.println("modelo:" + modelo);
             salir = Utilidades.leerBoolean();
         } while (salir = false);
+
+        if (!EquipoException.comprobarId(e.getIdEquipo())) {
+            throw new EquipoException("El id no es valido");
+        } else if (!EquipoException.comprobarModeloEquipo(e.getModeloEquipo())) {
+            throw new EquipoException("El modelo no es valido");
+        } else if (!EquipoException.validarPrecioEquipo(e.getPrecioEquipo())) {
+            throw new EquipoException("El precio no es valido");
+
+        }
         return e;
     }
 
@@ -211,7 +230,7 @@ public class Equipo {
             } else {
                 System.out.println("el quipo con el precio " + precioEquipo + " no se a encontrado \n");
             }
-        }catch (InputMismatchException ex){
+        } catch (InputMismatchException ex) {
             System.out.println("El carácter introducido no es un número, porfavor introduzca un número");
         }
     }
@@ -219,6 +238,118 @@ public class Equipo {
     @Override
     public String toString() {
         return "Equipo{" + "idEquipo=" + idEquipo + ", precioEquipo=" + precioEquipo + ", modeloEquipo=" + modeloEquipo + '}';
+    }
+
+    public static void exportarColeccionEquiposaArchivoBinario(String path) {
+        ArrayList<Equipo> coleccion;
+        coleccion = Equipo.convertir(Utilidades.EQUIPOS);
+        try {
+            FileOutputStream fichero = new FileOutputStream(path, true);
+            ObjectOutputStream escritor = new ObjectOutputStream(fichero);
+            escritor.writeObject(coleccion);
+            escritor.flush();
+            escritor.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero");
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error en la inserción de los datos");
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error inesperado intentelo de nuevo");
+        }
+    }
+
+    /**
+     * Este metodo importa una coleccion de obejtos de tipo empleado desde un
+     * fichero de datos binario
+     *
+     * @param path
+     * @return
+     */
+    public static ArrayList<Equipo> importarEquipoDesdeFicheroBytes(String path) {
+        ArrayList<Equipo> ret = new ArrayList<Equipo>();
+        FileInputStream lector = null;
+        ObjectInputStream lectorObjeto = null;
+        try {
+            try {
+                lector = new FileInputStream(path);
+                lectorObjeto = new ObjectInputStream(lector);
+                Equipo e;
+                while ((e = (Equipo) lectorObjeto.readObject()) != null) {
+                    ret.add(e);
+                }
+            } finally {
+                if (lectorObjeto != null) {
+                    lectorObjeto.close();
+                }
+                if (lector != null) {
+                    lector.close();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero");
+        } catch (EOFException e) {
+            System.out.println("Final de fichero");
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error en la inserción de los datos");
+        } catch (ClassNotFoundException e) {
+            System.out.println("No se ha encontrado la clase a la cual haces referencia");
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error inesperado intentelo de nuevo");
+        }
+        return ret;
+    }
+
+    /**
+     * Este metodo importa una coleccion de objetos de tipo empleado desde un
+     * fichero de tecto
+     *
+     * @param path
+     * @return
+     */
+    public static ArrayList<Equipo> importarEquipoDesdeFicheroCaracteres(String path) {
+        ArrayList<Equipo> ret = new ArrayList<Equipo>();
+        File fichero = new File(path);
+        BufferedReader buffer = null;
+        FileReader lector = null;
+        try {
+            try {
+                lector = new FileReader(fichero);
+                buffer = new BufferedReader(lector);
+                String linea;
+                while ((linea = buffer.readLine()) != null) {
+                    String campos[] = linea.split("\\|");
+                    long id = Long.parseLong(campos[0]);
+                    double precioEquipo = Double.parseDouble(campos[1]);
+                    String nombreEquipo = campos[2];
+                    Equipo e = new Equipo(id, precioEquipo, nombreEquipo);
+                    ret.add(e);
+                }
+            } finally {
+                if (lector != null) {
+                    lector.close();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero");
+        } catch (EOFException e) {
+            System.out.println("Final de fichero");
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error en la inserción de los datos");
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error inesperado intentelo de nuevo");
+        }
+        return ret;
+    }
+
+    /**
+     * Este metodo busca un objeto de la coleccion de objetos de un fichero de
+     * texto mediante el id del objeto
+     *
+     * @param path
+     * @return
+     */
+    public String data() {
+        return idEquipo + "|" + modeloEquipo + '|' + precioEquipo;
     }
 
 }
