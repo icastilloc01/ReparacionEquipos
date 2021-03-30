@@ -114,7 +114,7 @@ Drop table if exists Envio;
 Create table Envio (
 	id int primary key not null auto_increment,
     fechaDeSalida datetime not null,
-    despachado boolean not null,
+    despachado varchar(20) not null,
     radioDeReparto int not null,
     precioTotal double not null,
     coste double not null,
