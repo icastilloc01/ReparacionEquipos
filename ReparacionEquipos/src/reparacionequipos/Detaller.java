@@ -51,7 +51,7 @@ public class Detaller extends Empleado {
         this.senior = senior;
     }
 
-    public static Detaller nuevoDetaller() {
+    public static Detaller nuevoDetaller() throws EmpleadoException {
         Detaller nuevoDetaller = new Detaller();
         Empleado e = Empleado.nuevoEmpleado();
         nuevoDetaller.setId(e.getId());

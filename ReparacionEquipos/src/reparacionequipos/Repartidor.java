@@ -27,7 +27,7 @@ public class Repartidor extends Empleado {
         super(e);
     }
     
-    public static Repartidor nuevoRepartidor() {
+    public static Repartidor nuevoRepartidor() throws EmpleadoException {
         Empleado e = Empleado.nuevoEmpleado();
         Repartidor nuevoRepartidor = new Repartidor();
         nuevoRepartidor.setId(e.getId());

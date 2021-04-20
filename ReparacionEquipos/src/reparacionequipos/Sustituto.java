@@ -94,7 +94,7 @@ public class Sustituto extends Empleado {
         return ret;
     }
 
-    public static Sustituto nuevoSustituto() {
+    public static Sustituto nuevoSustituto() throws EmpleadoException {
         Sustituto nuevoSustituto = new Sustituto();
         Empleado e = Empleado.nuevoEmpleado();
         nuevoSustituto.setId(e.getId());

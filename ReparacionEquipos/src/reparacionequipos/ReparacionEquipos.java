@@ -251,6 +251,9 @@ public class ReparacionEquipos {
         } catch (InputMismatchException ex) {
             System.out.println("El caracter introducido no es un número");
             System.out.println("");
+        } catch (EmpleadoException ex) {
+            System.out.println("Se ha producido una EmpleadoException" + ex.getMessage());
+            System.out.println("");
         }
     }
 

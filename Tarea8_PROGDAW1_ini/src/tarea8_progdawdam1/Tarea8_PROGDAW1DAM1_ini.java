@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
+import java.util.Random;
 import java.util.TreeSet;
 
 /**
@@ -226,6 +227,52 @@ public class Tarea8_PROGDAW1DAM1_ini {
             
             Carrera bilbao = new Carrera("Sal Silvestre Nochevieja", "bilbao", java.sql.Date.valueOf(LocalDate.parse("31/12/2019", dateFormatter)));
             //Apartado 5.	Diseñar los datos (e incluirlos en el programa principal) acerca de la carrera San Silvestre de Bilbao
+            LinkedList<Premio> bilbaoPremios = new LinkedList<Premio>();
+            
+            bilbaoPremios.add(p1);
+            bilbaoPremios.add(p2);
+            bilbaoPremios.add(p3);
+            bilbaoPremios.add(p4);
+            bilbaoPremios.add(p5);
+            bilbaoPremios.add(p9);
+            bilbaoPremios.add(p9);
+            
+            bilbao.setPremios(bilbaoPremios);
+            
+            LinkedHashMap<Atleta, Integer> bilbaoDorsales = new LinkedHashMap<Atleta, Integer>();
+            
+            bilbaoDorsales.put(luisPeres, 100);
+            bilbaoDorsales.put(antonioRosal, 101);
+            bilbaoDorsales.put(marcosCalderon, 102);
+            bilbaoDorsales.put(luisDelPozo, 103);
+            bilbaoDorsales.put(albertoArias, 104);
+            bilbaoDorsales.put(robertoGarcia, 105);
+            bilbaoDorsales.put(enriqueSantos, 107);
+            bilbaoDorsales.put(rafaelCruz, 108);
+            bilbaoDorsales.put(gloriaFernandez, 109);
+            bilbaoDorsales.put(raquelGomez, 110);
+            
+            bilbao.setDorsales(bilbaoDorsales);
+            bilbao.imprimirDatosInscripcion();
+            
+            LinkedHashSet<Atleta> bilbaoClasificacion = new LinkedHashSet<Atleta>();
+            
+            bilbaoClasificacion.add(rafaelCruz);
+            bilbaoClasificacion.add(luisDelPozo);
+            bilbaoClasificacion.add(luisPeres);
+            bilbaoClasificacion.add(albertoArias);
+            bilbaoClasificacion.add(gloriaFernandez);
+            bilbaoClasificacion.add(raquelGomez);
+            bilbaoClasificacion.add(enriqueSantos);
+            bilbaoClasificacion.add(robertoGarcia);
+            bilbaoClasificacion.add(marcosCalderon);
+            bilbaoClasificacion.add(antonioRosal);
+            
+            bilbao.setClasificacion(bilbaoClasificacion);
+            System.out.println(bilbao.toString());
+            
+            //Comprobación de Apartado 4
+            System.out.println(bilbao.inscripcionAtleta(doloresFresno));
         
     }
     
