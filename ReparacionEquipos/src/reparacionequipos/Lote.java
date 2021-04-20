@@ -5,6 +5,8 @@
  */
 package reparacionequipos;
 
+import Exception.ServicioException;
+import Exception.LoteException;
 import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.File;

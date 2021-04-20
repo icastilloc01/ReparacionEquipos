@@ -5,6 +5,7 @@
  */
 package reparacionequipos;
 
+import Exception.GrupoException;
 import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.File;

@@ -5,6 +5,7 @@
  */
 package reparacionequipos;
 
+import Exception.EmpleadoException;
 import java.util.ArrayList;
 import java.util.Scanner;
 

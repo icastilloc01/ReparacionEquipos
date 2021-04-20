@@ -5,6 +5,7 @@
  */
 package reparacionequipos;
 
+import Exception.CompraException;
 import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.File;

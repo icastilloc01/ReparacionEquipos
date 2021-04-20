@@ -3,11 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package reparacionequipos;
+package Main;
 
+import Exception.EmpleadoException;
+import ConexionBD.*;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import reparacionequipos.*;
 
 /**
  *

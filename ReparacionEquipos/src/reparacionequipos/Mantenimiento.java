@@ -5,6 +5,7 @@
  */
 package reparacionequipos;
 
+import Exception.MantenimientoException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.EOFException;

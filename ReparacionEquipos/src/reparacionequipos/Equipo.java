@@ -5,6 +5,8 @@
  */
 package reparacionequipos;
 
+import Exception.EquipoException;
+import Main.ReparacionEquipos;
 import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.File;
