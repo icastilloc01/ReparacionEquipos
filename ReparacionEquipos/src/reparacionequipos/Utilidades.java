@@ -27,11 +27,11 @@ public class Utilidades {
 
     public static Date introducirFecha() {
 
-        System.out.println("Introduzca la fecha en format dd/mm/aaaa");
+        System.out.println("Introduzca la fecha en format aaaa-mm-dd");
         Scanner sc = new Scanner(System.in);
 
         String fechaTexto = sc.nextLine();
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-mm-dd");
         Date fecha = null;
         try {
             fecha = df.parse(fechaTexto);
