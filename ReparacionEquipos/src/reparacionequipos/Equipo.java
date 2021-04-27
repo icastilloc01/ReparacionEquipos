@@ -30,7 +30,9 @@ public class Equipo {
     private long idEquipo;////valores validos: números positivos mayores que 0 - valor invalido: números menores o iguales que 0
     private double precioEquipo;//valores validos: números positivos mayores que 0 - valor invalido: números menores que 0
     private String modeloEquipo;// valores validos: cadena de caracteres con minimo de 4 letras - valor invalido: longitud de cadena menor de 4 letras
-
+    private long idLote;///
+    
+    
     public Equipo(long idEquipo, double precioEquipo, String modeloEquipo) {
         this.idEquipo = idEquipo;
         this.precioEquipo = precioEquipo;

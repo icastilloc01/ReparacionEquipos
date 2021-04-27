@@ -183,8 +183,8 @@ public class Utilidades {
     public static final int numReparaciones = REPARACIONES.length;
 
     public static final Compra[] COMPRAS = {
-        //long idcompra, double preciototal, char metodoPago, ArrayList<Equipo> equipos, ArrayList<Lote> lotes
-        new Compra(1, 240.99, 'T', new ArrayList<Equipo>(), new ArrayList<Lote>(), SERVICIOS[2])
+        //long idcompra, double preciototal, char metodoPago, long idEquipo, long idLote
+       // new Compra(1, 240.99, 'T', new ArrayList<Equipo>(), new ArrayList<Lote>(), SERVICIOS[2])
     };
 
     public static final Grupo[] GRUPOS = {
