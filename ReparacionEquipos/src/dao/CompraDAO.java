@@ -8,7 +8,6 @@ package dao;
 import java.sql.Connection;
 import reparacionequipos.Compra;
 import ConexionBD.ConexionBD;
-import static com.mysql.jdbc.Messages.getString;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
