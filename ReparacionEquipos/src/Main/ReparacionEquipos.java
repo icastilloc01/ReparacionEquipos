@@ -7,6 +7,7 @@ package Main;
 
 import Exception.EmpleadoException;
 import ConexionBD.*;
+import dao.MantenimientoDAO;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -185,13 +186,39 @@ public class ReparacionEquipos {
                         mostrarGestionEmpleados(empleados);
                         break;
                     case 2:
-                        mostrarTiposEmpleados(empleados);
-                        mostrarGestionEmpleados(empleados);
+//                        mostrarTiposEmpleados(empleados);
+//                        mostrarGestionEmpleados(empleados);
+                        System.out.println("Introduzca el id de un empleado : ");
+                        int id=in.nextInt();
+                        in=new Scanner(System.in);
+                        System.out.println("Introduzca el nombre :");
+                        String name=in.nextLine();
+                        in=new Scanner(System.in);
+                        System.out.println("Introduzca el telefono :");
+                        String telefono=in.nextLine();
+                        in=new Scanner(System.in);
+                        System.out.println("Introduzca el nif :");
+                        String nif=in.nextLine();
+                        in=new Scanner(System.in);
+                        System.out.println("Introduzca el apellido :");
+                        String apellido = in.nextLine();
+                        in=new Scanner(System.in);
+                        System.out.println("Introduzca la dirección :");
+                        String direccion = in.nextLine();
+                        in=new Scanner(System.in);
+                        Empleado e;
+                        e = new Empleado(id,name,telefono,nif,apellido,direccion);
+                        MantenimientoDAO.insertarEmpleadoMantenimiento(e);
                         break;
                     case 3:
-                        Empleado.buscarEmpleado(empleados);
-                        mostrarGestionEmpleados(empleados);
+//                        Empleado.buscarEmpleado(empleados);
+//                        mostrarGestionEmpleados(empleados);
+                        System.out.println("Introduzca nombre de empleado : ");
+                       in=new Scanner(System.in);
+                        String nombre = in.nextLine();
+                        MantenimientoDAO.FiltrarEmpleadoMantenimientoPorNombre(nombre);
                         break;
+                        
                     case 4:
                         Sustituto.cubrirBaja(bajas, sustitutos, empleados);
                         empleados.addAll(sustitutos);
