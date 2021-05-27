@@ -75,6 +75,10 @@ public class Cliente {
         this.servicios = c.servicios;
     }
 
+    public Cliente(long id, String nombre, String telefono, String nif, String direccion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     //getters and setters
     public long getId() {
         return id;

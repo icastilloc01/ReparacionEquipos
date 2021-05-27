@@ -28,8 +28,8 @@ public class GestionEmpleado extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        ReparacionEquiposPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("ReparacionEquiposPU").createEntityManager();
-        empleadoQuery = java.beans.Beans.isDesignTime() ? null : ReparacionEquiposPUEntityManager.createQuery("SELECT e FROM Empleado e");
+        entityManager0 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("reparacion_equipos?useSSL=falsePU").createEntityManager();
+        empleadoQuery = java.beans.Beans.isDesignTime() ? null : entityManager0.createQuery("SELECT e FROM Empleado e");
         empleadoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : empleadoQuery.getResultList();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -107,7 +107,7 @@ public class GestionEmpleado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * @param args the command line arguments
+     * @param args the command line argument
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -142,9 +142,9 @@ public class GestionEmpleado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.persistence.EntityManager ReparacionEquiposPUEntityManager;
     private java.util.List<Vista.Empleado> empleadoList;
     private javax.persistence.Query empleadoQuery;
+    private javax.persistence.EntityManager entityManager0;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

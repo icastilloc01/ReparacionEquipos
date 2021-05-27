@@ -13,7 +13,7 @@ public class ConexionBD {
     static final String DB_URL = "jdbc:mysql://localhost:3306/reparacion_equipos?useSSL=false";
     // Credenciales de la base de datos
     static final String USER = "root";
-    static final String PASS = "123456";
+    static final String PASS = "";
 
     static Connection conn = null;
     Statement stmt = null;
