@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package reparacionequipos;
+package Entidades;
 
-import Exception.MantenimientoException;
+import Exception.GrupoException;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,7 +18,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,37 +28,37 @@ import java.util.Scanner;
  *
  * @author aitor
  */
-public class Mantenimiento extends Servicio implements Serializable {
+public class Grupo {
 
-    private int horastrabajadas;
+    private long idgrupo;
     private ArrayList<Reparacion> reparaciones = new ArrayList<>();
-
-    public Mantenimiento() {
-        super();
-    }
-
-    public Mantenimiento(int horastrabajadas, long id, Date fechaServicio, String nota, ArrayList<Cliente> clientes) {
-        super(id, fechaServicio, nota, clientes);
-        this.horastrabajadas = horastrabajadas;
-    }
-
-    public Mantenimiento(Mantenimiento m) {
-        super(m);
-        this.horastrabajadas = m.horastrabajadas;
-    }
-
-    public Mantenimiento(int horastrabajadas) {
-        this.horastrabajadas = horastrabajadas;
-    }
-
+    private ArrayList<Detaller> detalleres = new ArrayList<>();
     
-
-    public int getHorastrabajadas() {
-        return horastrabajadas;
+     public static ArrayList<Grupo> convertir(Grupo[] array) {
+        ArrayList<Grupo> ret = new ArrayList<Grupo>();
+        for (Grupo g : array) {
+            ret.add((Grupo) g);
+        }
+        return ret;
     }
 
-    public void setHorastrabajadas(int horastrabajadas) {
-        this.horastrabajadas = horastrabajadas;
+    public long getId() {
+        return idgrupo;
+    }
+
+    public void setId(long id) {
+        this.idgrupo = id;
+    }
+
+    public Grupo() {
+    }
+
+    public Grupo(long id) {
+        this.idgrupo = id;
+    }
+
+    public Grupo(Grupo g) {
+        this.idgrupo = g.idgrupo;
     }
 
     public ArrayList<Reparacion> getReparaciones() {
@@ -71,58 +69,54 @@ public class Mantenimiento extends Servicio implements Serializable {
         this.reparaciones = reparaciones;
     }
 
-    public static ArrayList<Mantenimiento> convertir(Mantenimiento[] array) {
-        ArrayList<Mantenimiento> ret = new ArrayList<Mantenimiento>();
-        for (Mantenimiento m : array) {
-            ret.add((Mantenimiento) m);
-        }
-        return ret;
+    public ArrayList<Detaller> getDetalleres() {
+        return detalleres;
     }
 
-    public static Mantenimiento nuevomantenimiento() {
+    public void setDetalleres(ArrayList<Detaller> detalleres) {
+        this.detalleres = detalleres;
+    }
 
-        Servicio nuevoservicio = Servicio.nuevoServicio();
-        boolean exit;
-        exit = false;
-
-        for (int i = 0; i < Utilidades.CLIENTES.length; i++) {
-            Cliente s = Utilidades.CLIENTES[i];
-            System.out.println(" Servicio " + s.getId() + ",nombre " + s.getNombre());
-        }
-        Mantenimiento nuevomantenimiento = new Mantenimiento();
+    public static Grupo nuevogrupo() {
+        Reparacion r2 = Reparacion.listareparaciones();
+        Grupo nuevogrupo = new Grupo();
         Scanner sc = new Scanner(System.in);
-
-        int horastrabajadas = 0;
-        //Long id = Mantenimiento.thenextid();
-
-        do {
-            boolean ret = false;
-            System.out.println("Dame las horas trabajadas que has trabajado");
-            horastrabajadas = sc.nextInt();
-            if (horastrabajadas >= 0) {
-
-                System.out.println("Los datos introducidos son válidos");
-                ret = true;
-
-            } else {
-                System.out.println("Los datos introducidos no son válidos,por favor,introduzca a continuación los datos de forma correcta.");
-            }
-        } while (horastrabajadas < 0);
-        nuevomantenimiento.setHorastrabajadas(horastrabajadas);
-        if (nuevomantenimiento.getHorastrabajadas() < 0) {
-            throw new MantenimientoException("Valor introducido no válido");
+        //Muestro el día y la hora
+        
+        //System.out.println(" Este es tu id :" + Grupo.thenextid());
+        if (nuevogrupo.getId() <= 0) {
+            throw new GrupoException("Valor no valido");
         }
-        //El campo de REPARACIONES se inicializa a un ArrayList vacío.
-        return nuevomantenimiento;
+        if (nuevogrupo.getReparaciones().isEmpty()) {
+            throw new GrupoException("Este ArrayList es un ArrayList vacío");
+        } else {
+            StringBuffer sb = new StringBuffer("Estos son los datos del arraydeReparaciones:" + nuevogrupo.getReparaciones());
+            sb.insert(sb.indexOf(" . "), " Adios");
+            System.out.println(sb);
+
+        }
+
+        if (nuevogrupo.getDetalleres().isEmpty()) {
+            throw new GrupoException("Este ArrayList es un ArrayList vacío");
+        } else {
+            StringBuffer sb = new StringBuffer("Estos son los datos del arraydeReparaciones:" + nuevogrupo.getDetalleres());
+            sb.insert(sb.indexOf(" . "), " Adios");
+            System.out.println(sb);
+
+        }
+
+        //Los dos arrays de Reparaciones y Detaller, se inicializan a dos arrays vacíos.
+        return nuevogrupo;
     }
-
-    public String data() {
-
-        return this.getHorastrabajadas() + " | " + this.getReparaciones() + " | ";
+    
+    
+     public String data(){
+    
+    return this.getId()+" | "+this.getDetalleres()+" | "+this.getReparaciones()+" | ";
     }
     //*Los métodos de manejo de ficheros están en la clase Serialización
-
-    public void exportarObjetoMantenimientoTexto(String path) {
+    
+    public void exportarObjetoGrupoTexto(String path) {
         File fichero = new File(path);
         FileWriter escritor = null;
         PrintWriter buffer = null;
@@ -147,10 +141,10 @@ public class Mantenimiento extends Servicio implements Serializable {
             System.out.println("Se ha producido un error inesperado intentelo de nuevo");
         }
     }
-
-    public static void exportarColeccionDeObjetosMantenimientoTexto(String path) {
-        ArrayList<Mantenimiento> coleccion;
-        coleccion = Mantenimiento.convertir(Utilidades.MANTENIMIENTOS);
+    
+     public static void exportarColeccionDeObjetosGrupoTexto(String path) {
+        ArrayList<Grupo> coleccion;
+        coleccion = Grupo.convertir(Utilidades.GRUPOS);
         File fichero = new File(path);
         FileWriter escritor = null;
         PrintWriter buffer = null;
@@ -158,8 +152,8 @@ public class Mantenimiento extends Servicio implements Serializable {
             try {
                 escritor = new FileWriter(fichero, true);
                 buffer = new PrintWriter(escritor);
-                for (Mantenimiento m : coleccion) {
-                    buffer.print(m.data() + "\n");
+                for (Grupo g: coleccion) {
+                    buffer.print(g.data() + "\n");
                 }
             } finally {
                 if (buffer != null) {
@@ -177,14 +171,15 @@ public class Mantenimiento extends Servicio implements Serializable {
             System.out.println("Se ha producido un error inesperado intentelo de nuevo");
         }
     }
-
-    public void exportarMantenimientoaArchivoBinario(String path) {
+     
+     
+        public void exportarReparacionaArchivoBinario(String path) {
         try {
             FileOutputStream fichero = new FileOutputStream(path, true);
-            ObjectOutputStream mantenimiento = new ObjectOutputStream(fichero);
-            mantenimiento.writeObject(this);
-            mantenimiento.flush();
-            mantenimiento.close();
+            ObjectOutputStream Grupo = new ObjectOutputStream(fichero);
+          Grupo.writeObject(this);
+           Grupo.flush();
+            Grupo.close();
         } catch (FileNotFoundException e) {
             System.out.println("No se ha encontrado el fichero");
         } catch (IOException e) {
@@ -194,9 +189,10 @@ public class Mantenimiento extends Servicio implements Serializable {
         }
     }
 
-    public static void exportarColeccionMantenimientoArchivoBinario(String path) {
-        ArrayList<Mantenimiento> coleccion;
-        coleccion = Mantenimiento.convertir(Utilidades.MANTENIMIENTOS);
+
+        public static void exportarColeccionGrupoArchivoBinario(String path) {
+        ArrayList<Grupo> coleccion;
+        coleccion = Grupo.convertir(Utilidades.GRUPOS);
         try {
             FileOutputStream fichero = new FileOutputStream(path, true);
             ObjectOutputStream escritor = new ObjectOutputStream(fichero);
@@ -212,17 +208,17 @@ public class Mantenimiento extends Servicio implements Serializable {
         }
     }
 
-    public static ArrayList<Mantenimiento> importarMantenimientoDesdeFicheroBinario(String path) {
-        ArrayList<Mantenimiento> ret = new ArrayList<Mantenimiento>();
+        public static ArrayList<Grupo> importarReparacionDesdeFicheroBinario(String path) {
+        ArrayList<Grupo> ret = new ArrayList<Grupo>();
         FileInputStream lector = null;
         ObjectInputStream lectorObjeto = null;
         try {
             try {
                 lector = new FileInputStream(path);
                 lectorObjeto = new ObjectInputStream(lector);
-                Mantenimiento m;
-                while ((m = (Mantenimiento) lectorObjeto.readObject()) != null) {
-                    ret.add(m);
+                Grupo g;
+                while ((g = (Grupo) lectorObjeto.readObject()) != null) {
+                    ret.add(g);
                     lector.skip(4);
                 }
             } finally {
@@ -246,22 +242,22 @@ public class Mantenimiento extends Servicio implements Serializable {
         }
         return ret;
     }
-
-    public static ArrayList<Mantenimiento> importarMantenimientoDesdeFicheroTexto(String path) {
-        ArrayList<Mantenimiento> ret = new ArrayList<Mantenimiento>();
+    
+        public static ArrayList<Grupo> importarGrupoDesdeFicheroTexto(String path) {
+        ArrayList<Grupo> ret = new ArrayList<Grupo>();
         FileReader inputStream = null;
         BufferedReader lector = null;
         try {
             try {
                 inputStream = new FileReader(path);
                 lector = new BufferedReader(inputStream);
-                Mantenimiento m;
+                Grupo g;
                 while (lector.ready()) {
                     String cadena = lector.readLine();
-                    if (cadena.isEmpty() == false) {
+                    if (!cadena.isEmpty()) {
                         String[] parametros = cadena.split("\\|");
-                        m = new Mantenimiento(Integer.valueOf(parametros[0]));
-                        ret.add(m);
+                        g = new Grupo(Integer.valueOf(parametros[0]));
+                        ret.add(g);
                     }
                 }
             } finally {
@@ -280,29 +276,29 @@ public class Mantenimiento extends Servicio implements Serializable {
         }
         return ret;
     }
+    
 
+       
     /**
-     * Este metodo busca un objeto de la coleccion de objetos de un fichero de
-     * texto mediante el id del objeto
-     *
+     * Este metodo busca un objeto de la coleccion de objetos de un fichero de texto mediante el id del objeto
      * @param path
-     * @return
+     * @return 
      */
-    public static ArrayList<Mantenimiento> buscarPorIDEnFicheroDeTexto(String path) {
-        ArrayList<Mantenimiento> ret = new ArrayList<Mantenimiento>();
+    public static ArrayList<Grupo> buscarPorIDEnFicheroDeTexto(String path) {
+        ArrayList<Grupo> ret = new ArrayList<Grupo>();
         FileReader inputStream = null;
         BufferedReader lector = null;
         try {
             try {
                 inputStream = new FileReader(path);
                 lector = new BufferedReader(inputStream);
-                Mantenimiento m;
+                Grupo g;
                 while (lector.ready()) {
                     String cadena = lector.readLine();
                     if (cadena.isEmpty() == false) {
                         String[] parametros = cadena.split("\\|");
-                        m = new Mantenimiento(Integer.valueOf(parametros[0]));
-                        ret.add(m);
+                        g = new Grupo(Integer.valueOf(parametros[0]));
+                        ret.add(g);
                     }
                 }
                 Scanner in = new Scanner(System.in);
@@ -314,9 +310,9 @@ public class Mantenimiento extends Servicio implements Serializable {
                         System.out.println("Debe introducir un valor mayor que cero");
                     }
                 } while (idBuscar <= 0);
-                for (Mantenimiento me : ret) {
-                    if (me.getId() == idBuscar) {
-                        System.out.println(me.data());
+                for (Grupo gr : ret) {
+                    if (gr.getId() == idBuscar) {
+                        System.out.println(gr.data());
                         break;
                     }
                 }
@@ -338,10 +334,11 @@ public class Mantenimiento extends Servicio implements Serializable {
         }
         return ret;
     }
+    
 
     @Override
     public String toString() {
-        return "Mantenimiento{" + "horastrabajadas=" + horastrabajadas + ", reparaciones=" + reparaciones + '}';
+        return "Grupo{" + "id=" + idgrupo + ", reparaciones=" + reparaciones + ", detalleres=" + detalleres;
     }
 
 }

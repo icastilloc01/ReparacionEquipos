@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author luis
+ * @author DAM105
  */
 public class ConexionBD {
 

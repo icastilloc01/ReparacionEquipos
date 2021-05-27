@@ -14,8 +14,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import reparacionequipos.Empleado;
-import reparacionequipos.Mantenimiento;
+import Entidades.Empleado;
+import Entidades.Mantenimiento;
 
 /**
  *

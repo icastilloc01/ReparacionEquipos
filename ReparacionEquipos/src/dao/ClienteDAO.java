@@ -6,7 +6,7 @@
 package dao;
 
 import java.sql.Connection;
-import reparacionequipos.Cliente;
+import Entidades.Cliente;
 import ConexionBD.ConexionBD;
 import java.sql.Date;
 import java.sql.PreparedStatement;

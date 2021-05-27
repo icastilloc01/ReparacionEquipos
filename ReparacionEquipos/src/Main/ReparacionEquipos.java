@@ -5,6 +5,18 @@
  */
 package Main;
 
+import Entidades.Baja;
+import Entidades.Repartidor;
+import Entidades.Detaller;
+import Entidades.Cliente;
+import Entidades.Compra;
+import Entidades.Servicio;
+import Entidades.Envio;
+import Entidades.Sustituto;
+import Entidades.Utilidades;
+import Entidades.Empleado;
+import Entidades.Reparacion;
+import Entidades.Equipo;
 import Exception.EmpleadoException;
 import ConexionBD.*;
 import dao.MantenimientoDAO;
@@ -12,7 +24,6 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import reparacionequipos.*;
 
 /**
  *

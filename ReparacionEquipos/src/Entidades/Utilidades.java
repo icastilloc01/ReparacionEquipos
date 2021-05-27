@@ -1,4 +1,4 @@
-package reparacionequipos;
+package Entidades;
 
 import java.text.Normalizer;
 import java.text.ParseException;

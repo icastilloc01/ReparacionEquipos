@@ -7,7 +7,7 @@ package Exception;
 
 import java.util.ArrayList;
 import java.util.Date;
-import reparacionequipos.Cliente;
+import Entidades.Cliente;
 
 /**
  *

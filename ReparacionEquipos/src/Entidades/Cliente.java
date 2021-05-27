@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package reparacionequipos;
+package Entidades;
 
 import Exception.ClienteException;
 import Main.ReparacionEquipos;
@@ -20,7 +20,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import static reparacionequipos.Utilidades.CLIENTES;
+import static Entidades.Utilidades.CLIENTES;
 
 /**
  *

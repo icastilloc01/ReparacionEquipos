@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package reparacionequipos;
+package Entidades;
 
-import Exception.GrupoException;
+import Exception.ReparacionException;
 import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.File;
@@ -23,100 +23,188 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 /**
  *
  * @author aitor
  */
-public class Grupo {
+public class Reparacion extends Servicio {
 
-    private long idgrupo;
-    private ArrayList<Reparacion> reparaciones = new ArrayList<>();
-    private ArrayList<Detaller> detalleres = new ArrayList<>();
+    private long idreparacion;
+    private int duraciontotal;
+    private Mantenimiento mantenimiento;
+
+    public void setDuraciontotal(int duraciontotal) {
+        this.duraciontotal = duraciontotal;
+    }
+
+    public Reparacion() {
+        super();
+    }
+
+    public Reparacion(long idreparacion, int duraciontotal) {
+        this.idreparacion = idreparacion;
+        this.duraciontotal = duraciontotal;
+    }
     
-     public static ArrayList<Grupo> convertir(Grupo[] array) {
-        ArrayList<Grupo> ret = new ArrayList<Grupo>();
-        for (Grupo g : array) {
-            ret.add((Grupo) g);
+      public static ArrayList<Reparacion> convertir(Reparacion[] array) {
+        ArrayList<Reparacion> ret = new ArrayList<Reparacion>();
+        for (Reparacion r : array) {
+            ret.add((Reparacion) r);
         }
         return ret;
     }
 
-    public long getId() {
-        return idgrupo;
+    public Reparacion(long idreparacion, int duraciontotal, Mantenimiento mantenimiento, long id, Date fechaServicio, String nota, ArrayList<Cliente> clientes) {
+        super(id, fechaServicio, nota, clientes);
+        this.idreparacion = idreparacion;
+        this.duraciontotal = duraciontotal;
+        this.mantenimiento = mantenimiento;
+    }
+     Reparacion(Integer valueOf, String parametro, String parametro0, String parametro1, String parametro2, String parametro3) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void setId(long id) {
-        this.idgrupo = id;
+    public Reparacion(long idreparacion, int duraciontotal, Mantenimiento mantenimiento, Servicio se) {
+        super(se);
+        this.idreparacion = idreparacion;
+        this.duraciontotal = duraciontotal;
+        this.mantenimiento = mantenimiento;
     }
 
-    public Grupo() {
+    public Reparacion(Reparacion e) {
+        this.idreparacion = e.idreparacion;
+        this.duraciontotal = e.duraciontotal;
+        this.mantenimiento = e.mantenimiento;
     }
 
-    public Grupo(long id) {
-        this.idgrupo = id;
+    public long getIdreparacion() {
+        return idreparacion;
     }
 
-    public Grupo(Grupo g) {
-        this.idgrupo = g.idgrupo;
+    public void setIdreparacion(long idreparacion) {
+        this.idreparacion = idreparacion;
     }
 
-    public ArrayList<Reparacion> getReparaciones() {
-        return reparaciones;
+    public int getDuraciontotal() {
+        return duraciontotal;
     }
 
-    public void setReparaciones(ArrayList<Reparacion> reparaciones) {
-        this.reparaciones = reparaciones;
-    }
-
-    public ArrayList<Detaller> getDetalleres() {
-        return detalleres;
-    }
-
-    public void setDetalleres(ArrayList<Detaller> detalleres) {
-        this.detalleres = detalleres;
-    }
-
-    public static Grupo nuevogrupo() {
-        Reparacion r2 = Reparacion.listareparaciones();
-        Grupo nuevogrupo = new Grupo();
-        Scanner sc = new Scanner(System.in);
-        //Muestro el día y la hora
+    public static Reparacion nuevaReparacion() {
         
-        //System.out.println(" Este es tu id :" + Grupo.thenextid());
-        if (nuevogrupo.getId() <= 0) {
-            throw new GrupoException("Valor no valido");
-        }
-        if (nuevogrupo.getReparaciones().isEmpty()) {
-            throw new GrupoException("Este ArrayList es un ArrayList vacío");
-        } else {
-            StringBuffer sb = new StringBuffer("Estos son los datos del arraydeReparaciones:" + nuevogrupo.getReparaciones());
-            sb.insert(sb.indexOf(" . "), " Adios");
-            System.out.println(sb);
+        Reparacion r = new Reparacion();
+        Scanner in = new Scanner(System.in);
+        boolean ret = false;
+        boolean salir;
+        do {
+            System.out.println("Introduzca el id de la reparación:");
+            long id = in.nextLong();
+            if(r.getIdreparacion()>0){
+                System.out.println("Id válido");
+                ret = true;
+            }
+            if (r.getIdreparacion() < 0) {
+                throw new ReparacionException("Valor inválido");
+                
+            }
+            r.setId(id);
+            System.out.println("Introduzca la duración de la reparación:");
+            int duracion = in.nextInt();
+            r.setDuraciontotal(duracion);
+            System.out.println("Son correctos los siguientes datos?(s/n):");
+            System.out.println("id:" + id);
+            System.out.println("duracion:" + duracion);
+            salir = Utilidades.leerBoolean();
+        } while (salir);
 
-        }
+        return r;
 
-        if (nuevogrupo.getDetalleres().isEmpty()) {
-            throw new GrupoException("Este ArrayList es un ArrayList vacío");
-        } else {
-            StringBuffer sb = new StringBuffer("Estos son los datos del arraydeReparaciones:" + nuevogrupo.getDetalleres());
-            sb.insert(sb.indexOf(" . "), " Adios");
-            System.out.println(sb);
+    }
 
-        }
-
-        //Los dos arrays de Reparaciones y Detaller, se inicializan a dos arrays vacíos.
-        return nuevogrupo;
+    @Override
+    public String toString() {
+        return "Reparacion{" + "id=" + id + ", duraciontotal=" + duraciontotal + '}';
     }
     
     
-     public String data(){
-    
-    return this.getId()+" | "+this.getDetalleres()+" | "+this.getReparaciones()+" | ";
+    public String data() {
+        return "Reparacion{" + "id=" + id + ", duraciontotal=" + duraciontotal + '}';
     }
+
+    public Reparacion(long id, int duraciontotal, Mantenimiento mantenimiento) {
+        this.id = id;
+        this.duraciontotal = duraciontotal;
+        this.mantenimiento = mantenimiento;
+    }
+
+    public Mantenimiento getMantenimiento() {
+        return mantenimiento;
+    }
+
+    public void setMantenimiento(Mantenimiento mantenimiento) {
+        this.mantenimiento = mantenimiento;
+    }
+
+    public static ArrayList<Reparacion> arrayde(ArrayList<Reparacion> lista, int[] ids) {
+        ArrayList<Reparacion> ret = new ArrayList<Reparacion>();
+        for (int i = 0; i < ids.length; i++) {
+            for (int j = 0; j < lista.size(); j++) {
+                if (lista.get(j).getId() == ids[i]) {
+                    ret.add((Reparacion) lista.get(ids[i]));
+                    break;
+                }
+            }
+        }
+        return ret;
+    }
+
+    
+
+    public static long nextIdReparacion() {
+        long ret = 0;
+        for (Reparacion r : Utilidades.REPARACIONES) {
+            if (r.getIdreparacion() > ret) {
+                ret = r.getIdreparacion();
+            }
+        }
+        return ret + 1;
+    }
+
+    public static Reparacion listareparaciones() {
+        SimpleDateFormat sdf = new SimpleDateFormat(" EEEE dd MMMM yyyy(hh:mm:ss)");
+        System.out.println("Ahora es el día y la hora : " + sdf.format(new Date()));
+        Servicio se = Servicio.nuevoServicio();
+        Mantenimiento m = Mantenimiento.nuevomantenimiento();
+        Scanner sc = new Scanner(System.in);
+        Reparacion nuevoreparacion = new Reparacion();
+        nuevoreparacion.idreparacion = nextIdReparacion();
+        System.out.println(" Muestráme las horas que has trabajado :");
+        do {
+            int duraciontotal = sc.nextInt();
+            if (duraciontotal > 0) {
+                System.out.println("Los datos son validos");
+
+            } else {
+                System.out.println("Los datos no son validos");
+            }
+        } while (nuevoreparacion.duraciontotal <= 0);
+        System.out.println("Vuelve a esribir de manera correcta las horas por favor");
+        int duraciontotal = sc.nextInt();
+        if (nuevoreparacion.getDuraciontotal() <= 0) {
+            throw new ReparacionException("Valor no válido");
+        }
+        nuevoreparacion.setDuraciontotal(duraciontotal);
+        System.out.println("Esta reparacion se ha asignado a un grupo");
+
+        return nuevoreparacion;
+
+    }
+    
+    
     //*Los métodos de manejo de ficheros están en la clase Serialización
     
-    public void exportarObjetoGrupoTexto(String path) {
+    public void exportarObjetoReparacionTexto(String path) {
         File fichero = new File(path);
         FileWriter escritor = null;
         PrintWriter buffer = null;
@@ -142,9 +230,9 @@ public class Grupo {
         }
     }
     
-     public static void exportarColeccionDeObjetosGrupoTexto(String path) {
-        ArrayList<Grupo> coleccion;
-        coleccion = Grupo.convertir(Utilidades.GRUPOS);
+     public static void exportarColeccionDeObjetosReparacionTexto(String path) {
+        ArrayList<Reparacion> coleccion;
+        coleccion = Reparacion.convertir(Utilidades.REPARACIONES);
         File fichero = new File(path);
         FileWriter escritor = null;
         PrintWriter buffer = null;
@@ -152,8 +240,8 @@ public class Grupo {
             try {
                 escritor = new FileWriter(fichero, true);
                 buffer = new PrintWriter(escritor);
-                for (Grupo g: coleccion) {
-                    buffer.print(g.data() + "\n");
+                for (Reparacion r: coleccion) {
+                    buffer.print(r.data() + "\n");
                 }
             } finally {
                 if (buffer != null) {
@@ -176,10 +264,10 @@ public class Grupo {
         public void exportarReparacionaArchivoBinario(String path) {
         try {
             FileOutputStream fichero = new FileOutputStream(path, true);
-            ObjectOutputStream Grupo = new ObjectOutputStream(fichero);
-          Grupo.writeObject(this);
-           Grupo.flush();
-            Grupo.close();
+            ObjectOutputStream Reparacion = new ObjectOutputStream(fichero);
+          Reparacion.writeObject(this);
+            Reparacion.flush();
+            Reparacion.close();
         } catch (FileNotFoundException e) {
             System.out.println("No se ha encontrado el fichero");
         } catch (IOException e) {
@@ -190,9 +278,9 @@ public class Grupo {
     }
 
 
-        public static void exportarColeccionGrupoArchivoBinario(String path) {
-        ArrayList<Grupo> coleccion;
-        coleccion = Grupo.convertir(Utilidades.GRUPOS);
+        public static void exportarColeccionReparacionArchivoBinario(String path) {
+        ArrayList<Reparacion> coleccion;
+        coleccion = Reparacion.convertir(Utilidades.REPARACIONES);
         try {
             FileOutputStream fichero = new FileOutputStream(path, true);
             ObjectOutputStream escritor = new ObjectOutputStream(fichero);
@@ -208,17 +296,17 @@ public class Grupo {
         }
     }
 
-        public static ArrayList<Grupo> importarReparacionDesdeFicheroBinario(String path) {
-        ArrayList<Grupo> ret = new ArrayList<Grupo>();
+        public static ArrayList<Reparacion> importarReparacionDesdeFicheroBinario(String path) {
+        ArrayList<Reparacion> ret = new ArrayList<Reparacion>();
         FileInputStream lector = null;
         ObjectInputStream lectorObjeto = null;
         try {
             try {
                 lector = new FileInputStream(path);
                 lectorObjeto = new ObjectInputStream(lector);
-                Grupo g;
-                while ((g = (Grupo) lectorObjeto.readObject()) != null) {
-                    ret.add(g);
+                Reparacion r;
+                while ((r = (Reparacion) lectorObjeto.readObject()) != null) {
+                    ret.add(r);
                     lector.skip(4);
                 }
             } finally {
@@ -243,21 +331,21 @@ public class Grupo {
         return ret;
     }
     
-        public static ArrayList<Grupo> importarGrupoDesdeFicheroTexto(String path) {
-        ArrayList<Grupo> ret = new ArrayList<Grupo>();
+        public static ArrayList<Reparacion> importarReparacionDesdeFicheroTexto(String path) {
+        ArrayList<Reparacion> ret = new ArrayList<Reparacion>();
         FileReader inputStream = null;
         BufferedReader lector = null;
         try {
             try {
                 inputStream = new FileReader(path);
                 lector = new BufferedReader(inputStream);
-                Grupo g;
+                Reparacion r;
                 while (lector.ready()) {
                     String cadena = lector.readLine();
                     if (!cadena.isEmpty()) {
                         String[] parametros = cadena.split("\\|");
-                        g = new Grupo(Integer.valueOf(parametros[0]));
-                        ret.add(g);
+                        r = new Reparacion(Integer.valueOf(parametros[0]), Integer.valueOf(parametros[1]));
+                        ret.add(r);
                     }
                 }
             } finally {
@@ -284,21 +372,21 @@ public class Grupo {
      * @param path
      * @return 
      */
-    public static ArrayList<Grupo> buscarPorIDEnFicheroDeTexto(String path) {
-        ArrayList<Grupo> ret = new ArrayList<Grupo>();
+    public static ArrayList<Reparacion> buscarPorIDEnFicheroDeTexto(String path) {
+        ArrayList<Reparacion> ret = new ArrayList<Reparacion>();
         FileReader inputStream = null;
         BufferedReader lector = null;
         try {
             try {
                 inputStream = new FileReader(path);
                 lector = new BufferedReader(inputStream);
-                Grupo g;
+                Reparacion r;
                 while (lector.ready()) {
                     String cadena = lector.readLine();
-                    if (cadena.isEmpty() == false) {
+                    if (!cadena.isEmpty()) {
                         String[] parametros = cadena.split("\\|");
-                        g = new Grupo(Integer.valueOf(parametros[0]));
-                        ret.add(g);
+                        r = new Reparacion(Integer.valueOf(parametros[0]), Integer.valueOf(parametros[1]));
+                        ret.add(r);
                     }
                 }
                 Scanner in = new Scanner(System.in);
@@ -310,9 +398,9 @@ public class Grupo {
                         System.out.println("Debe introducir un valor mayor que cero");
                     }
                 } while (idBuscar <= 0);
-                for (Grupo gr : ret) {
-                    if (gr.getId() == idBuscar) {
-                        System.out.println(gr.data());
+                for (Reparacion re : ret) {
+                    if (re.getId() == idBuscar) {
+                        System.out.println(re.data());
                         break;
                     }
                 }
@@ -333,12 +421,6 @@ public class Grupo {
             System.out.println("Se ha producido un error inesperado intentelo de nuevo");
         }
         return ret;
-    }
-    
-
-    @Override
-    public String toString() {
-        return "Grupo{" + "id=" + idgrupo + ", reparaciones=" + reparaciones + ", detalleres=" + detalleres;
     }
 
 }

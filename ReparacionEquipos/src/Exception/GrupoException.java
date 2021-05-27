@@ -6,8 +6,8 @@
 package Exception;
 
 import java.util.ArrayList;
-import reparacionequipos.Detaller;
-import reparacionequipos.Reparacion;
+import Entidades.Detaller;
+import Entidades.Reparacion;
 
 /**
  *
