@@ -202,6 +202,7 @@ public class GestionEmpleado extends javax.swing.JFrame {
             Entidades.Empleado seleccionada = new Entidades.Empleado(idEmpleado, nombre, apellido, nif, telefono, direccion);
             GestionEmpleadoModificar modificarEmpleado = new GestionEmpleadoModificar(this, seleccionada);
             modificarEmpleado.setVisible(true);
+            this.setVisible(false);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
