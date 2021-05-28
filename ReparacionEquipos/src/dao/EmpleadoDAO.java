@@ -473,7 +473,7 @@ public class EmpleadoDAO {
             } catch (SQLException ex) {
                 System.out.println("Se ha producido una SQLException:" + ex.getMessage());
                 Logger.getLogger(EmpleadoDAO.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("NO se ha modificado el ejemplar de la BD.");
+                System.out.println("NO se ha modificado el empleado de la BD.");
             } finally {
                 if (conn != null) {
                     ConexionBD.cerrarConexion();

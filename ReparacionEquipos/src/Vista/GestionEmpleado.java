@@ -211,7 +211,7 @@ public class GestionEmpleado extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Debe seleccionar una únicp empleado de la tabla.");
         } else {
             Object[] opciones = {"Aceptar", "Cancelar"};
-            int i = JOptionPane.showOptionDialog(this, "¿Está seguro de eliminar el empleado seleccionada?", "Eliminar Empleado", JOptionPane.YES_NO_OPTION,
+            int i = JOptionPane.showOptionDialog(this, "¿Está seguro de eliminar el empleado seleccionado?", "Eliminar Empleado", JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
             if (i == JOptionPane.NO_OPTION) {
                 return;
@@ -222,7 +222,6 @@ public class GestionEmpleado extends javax.swing.JFrame {
                 dao.EmpleadoDAO.eliminarEmpleado(idEmpleadoselected);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "El empleado seleccionada está en uso y no se puede eliminar.", "ERROR", JOptionPane.ERROR_MESSAGE);
-               this.entityManager0.getTransaction().rollback();
             }
 
         }
