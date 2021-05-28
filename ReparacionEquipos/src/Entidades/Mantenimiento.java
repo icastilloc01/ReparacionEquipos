@@ -53,6 +53,10 @@ public class Mantenimiento extends Servicio implements Serializable {
         this.horastrabajadas = horastrabajadas;
     }
 
+    public Mantenimiento(Long horastrabajadas) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
 
     public int getHorastrabajadas() {
@@ -342,6 +346,10 @@ public class Mantenimiento extends Servicio implements Serializable {
     @Override
     public String toString() {
         return "Mantenimiento{" + "horastrabajadas=" + horastrabajadas + ", reparaciones=" + reparaciones + '}';
+    }
+
+    public void setHorastrabajadas(String horastrabajadas) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -22,6 +22,10 @@ import Entidades.Mantenimiento;
  * @author aitor
  */
 public class MantenimientoDAO {
+
+    public static void insertarEmpleadoMantenimiento(Mantenimiento m) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     private int horastrabajadas;
     private MantenimientoDAO m;
     private static Connection conn;
@@ -239,7 +243,33 @@ public class MantenimientoDAO {
         }
         return e;
     }
+    
+     public static void eliminarMantenimiento(int horas) {
+        try {
+            if (conn == null || conn.isClosed()) {
+                conn = ConexionBD.establecerConexion();
+            }
+            try {
+                PreparedStatement pstmt = null;
+                pstmt = conn.prepareStatement("DELETE FROM empleado WHERE horastrabajadas = ?");
+                pstmt.setString(1, String.valueOf(horas));
+                pstmt.executeUpdate();
+                System.out.println("Se ha eliminado el mantenimiento de la BD.");
+            } catch (SQLException ex) {
+                System.out.println("Se ha producido una SQLException:" + ex.getMessage());
+                Logger.getLogger(EmpleadoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("NO se ha eliminado el mantenimiento de la BD.");
+            } finally {
+                if (conn != null) {
+                    ConexionBD.cerrarConexion();
+                }
+            }
 
+        } catch (SQLException ex) {
+            Logger.getLogger(MantenimientoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+}
 }
 
 
