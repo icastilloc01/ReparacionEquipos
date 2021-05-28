@@ -393,7 +393,7 @@ public class EmpleadoDAO {
         return ret;
     }
 
-    public static Empleado insertarEjemplar(Empleado e) {
+    public static Empleado insertarEmpleado(Empleado e) {
         try {
             if (conn == null || conn.isClosed()) {
                 conn = ConexionBD.establecerConexion();
@@ -405,7 +405,7 @@ public class EmpleadoDAO {
                 String nif = e.getNif();
                 String telefono = e.getTelefono();
                 String direccion = e.getDireccion();
-                String sql = "INSERT INTO ejemplares(nombre, apellido, nif, telefono, direccion) VALUES(" + nombre + ", " + apellido + ", " + nif + ", " + telefono + ", " + direccion + ")";
+                String sql = "INSERT INTO Empleado(nombre, apellido, nif, telefono, direccion) VALUES(" + nombre + ", " + apellido + ", " + nif + ", " + telefono + ", " + direccion + ")";
                 pstmt = conn.prepareStatement(sql);
                 pstmt.execute();
 
@@ -446,7 +446,7 @@ public class EmpleadoDAO {
         return e;
     }
     
-    public static void modificarEjemplar(Empleado e) {
+    public static void modificarEmpleado(Empleado e) {
         try {
             if (conn == null || conn.isClosed()) {
                 conn = ConexionBD.establecerConexion();
@@ -460,7 +460,7 @@ public class EmpleadoDAO {
                 String direccion = e.getDireccion();
 
                 String sql = "UPDATE Empleado SET ";
-                sql += "nombbre=" + nombre;
+                sql += "nombre=" + nombre;
                 sql += ", apellido=" + apellido;
                 sql += ", nif=" + nif;
                 sql += ", telefono=" + telefono;

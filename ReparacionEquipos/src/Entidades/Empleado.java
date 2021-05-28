@@ -92,12 +92,12 @@ public class Empleado implements Serializable {
         }
     }
 
-    public void setNombre(String nombre) throws EmpleadoException{
-        if (nombre.length() < 3 || nombre.length() > 25 || Utilidades.isNumeric(nombre)) {
+    public void setNombre(String nombre) /*throws EmpleadoException*/{
+        //if (nombre.length() < 3 && nombre.length() > 25 && Utilidades.isNumeric(nombre)) {
             this.nombre = nombre;
-        } else {
-            throw new EmpleadoException("El nombre introducido contiene números, es menos de 3 o mayor de 25 caracteres");
-        }
+        //} else {
+            //throw new EmpleadoException("El nombre introducido contiene números, es menor de 3 o mayor de 25 caracteres");
+        //}
     }
 
     public void setTelefono(String telefono) {
@@ -173,13 +173,13 @@ public class Empleado implements Serializable {
                 System.out.println("El apellido introducido contiene números, es menos de 3 o mayor de 25 caracteres");
             }
         } while (nuevoEmpleado.apellido.length() < 3 || nuevoEmpleado.apellido.length() > 25 || Utilidades.isNumeric(nuevoEmpleado.apellido));
-        do {
-            System.out.print("Introduzca la direccion del nuevo empleado: ");
+        //do {
+            //System.out.print("Introduzca la direccion del nuevo empleado: ");
             nuevoEmpleado.direccion = in.nextLine();
-            if (nuevoEmpleado.direccion.startsWith("C\\") == false) {
-                System.out.println("El formato de dirección que ha introducido no es valido,introduzca una dirección que empiece por C\\");
-            }
-        } while (nuevoEmpleado.direccion.startsWith("C\\") == false);
+            //if (nuevoEmpleado.direccion.startsWith("C\\") == false) {
+                //System.out.println("El formato de dirección que ha introducido no es valido,introduzca una dirección que empiece por C\\");
+            //}
+        //} while (nuevoEmpleado.direccion.startsWith("C\\") == false);
         return nuevoEmpleado;
     }
 
